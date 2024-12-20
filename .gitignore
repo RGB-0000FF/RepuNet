@@ -5,6 +5,9 @@ pyproject.toml
 .idea/
 
 sim_storage/
+!sim_storage/investment_s1/
+sim_storage/investment_s1/*
+
 !sim_storage/investment_s1/step_0/
 
 output/
