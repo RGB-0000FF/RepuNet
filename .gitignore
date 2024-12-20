@@ -1,6 +1,7 @@
 venv/
 
 .DS_Store
+.idea/
 
 sim_storage/
 !sim_storage/investment_s1/step_0
