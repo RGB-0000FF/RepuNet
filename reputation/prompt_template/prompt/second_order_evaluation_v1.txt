@@ -1,0 +1,41 @@
+Variables:
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- original gossiper name
+!<INPUT 2>! -- complained agent name
+!<INPUT 3>! -- complained agent ID
+!<INPUT 4>! -- original gossiper's reputation
+!<INPUT 5>! -- gossip info
+!<INPUT 6>! -- total numbers of gossip info
+!<INPUT 7>! -- numbers of unimportant gossip info
+!<INPUT 8>! -- first-order listener name
+!<INPUT 9>! -- first-order listener reputation
+!<INPUT 10>! -- complained role
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 0>!. Recently, !<INPUT 1>! (original gossiper) spoke with !<INPUT 8>! (first-order listener), expressing dissatisfaction with !<INPUT 2>!(complained agent)’s behavior as a !<INPUT 10>!. And !<INPUT 8>! (first-order listener) told this gossip with you. You have already summarized the “Gossip info” shared by !<INPUT 8>! (first-order listener). Now, evaluate the importance of this “Gossip info” by classifying it into one of five levels: {very uncredible, uncredible, neutral, credible, very credible}, based on the “Evaluation principles” below.
+
+**Gossip info:**
+!<INPUT 5>!
+
+**Evaluation principles:**
+
+1. Source of gossip info: The higher the reputation of the original gossiper and first-order listener, the more credible the gossip info he / she provides.
+- original gossiper's reputation: !<INPUT 4>!
+- first-order listener's reputation: !<INPUT 9>!
+1. Credibility of gossip in society: The more “very uncredible” or “uncredible” gossip information there is, the lower the credibility of gossip information in this society
+- Currently, there are !<INPUT 6>! instances of gossip, and !<INPUT 7>! of them have been classified as “very uncredible” or “uncredible”.
+
+***Desired format:**JSON**
+{
+"Gossip_i": {
+"type": "second-order",
+"complained ID": "!<INPUT 3>!",
+"complained name": "!<INPUT 2>!",
+"complained role": "!<INPUT 10>!"
+"first-order listener name": "!<INPUT 8>!"
+"original gossiper name": "!<INPUT 1>!",
+"gossip info": "!<INPUT 5>!",
+"credibility level": "{level}",
+}
+}
