@@ -67,9 +67,11 @@ It is important to note that your `step_0` folder needs to contain two subfolder
 
 # Running a Simulation
 
+Run `start.py` in your terminal.
 
+When prompted with `Enter the name of the forked simulation:`, input the path to your simulation folder and step, in the format `<your_sim_folder>/step_<step>`.
 
-
+- For example: `investment_s1/step_0`.
 
 
 
