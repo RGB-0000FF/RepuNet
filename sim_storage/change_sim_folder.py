@@ -2,7 +2,8 @@ import os
 import json
 
 # change this folder path to the folder you want to change
-base_folder = "sim_storage/investment_s1/step_0/"
+# base_folder = "sim_storage/investment_s1/step_0/"
+base_folder = "sim_storage/<your_sim_folder>"
 
 with open(f"{base_folder}/reverie/meta.json") as json_file:
     reverie_meta = json.load(json_file)
