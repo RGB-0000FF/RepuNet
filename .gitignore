@@ -5,6 +5,7 @@ pyproject.toml
 .idea/
 
 sim_storage/
+!sim_storage/change_sim_folder.py
 !sim_storage/investment_s1/
 sim_storage/investment_s1/*
 
