@@ -70,13 +70,23 @@ class Creation:
             if int_counter == 0:
                 break
 
-            self.set_graph()
+            self.step += 1
             origin_sim_folder = f"{fs_storage}/{self.sim_code}"
-            if os.path.exists(f"{origin_sim_folder}/investment results"):
-                shutil.rmtree(f"{origin_sim_folder}/investment results")
+            new_sim_code = self.sim_code.split("/")[0] + f"/step_{self.step}"
+            new_sim_folder = f"{fs_storage}/{new_sim_code}"
+            self.sim_code = new_sim_code
+            # copy the investment data to the new simulation folder
+            shutil.copytree(
+                f"{origin_sim_folder}",
+                f"{new_sim_folder}",
+            )
 
-
-            print(f"sim_code: {self.sim_code}-----------------------------------------------")
+            if os.path.exists(f"{new_sim_folder}/investment results"):
+                shutil.rmtree(f"{new_sim_folder}/investment results")
+            self.set_graph()
+            print(
+                f"sim_code: {self.sim_code}-----------------------------------------------"
+            )
             pairs = pair_each(self.personas, self.G)
 
             for pair in pairs:
@@ -86,18 +96,6 @@ class Creation:
                     self.G,
                     f"{fs_storage}/{self.sim_code}/investment results",
                 )
-
-            self.step += 1
-            origin_sim_folder = f"{fs_storage}/{self.sim_code}"
-            new_sim_code = self.sim_code.split("/")[0] + f"/step_{self.step}"
-            new_sim_folder = f"{fs_storage}/{new_sim_code}"
-            self.sim_code = new_sim_code
-            # copy the investment results to the new simulation folder
-            shutil.copytree(
-                f"{origin_sim_folder}",
-                f"{new_sim_folder}",
-            )
-            shutil.rmtree(f"{new_sim_folder}/investment results")
 
             self.save()
             int_counter -= 1
