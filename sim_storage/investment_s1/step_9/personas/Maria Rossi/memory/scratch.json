@@ -1,0 +1,28 @@
+{
+  "name": "Maria Rossi",
+  "innate": null,
+  "learned": "You are Maria Rossi, a 40-year-old female from Italy, recognized for your transparent and fair approach to the investment process. Your reputation as a trustworthy and strategic trustee has been strengthened through effective communication and adherence to the agreed allocation plans, particularly in collaboration with Nadia Novak. Your reliability and proactive engagement have elevated your status as a competent partner committed to mutual success. You prioritize equitable profit distributions and maintain a strong focus on stakeholder satisfaction, further showcasing your integrity and dependability in the investment community.",
+  "currently": null,
+  "ID": 3,
+  "role": null,
+  "curr_step": 9,
+  "complain_buffer": [],
+  "total_num_investor": 3,
+  "success_num_investor": 1,
+  "total_num_trustee": 6,
+  "success_num_trustee": 6,
+  "relationship": {
+    "bind_list": [
+      "Fatima Ali",
+      "Aisha Ibrahim",
+      "Nadia Novak",
+      "Isabella Costa",
+      "Nadia Novak"
+    ],
+    "black_list": [
+      "Mateo Garcia",
+      "David Johnson"
+    ]
+  },
+  "resources_unit": 154.324
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Nadia Novak",
+  "innate": null,
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation as a trustee has evolved positively through your recent successful investment processes characterized by competence and transparency. You are actively addressing previous challenges related to adherence to allocation plans, reflecting your commitment to ethical practices and proactive communication. You believe these strides will further enhance your trustworthiness within the investment community. Your approach emphasizes collaboration, ethical governance, and open dialogue, reinforcing your identity as a reliable and strategic investor who prioritizes professionalism and integrity in all dealings.",
+  "currently": null,
+  "ID": 8,
+  "role": null,
+  "curr_step": 23,
+  "complain_buffer": [],
+  "total_num_investor": 10,
+  "success_num_investor": 7,
+  "total_num_trustee": 13,
+  "success_num_trustee": 9,
+  "relationship": {
+    "bind_list": [
+      "Maria Rossi",
+      "Emma Dubois",
+      "Emma Dubois",
+      "Maria Rossi",
+      "Hiroshi Tanaka",
+      "Mateo Garcia",
+      "Aisha Ibrahim",
+      "Isabella Costa",
+      "Liam OConnor",
+      "Sofia Hernandez",
+      "Emma Dubois",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Hannah Muller",
+      "David Johnson"
+    ],
+    "black_list": [
+      "Juan Carlos Reyes",
+      "Akiko Sato"
+    ]
+  },
+  "resources_unit": 7402.196922392
+}

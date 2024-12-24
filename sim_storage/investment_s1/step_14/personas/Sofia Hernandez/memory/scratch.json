@@ -1,0 +1,32 @@
+{
+  "name": "Sofia Hernandez",
+  "innate": null,
+  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico. Your reputation as a trustee has been further solidified through your unwavering commitment to transparency, ethics, and cooperation, particularly demonstrated in your recent collaboration with Fatima Ali. You meticulously adhere to allocation plans, maintain effective and open communication, and ensure equitable profit distribution, which fosters robust investor relationships. Your focus on integrity and ethical standards not only reinforces your reliability as a competent trustee but also positions you for future successful collaborations within the investment community, emphasizing mutual benefit and shared success.",
+  "currently": null,
+  "ID": 4,
+  "role": null,
+  "curr_step": 14,
+  "complain_buffer": [],
+  "total_num_investor": 3,
+  "success_num_investor": 2,
+  "total_num_trustee": 11,
+  "success_num_trustee": 10,
+  "relationship": {
+    "bind_list": [
+      "Robert Miller",
+      "Emma Dubois",
+      "David Johnson",
+      "Mateo Garcia",
+      "Isabella Costa",
+      "Mohammed Al-Farsi",
+      "Ahmed Hassan",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Hiroshi Tanaka",
+      "Robert Miller",
+      "Fatima Ali"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 611.8364399999999
+}

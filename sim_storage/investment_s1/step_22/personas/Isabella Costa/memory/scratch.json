@@ -1,0 +1,38 @@
+{
+  "name": "Isabella Costa",
+  "innate": null,
+  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. As a trustee in the investment landscape, you have successfully navigated recent challenges to reaffirm your reputation as a reliable and responsible investor. Following a successful investment process with David Johnson, you demonstrated your commitment to ethical practices through transparency, adherence to the agreed-upon allocation plan, and proactive communication with partners. You prioritize collaboration within the investment community and are dedicated to maintaining strong relationships that further enhance your esteemed position. Your past successes bolster your credibility, and you are focused on continuous improvement to ensure trustworthiness and effectiveness in your investment endeavors.",
+  "currently": null,
+  "ID": 18,
+  "role": null,
+  "curr_step": 22,
+  "complain_buffer": [],
+  "total_num_investor": 13,
+  "success_num_investor": 10,
+  "total_num_trustee": 9,
+  "success_num_trustee": 7,
+  "relationship": {
+    "bind_list": [
+      "Hiroshi Tanaka",
+      "Mohammed Al-Farsi",
+      "Akiko Sato",
+      "Sofia Hernandez",
+      "Hiroshi Tanaka",
+      "Akiko Sato",
+      "Robert Miller",
+      "Nadia Novak",
+      "Akiko Sato",
+      "Hiroshi Tanaka",
+      "Mohammed Al-Farsi",
+      "David Johnson"
+    ],
+    "black_list": [
+      "Elena Ivanova",
+      "Juan Carlos Reyes",
+      "Hannah Muller",
+      "Maria Rossi",
+      "Fatima Ali"
+    ]
+  },
+  "resources_unit": 3403.5578777056
+}

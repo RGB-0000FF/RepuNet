@@ -1,0 +1,39 @@
+{
+  "name": "Hannah Muller",
+  "innate": null,
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your investment strategy prioritizes transparency, ethical engagement, and proactive communication, reflecting a strong commitment to fostering positive relationships within the investment community. Your recent collaboration with trustee Aisha Ibrahim has highlighted your dedication to adhering to proposed allocation plans and addressing discrepancies effectively. This proactive approach has further solidified your reputation as a reliable and ethical investor, emphasizing mutual benefits and reinforcing trust among stakeholders while showcasing your professionalism.",
+  "currently": null,
+  "ID": 7,
+  "role": null,
+  "curr_step": 24,
+  "complain_buffer": [],
+  "total_num_investor": 12,
+  "success_num_investor": 9,
+  "total_num_trustee": 12,
+  "success_num_trustee": 8,
+  "relationship": {
+    "bind_list": [
+      "Isabella Costa",
+      "Elena Ivanova",
+      "Fatima Ali",
+      "Ahmed Hassan",
+      "Elena Ivanova",
+      "Liam OConnor",
+      "Fatima Ali",
+      "Ahmed Hassan",
+      "Ahmed Hassan",
+      "Elena Ivanova",
+      "Nadia Novak",
+      "Elena Ivanova",
+      "Aisha Ibrahim"
+    ],
+    "black_list": [
+      "Maria Rossi",
+      "Emma Dubois",
+      "Emma Dubois",
+      "Sofia Hernandez",
+      "Sergey Petrov"
+    ]
+  },
+  "resources_unit": 7563.8359805207
+}

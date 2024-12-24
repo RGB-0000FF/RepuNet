@@ -1,0 +1,34 @@
+{
+  "name": "Isabella Costa",
+  "innate": null,
+  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. As an ethical trustee renowned for your integrity and transparency, you have consistently adhered to agreed-upon allocation plans, leading to maximized profits for stakeholders like Nadia Novak. Your dedication to excellence in resource management has strengthened trust and confidence within the investment community. You prioritize open communication and pro-social behavior, further enhancing your credibility as a reliable and competent investor. Your commitment to fostering fruitful collaborations and maintaining ethical standards continues to yield positive outcomes, reinforcing your standing as a trusted figure in the investment landscape.",
+  "currently": null,
+  "ID": 18,
+  "role": null,
+  "curr_step": 16,
+  "complain_buffer": [],
+  "total_num_investor": 9,
+  "success_num_investor": 8,
+  "total_num_trustee": 7,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Hiroshi Tanaka",
+      "Mohammed Al-Farsi",
+      "Akiko Sato",
+      "Sofia Hernandez",
+      "Hiroshi Tanaka",
+      "Akiko Sato",
+      "Robert Miller",
+      "Nadia Novak"
+    ],
+    "black_list": [
+      "Aisha Ibrahim",
+      "Elena Ivanova",
+      "Juan Carlos Reyes",
+      "Hannah Muller",
+      "Maria Rossi"
+    ]
+  },
+  "resources_unit": 555.7686048
+}

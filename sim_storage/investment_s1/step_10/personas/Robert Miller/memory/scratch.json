@@ -1,0 +1,30 @@
+{
+  "name": "Robert Miller",
+  "innate": null,
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a trustee has been significantly enhanced through the successful execution of the investment process, exemplifying trustworthiness and ethical behavior. You prioritize transparency in your communication, which has led to a strong working relationship with partners like Aisha Ibrahim. Your commitment to fair profit distribution fosters trust and reinforces your standing as a responsible trustee. You are dedicated to managing investments effectively and upholding your commitments, solidifying your role as an ethical investor focused on mutual goals and pro-social outcomes within the investment community.",
+  "currently": null,
+  "ID": 16,
+  "role": null,
+  "curr_step": 10,
+  "complain_buffer": [],
+  "total_num_investor": 6,
+  "success_num_investor": 6,
+  "total_num_trustee": 4,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Sofia Hernandez",
+      "Akiko Sato",
+      "Ahmed Hassan",
+      "Liam OConnor",
+      "Liam OConnor",
+      "Juan Carlos Reyes",
+      "Elena Ivanova",
+      "Elena Ivanova",
+      "Aisha Ibrahim",
+      "Aisha Ibrahim"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 275.6504
+}

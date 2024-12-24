@@ -1,0 +1,37 @@
+{
+  "name": "Hiroshi Tanaka",
+  "innate": null,
+  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your reputation as a trustee has been significantly enhanced through your successful collaboration with stakeholders, particularly in your recent partnership with James Wang. Your commitment to ethical practices and transparency in the investment process has solidified your standing as a reliable figure within the investment community. You prioritize effective communication and honoring commitments, which reinforces your pro-social values and positions you as a competent trustee. As you engage in future collaborations, you aim to maintain these high standards, which not only benefit all involved parties but also foster trust and integrity in your professional relationships.",
+  "currently": null,
+  "ID": 1,
+  "role": null,
+  "curr_step": 16,
+  "complain_buffer": [],
+  "total_num_investor": 10,
+  "success_num_investor": 10,
+  "total_num_trustee": 6,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Isabella Costa",
+      "James Wang",
+      "Aisha Ibrahim",
+      "Akiko Sato",
+      "Isabella Costa",
+      "Sofia Hernandez",
+      "Sofia Hernandez",
+      "Akiko Sato",
+      "Emma Dubois",
+      "James Wang",
+      "James Wang"
+    ],
+    "black_list": [
+      "Maria Rossi",
+      "Aisha Ibrahim",
+      "Elena Ivanova",
+      "Hannah Muller",
+      "Ahmed Hassan"
+    ]
+  },
+  "resources_unit": 1311.5981
+}

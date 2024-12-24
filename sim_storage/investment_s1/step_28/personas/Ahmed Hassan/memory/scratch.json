@@ -1,0 +1,41 @@
+{
+  "name": "Ahmed Hassan",
+  "innate": null,
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt, recognized as a reliable and ethical trustee in the investment community. Your commitment to transparency and integrity has further solidified your reputation, as you consistently deliver the agreed-upon returns while proactively communicating with investors. Your approach has fostered strong, positive relationships and ensured that you meet and exceed investor expectations. You prioritize honest and open communication, reinforcing your standing as a trustworthy partner and enhancing your ability to forge successful collaborations. Your dedication to these high ethical standards helps pave the way for future opportunities, affirming your role as a respected and responsible investor in an evolving landscape.",
+  "currently": null,
+  "ID": 15,
+  "role": null,
+  "curr_step": 28,
+  "complain_buffer": [],
+  "total_num_investor": 15,
+  "success_num_investor": 9,
+  "total_num_trustee": 13,
+  "success_num_trustee": 10,
+  "relationship": {
+    "bind_list": [
+      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Mohammed Al-Farsi",
+      "Hannah Muller",
+      "Mohammed Al-Farsi",
+      "Akiko Sato",
+      "Hannah Muller",
+      "Liam OConnor",
+      "Emma Dubois",
+      "Hannah Muller",
+      "Akiko Sato",
+      "Mateo Garcia",
+      "Sergey Petrov",
+      "Hannah Muller",
+      "Sergey Petrov"
+    ],
+    "black_list": [
+      "Juan Carlos Reyes",
+      "Sofia Hernandez",
+      "Fatima Ali",
+      "Fatima Ali",
+      "Elena Ivanova"
+    ]
+  },
+  "resources_unit": 10041.739224590001
+}

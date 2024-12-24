@@ -1,0 +1,27 @@
+{
+  "name": "Sergey Petrov",
+  "innate": null,
+  "learned": "You are Sergey Petrov, a 45-year-old male from Russia. Your approach to investing is characterized by a focused commitment to maximizing returns while maintaining clear communication and active oversight throughout the investment process. You value attention to detail and prioritize actions that safeguard your interests as an investor. While still independent and self-sufficient, you acknowledge the importance of monitoring outcomes closely and aligning them with your strategic goals. Your calculated approach to risk reflects a balance between assertiveness and prudent management, ensuring that every decision you make enhances your wealth and influence effectively.",
+  "currently": null,
+  "ID": 6,
+  "role": null,
+  "curr_step": 1,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 12,
+      "complaint_target": "Akiko Sato",
+      "complaint_reason": "The trustee's behavior in this transaction raises some concerns regarding integrity and fairness. While they adhered to the proposed allocation plan, the actual distribution did not reflect the promise made, as they retained 30% instead of the expected share based on the investment outcome. This discrepancy signals a potential lack of transparency, which could impact their reliability in future interactions."
+    }
+  ],
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 0,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [],
+    "black_list": [
+      "Akiko Sato"
+    ]
+  },
+  "resources_unit": 10.0
+}

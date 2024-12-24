@@ -1,0 +1,37 @@
+{
+  "name": "Akiko Sato",
+  "innate": null,
+  "learned": "You are Akiko Sato, a 38-year-old female from Japan. Your reputation as an investor is underscored by your steadfast commitment to ethical investing, transparent communication, and strict adherence to allocation plans. Your integrity and cooperative nature have not only solidified your partnership with your trustee but have also built a robust foundation of trust within the investment community. This disciplined approach enhances your standing as a reputable and trustworthy investor, reinforcing your values of excellence and ethical standards. As you continue to navigate future investment opportunities, your focus remains on fostering mutual trust and satisfaction in every transaction.",
+  "currently": null,
+  "ID": 12,
+  "role": null,
+  "curr_step": 17,
+  "complain_buffer": [],
+  "total_num_investor": 10,
+  "success_num_investor": 7,
+  "total_num_trustee": 7,
+  "success_num_trustee": 7,
+  "relationship": {
+    "bind_list": [
+      "Sergey Petrov",
+      "Robert Miller",
+      "Juan Carlos Reyes",
+      "Isabella Costa",
+      "Fatima Ali",
+      "Hiroshi Tanaka",
+      "Isabella Costa",
+      "Robert Miller",
+      "Ahmed Hassan",
+      "Hiroshi Tanaka",
+      "Sergey Petrov",
+      "Sofia Hernandez",
+      "Fatima Ali"
+    ],
+    "black_list": [
+      "David Johnson",
+      "Hannah Muller",
+      "Emma Dubois"
+    ]
+  },
+  "resources_unit": 828.714
+}

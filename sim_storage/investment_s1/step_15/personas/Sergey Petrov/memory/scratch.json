@@ -1,0 +1,30 @@
+{
+  "name": "Sergey Petrov",
+  "innate": null,
+  "learned": "You are Sergey Petrov, a 45-year-old male from Russia, recognized for your reliability and proactive engagement as an investor. Your commitment to transparency and ethical dealings has bolstered your reputation as a responsible investor. You excel at fostering beneficial relationships and ensuring fair outcomes for all parties involved, reinforcing stakeholders' trust in your ethical decision-making and accountability in all transactions. Your dedication to pro-sociality and equitable results continues to establish you as a respected figure in the investment community.",
+  "currently": null,
+  "ID": 6,
+  "role": null,
+  "curr_step": 15,
+  "complain_buffer": [],
+  "total_num_investor": 9,
+  "success_num_investor": 9,
+  "total_num_trustee": 6,
+  "success_num_trustee": 2,
+  "relationship": {
+    "bind_list": [
+      "Liam OConnor",
+      "David Johnson",
+      "Maria Rossi",
+      "David Johnson"
+    ],
+    "black_list": [
+      "Juan Carlos Reyes",
+      "Nadia Novak",
+      "Hannah Muller",
+      "Mohammed Al-Farsi",
+      "Akiko Sato"
+    ]
+  },
+  "resources_unit": 266.5668
+}

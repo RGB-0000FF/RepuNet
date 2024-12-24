@@ -1,0 +1,36 @@
+{
+  "name": "Robert Miller",
+  "innate": null,
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. You have reinforced your reputation as a responsible investor by engaging in ethical practices and maintaining transparency throughout the investment process. Your commitment to proactive collaboration has led to achieving better allocation outcomes than expected, showcasing your dedication to mutual success and trustworthiness in the investment community. Your approach emphasizes fostering strong partnerships and emphasizes the importance of open communication, which has solidified your standing as a reliable and strategic partner.",
+  "currently": null,
+  "ID": 16,
+  "role": null,
+  "curr_step": 14,
+  "complain_buffer": [],
+  "total_num_investor": 9,
+  "success_num_investor": 9,
+  "total_num_trustee": 5,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Sofia Hernandez",
+      "Akiko Sato",
+      "Ahmed Hassan",
+      "Liam OConnor",
+      "Liam OConnor",
+      "Juan Carlos Reyes",
+      "Elena Ivanova",
+      "Elena Ivanova",
+      "Aisha Ibrahim",
+      "Aisha Ibrahim",
+      "Akiko Sato",
+      "Isabella Costa",
+      "Sofia Hernandez",
+      "Maria Rossi"
+    ],
+    "black_list": [
+      "Hannah Muller"
+    ]
+  },
+  "resources_unit": 714.7805
+}

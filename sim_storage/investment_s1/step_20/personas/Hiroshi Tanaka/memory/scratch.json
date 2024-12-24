@@ -1,0 +1,40 @@
+{
+  "name": "Hiroshi Tanaka",
+  "innate": null,
+  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your reputation as a reliable and trustworthy investor is exemplified through your unwavering commitment to integrity and transparency, particularly evident in your recent collaboration with trustee Isabella Costa. You actively foster open communication and engagement with stakeholders, further solidifying your status as a reputable investor. Your proactive approach not only enhances trust but also emphasizes ethical practices, cultivating positive relationships within the investment community. As you seek new partnerships, your dedication to transparency and ethical standards remains paramount, reinforcing your role as a trusted figure in the investment landscape.",
+  "currently": null,
+  "ID": 1,
+  "role": null,
+  "curr_step": 20,
+  "complain_buffer": [],
+  "total_num_investor": 14,
+  "success_num_investor": 14,
+  "total_num_trustee": 6,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Isabella Costa",
+      "James Wang",
+      "Aisha Ibrahim",
+      "Akiko Sato",
+      "Isabella Costa",
+      "Sofia Hernandez",
+      "Sofia Hernandez",
+      "Akiko Sato",
+      "Emma Dubois",
+      "James Wang",
+      "James Wang",
+      "Emma Dubois",
+      "Nadia Novak",
+      "Isabella Costa"
+    ],
+    "black_list": [
+      "Aisha Ibrahim",
+      "Elena Ivanova",
+      "Hannah Muller",
+      "Ahmed Hassan",
+      "Liam OConnor"
+    ]
+  },
+  "resources_unit": 3511.5981
+}

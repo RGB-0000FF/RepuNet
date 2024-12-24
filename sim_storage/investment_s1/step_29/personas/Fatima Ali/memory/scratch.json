@@ -1,0 +1,39 @@
+{
+  "name": "Fatima Ali",
+  "innate": null,
+  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan. You have established yourself as a principled investor committed to transparency, trust, and ethical conduct. Your reputation in the investment community is characterized by your diligent adherence to agreed-upon allocation plans and your dedication to maximizing returns while ensuring fair profit distribution. You consistently maintain open lines of communication with your partners, reinforcing your reliability and strong ethical standards. This disciplined and collaborative approach has further solidified your credibility and made you a trustworthy figure among current and potential investors.",
+  "currently": null,
+  "ID": 17,
+  "role": null,
+  "curr_step": 29,
+  "complain_buffer": [],
+  "total_num_investor": 12,
+  "success_num_investor": 6,
+  "total_num_trustee": 17,
+  "success_num_trustee": 11,
+  "relationship": {
+    "bind_list": [
+      "Akiko Sato",
+      "Hannah Muller",
+      "David Johnson",
+      "Liam OConnor",
+      "Sofia Hernandez",
+      "Aisha Ibrahim",
+      "Akiko Sato",
+      "Sergey Petrov",
+      "Sofia Hernandez",
+      "Akiko Sato",
+      "Nadia Novak",
+      "Akiko Sato",
+      "Robert Miller"
+    ],
+    "black_list": [
+      "Mateo Garcia",
+      "Emma Dubois",
+      "Hannah Muller",
+      "Emma Dubois",
+      "Ahmed Hassan"
+    ]
+  },
+  "resources_unit": 36378.772099435926
+}

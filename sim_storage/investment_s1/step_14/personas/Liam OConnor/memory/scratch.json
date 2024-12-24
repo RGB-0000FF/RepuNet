@@ -1,0 +1,33 @@
+{
+  "name": "Liam OConnor",
+  "innate": null,
+  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. Your reputation as a commendable and ethical investor has been further solidified by your transparent communication and strict adherence to investment agreements, as demonstrated in your recent transaction with Ahmed Hassan. You prioritize fostering trusting relationships and ensure fair returns for all stakeholders, which showcases your commitment to mutual respect and benefit. Your proactive engagement and ability to create a collaborative investment environment enhance your integrity and reliability, establishing you as a trustworthy partner in the investment community.",
+  "currently": null,
+  "ID": 0,
+  "role": null,
+  "curr_step": 14,
+  "complain_buffer": [],
+  "total_num_investor": 8,
+  "success_num_investor": 6,
+  "total_num_trustee": 6,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "James Wang",
+      "Sergey Petrov",
+      "Robert Miller",
+      "Robert Miller",
+      "Mateo Garcia",
+      "Hannah Muller",
+      "David Johnson",
+      "David Johnson"
+    ],
+    "black_list": [
+      "Akiko Sato",
+      "Fatima Ali",
+      "Emma Dubois",
+      "Ahmed Hassan"
+    ]
+  },
+  "resources_unit": 417.03
+}

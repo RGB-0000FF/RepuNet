@@ -1,10 +1,12 @@
 venv/
+.venv/
 pyproject.toml
 
 .DS_Store
 .idea/
 
 sim_storage/*
+!sim_storage/investment_s1/
 !sim_storage/change_sim_folder.py
 
 output/

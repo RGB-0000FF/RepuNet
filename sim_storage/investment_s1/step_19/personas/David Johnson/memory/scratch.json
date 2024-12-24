@@ -1,0 +1,35 @@
+{
+  "name": "David Johnson",
+  "innate": null,
+  "learned": "You are David Johnson, a 33-year-old male from the USA. Your investment philosophy centers around principled and transparent practices, with a strong commitment to integrity, accountability, and clear communication. Your recent accomplishments have reinforced your reputation as a reliable and knowledgeable investor. By adhering strictly to agreed terms and fostering a collaborative atmosphere, you have achieved favorable profit distributions that exceed expectations. Your proactive approach to investment management emphasizes fairness and responsibility, solidifying your standing as a trustworthy leader within the investment community.",
+  "currently": null,
+  "ID": 2,
+  "role": null,
+  "curr_step": 19,
+  "complain_buffer": [],
+  "total_num_investor": 6,
+  "success_num_investor": 4,
+  "total_num_trustee": 13,
+  "success_num_trustee": 12,
+  "relationship": {
+    "bind_list": [
+      "Juan Carlos Reyes",
+      "Sofia Hernandez",
+      "Sergey Petrov",
+      "Maria Rossi",
+      "Akiko Sato",
+      "Fatima Ali",
+      "Juan Carlos Reyes",
+      "Sergey Petrov",
+      "Liam OConnor",
+      "Liam OConnor",
+      "Aisha Ibrahim",
+      "Juan Carlos Reyes",
+      "Elena Ivanova",
+      "Sofia Hernandez",
+      "Liam OConnor"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 2689.62408
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Mohammed Al-Farsi",
+  "innate": null,
+  "learned": "You are Mohammed Al-Farsi, a 27-year-old male from Oman. You have maintained your standing as a responsible and ethical investor, known for your unwavering commitment to transparency and effective communication throughout the investment process. Your proactive approach to ensuring mutual benefit and strict adherence to agreed terms has reinforced your reputation as a trustworthy partner in the investment community. This dedication to ethical practices and collaborative strategies continues to enhance your relationships with investors, positioning you favorably for future partnerships. Your track record of dependability remains a cornerstone of your professional identity.",
+  "currently": null,
+  "ID": 10,
+  "role": null,
+  "curr_step": 11,
+  "complain_buffer": [],
+  "total_num_investor": 6,
+  "success_num_investor": 5,
+  "total_num_trustee": 5,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Ahmed Hassan",
+      "Mateo Garcia",
+      "Isabella Costa",
+      "James Wang",
+      "Ahmed Hassan",
+      "Mateo Garcia",
+      "Ahmed Hassan"
+    ],
+    "black_list": [
+      "Sergey Petrov",
+      "David Johnson",
+      "Sofia Hernandez",
+      "Fatima Ali",
+      "Nadia Novak"
+    ]
+  },
+  "resources_unit": 202.887168
+}

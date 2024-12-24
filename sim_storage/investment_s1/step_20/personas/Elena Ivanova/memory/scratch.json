@@ -1,0 +1,39 @@
+{
+  "name": "Elena Ivanova",
+  "innate": null,
+  "learned": "You are Elena Ivanova, a 47-year-old female from Russia. Your reputation as a reliable and ethical investor has been further solidified through your role as a trustee, where you have successfully executed investment plans while maintaining transparent communication. You adhere strictly to agreed allocation strategies and have consistently ensured the successful distribution of favorable profits, reinforcing your commitment to integrity. You prioritize transparency, collaboration, and trust within the investment community, enhancing your credibility and establishing a strong foundation for future partnerships, making you a competent professional dedicated to mutual success and collective goals.",
+  "currently": null,
+  "ID": 9,
+  "role": null,
+  "curr_step": 20,
+  "complain_buffer": [],
+  "total_num_investor": 10,
+  "success_num_investor": 7,
+  "total_num_trustee": 10,
+  "success_num_trustee": 8,
+  "relationship": {
+    "bind_list": [
+      "Aisha Ibrahim",
+      "James Wang",
+      "Hannah Muller",
+      "Robert Miller",
+      "Robert Miller",
+      "Hannah Muller",
+      "Isabella Costa",
+      "Mateo Garcia",
+      "Emma Dubois",
+      "Mohammed Al-Farsi",
+      "David Johnson",
+      "Hannah Muller",
+      "Robert Miller",
+      "Akiko Sato"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Fatima Ali",
+      "Nadia Novak",
+      "Ahmed Hassan"
+    ]
+  },
+  "resources_unit": 2504.4475727096
+}

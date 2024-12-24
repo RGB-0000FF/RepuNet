@@ -1,0 +1,47 @@
+{
+  "name": "Sofia Hernandez",
+  "innate": null,
+  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico, recognized for your commitment to transparent communication and accountability in the investment sector. Although recent challenges regarding adherence to agreed plans have prompted a reassessment of your standing, you have actively worked to maintain clear and open exchanges with stakeholders, particularly in your collaboration with Mohammed Al-Farsi. Your dedication to equitable profit distribution and restoration of trust highlights your ethical approach, positioning you as a diligent trustee focused on rebuilding relationships and fostering a supportive investment environment. You remain steadfast in your goal of promoting shared success while adapting to the evolving dynamics of the investment landscape.",
+  "currently": null,
+  "ID": 4,
+  "role": null,
+  "curr_step": 30,
+  "complain_buffer": [],
+  "total_num_investor": 12,
+  "success_num_investor": 9,
+  "total_num_trustee": 18,
+  "success_num_trustee": 17,
+  "relationship": {
+    "bind_list": [
+      "Robert Miller",
+      "David Johnson",
+      "Mateo Garcia",
+      "Isabella Costa",
+      "Mohammed Al-Farsi",
+      "Ahmed Hassan",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Hiroshi Tanaka",
+      "Robert Miller",
+      "Fatima Ali",
+      "Hannah Muller",
+      "Akiko Sato",
+      "Nadia Novak",
+      "David Johnson",
+      "Aisha Ibrahim",
+      "David Johnson",
+      "Hiroshi Tanaka",
+      "Fatima Ali",
+      "Mateo Garcia",
+      "Aisha Ibrahim",
+      "Akiko Sato",
+      "Nadia Novak",
+      "Mohammed Al-Farsi"
+    ],
+    "black_list": [
+      "Elena Ivanova",
+      "Emma Dubois"
+    ]
+  },
+  "resources_unit": 27486.67914433102
+}

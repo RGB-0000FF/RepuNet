@@ -1,0 +1,41 @@
+{
+  "name": "Mateo Garcia",
+  "innate": null,
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized for your transparent communication skills and collaborative approach in the investment sector. Your reputation as a reliable and successful investor is reinforced by your commitment to integrity and a proactive stance in building understanding throughout the investment process. You emphasize adherence to proposed allocation plans and strive for mutual success in partnerships, showcasing your dedication to achieving favorable outcomes for all parties involved. Your experiences reflect a focus on collaboration and shared goals, further solidifying your standing as an effective investor within the community.",
+  "currently": null,
+  "ID": 19,
+  "role": null,
+  "curr_step": 26,
+  "complain_buffer": [],
+  "total_num_investor": 12,
+  "success_num_investor": 12,
+  "total_num_trustee": 14,
+  "success_num_trustee": 7,
+  "relationship": {
+    "bind_list": [
+      "Mohammed Al-Farsi",
+      "Maria Rossi",
+      "Sofia Hernandez",
+      "Hannah Muller",
+      "Liam OConnor",
+      "Mohammed Al-Farsi",
+      "Nadia Novak",
+      "Elena Ivanova",
+      "James Wang",
+      "Mohammed Al-Farsi",
+      "Robert Miller",
+      "Robert Miller",
+      "Robert Miller",
+      "Sofia Hernandez",
+      "Liam OConnor",
+      "James Wang"
+    ],
+    "black_list": [
+      "Emma Dubois",
+      "Juan Carlos Reyes",
+      "Fatima Ali",
+      "Sergey Petrov"
+    ]
+  },
+  "resources_unit": 3969.7317994904006
+}

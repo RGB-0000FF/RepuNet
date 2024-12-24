@@ -1,0 +1,29 @@
+{
+  "name": "David Johnson",
+  "innate": null,
+  "learned": "You are David Johnson, a 33-year-old male from the USA. Your investment approach is characterized by a rigorous commitment to transparency, ethical investing, and collaborative management. Recent interactions with both Sergey Petrov and Liam O'Connor have further solidified your reputation as a reliable and pro-social trustee. You have consistently adhered to the agreed-upon profit allocation plans and maintained open, honest communication throughout all transactions. The equitable distribution of profits not only underscores your dedication to ethical practices but also enhances your standing in the investment community as a trustworthy stakeholder who prioritizes collaboration and mutual success.",
+  "currently": null,
+  "ID": 2,
+  "role": null,
+  "curr_step": 12,
+  "complain_buffer": [],
+  "total_num_investor": 3,
+  "success_num_investor": 2,
+  "total_num_trustee": 9,
+  "success_num_trustee": 8,
+  "relationship": {
+    "bind_list": [
+      "Juan Carlos Reyes",
+      "Sofia Hernandez",
+      "Sergey Petrov",
+      "Maria Rossi",
+      "Akiko Sato",
+      "Fatima Ali",
+      "Juan Carlos Reyes",
+      "Sergey Petrov",
+      "Liam OConnor"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 327.51
+}

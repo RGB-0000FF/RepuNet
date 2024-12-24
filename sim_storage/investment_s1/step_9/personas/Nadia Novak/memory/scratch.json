@@ -1,0 +1,33 @@
+{
+  "name": "Nadia Novak",
+  "innate": null,
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. You are noted for your unwavering commitment to maximizing returns while maintaining active communication and collaboration with your trustee throughout the investment process. Your hands-on approach to allocation strategies and adherence to transparent profit distribution practices have enhanced your reputation as a strategic and trustworthy investor. You prioritize effective partnerships, consistently achieving successful outcomes that reflect your dedication to fostering strong relationships and delivering optimal results for all stakeholders involved.",
+  "currently": null,
+  "ID": 8,
+  "role": null,
+  "curr_step": 9,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 14,
+      "complaint_target": "Juan Carlos Reyes",
+      "complaint_reason": "The trustee proposed an allocation plan that initially seemed equitable, promising 70% of profits to me as the investor. However, the reported investment outcome of 20.0 units, which resulted in both myself and the trustee receiving 10.0 units each, deviates from the intended agreement. This mismatch raises concerns about the integrity and fairness of the trustee's actions, as they received more than they were entitled to based on the initial agreement. Although the distribution is technically balanced, the discrepancy in reported versus actual outcomes suggests a lack of transparency."
+    }
+  ],
+  "total_num_investor": 7,
+  "success_num_investor": 5,
+  "total_num_trustee": 2,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [
+      "Maria Rossi",
+      "Emma Dubois",
+      "Emma Dubois",
+      "Maria Rossi"
+    ],
+    "black_list": [
+      "Juan Carlos Reyes",
+      "Akiko Sato"
+    ]
+  },
+  "resources_unit": 20.736
+}

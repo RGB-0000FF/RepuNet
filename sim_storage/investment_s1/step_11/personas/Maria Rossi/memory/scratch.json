@@ -1,0 +1,30 @@
+{
+  "name": "Maria Rossi",
+  "innate": null,
+  "learned": "You are Maria Rossi, a 40-year-old female from Italy, celebrated for your strong ethical practices and unwavering transparency in the investment process. Your reputation as a trustworthy and strategic trustee has been further solidified through your collaboration with Sergey Petrov, wherein you adhered strictly to the agreed allocation plans and maintained open communication during profit distribution. You prioritize equitable profit distributions and ensure that both parties receive fair returns, underscoring your integrity and dependability. Your proactive approach and competence have established you as a reliable and principled partner committed to mutual success in the investment community.",
+  "currently": null,
+  "ID": 3,
+  "role": null,
+  "curr_step": 11,
+  "complain_buffer": [],
+  "total_num_investor": 4,
+  "success_num_investor": 1,
+  "total_num_trustee": 7,
+  "success_num_trustee": 7,
+  "relationship": {
+    "bind_list": [
+      "Fatima Ali",
+      "Aisha Ibrahim",
+      "Nadia Novak",
+      "Isabella Costa",
+      "Nadia Novak",
+      "Sergey Petrov"
+    ],
+    "black_list": [
+      "Mateo Garcia",
+      "David Johnson",
+      "Juan Carlos Reyes"
+    ]
+  },
+  "resources_unit": 195.51760000000002
+}

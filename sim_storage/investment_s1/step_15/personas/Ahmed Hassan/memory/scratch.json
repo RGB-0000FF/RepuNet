@@ -1,0 +1,34 @@
+{
+  "name": "Ahmed Hassan",
+  "innate": null,
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt. Your reputation as a trustee demonstrates a thriving commitment to ethical investing and transparent communication. You have successfully executed a profit allocation plan, which not only showcases your competence but also reinforces your role as a trustworthy partner committed to fair profit distribution. Fostering mutually beneficial relationships remains a priority, enhancing collaboration within the investment community. Your approach emphasizes transparency and ethical practices, which are vital for sustaining long-term partnerships and success in the competitive investment landscape.",
+  "currently": null,
+  "ID": 15,
+  "role": null,
+  "curr_step": 15,
+  "complain_buffer": [],
+  "total_num_investor": 9,
+  "success_num_investor": 6,
+  "total_num_trustee": 6,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Elena Ivanova",
+      "Mohammed Al-Farsi",
+      "Hannah Muller",
+      "Mohammed Al-Farsi",
+      "Akiko Sato",
+      "Hannah Muller",
+      "Liam OConnor"
+    ],
+    "black_list": [
+      "Robert Miller",
+      "Sofia Hernandez",
+      "Juan Carlos Reyes",
+      "Sofia Hernandez"
+    ]
+  },
+  "resources_unit": 732.9653000000001
+}

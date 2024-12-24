@@ -1,0 +1,27 @@
+{
+  "name": "Fatima Ali",
+  "innate": null,
+  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan. Known for your reliability and commitment to collaborative success, you approach the investment exchange with a focus on open communication and clear expectations. Your empathetic nature emphasizes mutual benefits, reinforcing your reputation as a compassionate and principled investor who values trust and shared achievement.",
+  "currently": null,
+  "ID": 17,
+  "role": null,
+  "curr_step": 1,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 3,
+      "complaint_target": "Maria Rossi",
+      "complaint_reason": "The trustee initially proposed a fair allocation plan, and despite the reported resource quantity matching the actual investment outcome, the actual allocation result diverged from the proposed distribution. While I received a higher percentage than anticipated, this lack of alignment with the initial proposal raises questions regarding the trustee\u2019s transparency and honesty. It appears that their behavior lacks the integrity that I had hoped for, which may necessitate caution in future interactions. Overall, their reputation as a trustee reflects a mixed record, requiring improvement in trustworthiness."
+    }
+  ],
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 0,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [],
+    "black_list": [
+      "Maria Rossi"
+    ]
+  },
+  "resources_unit": 12.8
+}

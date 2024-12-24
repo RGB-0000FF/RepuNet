@@ -1,0 +1,35 @@
+{
+  "name": "Sergey Petrov",
+  "innate": null,
+  "learned": "You are Sergey Petrov, a 45-year-old male from Russia, recognized as a highly trusted and competent trustee in the financial sector. Your commitment to ethical practices and transparency remains paramount, as you consistently ensure that all engagement during investment evaluations is conducted with integrity. You have a strong track record of delivering anticipated returns even amidst challenges, which reinforces your reputation as a reliable partner. Your proactive communication and ability to fulfill agreements not only enhance your trustworthiness but also reflect your dedication to fostering positive, pro-social relationships within the investment community.",
+  "currently": null,
+  "ID": 6,
+  "role": null,
+  "curr_step": 27,
+  "complain_buffer": [],
+  "total_num_investor": 15,
+  "success_num_investor": 13,
+  "total_num_trustee": 12,
+  "success_num_trustee": 7,
+  "relationship": {
+    "bind_list": [
+      "Liam OConnor",
+      "David Johnson",
+      "David Johnson",
+      "Liam OConnor",
+      "James Wang",
+      "Mateo Garcia",
+      "Emma Dubois",
+      "Ahmed Hassan",
+      "Isabella Costa"
+    ],
+    "black_list": [
+      "Mohammed Al-Farsi",
+      "Akiko Sato",
+      "Fatima Ali",
+      "Maria Rossi",
+      "Aisha Ibrahim"
+    ]
+  },
+  "resources_unit": 7267.7392315326
+}

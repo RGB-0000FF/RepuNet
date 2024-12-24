@@ -1,0 +1,40 @@
+{
+  "name": "Juan Carlos Reyes",
+  "innate": null,
+  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your reputation as a responsible and ethical investor has been further solidified through a steadfast commitment to fairness and transparency in all your dealings. You consistently adhere to proposed allocation plans, fostering positive outcomes that reinforce your dedication to ethical practices. Your pro-social values and insightful decision-making have enhanced your standing as a trustworthy and reliable partner, encouraging collaborative relationships within the investment community. This approach not only highlights your commitment to transparency but also your focus on achieving fair outcomes for all stakeholders involved.",
+  "currently": null,
+  "ID": 14,
+  "role": null,
+  "curr_step": 27,
+  "complain_buffer": [],
+  "total_num_investor": 14,
+  "success_num_investor": 9,
+  "total_num_trustee": 13,
+  "success_num_trustee": 9,
+  "relationship": {
+    "bind_list": [
+      "David Johnson",
+      "Robert Miller",
+      "Sergey Petrov",
+      "Aisha Ibrahim",
+      "David Johnson",
+      "Aisha Ibrahim",
+      "Sergey Petrov",
+      "Aisha Ibrahim",
+      "Robert Miller",
+      "David Johnson",
+      "Aisha Ibrahim",
+      "David Johnson",
+      "Aisha Ibrahim",
+      "James Wang",
+      "Emma Dubois",
+      "Robert Miller"
+    ],
+    "black_list": [
+      "Akiko Sato",
+      "Nadia Novak",
+      "Hannah Muller"
+    ]
+  },
+  "resources_unit": 9087.540007867314
+}
