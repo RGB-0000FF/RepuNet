@@ -64,6 +64,20 @@ class Analysis:
             investment_event = persona.associativeMemory.get_latest_event()
             if "failed" in investment_event["description"].lower():
                 self.analysis_dict[persona_name]["investment_status"] = "failed"
+                investor = (
+                    investment_event["description"]
+                    .split("investor is ")[-1]
+                    .split(",")[0]
+                    .strip()
+                )
+                trustee = (
+                    investment_event["description"]
+                    .split(", trustee is ")[-1]
+                    .split("stage 1")[0]
+                    .strip()
+                )
+                self.analysis_dict[persona_name]["investor"] = investor
+                self.analysis_dict[persona_name]["trustee"] = trustee
             else:
                 self.analysis_dict[persona_name]["investment_status"] = "success"
                 investor = (
@@ -129,3 +143,10 @@ def get_all_sim_info(sim_folder):
     for sim_step in sim_steps:
         sims.append(Analysis(f"{sim_folder}/{sim_step}"))
     return sims
+
+if __name__=="__main__":
+    sims = get_all_sim_info("investment_s1")
+    sim=sims[0]
+    print(sim.analysis_dict)
+    with open("./analysis_dict.json", "w") as f:
+        json.dump(sim.analysis_dict, f,indent=4)
