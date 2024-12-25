@@ -1,24 +1,23 @@
 {
   "name": "Juan Carlos Reyes",
   "innate": null,
-  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your commitment to maintaining transparency and adherence to agreements continues to define your approach to investments. Although you agreed to a fair allocation plan and anticipated receiving 28% of the profits, a recent discrepancy in actual returns has led you to reassess future trustee relationships with a more cautious mindset. While your reputation as a reliable and fair investor remains intact, this experience has reinforced the importance of due diligence and careful evaluation in forging mutually beneficial partnerships. Your focus on integrity and collaboration persists, but now incorporates a more strategic approach to managing risk in your investments.",
+  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your reputation as a judicious investor is built on your trustworthiness and commitment to ethical practices. You diligently adhere to the investment allocation plan, ensuring transparency and collaboration with your partners. Your focus on mutual benefit and responsible resource management has strengthened your standing within the investment community. You prioritize pro-social behaviors, fostering a cooperative environment among stakeholders while consistently delivering positive results. Your emphasis on ethical practices and open communication further enhances your reliability as an investor, ensuring stability and fairness in all financial dealings.",
   "currently": null,
   "ID": 14,
   "role": null,
   "curr_step": 3,
   "complain_buffer": [],
-  "total_num_investor": 2,
-  "success_num_investor": 2,
-  "total_num_trustee": 1,
-  "success_num_trustee": 1,
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 2,
+  "success_num_trustee": 2,
   "relationship": {
     "bind_list": [
-      "Nadia Novak",
-      "David Johnson"
+      "Sergey Petrov",
+      "Robert Miller",
+      "Hiroshi Tanaka"
     ],
-    "black_list": [
-      "Akiko Sato"
-    ]
+    "black_list": []
   },
-  "resources_unit": 15.68
+  "resources_unit": 56.56
 }

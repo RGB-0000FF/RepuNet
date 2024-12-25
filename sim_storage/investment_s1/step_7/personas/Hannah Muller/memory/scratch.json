@@ -1,28 +1,30 @@
 {
   "name": "Hannah Muller",
   "innate": null,
-  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your investment strategy is characterized by a strong commitment to transparency and reliability, fundamental aspects that have shaped your recent role as a trustee. You prioritize ethical practices in investing, ensuring adherence to agreed profit distribution while maintaining open lines of communication with stakeholders regarding investment outcomes. Your approach fosters mutual understanding and collaboration, reinforcing your reputation as a trustworthy partner in the investment community. You handle discrepancies with professionalism, encouraging open dialogue to address concerns, which solidifies your standing as a proactive investor dedicated to informed decision-making and successful partnerships.",
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. As an esteemed trustee, your reputation has been strengthened by your unwavering commitment to ethical standards, transparency, and accountability in all investment dealings. You prioritize pro-social behavior, exemplified by your adherence to the agreed-upon allocation plan and your fair profit distribution, which recently saw 70% of profits returned to investors. Your proactive communication fosters trust, enhancing your relationships within the investment community. Your dedication to effective resource management and collaboration is evident, as you consistently seek opportunities for mutual success, reinforcing your credibility and competence in the investment landscape.",
   "currently": null,
   "ID": 7,
   "role": null,
   "curr_step": 7,
   "complain_buffer": [],
-  "total_num_investor": 6,
-  "success_num_investor": 6,
-  "total_num_trustee": 1,
-  "success_num_trustee": 1,
+  "total_num_investor": 3,
+  "success_num_investor": 3,
+  "total_num_trustee": 4,
+  "success_num_trustee": 4,
   "relationship": {
     "bind_list": [
+      "Hiroshi Tanaka",
       "Isabella Costa",
-      "Elena Ivanova",
-      "Fatima Ali",
-      "Ahmed Hassan"
+      "Maria Rossi",
+      "Fatima Ali"
     ],
     "black_list": [
-      "David Johnson",
-      "Mateo Garcia",
-      "Maria Rossi"
+      "Robert Miller",
+      "Emma Dubois",
+      "Elena Ivanova",
+      "Sofia Hernandez",
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 33.4328
+  "resources_unit": 109.17154000000001
 }

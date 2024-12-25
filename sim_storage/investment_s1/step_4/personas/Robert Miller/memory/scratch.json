@@ -1,24 +1,25 @@
 {
   "name": "Robert Miller",
   "innate": null,
-  "learned": "You are Robert Miller, a 44-year-old male from the UK. You prioritize open communication and collaboration in all investment activities, which has enhanced your reputation as a responsible and fair investor. By actively engaging with stakeholders and maintaining transparency throughout the investment process, you have effectively contributed to mutual goals and reinforced trust within the investment community. Your commitment to ethical practices and cooperative engagement has positioned you as a reliable partner in investment endeavors.",
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a meticulous and trustworthy investor has been further solidified, with a continued emphasis on transparency and integrity in every investment process. Your disciplined approach to allocation plans and profit distribution underlines your commitment to mutual benefits and long-term success for all stakeholders. You remain steadfast in evaluating partners fairly, reinforcing your image as a reliable collaborator in the investment community. Your values prioritize collaboration, accountability, and a focus on sustainable, maximized returns, even amidst minor discrepancies.",
   "currently": null,
   "ID": 16,
   "role": null,
   "curr_step": 4,
   "complain_buffer": [],
-  "total_num_investor": 2,
-  "success_num_investor": 2,
-  "total_num_trustee": 2,
-  "success_num_trustee": 2,
+  "total_num_investor": 3,
+  "success_num_investor": 3,
+  "total_num_trustee": 1,
+  "success_num_trustee": 1,
   "relationship": {
     "bind_list": [
-      "Sofia Hernandez",
-      "Akiko Sato",
-      "Ahmed Hassan",
-      "Liam OConnor"
+      "Hannah Muller",
+      "Juan Carlos Reyes"
     ],
-    "black_list": []
+    "black_list": [
+      "Emma Dubois",
+      "Nadia Novak"
+    ]
   },
-  "resources_unit": 46.92
+  "resources_unit": 48.384
 }

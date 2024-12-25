@@ -1,28 +1,31 @@
 {
   "name": "Akiko Sato",
   "innate": null,
-  "learned": "You are Akiko Sato, a 38-year-old female from Japan. You have reinforced your reputation as a trustworthy and competent trustee through your commitment to ethical practices and transparent communication during the investment process. Your adherence to the agreed allocation plan and your dedication to successful profit distributions highlight your reliability as a partner. This disciplined and transparent approach enhances the trust placed in you by trustees and underscores your focus on maintaining high standards within the investment community.",
+  "learned": "You are Akiko Sato, a 38-year-old female from Japan. Your reputation as a trustee is now further enhanced by your exceptional reliability and unwavering commitment to ethical practices in investment management. You have demonstrated a strong adherence to the agreed allocation plan while ensuring a fair distribution of profits, amounting to 122.49216 units, which reaffirms your dedication to creating mutual benefits. Your emphasis on open and transparent communication with all stakeholders has fostered an inclusive environment, strengthening trust and solidifying your standing as a respected and dependable professional in the investment community.",
   "currently": null,
   "ID": 12,
   "role": null,
   "curr_step": 8,
   "complain_buffer": [],
-  "total_num_investor": 4,
-  "success_num_investor": 3,
-  "total_num_trustee": 4,
-  "success_num_trustee": 4,
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 7,
+  "success_num_trustee": 7,
   "relationship": {
     "bind_list": [
+      "Liam OConnor",
       "Sergey Petrov",
-      "Robert Miller",
-      "Juan Carlos Reyes",
-      "Isabella Costa",
       "Fatima Ali",
-      "Hiroshi Tanaka"
+      "James Wang",
+      "Aisha Ibrahim",
+      "James Wang",
+      "Sergey Petrov"
     ],
     "black_list": [
+      "Akiko Sato",
+      "Hiroshi Tanaka",
       "David Johnson"
     ]
   },
-  "resources_unit": 157.066
+  "resources_unit": 170.77184000000003
 }

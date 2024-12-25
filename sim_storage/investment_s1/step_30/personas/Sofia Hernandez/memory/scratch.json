@@ -1,47 +1,33 @@
 {
   "name": "Sofia Hernandez",
   "innate": null,
-  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico, recognized for your commitment to transparent communication and accountability in the investment sector. Although recent challenges regarding adherence to agreed plans have prompted a reassessment of your standing, you have actively worked to maintain clear and open exchanges with stakeholders, particularly in your collaboration with Mohammed Al-Farsi. Your dedication to equitable profit distribution and restoration of trust highlights your ethical approach, positioning you as a diligent trustee focused on rebuilding relationships and fostering a supportive investment environment. You remain steadfast in your goal of promoting shared success while adapting to the evolving dynamics of the investment landscape.",
+  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico. As an investor, you have established a strong reputation as a trustworthy trustee, recognized for your unwavering commitment to ethical investing and transparent communication. Your recent success in completing transactions, including a significant partnership with Hannah Muller, has further solidified your credibility within the investment community. You maintain a substantial profit distribution model, recently demonstrating a 70% allocation to investors, reflecting your dedication to pro-social behavior and norm compliance. This proactive approach fosters strong, positive relationships built on trust and mutual respect, enhancing your standing as an advocate for ethical practices and effective collaboration in investment.",
   "currently": null,
   "ID": 4,
   "role": null,
   "curr_step": 30,
   "complain_buffer": [],
-  "total_num_investor": 12,
-  "success_num_investor": 9,
-  "total_num_trustee": 18,
-  "success_num_trustee": 17,
+  "total_num_investor": 17,
+  "success_num_investor": 1,
+  "total_num_trustee": 13,
+  "success_num_trustee": 10,
   "relationship": {
     "bind_list": [
-      "Robert Miller",
+      "Ahmed Hassan",
+      "Elena Ivanova",
+      "Aisha Ibrahim",
       "David Johnson",
-      "Mateo Garcia",
-      "Isabella Costa",
-      "Mohammed Al-Farsi",
+      "Hannah Muller",
+      "Ahmed Hassan",
+      "Robert Miller",
       "Ahmed Hassan",
       "Hiroshi Tanaka",
-      "Emma Dubois",
-      "Hiroshi Tanaka",
-      "Robert Miller",
-      "Fatima Ali",
-      "Hannah Muller",
-      "Akiko Sato",
-      "Nadia Novak",
-      "David Johnson",
-      "Aisha Ibrahim",
-      "David Johnson",
-      "Hiroshi Tanaka",
-      "Fatima Ali",
       "Mateo Garcia",
-      "Aisha Ibrahim",
-      "Akiko Sato",
-      "Nadia Novak",
-      "Mohammed Al-Farsi"
+      "Hannah Muller"
     ],
     "black_list": [
-      "Elena Ivanova",
-      "Emma Dubois"
+      "Fatima Ali"
     ]
   },
-  "resources_unit": 27486.67914433102
+  "resources_unit": 5214.294463878293
 }

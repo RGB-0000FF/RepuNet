@@ -1,38 +1,41 @@
 {
   "name": "Ahmed Hassan",
   "innate": null,
-  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt, recognized as a highly competent trustee in the investment community. Your successful execution of the investment process has greatly enhanced your reputation, characterized by strict adherence to agreed allocation plans and a commitment to transparency at every stage. You prioritize effective communication with investors, which has solidified their trust and confidence in your ability to maximize profits ethically. Your dedication to high ethical standards and consistent performance has not only reinforced your credibility but also established you as a reliable and respected figure in the competitive investment landscape, paving the way for fruitful future collaborations.",
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt. Your reputation as a principled and responsible investor has been further solidified through an unwavering commitment to ethical investing and transparent communication. You consistently adhere to agreed-upon terms, enhancing trust and reliability within the investment community. Your pro-social behavior and competence are evident in your strong relationships with stakeholders, reinforcing your standing as a trustworthy figure dedicated to maintaining high ethical standards and accountability. Your focus on fostering beneficial connections and delivering on promises guarantees prompt profit distribution, contributing to your esteemed reputation.",
   "currently": null,
   "ID": 15,
   "role": null,
   "curr_step": 20,
   "complain_buffer": [],
-  "total_num_investor": 9,
-  "success_num_investor": 6,
-  "total_num_trustee": 11,
+  "total_num_investor": 12,
+  "success_num_investor": 12,
+  "total_num_trustee": 8,
   "success_num_trustee": 8,
   "relationship": {
     "bind_list": [
+      "Sofia Hernandez",
       "Mohammed Al-Farsi",
-      "Hiroshi Tanaka",
+      "Fatima Ali",
+      "Sergey Petrov",
       "Elena Ivanova",
       "Mohammed Al-Farsi",
-      "Hannah Muller",
       "Mohammed Al-Farsi",
-      "Akiko Sato",
-      "Hannah Muller",
-      "Liam OConnor",
+      "Robert Miller",
       "Emma Dubois",
-      "Hannah Muller",
-      "Akiko Sato"
+      "Sofia Hernandez",
+      "Akiko Sato",
+      "Aisha Ibrahim",
+      "Fatima Ali",
+      "Liam OConnor",
+      "Mohammed Al-Farsi",
+      "Sofia Hernandez",
+      "James Wang"
     ],
     "black_list": [
-      "Robert Miller",
-      "Sofia Hernandez",
-      "Juan Carlos Reyes",
-      "Sofia Hernandez",
-      "Fatima Ali"
+      "Hiroshi Tanaka",
+      "David Johnson",
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 2076.031696008
+  "resources_unit": 8288.548481736594
 }

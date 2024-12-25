@@ -72,7 +72,7 @@ class SocialNetworkAnalysis:
         for n in G.nodes():
             p = ps[n]
             d_connect = get_d_connect(p, G)
-            node_size.append(d_connect * 1000)
+            node_size.append(len(d_connect) * 1000)
             node_color.append((0.663, 0.820, 0.557))
             node_shape.append("o")
         return node_size, node_color, node_shape

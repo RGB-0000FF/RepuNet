@@ -1,32 +1,33 @@
 {
   "name": "Juan Carlos Reyes",
   "innate": null,
-  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your reputation as a trustee in the investment community is underpinned by a steadfast commitment to ethical practices, transparency, and fairness. The recent successful investment with Aisha Ibrahim has further enhanced your credibility, as you meticulously adhered to the agreed allocation plan and ensured equitable profit distribution that satisfied both parties. This experience has reaffirmed your role as a responsible leader and a reliable figure in the investment landscape, fostering confidence among peers and making you a sought-after collaborator known for your proactive communication and dedication to maintaining high ethical standards.",
+  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. You are recognized for your unwavering commitment to ethical investing and transparency, consistently demonstrating your dedication to open communication and adherence to agreed-upon allocation plans. Your ability to achieve favorable profit distributions has solidified your standing as a principled and responsible investor within the investment community. You prioritize mutual benefit and sustainable practices, seeking partnerships that reflect your core values of integrity, collaboration, and sustainability in all investment endeavors.",
   "currently": null,
   "ID": 14,
   "role": null,
   "curr_step": 13,
   "complain_buffer": [],
   "total_num_investor": 7,
-  "success_num_investor": 5,
+  "success_num_investor": 6,
   "total_num_trustee": 6,
-  "success_num_trustee": 5,
+  "success_num_trustee": 6,
   "relationship": {
     "bind_list": [
-      "David Johnson",
+      "Sergey Petrov",
       "Robert Miller",
-      "Sergey Petrov",
-      "Aisha Ibrahim",
-      "David Johnson",
-      "Aisha Ibrahim",
-      "Sergey Petrov",
-      "Aisha Ibrahim"
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Emma Dubois",
+      "Robert Miller",
+      "Hannah Muller",
+      "Liam OConnor",
+      "Hannah Muller"
     ],
     "black_list": [
-      "Akiko Sato",
-      "Nadia Novak",
-      "Hannah Muller"
+      "David Johnson",
+      "Fatima Ali",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 502.14750000000004
+  "resources_unit": 501.1315199999999
 }

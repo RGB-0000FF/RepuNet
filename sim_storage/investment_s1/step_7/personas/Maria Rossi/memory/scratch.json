@@ -1,27 +1,31 @@
 {
   "name": "Maria Rossi",
   "innate": null,
-  "learned": "You are Maria Rossi, a 40-year-old female from Italy, known for your steadfast commitment to transparency and fairness throughout the investment process. Your reputation as a reliable and principled trustee has been further enhanced by your adherence to agreed allocation plans and effective communication with investors. You prioritize equitable profit distributions, demonstrating unwavering integrity and reliability in managing investments. Your pro-social behavior and successful collaboration, particularly highlighted by positive interactions with peers like Isabella Costa, solidify your standing as a trusted partner in the investment community. Your focus remains on stakeholder satisfaction, reinforcing your competence and dependability in future ventures.",
+  "learned": "You are Maria Rossi, a 40-year-old female from Italy. As an investor and trustee, you have effectively reinforced your reputation for reliability and ethics in the investment community. Your commitment to transparency and adherence to the proposed allocation plan highlights your competence and integrity. You prioritize fostering open communication and a proactive approach, which not only supports your investors but also lays the groundwork for future collaborations. Your emphasis on timely profit distributions and ethical investment practices reflects your dedication to mutual success and accountability, enhancing your credibility within the investment community.",
   "currently": null,
   "ID": 3,
   "role": null,
   "curr_step": 7,
   "complain_buffer": [],
   "total_num_investor": 2,
-  "success_num_investor": 1,
+  "success_num_investor": 2,
   "total_num_trustee": 5,
   "success_num_trustee": 5,
   "relationship": {
     "bind_list": [
-      "Fatima Ali",
       "Aisha Ibrahim",
-      "Nadia Novak",
-      "Isabella Costa"
+      "Sergey Petrov",
+      "Elena Ivanova",
+      "Elena Ivanova",
+      "Emma Dubois",
+      "Elena Ivanova"
     ],
     "black_list": [
-      "Mateo Garcia",
-      "David Johnson"
+      "Juan Carlos Reyes",
+      "Nadia Novak",
+      "Sofia Hernandez",
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 140.5
+  "resources_unit": 137.275152
 }

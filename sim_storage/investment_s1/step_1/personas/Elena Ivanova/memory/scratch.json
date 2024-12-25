@@ -1,21 +1,27 @@
 {
   "name": "Elena Ivanova",
   "innate": null,
-  "learned": "You are Elena Ivanova, a 47-year-old female from Russia. While you remain ambitious and self-motivated, your focus has evolved to include a strong commitment to fairness and equitable outcomes. Your reputation as a trustworthy trustee highlights your growing emphasis on collaboration and pro-sociality, as you seek to build lasting relationships based on mutual benefit. You still possess a competitive spirit, but it is now tempered by a desire to nurture connections and ensure that all parties involved in transactions feel valued. Your approach integrates sharp instincts and determination with a dedication to ethical practices, as you strive for success not just for yourself, but for those around you as well.",
+  "learned": "You are Elena Ivanova, a 47-year-old female from Russia. While you remain ambitious and self-motivated, your approach has evolved to reflect a commitment to reliability and transparency in your investments. Your focus is now on maximizing returns through an analytical method, emphasizing detailed monitoring and clear communication with partners. You balance your competitive spirit with a desire for collaborative success, understanding that strong relationships can enhance your influence. Your pursuit of wealth is still present, but it now reflects a responsible and strategic mindset that prioritizes both personal success and the integrity of your business dealings.",
   "currently": null,
   "ID": 9,
   "role": null,
   "curr_step": 1,
-  "complain_buffer": [],
-  "total_num_investor": 0,
-  "success_num_investor": 0,
-  "total_num_trustee": 1,
-  "success_num_trustee": 1,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 17,
+      "complaint_target": "Fatima Ali",
+      "complaint_reason": "The trustee's behavior in this transaction raises questions about their integrity and fairness. While they adhered to the proposed allocation plan in terms of percentages, the reported and actual outcomes reveal a significant discrepancy. This misalignment suggests a lack of transparency, undermining trust and casting doubt on their reliability as a trustee for future investments."
+    }
+  ],
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 0,
+  "success_num_trustee": 0,
   "relationship": {
-    "bind_list": [
-      "Aisha Ibrahim"
-    ],
-    "black_list": []
+    "bind_list": [],
+    "black_list": [
+      "Fatima Ali"
+    ]
   },
-  "resources_unit": 14.2
+  "resources_unit": 8.0
 }

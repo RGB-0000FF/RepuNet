@@ -1,28 +1,31 @@
 {
   "name": "Liam OConnor",
   "innate": null,
-  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. You have reinforced your strong reputation as a reliable and ethical investor. Your unwavering commitment to transparency and adherence to the agreed-upon terms throughout the investment process has proven essential in ensuring fairness in profit distribution. This has solidified your credibility for future transactions, enhancing your standing in the investment community. Your consistent positive behavior reflects a trustworthy and pro-social disposition, and you continue to focus on building collaborative relationships, which showcases your dedication to maintaining integrity and fostering a transparent environment for all stakeholders involved.",
+  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. As a savvy investor, you have honed your negotiation skills, successfully achieving a 70% return on investments, which has solidified your reputation for strategic focus on wealth maximization. Your ambitious nature is complemented by a strong sense of trustworthiness and competence, allowing you to navigate investment landscapes with efficacy. While you prioritize personal gain, you maintain integrity, reflecting a balance of independence and strategic collaboration. Your approach underscores your commitment to securing advantageous outcomes while reinforcing your stature as a respected figure in the investment community.",
   "currently": null,
   "ID": 0,
   "role": null,
   "curr_step": 8,
-  "complain_buffer": [],
-  "total_num_investor": 4,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 5,
+      "complaint_target": "James Wang",
+      "complaint_reason": "The trustee's behavior appears to be somewhat constructive, as they have distributed more resources to me than the proposed allocation plan stipulated. While the trustee has reported the investment outcome accurately, the willingness to allocate more than promised raises questions about their transparency and overall integrity. This creates a mixed impression; they may be acting in a potentially self-serving manner, straying from the expected integrity in the investment process."
+    }
+  ],
+  "total_num_investor": 2,
   "success_num_investor": 2,
-  "total_num_trustee": 4,
-  "success_num_trustee": 4,
+  "total_num_trustee": 6,
+  "success_num_trustee": 0,
   "relationship": {
     "bind_list": [
-      "James Wang",
-      "Sergey Petrov",
-      "Emma Dubois",
-      "Robert Miller",
-      "Robert Miller"
+      "Akiko Sato"
     ],
     "black_list": [
-      "Akiko Sato",
-      "Fatima Ali"
+      "James Wang",
+      "Liam OConnor",
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 93.78
+  "resources_unit": 16.8
 }

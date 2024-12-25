@@ -1,32 +1,28 @@
 {
   "name": "Hannah Muller",
   "innate": null,
-  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your investment strategy is characterized by a strong emphasis on diligence and adaptability, showcased through your proactive engagement in mutual evaluations throughout your investment processes. This approach has not only facilitated careful planning and scrutiny of outcomes but has also reinforced your reputation as a reliable investor. You prioritize building robust partnerships with stakeholders, fostering an environment of mutual growth and satisfaction through informed decision-making and successful collaborations in your investment journey.",
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. As a disciplined and ethical trustee, you prioritize transparency, accountability, and pro-social behavior in all your investment activities. Your unwavering commitment to adhere to the agreed-upon allocation plan has solidified your reputation as a reliable and trustworthy investor within the community. With a strong track record of successful resource management and positive profit distributions, you exemplify competence and foster constructive relationships with fellow investors. You recognize the importance of collaboration and effective communication, which has further enhanced your credibility and standing in the investment landscape.",
   "currently": null,
   "ID": 7,
   "role": null,
   "curr_step": 5,
-  "complain_buffer": [
-    {
-      "complaint_target_ID": 2,
-      "complaint_target": "David Johnson",
-      "complaint_reason": "The trustee's behavior has proven to be significantly lacking in integrity and fairness. They have reported an investment outcome of 20.0 units but allocated only 2.0 units to the investor, instead of the promised 14.0 units. This deviation raises serious concerns about their commitment to honoring the proposed allocation plan. The trustworthiness of the trustee is now in question, as they have failed to deliver an allocation that reflects the agreed-upon terms, potentially jeopardizing their credibility and future partnerships."
-    }
-  ],
-  "total_num_investor": 5,
-  "success_num_investor": 5,
-  "total_num_trustee": 0,
-  "success_num_trustee": 0,
+  "complain_buffer": [],
+  "total_num_investor": 3,
+  "success_num_investor": 3,
+  "total_num_trustee": 2,
+  "success_num_trustee": 2,
   "relationship": {
     "bind_list": [
+      "Hiroshi Tanaka",
       "Isabella Costa",
-      "Elena Ivanova",
-      "Fatima Ali"
+      "Isabella Costa",
+      "Maria Rossi"
     ],
     "black_list": [
-      "David Johnson",
-      "Mateo Garcia"
+      "Robert Miller",
+      "Emma Dubois",
+      "Elena Ivanova"
     ]
   },
-  "resources_unit": 4.1472
+  "resources_unit": 41.730000000000004
 }

@@ -1,37 +1,40 @@
 {
   "name": "Maria Rossi",
   "innate": null,
-  "learned": "You are Maria Rossi, a 40-year-old female from Italy, recognized for your steadfast dedication to transparency and effective communication within the investment community. Your reputation has been enhanced through your successful collaboration with investor Nadia Novak, where you not only adhered to the agreed allocation plan but also effectively managed resources and ensured timely profit distributions. This experience has further solidified your credibility as a reliable trustee committed to ethical practices and fostering strong partnerships. You prioritize integrity and transparent dialogue, emphasizing respect among all stakeholders, which reinforces trust and supports enduring success in the investment process.",
+  "learned": "You are Maria Rossi, a 40-year-old female from Italy, recognized for your commitment to ethical investing and transparency in the investment community. Your recent success in transactions has reinforced your status as a dignified investor, where proactive communication and a focus on mutual benefits have led to outcomes that exceeded expectations. Your dedication to reliability and ethical practices in collaborations solidifies your reputation as a trustworthy partner. You prioritize fairness, accountability, and transparent dialogues, actively fostering pro-social outcomes in your investments, which are integral to your esteemed position in the industry.",
   "currently": null,
   "ID": 3,
   "role": null,
   "curr_step": 29,
   "complain_buffer": [],
-  "total_num_investor": 12,
-  "success_num_investor": 3,
-  "total_num_trustee": 17,
-  "success_num_trustee": 12,
+  "total_num_investor": 15,
+  "success_num_investor": 10,
+  "total_num_trustee": 14,
+  "success_num_trustee": 9,
   "relationship": {
     "bind_list": [
-      "Fatima Ali",
       "Aisha Ibrahim",
-      "Nadia Novak",
-      "Isabella Costa",
-      "Nadia Novak",
-      "Isabella Costa",
-      "Robert Miller",
-      "Mohammed Al-Farsi",
+      "Sergey Petrov",
       "Elena Ivanova",
+      "Elena Ivanova",
+      "Emma Dubois",
+      "Elena Ivanova",
+      "James Wang",
       "Hiroshi Tanaka",
-      "Nadia Novak"
+      "Mohammed Al-Farsi",
+      "Mohammed Al-Farsi",
+      "Sergey Petrov",
+      "Elena Ivanova",
+      "Mateo Garcia",
+      "Hiroshi Tanaka"
     ],
     "black_list": [
-      "Mateo Garcia",
-      "David Johnson",
+      "Sofia Hernandez",
+      "Isabella Costa",
+      "Akiko Sato",
       "Juan Carlos Reyes",
-      "Emma Dubois",
-      "Sergey Petrov"
+      "Ahmed Hassan"
     ]
   },
-  "resources_unit": 13651.82138586419
+  "resources_unit": 11693.682332710176
 }

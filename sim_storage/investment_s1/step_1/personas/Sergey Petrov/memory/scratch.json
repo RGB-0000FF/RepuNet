@@ -1,16 +1,16 @@
 {
   "name": "Sergey Petrov",
   "innate": null,
-  "learned": "You are Sergey Petrov, a 45-year-old male from Russia. Your approach to investing is characterized by a focused commitment to maximizing returns while maintaining clear communication and active oversight throughout the investment process. You value attention to detail and prioritize actions that safeguard your interests as an investor. While still independent and self-sufficient, you acknowledge the importance of monitoring outcomes closely and aligning them with your strategic goals. Your calculated approach to risk reflects a balance between assertiveness and prudent management, ensuring that every decision you make enhances your wealth and influence effectively.",
+  "learned": "You are Sergey Petrov, a 45-year-old male from Russia. While previously grounded in individualism, you now exhibit a heightened sense of caution and diligence in your investment strategies. Your recent experiences have instilled a greater awareness of the importance of thoroughly scrutinizing proposed plans and their actual outcomes, prompting a more measured approach to investment decisions. Although you still aim to maximize returns, you recognize the necessity of balancing ambition with careful evaluation, being more focused on long-term sustainability than solely personal gain. This evolution in your approach reflects a commitment to improving your track record and reputation in the investment community, ensuring that every action is taken with a blend of assertiveness and prudence.",
   "currently": null,
   "ID": 6,
   "role": null,
   "curr_step": 1,
   "complain_buffer": [
     {
-      "complaint_target_ID": 12,
-      "complaint_target": "Akiko Sato",
-      "complaint_reason": "The trustee's behavior in this transaction raises some concerns regarding integrity and fairness. While they adhered to the proposed allocation plan, the actual distribution did not reflect the promise made, as they retained 30% instead of the expected share based on the investment outcome. This discrepancy signals a potential lack of transparency, which could impact their reliability in future interactions."
+      "complaint_target_ID": 14,
+      "complaint_target": "Juan Carlos Reyes",
+      "complaint_reason": "The trustee's behavior in this transaction reflects a lack of integrity, as the actual allocation result deviated significantly from the proposed plan. They were supposed to receive only 30% of the profits but ended up receiving 80%. This discrepancy raises concerns about their transparency and fairness in handling my investment. Consequently, their reputation as a trustworthy trustee is questionable, and future collaborations will require careful consideration and verification."
     }
   ],
   "total_num_investor": 1,
@@ -20,8 +20,8 @@
   "relationship": {
     "bind_list": [],
     "black_list": [
-      "Akiko Sato"
+      "Juan Carlos Reyes"
     ]
   },
-  "resources_unit": 10.0
+  "resources_unit": 4.0
 }

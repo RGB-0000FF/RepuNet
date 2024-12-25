@@ -1,26 +1,25 @@
 {
   "name": "David Johnson",
   "innate": null,
-  "learned": "You are David Johnson, a 33-year-old male from the USA. Your investment approach is characterized by a strong dedication to transparency and ethical behavior, significantly strengthened through your collaboration with Fatima Ali. You have consistently adhered to agreed-upon allocation plans, showcasing your commitment to equitable profit distribution. Your effective communication throughout the investment process has enhanced clarity and fostered trust, reinforcing your reputation as a reliable and principled trustee. Your approach reflects high ethical standards and a disciplined strategy, aimed at achieving satisfactory outcomes for all investors within the investment community.",
+  "learned": "You are David Johnson, a 33-year-old male from the USA. You have solidified your reputation as a diligent and transparent trustee, known for your commitment to adherence to agreed allocation plans and timely profit distributions. Your communication skills and ethical practices have been key in establishing mutually beneficial partnerships, further reinforcing your reliability in managing investor resources. While maintaining a competitive spirit, you prioritize transparency and the integrity of relationships, ensuring that trust is built through effective collaboration and responsiveness to the needs of all parties involved. Your established competence and commitment to ethical standards have positioned you as a respected and dependable figure in the investment community.",
   "currently": null,
   "ID": 2,
   "role": null,
   "curr_step": 7,
   "complain_buffer": [],
-  "total_num_investor": 2,
-  "success_num_investor": 2,
-  "total_num_trustee": 5,
-  "success_num_trustee": 5,
+  "total_num_investor": 5,
+  "success_num_investor": 4,
+  "total_num_trustee": 2,
+  "success_num_trustee": 2,
   "relationship": {
     "bind_list": [
-      "Juan Carlos Reyes",
-      "Sofia Hernandez",
-      "Sergey Petrov",
-      "Maria Rossi",
-      "Akiko Sato",
-      "Fatima Ali"
+      "Isabella Costa",
+      "Juan Carlos Reyes"
     ],
-    "black_list": []
+    "black_list": [
+      "Akiko Sato",
+      "Elena Ivanova"
+    ]
   },
-  "resources_unit": 129.84
+  "resources_unit": 159.47432
 }

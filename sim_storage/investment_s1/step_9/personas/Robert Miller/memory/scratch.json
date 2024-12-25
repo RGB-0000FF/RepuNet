@@ -1,7 +1,7 @@
 {
   "name": "Robert Miller",
   "innate": null,
-  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a trustee has been further reinforced through the successful execution of the agreed allocation plan and timely distribution of 70% of profits to investors. You prioritize trustworthiness and integrity in your investment practices, demonstrating a strong commitment to ethical management. Open communication and transparency are central to your approach, allowing you to build trust with current and future partners. Your strategic mindset, effective management of investments, and dedication to mutual goals have established you as a responsible and ethical investor focused on fostering pro-social outcomes within the investment community.",
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a meticulous and trustworthy investor is underscored by your professionalism and clear communication throughout the investment process. You emphasize integrity and an unwavering commitment to equitable outcomes, cultivating robust partnerships and reinforcing a culture of fair dealings. Your values prioritize transparency, accountability, and collaborative success, fostering trust and establishing a solid foundation for future investments. This approach further solidifies your standing as a reliable figure in the investment community, dedicated to maintaining high standards in all interactions.",
   "currently": null,
   "ID": 16,
   "role": null,
@@ -13,17 +13,18 @@
   "success_num_trustee": 3,
   "relationship": {
     "bind_list": [
-      "Sofia Hernandez",
-      "Akiko Sato",
-      "Ahmed Hassan",
-      "Liam OConnor",
-      "Liam OConnor",
+      "Hannah Muller",
       "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Elena Ivanova",
-      "Aisha Ibrahim"
+      "Mohammed Al-Farsi",
+      "Juan Carlos Reyes",
+      "Fatima Ali",
+      "Ahmed Hassan"
     ],
-    "black_list": []
+    "black_list": [
+      "Emma Dubois",
+      "Nadia Novak",
+      "Isabella Costa"
+    ]
   },
-  "resources_unit": 183.94799999999998
+  "resources_unit": 241.60512
 }

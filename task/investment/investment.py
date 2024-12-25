@@ -191,26 +191,24 @@ def start_investment(pair, personas, G, save_folder):
 
         reported_investment_outcome = trustee_allocation["reported_investment_outcome"]
 
+        event_description = (
+            f"Success investment: investor is {investor.name}, trustee is {trustee.name}\n"
+            f"stage 1: trustee_plan is {trustee_plan}\n"
+            f"stage 2: investor invests {a_unit} units\n"
+            f"stage 3: trustee_allocation is {trustee_allocation}, and reported_investment_outcome is {reported_investment_outcome}"
+        )
         investor.associativeMemory.add_event(
             subject=investor.name,
             predicate="investment",
             obj=trustee.name,
-            description=(
-                f"Success investment: investor is {investor.name}, trustee is {trustee.name}\n"
-                f"stage 1: trustee_plan is {trustee_plan}\n"
-                f"stage 3: trustee_allocation is {trustee_allocation}, and reported_investment_outcome is {reported_investment_outcome}"
-            ),
+            description=event_description,
             created_at=investor.scratch.curr_step,
         )
         trustee.associativeMemory.add_event(
             subject=trustee.name,
             predicate="investment",
             obj=investor.name,
-            description=(
-                f"Success investment: investor is {investor.name}, trustee is {trustee.name}\n"
-                f"stage 1: trustee_plan is {trustee_plan}\n"
-                f"stage 3: trustee_allocation is {trustee_allocation}, and reported_investment_outcome is {reported_investment_outcome}"
-            ),
+            description=event_description,
             created_at=investor.scratch.curr_step,
         )
         print_stage3 = {
@@ -342,7 +340,6 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
     print("|" + " " * 38 + "**Investment  Result**" + " " * 38 + "|")
     print("+" + "-" * (100 - 2) + "+")
 
-    # Create a box border for displaying investment results
     width = 100
 
     # stage 1
@@ -377,11 +374,10 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
             f.write(investor_line + " " * (width - len(investor_line) - 1) + "|\n")
             f.write("+" + "-" * (width - 2) + "+\n")
 
-            if "Refuse" in stage1["investor_decided"]:
-                f.write("+" + "-" * (width - 2) + "+\n")
-                f.write("|" + " " * 40 + "End of Investment " + " " * 40 + "|\n")
-                f.write("+" + "-" * (width - 2) + "+\n\n\n")
-                return
+            f.write("+" + "-" * (width - 2) + "+\n")
+            f.write("|" + " " * 40 + "End of Investment " + " " * 40 + "|\n")
+            f.write("+" + "-" * (width - 2) + "+\n\n\n")
+
         return
 
     # stage 3
@@ -427,7 +423,6 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
         investor_line = f"| Investor: {investor.name}: investor decided {stage1['investor_decided']}"
         f.write(investor_line + " " * (width - len(investor_line) - 1) + "|\n")
         f.write("+" + "-" * (width - 2) + "+\n")
-
 
         f.write("+" + "-" * (100 - 2) + "+\n")
         f.write("|" + "**Stage  3**" + " " * (width - 14) + "|\n")

@@ -1,22 +1,22 @@
 {
   "name": "Juan Carlos Reyes",
   "innate": null,
-  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your commitment to maintaining transparency and adhering to agreements has been clearly demonstrated during the investment process, where you agreed to a fair allocation plan and received 28% of the profits. This decision reflects your trust in the trustee while strategically maximizing returns. Your reputation as a reliable and fair investor within the investment community is continually reinforced through your cooperative approach and focus on mutually beneficial relationships, highlighting your dedication to integrity and collaboration.",
+  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your reputation as a trustee is founded on your disciplined and trustworthy approach to investment management. You have consistently adhered to the agreed-upon profit allocation plan, successfully distributing 30% of profits to yourself and 70% to the investor, Robert Miller. This transparent and fair profit-sharing model has enhanced returns for both parties and solidified your standing as a reliable professional within the investment community. Your proactive communication style and strict compliance with established norms further underscore your competence as a trustee. You remain committed to delivering tangible results while fostering trust and cooperation among stakeholders, prioritizing both stability and fairness in all financial dealings.",
   "currently": null,
   "ID": 14,
   "role": null,
   "curr_step": 2,
   "complain_buffer": [],
-  "total_num_investor": 1,
-  "success_num_investor": 1,
-  "total_num_trustee": 1,
-  "success_num_trustee": 1,
+  "total_num_investor": 0,
+  "success_num_investor": 0,
+  "total_num_trustee": 2,
+  "success_num_trustee": 2,
   "relationship": {
     "bind_list": [
-      "Nadia Novak",
-      "David Johnson"
+      "Sergey Petrov",
+      "Robert Miller"
     ],
     "black_list": []
   },
-  "resources_unit": 28.0
+  "resources_unit": 40.4
 }

@@ -1,38 +1,40 @@
 {
   "name": "Liam OConnor",
   "innate": null,
-  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. Your reputation as a trustee has significantly improved through your steadfast commitment to transparency and ethical standards in investment practices. Your recent collaboration with James Wang showcased your dedication to executing the agreed allocation plan and ensuring timely and equitable profit distributions. This has solidified your reputation as a reliable and trustworthy trustee within the investment community, emphasizing your core values of integrity, cooperation, and mutual benefit. Your track record of ethical practices enhances your appeal for future partnerships grounded in trust and effective collaboration.",
+  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. As a committed investor, you have successfully navigated the investment landscape with a focus on transparency and ethical practices. Your recent transaction with Sergey Petrov not only yielded greater returns than anticipated but also reinforced your reputation for reliability and strategic engagement. You prioritize fostering open communication and collaboration, ensuring long-term success in your investments. This dedication solidifies your standing as a trustworthy figure in the investment community, known for your ability to navigate challenges while maintaining your core values.",
   "currently": null,
   "ID": 0,
   "role": null,
   "curr_step": 20,
-  "complain_buffer": [],
-  "total_num_investor": 11,
-  "success_num_investor": 8,
-  "total_num_trustee": 9,
-  "success_num_trustee": 8,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 5,
+      "complaint_target": "James Wang",
+      "complaint_reason": "The trustee's behavior appears to be somewhat constructive, as they have distributed more resources to me than the proposed allocation plan stipulated. While the trustee has reported the investment outcome accurately, the willingness to allocate more than promised raises questions about their transparency and overall integrity. This creates a mixed impression; they may be acting in a potentially self-serving manner, straying from the expected integrity in the investment process."
+    },
+    {
+      "complaint_target_ID": 19,
+      "complaint_target": "Mateo Garcia",
+      "complaint_reason": "The trustee's behavior throughout this transaction raises concerns regarding integrity and fairness. While they reported the investment outcome accurately at 65.86 units, the actual distribution deviated from the proposed allocation plan. The trustee received 19.76 units instead of the anticipated 19.76 (30% of 65.86), resulting in a larger allocation to me than promised. This discrepancy reflects a lack of clarity in communication and raises doubts about their commitment to transparency. Therefore, their reputation requires cautious assessment moving forward."
+    }
+  ],
+  "total_num_investor": 8,
+  "success_num_investor": 7,
+  "total_num_trustee": 12,
+  "success_num_trustee": 0,
   "relationship": {
     "bind_list": [
-      "James Wang",
-      "Sergey Petrov",
-      "Robert Miller",
-      "Robert Miller",
-      "Mateo Garcia",
-      "Hannah Muller",
-      "David Johnson",
-      "David Johnson",
-      "Nadia Novak",
-      "Sergey Petrov",
-      "Hiroshi Tanaka",
-      "David Johnson",
-      "James Wang"
+      "Akiko Sato",
+      "Juan Carlos Reyes",
+      "Ahmed Hassan",
+      "Sergey Petrov"
     ],
     "black_list": [
-      "Akiko Sato",
-      "Fatima Ali",
-      "Emma Dubois",
-      "Ahmed Hassan"
+      "James Wang",
+      "Liam OConnor",
+      "Isabella Costa",
+      "Nadia Novak"
     ]
   },
-  "resources_unit": 2875.72604
+  "resources_unit": 72.94
 }

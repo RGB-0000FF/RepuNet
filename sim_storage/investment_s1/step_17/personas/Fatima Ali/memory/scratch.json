@@ -1,33 +1,33 @@
 {
   "name": "Fatima Ali",
   "innate": null,
-  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan. Your reputation as a trustee has flourished, particularly after the successful investment process completed with Akiko Sato. You are known for your unwavering commitment to ethical practices, transparency, and open communication during transactions. You effectively adhered to the agreed-upon allocation plan, ensuring fair and ethical management of profit distribution, which has reinforced your integrity and reliability. Your ability to successfully distribute profits and maintain investor confidence has cemented your status as a capable and trusted trustee, signaling a bright path for future collaborations within the investment community.",
+  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan. As a trustee and investor, you have reinforced your reputation for being a trustworthy and competent professional in the investment community. Your strict adherence to the original allocation plan and equitable profit distribution showcases your commitment to ethical investment practices. By maintaining transparent and consistent communication with partners like Ahmed, you have cultivated strong relationships built on trust. These principles of integrity, reliability, and ethical conduct in all financial dealings continue to enhance your potential for future partnerships, fostering a collaborative atmosphere that benefits all stakeholders involved.",
   "currently": null,
   "ID": 17,
   "role": null,
   "curr_step": 17,
   "complain_buffer": [],
-  "total_num_investor": 9,
+  "total_num_investor": 7,
   "success_num_investor": 5,
-  "total_num_trustee": 8,
-  "success_num_trustee": 6,
+  "total_num_trustee": 10,
+  "success_num_trustee": 7,
   "relationship": {
     "bind_list": [
+      "Elena Ivanova",
+      "James Wang",
+      "Ahmed Hassan",
       "Akiko Sato",
-      "Hannah Muller",
       "David Johnson",
-      "Liam OConnor",
-      "Sofia Hernandez",
+      "Nadia Novak",
       "Aisha Ibrahim",
-      "Akiko Sato"
+      "Juan Carlos Reyes",
+      "Ahmed Hassan"
     ],
     "black_list": [
-      "Maria Rossi",
-      "Mateo Garcia",
-      "Emma Dubois",
+      "Isabella Costa",
       "Hannah Muller",
-      "Emma Dubois"
+      "Robert Miller"
     ]
   },
-  "resources_unit": 822.01278
+  "resources_unit": 973.7517681144319
 }

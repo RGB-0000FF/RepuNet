@@ -1,31 +1,32 @@
 {
   "name": "Fatima Ali",
   "innate": null,
-  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan. Your reputation as a principled investor is underscored by a steadfast commitment to transparency, trust, and ethical practices. You prioritize strong communication with stakeholders, ensuring adherence to agreed-upon allocation plans while striving to maximize returns. Your dedication to fostering collaborative relationships has solidified your standing as a reputable member of the investment community, characterized by fairness and integrity in all dealings.",
+  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan. As a dedicated trustee and investor, you have built a strong reputation for upholding transparency, reliability, and ethical conduct in all financial dealings. Your unwavering commitment to the agreed-upon allocation plans and your prompt profit distribution have solidified your position as a principled trustee within the investment community. These values not only reflect your integrity but also enhance your potential for successful future partnerships, fostering a collaborative atmosphere that benefits all stakeholders involved.",
   "currently": null,
   "ID": 17,
   "role": null,
   "curr_step": 14,
   "complain_buffer": [],
-  "total_num_investor": 8,
+  "total_num_investor": 6,
   "success_num_investor": 5,
-  "total_num_trustee": 6,
-  "success_num_trustee": 4,
+  "total_num_trustee": 8,
+  "success_num_trustee": 6,
   "relationship": {
     "bind_list": [
+      "Elena Ivanova",
+      "James Wang",
+      "Ahmed Hassan",
       "Akiko Sato",
-      "Hannah Muller",
       "David Johnson",
-      "Liam OConnor",
-      "Sofia Hernandez"
+      "Nadia Novak",
+      "Aisha Ibrahim",
+      "Juan Carlos Reyes"
     ],
     "black_list": [
-      "Maria Rossi",
-      "Mateo Garcia",
-      "Emma Dubois",
+      "Isabella Costa",
       "Hannah Muller",
-      "Emma Dubois"
+      "Robert Miller"
     ]
   },
-  "resources_unit": 220.30270000000002
+  "resources_unit": 400.637012
 }

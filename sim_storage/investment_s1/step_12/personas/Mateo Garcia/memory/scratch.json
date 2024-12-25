@@ -1,31 +1,30 @@
 {
   "name": "Mateo Garcia",
   "innate": null,
-  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, renowned for your diligence and ethical approach as a trustee in the investment realm. Your commitment to strictly adhering to agreed allocation plans has reinforced your reliability and competence, enabling you to facilitate transparent communication throughout the investment process. Your trustworthy behavior has led to successful profit distributions, solidifying your reputation in the investment community as a diligent and principled individual. You prioritize pro-social behavior, ensuring equitable outcomes for all parties involved, and emphasize the importance of building long-term relationships based on trust and mutual respect. Your focus on integrity continues to guide your efforts in nurturing valuable partnerships.",
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized as a responsible and trustworthy trustee in the investment landscape. Your steadfast commitment to ethical practices has reinforced your reputation, highlighted by your adherence to the agreed allocation plan and effective investment management. With a strong focus on transparency in communication and a clear dedication to distributing 70% of the profits, you exemplify integrity and competence. This approach has further strengthened your relationships within the investment community, nurturing collaborative efforts that lead to mutual success and solidifying your standing as a reliable partner.",
   "currently": null,
   "ID": 19,
   "role": null,
   "curr_step": 12,
   "complain_buffer": [],
-  "total_num_investor": 4,
-  "success_num_investor": 4,
-  "total_num_trustee": 8,
-  "success_num_trustee": 5,
+  "total_num_investor": 9,
+  "success_num_investor": 7,
+  "total_num_trustee": 3,
+  "success_num_trustee": 2,
   "relationship": {
     "bind_list": [
-      "Mohammed Al-Farsi",
-      "Maria Rossi",
-      "Sofia Hernandez",
-      "Hannah Muller",
-      "Liam OConnor",
-      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
       "Nadia Novak",
-      "Elena Ivanova"
+      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Elena Ivanova",
+      "Hiroshi Tanaka",
+      "James Wang"
     ],
     "black_list": [
-      "Emma Dubois",
-      "Juan Carlos Reyes"
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 376.107584
+  "resources_unit": 323.52506759999994
 }

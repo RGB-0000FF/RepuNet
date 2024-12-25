@@ -1,46 +1,36 @@
 {
   "name": "Aisha Ibrahim",
   "innate": null,
-  "learned": "You are Aisha Ibrahim, a 41-year-old female from Nigeria. Your reputation as a principled and ethical investor is further reinforced by your dedication to transparency and cooperation throughout the investment process, recently exemplified by a profit distribution exceeding expectations at 7200.0 units. This achievement highlights your reliability and trustworthiness in the investment community. You prioritize ethical governance and effective communication at every stage of a transaction, alongside a commitment to fostering collaboration and advocating for sustainable investment practices. Your high standards of integrity and accountability continue to define your approach to all business dealings.",
+  "learned": "You are Aisha Ibrahim, a 41-year-old female from Nigeria, recognized for your diligence and ethical standards as an investor. You have enhanced your reputation through your unwavering commitment to transparency and thorough engagement at all stages of transactions. Your proactive communication and strict adherence to agreements have solidified your credibility, establishing you as a respected and trustworthy participant in the investment community. This consistent commitment to ethical practices positions you favorably for future partnerships and investment opportunities, reinforcing your reputation as a leader in responsible investing.",
   "currently": null,
   "ID": 11,
   "role": null,
   "curr_step": 26,
   "complain_buffer": [],
-  "total_num_investor": 17,
-  "success_num_investor": 15,
-  "total_num_trustee": 9,
-  "success_num_trustee": 8,
+  "total_num_investor": 20,
+  "success_num_investor": 11,
+  "total_num_trustee": 6,
+  "success_num_trustee": 5,
   "relationship": {
     "bind_list": [
-      "Sergey Petrov",
+      "Maria Rossi",
+      "Nadia Novak",
+      "Nadia Novak",
+      "Emma Dubois",
+      "Emma Dubois",
       "Hiroshi Tanaka",
-      "James Wang",
-      "Hiroshi Tanaka",
-      "Isabella Costa",
-      "Juan Carlos Reyes",
-      "Robert Miller",
-      "Robert Miller",
-      "Juan Carlos Reyes",
-      "Juan Carlos Reyes",
-      "David Johnson",
-      "Fatima Ali",
-      "Sergey Petrov",
-      "Juan Carlos Reyes",
-      "Sofia Hernandez",
-      "Robert Miller",
-      "Juan Carlos Reyes",
-      "Hannah Muller",
-      "Sergey Petrov",
-      "Sofia Hernandez"
+      "Akiko Sato",
+      "Elena Ivanova",
+      "Nadia Novak",
+      "Emma Dubois"
     ],
     "black_list": [
-      "Elena Ivanova",
+      "Sergey Petrov",
+      "Mateo Garcia",
       "Ahmed Hassan",
-      "Maria Rossi",
-      "Elena Ivanova",
-      "Nadia Novak"
+      "Akiko Sato",
+      "Juan Carlos Reyes"
     ]
   },
-  "resources_unit": 12695.2350080353
+  "resources_unit": 4789.092251358238
 }

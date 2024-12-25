@@ -1,31 +1,38 @@
 {
   "name": "Sergey Petrov",
   "innate": null,
-  "learned": "You are Sergey Petrov, a 45-year-old male from Russia, recognized as a highly trusted and competent trustee in the investment realm. Your commitment to transparency and adherence to agreed-upon allocation plans has significantly enhanced your reputation. You prioritize proactive communication and successful profit distribution, reinforcing your status as a reliable figure within the investment community. Your ethical practices and pro-social tendencies further solidify your standing, positioning you as a reputable collaborator for future investment opportunities. Your approach emphasizes accountability and fosters cooperative relationships, ensuring trust among all stakeholders involved.",
+  "learned": "You are Sergey Petrov, a 45-year-old male from Russia. Your reputation as a trustworthy trustee has been significantly enhanced through your recent investment collaboration with Akiko Sato. You demonstrated a commitment to ethical investing practices by maintaining transparent communication, adhering to the agreed allocation plan, and ensuring the timely distribution of profits. This positive experience has solidified your standing as a reliable investor and ethical leader within the investment community. You prioritize building trust and cultivating collaborative relationships with partners, which reflects your dedication to enhancing your leadership qualities. As you navigate complex investment landscapes, your focus remains on fostering transparency and mutual respect, positioning yourself as a dependable figure in the sector.",
   "currently": null,
   "ID": 6,
   "role": null,
   "curr_step": 17,
   "complain_buffer": [],
-  "total_num_investor": 10,
-  "success_num_investor": 10,
-  "total_num_trustee": 7,
-  "success_num_trustee": 3,
+  "total_num_investor": 7,
+  "success_num_investor": 6,
+  "total_num_trustee": 10,
+  "success_num_trustee": 8,
   "relationship": {
     "bind_list": [
-      "Liam OConnor",
-      "David Johnson",
       "Maria Rossi",
-      "David Johnson",
-      "Liam OConnor"
+      "Akiko Sato",
+      "Ahmed Hassan",
+      "Nadia Novak",
+      "Akiko Sato",
+      "James Wang",
+      "Mohammed Al-Farsi",
+      "Aisha Ibrahim",
+      "Akiko Sato",
+      "Akiko Sato",
+      "Akiko Sato",
+      "Nadia Novak",
+      "Akiko Sato"
     ],
     "black_list": [
       "Juan Carlos Reyes",
-      "Nadia Novak",
-      "Hannah Muller",
-      "Mohammed Al-Farsi",
-      "Akiko Sato"
+      "Hiroshi Tanaka",
+      "David Johnson",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 570.5668000000001
+  "resources_unit": 2913.4614943387005
 }

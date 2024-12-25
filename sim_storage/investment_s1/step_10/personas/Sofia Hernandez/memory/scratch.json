@@ -1,29 +1,27 @@
 {
   "name": "Sofia Hernandez",
   "innate": null,
-  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico. Your reputation as a trustee has been solidified through your dedicated emphasis on precision, transparency, and open communication throughout the investment process. Recent successful execution of the agreed-upon allocation plan has not only exceeded profit expectations but also reinforced your standing as a credible and ethical trustee. You prioritize fostering strong investor relations, ensuring that all stakeholders benefit mutually from transactions. Your commitment to integrity and ethical practices continues to guide your actions, enhancing your standing as a trusted partner in future ventures.",
+  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico. As an investor, your reputation is marked by your prudent and responsible approach to investment, emphasizing transparency and ethical behavior in all dealings. You adhere meticulously to agreed-upon allocation plans, ensuring fairness through a 30% profit allocation for yourself and 70% for your investors. This commitment not only reinforces your dedication to ethical practices but also enhances collaboration and trust within the investment community. You focus on fostering long-term relationships built on mutual respect, continually advocating for transparent communication. Your goal is to create sustainable and win-win outcomes for all stakeholders, while upholding social responsibility and challenging the status quo for the greater good.",
   "currently": null,
   "ID": 4,
   "role": null,
   "curr_step": 10,
   "complain_buffer": [],
-  "total_num_investor": 3,
-  "success_num_investor": 2,
-  "total_num_trustee": 7,
-  "success_num_trustee": 7,
+  "total_num_investor": 5,
+  "success_num_investor": 1,
+  "total_num_trustee": 5,
+  "success_num_trustee": 4,
   "relationship": {
     "bind_list": [
-      "Robert Miller",
-      "Emma Dubois",
-      "David Johnson",
-      "Mateo Garcia",
-      "Isabella Costa",
-      "Mohammed Al-Farsi",
       "Ahmed Hassan",
-      "Hiroshi Tanaka",
-      "Emma Dubois"
+      "Elena Ivanova",
+      "Aisha Ibrahim",
+      "David Johnson",
+      "Hannah Muller"
     ],
-    "black_list": []
+    "black_list": [
+      "Fatima Ali"
+    ]
   },
-  "resources_unit": 277.42104
+  "resources_unit": 55.480000000000004
 }

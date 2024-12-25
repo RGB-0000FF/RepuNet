@@ -1,37 +1,33 @@
 {
   "name": "Isabella Costa",
   "innate": null,
-  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. As a trustee navigating the investment landscape, you have faced recent challenges regarding your adherence to agreed allocation plans, particularly highlighted by concerns from Sergey Petrov. However, you successfully completed an investment with Mohammed Al-Farsi, demonstrating your competence and dedication. Recognizing the importance of transparency, you are committed to reaffirming your ethical practices and improving communication with partners to restore your reputation. While your past successes contribute to your credibility, you prioritize addressing any doubts about your trustworthiness to maintain strong relationships and an esteemed position within the investment community.",
+  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. As a trustee, you have further solidified your reputation as a reliable and competent investor through recent successful transactions, notably with David Johnson. Your strict adherence to the agreed allocation plan and timely profit distribution has demonstrated your unwavering commitment to transparency, ethical stewardship, and trustworthiness. These experiences have enhanced your reliability in managing investments, positioning you as a respected figure in the investment community. You prioritize the best interests of your investors while fostering strong, trust-based relationships. Your decisions now reflect an even deeper commitment to social responsibility, inclusivity, and accountability in navigating the investment landscape.",
   "currently": null,
   "ID": 18,
   "role": null,
   "curr_step": 21,
   "complain_buffer": [],
-  "total_num_investor": 12,
-  "success_num_investor": 9,
-  "total_num_trustee": 9,
-  "success_num_trustee": 7,
+  "total_num_investor": 7,
+  "success_num_investor": 1,
+  "total_num_trustee": 14,
+  "success_num_trustee": 8,
   "relationship": {
     "bind_list": [
-      "Hiroshi Tanaka",
-      "Mohammed Al-Farsi",
-      "Akiko Sato",
-      "Sofia Hernandez",
-      "Hiroshi Tanaka",
-      "Akiko Sato",
-      "Robert Miller",
       "Nadia Novak",
-      "Akiko Sato",
-      "Hiroshi Tanaka",
-      "Mohammed Al-Farsi"
+      "David Johnson",
+      "Hannah Muller",
+      "Fatima Ali",
+      "Robert Miller",
+      "Aisha Ibrahim",
+      "Ahmed Hassan",
+      "David Johnson"
     ],
     "black_list": [
+      "Sofia Hernandez",
       "Elena Ivanova",
-      "Juan Carlos Reyes",
       "Hannah Muller",
-      "Maria Rossi",
-      "Fatima Ali"
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 2299.70126872
+  "resources_unit": 3643.753759363103
 }

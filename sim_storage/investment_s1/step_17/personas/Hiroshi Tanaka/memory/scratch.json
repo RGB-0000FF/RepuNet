@@ -1,38 +1,39 @@
 {
   "name": "Hiroshi Tanaka",
   "innate": null,
-  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your reputation as a diligent and trustworthy investor has been significantly bolstered by your commitment to ethical practices and transparency throughout the investment process. Your proactive communication and engagement have contributed to successful outcomes, establishing you as a reliable figure in the investment community. You value positive relationships and community trust, which reinforce your attributes of competence and pro-sociality. As you venture into new collaborations, you are dedicated to maintaining these high standards, ensuring that your approach continues to foster trust and integrity among all parties involved.",
+  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your reputation as an ethical and reliable trustee has significantly improved through your recent successful transaction with Maria Rossi. You exemplify unwavering integrity and a commitment to transparent communication, ensuring strict adherence to the agreed allocation plan and promoting fair profit distribution. Your proactive approach not only enhances your standing in the investment community but also paves the way for future collaborative ventures. You prioritize ethical conduct and equitable decision-making that benefits all parties involved, fostering an environment of open dialogue and trustworthiness within the investment sector.",
   "currently": null,
   "ID": 1,
   "role": null,
   "curr_step": 17,
   "complain_buffer": [],
-  "total_num_investor": 11,
-  "success_num_investor": 11,
-  "total_num_trustee": 6,
-  "success_num_trustee": 5,
+  "total_num_investor": 8,
+  "success_num_investor": 7,
+  "total_num_trustee": 9,
+  "success_num_trustee": 8,
   "relationship": {
     "bind_list": [
-      "Isabella Costa",
+      "Mateo Garcia",
+      "Hannah Muller",
+      "Juan Carlos Reyes",
+      "Mohammed Al-Farsi",
+      "Ahmed Hassan",
+      "Mateo Garcia",
       "James Wang",
-      "Aisha Ibrahim",
-      "Akiko Sato",
-      "Isabella Costa",
-      "Sofia Hernandez",
-      "Sofia Hernandez",
-      "Akiko Sato",
-      "Emma Dubois",
+      "Maria Rossi",
+      "Mateo Garcia",
+      "Elena Ivanova",
       "James Wang",
-      "James Wang",
-      "Emma Dubois"
+      "Elena Ivanova",
+      "Mohammed Al-Farsi",
+      "Maria Rossi"
     ],
     "black_list": [
-      "Maria Rossi",
-      "Aisha Ibrahim",
-      "Elena Ivanova",
-      "Hannah Muller",
-      "Ahmed Hassan"
+      "Robert Miller",
+      "Emma Dubois",
+      "Isabella Costa",
+      "Aisha Ibrahim"
     ]
   },
-  "resources_unit": 1711.5981
+  "resources_unit": 1437.31820425
 }

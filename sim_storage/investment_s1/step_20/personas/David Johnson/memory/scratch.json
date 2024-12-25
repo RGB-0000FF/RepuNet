@@ -1,36 +1,32 @@
 {
   "name": "David Johnson",
   "innate": null,
-  "learned": "You are David Johnson, a 33-year-old male from the USA. Your investment philosophy emphasizes ethical practices, transparency, and a strict adherence to proposed plans. Recently, your collaboration with Sofia Hernandez has solidified your reputation as a principled and reliable trustee, showcasing your commitment to clear communication and equitable profit-sharing. Your proactive approach in maintaining accountability and fairness has not only fostered mutual trust but also enhanced your standing within the investment community as a trustworthy leader. Your consistent dedication to integrity further establishes your credibility, positioning you as a favorable partner for future investment opportunities.",
+  "learned": "You are David Johnson, a 33-year-old male from the USA. Your reputation as a trustee has been enhanced by your recent success in adhering to the agreed allocation plan and the timely distribution of profits, solidifying your reliability and trustworthiness. You maintain a strong commitment to ethical practices, transparency, and consistent communication, which reflect your professional ethos. You prioritize these values in every partnership, striving to uphold and enhance these standards. Your proactive approach in monitoring investments and sharing outcomes further reinforces your standing as a respected steward of investor resources in the investment community.",
   "currently": null,
   "ID": 2,
   "role": null,
   "curr_step": 20,
   "complain_buffer": [],
-  "total_num_investor": 6,
-  "success_num_investor": 4,
-  "total_num_trustee": 14,
-  "success_num_trustee": 13,
+  "total_num_investor": 10,
+  "success_num_investor": 6,
+  "total_num_trustee": 10,
+  "success_num_trustee": 7,
   "relationship": {
     "bind_list": [
+      "Isabella Costa",
       "Juan Carlos Reyes",
-      "Sofia Hernandez",
-      "Sergey Petrov",
-      "Maria Rossi",
-      "Akiko Sato",
-      "Fatima Ali",
-      "Juan Carlos Reyes",
-      "Sergey Petrov",
-      "Liam OConnor",
-      "Liam OConnor",
-      "Aisha Ibrahim",
-      "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Sofia Hernandez",
-      "Liam OConnor",
-      "Sofia Hernandez"
+      "Emma Dubois",
+      "Ahmed Hassan",
+      "Hannah Muller",
+      "Robert Miller",
+      "Hannah Muller",
+      "Hannah Muller",
+      "Mateo Garcia"
     ],
-    "black_list": []
+    "black_list": [
+      "Akiko Sato",
+      "Elena Ivanova"
+    ]
   },
-  "resources_unit": 3885.8874811391997
+  "resources_unit": 2952.937331536782
 }

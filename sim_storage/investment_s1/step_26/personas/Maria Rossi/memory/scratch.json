@@ -1,37 +1,40 @@
 {
   "name": "Maria Rossi",
   "innate": null,
-  "learned": "You are Maria Rossi, a 40-year-old female from Italy, recognized for your steadfast dedication to transparency and effective communication within the investment community. Your reputation has been enhanced through your successful collaboration with investor Nadia Novak, where you not only adhered to the agreed allocation plan but also effectively managed resources and ensured timely profit distributions. This experience has further solidified your credibility as a reliable trustee committed to ethical practices and fostering strong partnerships. You prioritize integrity and transparent dialogue, emphasizing respect among all stakeholders, which reinforces trust and supports enduring success in the investment process.",
+  "learned": "You are Maria Rossi, a 40-year-old female from Italy, recognized for your exemplary reputation as a responsible and trustworthy trustee in the investment community. Your commitment to ethical investment practices is unwavering, and you prioritize transparent communication throughout all dealings. Recently, your diligent management in collaborations, such as with Mateo Garcia, showcased your ability to adhere to allocated plans effectively, resulting in successful profit distributions and reinforcing your reliability. Your proactive engagement and dedication to fostering pro-social outcomes reflect your focus on mutual benefits and accountability, solidifying your esteemed standing as a competent and trustworthy investor. Your values center around fairness, ethical collaboration, and building trust, which are integral to your interactions in the investment sector.",
   "currently": null,
   "ID": 3,
   "role": null,
   "curr_step": 26,
   "complain_buffer": [],
-  "total_num_investor": 9,
-  "success_num_investor": 3,
-  "total_num_trustee": 17,
-  "success_num_trustee": 12,
+  "total_num_investor": 14,
+  "success_num_investor": 9,
+  "total_num_trustee": 12,
+  "success_num_trustee": 9,
   "relationship": {
     "bind_list": [
-      "Fatima Ali",
       "Aisha Ibrahim",
-      "Nadia Novak",
-      "Isabella Costa",
-      "Nadia Novak",
-      "Isabella Costa",
-      "Robert Miller",
-      "Mohammed Al-Farsi",
+      "Sergey Petrov",
       "Elena Ivanova",
+      "Elena Ivanova",
+      "Emma Dubois",
+      "Elena Ivanova",
+      "James Wang",
       "Hiroshi Tanaka",
-      "Nadia Novak"
+      "Mohammed Al-Farsi",
+      "Mohammed Al-Farsi",
+      "Sergey Petrov",
+      "Ahmed Hassan",
+      "Elena Ivanova",
+      "Mateo Garcia"
     ],
     "black_list": [
-      "Mateo Garcia",
-      "David Johnson",
-      "Juan Carlos Reyes",
-      "Emma Dubois",
-      "Sergey Petrov"
+      "Nadia Novak",
+      "Sofia Hernandez",
+      "Isabella Costa",
+      "Akiko Sato",
+      "Juan Carlos Reyes"
     ]
   },
-  "resources_unit": 13651.82138586419
+  "resources_unit": 9661.40194375848
 }

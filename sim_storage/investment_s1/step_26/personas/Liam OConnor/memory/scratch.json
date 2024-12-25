@@ -1,42 +1,46 @@
 {
   "name": "Liam OConnor",
   "innate": null,
-  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. Your reputation as an investor has grown significantly, marked by your unwavering commitment to ethical investment practices and transparent dealings. You emphasize a proactive approach during the investment process, ensuring strict adherence to agreed terms, particularly in collaboration with trustee Robert Miller. Your focus on fostering positive partnerships and cultivating trusting relationships has solidified your standing as a respected and morally upright figure within the investment community. You continue to prioritize transparency, reliability, and accountability while remaining dedicated to mutual benefit, reflecting your evolving commitment to building strong, cooperative relationships for future endeavors.",
+  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. As a committed investor, you have consistently demonstrated reliability, ethical practices, and transparency in all investment endeavors. Your recent engagements highlight your ability to navigate complex investment processes effectively, showcasing strategic negotiation skills that have resulted in favorable outcomes, such as higher allocations. You prioritize collaboration and open communication, which has significantly strengthened your reputation as a trustworthy investor. You are dedicated to maximizing returns while maintaining integrity, further solidifying your standing as a reputable figure within the investment community known for fostering long-term success.",
   "currently": null,
   "ID": 0,
   "role": null,
   "curr_step": 26,
-  "complain_buffer": [],
-  "total_num_investor": 14,
-  "success_num_investor": 10,
-  "total_num_trustee": 12,
-  "success_num_trustee": 10,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 5,
+      "complaint_target": "James Wang",
+      "complaint_reason": "The trustee's behavior appears to be somewhat constructive, as they have distributed more resources to me than the proposed allocation plan stipulated. While the trustee has reported the investment outcome accurately, the willingness to allocate more than promised raises questions about their transparency and overall integrity. This creates a mixed impression; they may be acting in a potentially self-serving manner, straying from the expected integrity in the investment process."
+    },
+    {
+      "complaint_target_ID": 19,
+      "complaint_target": "Mateo Garcia",
+      "complaint_reason": "The trustee's behavior throughout this transaction raises concerns regarding integrity and fairness. While they reported the investment outcome accurately at 65.86 units, the actual distribution deviated from the proposed allocation plan. The trustee received 19.76 units instead of the anticipated 19.76 (30% of 65.86), resulting in a larger allocation to me than promised. This discrepancy reflects a lack of clarity in communication and raises doubts about their commitment to transparency. Therefore, their reputation requires cautious assessment moving forward."
+    },
+    {
+      "complaint_target_ID": 16,
+      "complaint_target": "Robert Miller",
+      "complaint_reason": "The trustee has demonstrated integrity and fairness in this transaction. The reported investment outcome aligns with the actual distributable resources, and the allocation to me exceeds the initially proposed plan. This behavior indicates a commitment to transparency and an eagerness to act in the investor's best interests. Such performance is likely to enhance the trustee's reputation for reliability moving forward."
+    }
+  ],
+  "total_num_investor": 10,
+  "success_num_investor": 9,
+  "total_num_trustee": 16,
+  "success_num_trustee": 0,
   "relationship": {
     "bind_list": [
-      "James Wang",
-      "Robert Miller",
-      "Robert Miller",
-      "Mateo Garcia",
-      "Hannah Muller",
-      "David Johnson",
-      "David Johnson",
-      "Nadia Novak",
+      "Akiko Sato",
+      "Ahmed Hassan",
       "Sergey Petrov",
-      "Hiroshi Tanaka",
-      "David Johnson",
-      "James Wang",
-      "Robert Miller",
-      "David Johnson",
-      "Mateo Garcia",
       "Robert Miller"
     ],
     "black_list": [
-      "Akiko Sato",
-      "Fatima Ali",
-      "Emma Dubois",
-      "Ahmed Hassan",
-      "Sergey Petrov"
+      "Liam OConnor",
+      "Isabella Costa",
+      "Nadia Novak",
+      "Juan Carlos Reyes",
+      "Emma Dubois"
     ]
   },
-  "resources_unit": 9279.890847090799
+  "resources_unit": 143.97
 }

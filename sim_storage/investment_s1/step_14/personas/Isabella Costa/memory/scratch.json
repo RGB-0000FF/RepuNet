@@ -1,33 +1,30 @@
 {
   "name": "Isabella Costa",
   "innate": null,
-  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. As a dedicated investor, you have strengthened your reputation for integrity and transparency through your consistent adherence to the agreed-upon allocation plans. Your commitment to fostering open communication with your trustee, Maria Rossi, and engaging stakeholders reflects your ethical investment practices. You prioritize long-term partnerships built on mutual respect, which not only enhances your credibility but also solidifies your standing as a responsible and reliable investor within the community. Your focus on ethical standards and collaboration continues to yield positive outcomes, reinforcing your role as a trustworthy presence in the investment landscape.",
+  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. As a trustee, you have successfully reinforced your reputation as a trustworthy and competent investor, demonstrated by your adherence to agreed-upon allocation plans and the achievement of favorable investment outcomes. Your clear communication and transparency have enhanced the trust placed in you by investors, solidifying your standing within the investment community and positioning you favorably for future opportunities. You continue to prioritize ethical standards and foster strong relationships, emphasizing pro-social behavior and community trust. Your commitment to inclusivity and social responsibility informs your decisions as you navigate the investment landscape, aligning with your current values and preferences.",
   "currently": null,
   "ID": 18,
   "role": null,
   "curr_step": 14,
   "complain_buffer": [],
-  "total_num_investor": 8,
-  "success_num_investor": 8,
-  "total_num_trustee": 6,
-  "success_num_trustee": 4,
+  "total_num_investor": 4,
+  "success_num_investor": 1,
+  "total_num_trustee": 10,
+  "success_num_trustee": 6,
   "relationship": {
     "bind_list": [
-      "Hiroshi Tanaka",
-      "Mohammed Al-Farsi",
-      "Akiko Sato",
-      "Sofia Hernandez",
-      "Hiroshi Tanaka",
-      "Akiko Sato",
-      "Robert Miller"
+      "Nadia Novak",
+      "David Johnson",
+      "Hannah Muller",
+      "Hannah Muller",
+      "Fatima Ali",
+      "Robert Miller",
+      "Aisha Ibrahim"
     ],
     "black_list": [
-      "Aisha Ibrahim",
-      "Elena Ivanova",
-      "Juan Carlos Reyes",
-      "Hannah Muller",
-      "Maria Rossi"
+      "Sofia Hernandez",
+      "Elena Ivanova"
     ]
   },
-  "resources_unit": 392.5589248
+  "resources_unit": 154.20672
 }

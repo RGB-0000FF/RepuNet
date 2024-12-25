@@ -1,39 +1,42 @@
 {
   "name": "Akiko Sato",
   "innate": null,
-  "learned": "You are Akiko Sato, a 38-year-old female from Japan. Your reputation as an investor is firmly established by your consistent reliability and integrity throughout your investment processes. Known for engaging transparently with your trustee and effectively aligning expectations, you've reinforced your standing as a trustworthy and disciplined investor committed to mutual success. This positive engagement reflects your competence and pro-sociality, further solidifying your credibility within the investment community. Your unwavering dedication to ethical practices has not only enhanced your partnerships but also positioned you as a leader in navigating investment opportunities with transparency and integrity.",
+  "learned": "You are Akiko Sato, a 38-year-old female from Japan. Your reputation as a principled and trustworthy trustee has been solidified following a successful investment process with Fatima Ali, where you strictly adhered to the agreed allocation plan and maintained transparent communication. This commitment to integrity reflects your values of ethical practices and equitable profit distribution, enhancing your credibility in the investment community. You are recognized as a reliable stakeholder who prioritizes the success of all parties involved, fostering optimism for future collaborations and the development of lasting professional relationships built on trust and effective communication.",
   "currently": null,
   "ID": 12,
   "role": null,
   "curr_step": 19,
   "complain_buffer": [],
-  "total_num_investor": 11,
-  "success_num_investor": 8,
-  "total_num_trustee": 8,
-  "success_num_trustee": 8,
+  "total_num_investor": 7,
+  "success_num_investor": 7,
+  "total_num_trustee": 12,
+  "success_num_trustee": 12,
   "relationship": {
     "bind_list": [
+      "Liam OConnor",
       "Sergey Petrov",
-      "Robert Miller",
-      "Juan Carlos Reyes",
-      "Isabella Costa",
       "Fatima Ali",
-      "Hiroshi Tanaka",
-      "Isabella Costa",
-      "Robert Miller",
+      "James Wang",
+      "Aisha Ibrahim",
+      "James Wang",
+      "Sergey Petrov",
+      "Hannah Muller",
+      "Nadia Novak",
+      "Maria Rossi",
       "Ahmed Hassan",
-      "Hiroshi Tanaka",
       "Sergey Petrov",
-      "Sofia Hernandez",
-      "Fatima Ali",
-      "Isabella Costa",
-      "Ahmed Hassan"
+      "Sergey Petrov",
+      "Sergey Petrov",
+      "Aisha Ibrahim",
+      "Sergey Petrov",
+      "Fatima Ali"
     ],
     "black_list": [
+      "Akiko Sato",
+      "Hiroshi Tanaka",
       "David Johnson",
-      "Hannah Muller",
-      "Emma Dubois"
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 1627.045227048
+  "resources_unit": 4450.48924919956
 }

@@ -56,7 +56,6 @@ class Creation:
             persona.associativeMemory.base_path = (
                 f"{save_folder}/memory/associative_memory"
             )
-            persona.scratch.curr_step += 1
             persona.save(save_folder)
             # save reputation and gossip
             reputation_folder = f"{sim_folder}/personas/{persona_name}/reputation"
@@ -71,6 +70,8 @@ class Creation:
                 break
 
             self.step += 1
+            for persona_name, persona in self.personas.items():
+                persona.scratch.curr_step += 1
             origin_sim_folder = f"{fs_storage}/{self.sim_code}"
             new_sim_code = self.sim_code.split("/")[0] + f"/step_{self.step}"
             new_sim_folder = f"{fs_storage}/{new_sim_code}"

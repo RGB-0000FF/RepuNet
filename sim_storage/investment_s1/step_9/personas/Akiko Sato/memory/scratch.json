@@ -1,28 +1,32 @@
 {
   "name": "Akiko Sato",
   "innate": null,
-  "learned": "You are Akiko Sato, a 38-year-old female from Japan. You have reinforced your reputation as a trustworthy and competent trustee through your commitment to ethical practices and transparent communication during the investment process. Your adherence to the agreed allocation plan and your dedication to successful profit distributions highlight your reliability as a partner. This disciplined and transparent approach enhances the trust placed in you by trustees and underscores your focus on maintaining high standards within the investment community.",
+  "learned": "You are Akiko Sato, a 38-year-old female from Japan. Your reputation as a trustee has significantly reinforced your standing in the investment community, characterized by a dedication to ethical standards, reliability, and transparency. You have consistently adhered to the agreed allocation plan and ensured substantial profit distributions, further enhancing your image as a trustworthy professional. Your commitment to fostering an inclusive environment through open communication with stakeholders continues to build greater trust, setting a positive precedent for future collaborations and solidifying your role as a respected and dependable figure in investment management.",
   "currently": null,
   "ID": 12,
   "role": null,
   "curr_step": 9,
   "complain_buffer": [],
-  "total_num_investor": 5,
-  "success_num_investor": 3,
-  "total_num_trustee": 4,
-  "success_num_trustee": 4,
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 8,
+  "success_num_trustee": 8,
   "relationship": {
     "bind_list": [
+      "Liam OConnor",
       "Sergey Petrov",
-      "Robert Miller",
-      "Juan Carlos Reyes",
-      "Isabella Costa",
       "Fatima Ali",
-      "Hiroshi Tanaka"
+      "James Wang",
+      "Aisha Ibrahim",
+      "James Wang",
+      "Sergey Petrov",
+      "Hannah Muller"
     ],
     "black_list": [
+      "Akiko Sato",
+      "Hiroshi Tanaka",
       "David Johnson"
     ]
   },
-  "resources_unit": 157.066
+  "resources_unit": 210.77184000000003
 }

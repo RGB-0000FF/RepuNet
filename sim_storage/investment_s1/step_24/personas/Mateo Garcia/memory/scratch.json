@@ -1,39 +1,37 @@
 {
   "name": "Mateo Garcia",
   "innate": null,
-  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, known for your strong communication skills and adaptability within the investment sector. Your current reputation as a dependable and effective investor is built on your commitment to fostering a collaborative environment that emphasizes mutual understanding and success. You prioritize integrity and pro-social behavior, which reinforces trust and reliability in your professional relationships. Your focus on favorable profit distribution reflects your dedication to creating long-term, mutually beneficial partnerships that enhance your standing in the investment community.",
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized as a diligent and transparent investor in the investment community. Your reputation has been bolstered through your effective management skills and your unwavering commitment to open communication, particularly showcased in your successful collaboration with trustee Sofia Hernandez. You exemplify reliability and competence, as demonstrated by a successful return of 4500.0 units. Core values that now define your professional approach include diligence, transparency, and a strong focus on fostering constructive and positive relationships with trustees, further solidifying your status as a reputable and ethical participant in the field.",
   "currently": null,
   "ID": 19,
   "role": null,
   "curr_step": 24,
   "complain_buffer": [],
-  "total_num_investor": 10,
-  "success_num_investor": 10,
-  "total_num_trustee": 14,
+  "total_num_investor": 13,
+  "success_num_investor": 9,
+  "total_num_trustee": 11,
   "success_num_trustee": 7,
   "relationship": {
     "bind_list": [
-      "Mohammed Al-Farsi",
-      "Maria Rossi",
-      "Sofia Hernandez",
-      "Hannah Muller",
-      "Liam OConnor",
-      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
       "Nadia Novak",
-      "Elena Ivanova",
-      "James Wang",
       "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Elena Ivanova",
+      "Hiroshi Tanaka",
+      "James Wang",
+      "Juan Carlos Reyes",
+      "Elena Ivanova",
+      "Liam OConnor",
+      "Hiroshi Tanaka",
       "Robert Miller",
-      "Robert Miller",
-      "Robert Miller",
+      "David Johnson",
       "Sofia Hernandez"
     ],
     "black_list": [
-      "Emma Dubois",
-      "Juan Carlos Reyes",
-      "Fatima Ali",
-      "Sergey Petrov"
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 2363.53083303
+  "resources_unit": 4919.064668497465
 }

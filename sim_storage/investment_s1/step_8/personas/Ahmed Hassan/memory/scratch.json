@@ -1,28 +1,29 @@
 {
   "name": "Ahmed Hassan",
   "innate": null,
-  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt. You have reaffirmed your standing as a principled and trustworthy investor, known for your unwavering commitment to transparency and equitable profit distribution. Your proactive communication and focus on building long-term relationships set you apart as a reliable partner in the investment community. You prioritize mutual trust and ethical practices, ensuring that all parties involved in transactions benefit. This dedication to collaborative engagement and ethical standards solidifies your reputation as a credible and respected investor in a competitive landscape.",
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt. Your reputation has become a hallmark of trustworthiness and pro-social behavior, particularly evident in your latest investment process with Mohammed Al-Farsi. You prioritize transparency and open communication, which are cornerstones of your ethical investment practices. Your reputation reflects an unwavering commitment to collaboration aimed at maximizing returns while ensuring equitable profit distribution. You are dedicated to building long-term, sustainable relationships within the investment community, enhancing your status as a responsible and ethical investor committed to fostering positive interactions and mutual benefit. Your focus remains on inclusivity and sustainability in all your endeavors.",
   "currently": null,
   "ID": 15,
   "role": null,
   "curr_step": 8,
   "complain_buffer": [],
   "total_num_investor": 6,
-  "success_num_investor": 5,
+  "success_num_investor": 6,
   "total_num_trustee": 2,
   "success_num_trustee": 2,
   "relationship": {
     "bind_list": [
+      "Sofia Hernandez",
       "Mohammed Al-Farsi",
-      "Hiroshi Tanaka",
+      "Fatima Ali",
+      "Sergey Petrov",
       "Elena Ivanova",
       "Mohammed Al-Farsi",
-      "Hannah Muller"
+      "Mohammed Al-Farsi"
     ],
     "black_list": [
-      "Robert Miller",
-      "Sofia Hernandez"
+      "Hiroshi Tanaka"
     ]
   },
-  "resources_unit": 94.03296
+  "resources_unit": 123.145344
 }

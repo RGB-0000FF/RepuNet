@@ -1,32 +1,31 @@
 {
   "name": "Mateo Garcia",
   "innate": null,
-  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized for your unwavering diligence and ethical approach as a trustee in the investment realm. Your successful adherence to the agreed allocation plan and execution of profit distribution with complete transparency and fairness have further solidified your reputation. You prioritize consistent and open communication, particularly exemplified in your dealings with James Wang, reinforcing your reliability and competence. Your commitment to pro-social behavior ensures equitable outcomes for all parties involved, while your ability to foster trust and mutual respect positions you as a respected figure in the investment community. Your focus on integrity continues to guide your efforts in strengthening long-term partnerships.",
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, celebrated as a principled and capable trustee in the investment landscape. Your reputation has been further solidified through your commitment to ethical practices, demonstrated by the successful completion of transactions, such as the recent one with Juan Carlos Reyes. You adhere to the agreed allocation plan and prioritize transparent communication, ensuring a fair distribution of profits\u2014receiving 180.0 units while distributing 420.0 units to investors. This approach exemplifies your dedication to mutual benefit, trustworthiness, and competence. Your consistent alignment with these principles enhances your credibility and fosters stronger relationships within the investment community, positioning you as a preferred partner for future collaborations.",
   "currently": null,
   "ID": 19,
   "role": null,
   "curr_step": 13,
   "complain_buffer": [],
-  "total_num_investor": 4,
-  "success_num_investor": 4,
-  "total_num_trustee": 9,
-  "success_num_trustee": 6,
+  "total_num_investor": 9,
+  "success_num_investor": 7,
+  "total_num_trustee": 4,
+  "success_num_trustee": 3,
   "relationship": {
     "bind_list": [
-      "Mohammed Al-Farsi",
-      "Maria Rossi",
-      "Sofia Hernandez",
-      "Hannah Muller",
-      "Liam OConnor",
-      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
       "Nadia Novak",
+      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
       "Elena Ivanova",
-      "James Wang"
+      "Hiroshi Tanaka",
+      "James Wang",
+      "Juan Carlos Reyes"
     ],
     "black_list": [
-      "Emma Dubois",
-      "Juan Carlos Reyes"
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 466.107584
+  "resources_unit": 503.52506759999994
 }

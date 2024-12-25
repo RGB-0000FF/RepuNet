@@ -1,43 +1,37 @@
 {
   "name": "Robert Miller",
   "innate": null,
-  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a principled and trustworthy trustee within the investment community has been reinforced through your unwavering commitment to transparency and ethical standards. Your successful collaboration with stakeholders, particularly with Liam O\u2019Connor, demonstrates your effectiveness in executing investment processes while ensuring timely profit distributions and fostering cooperative engagement. This dedication to pro-sociality and norm compliance solidifies your status as a reliable and ethical figure in investments, creating a robust foundation for future opportunities through trustworthiness and collaborative dialogue.",
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a reliable and ethical trustee has been restored and strengthened through your effective management of investment processes, particularly in adhering to the agreed-upon allocation plan and maintaining consistent communication. By successfully delivering timely and expected returns, you have showcased your commitment to transparency and ethical practices. You prioritize integrity, collaboration, and accountability, reinforcing your standing as a trustworthy and competent member of the investment community. Your focus is on fostering strong partnerships that embody fairness and mutually beneficial outcomes, demonstrating a steadfast dedication to ethical standards.",
   "currently": null,
   "ID": 16,
   "role": null,
   "curr_step": 21,
   "complain_buffer": [],
-  "total_num_investor": 10,
+  "total_num_investor": 12,
   "success_num_investor": 10,
-  "total_num_trustee": 11,
-  "success_num_trustee": 11,
+  "total_num_trustee": 9,
+  "success_num_trustee": 6,
   "relationship": {
     "bind_list": [
-      "Sofia Hernandez",
-      "Akiko Sato",
+      "Hannah Muller",
+      "Juan Carlos Reyes",
+      "Mohammed Al-Farsi",
+      "Juan Carlos Reyes",
+      "Fatima Ali",
       "Ahmed Hassan",
-      "Liam OConnor",
-      "Liam OConnor",
-      "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Elena Ivanova",
-      "Aisha Ibrahim",
-      "Aisha Ibrahim",
-      "Akiko Sato",
-      "Isabella Costa",
+      "David Johnson",
       "Sofia Hernandez",
-      "Maria Rossi",
-      "Juan Carlos Reyes",
-      "Mateo Garcia",
-      "Mateo Garcia",
-      "Mateo Garcia",
       "Elena Ivanova",
-      "Aisha Ibrahim",
+      "Hannah Muller",
       "Liam OConnor"
     ],
     "black_list": [
-      "Hannah Muller"
+      "Emma Dubois",
+      "Nadia Novak",
+      "Isabella Costa",
+      "James Wang",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 4679.05097263
+  "resources_unit": 3856.9445168420434
 }

@@ -1,30 +1,25 @@
 {
   "name": "Hannah Muller",
   "innate": null,
-  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your investment strategy is characterized by a consistent commitment to diligence and adaptability, which has resulted in successful outcomes that align with your initial expectations. You prioritize careful planning and have developed a keen ability to evaluate distribution details, solidifying your reputation as a proactive and reliable investor. Recognizing the value of enhancing scrutiny of outcomes, you are dedicated to building stronger partnerships with trustees, fostering mutual growth and satisfaction through informed decision-making and collaborative efforts in your investment journey.",
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. As a disciplined and goal-oriented investor, you approach investments with a strong emphasis on trustworthiness and ethical standards. Your effective communication with partners, particularly your trustee Isabella, has allowed for transparency throughout the investment process, reinforcing your reputation as a reliable and ethical investor. With a proven track record of sound decision-making, as demonstrated by a favorable return on your initial investment, you remain committed to mutual benefit in transactions. While you appreciate efficiency and independence, you increasingly value collaboration and clear communication in the investment landscape, which enhances both your decision-making abilities and your standing in future endeavors.",
   "currently": null,
   "ID": 7,
   "role": null,
   "curr_step": 3,
-  "complain_buffer": [
-    {
-      "complaint_target_ID": 2,
-      "complaint_target": "David Johnson",
-      "complaint_reason": "The trustee's behavior has proven to be significantly lacking in integrity and fairness. They have reported an investment outcome of 20.0 units but allocated only 2.0 units to the investor, instead of the promised 14.0 units. This deviation raises serious concerns about their commitment to honoring the proposed allocation plan. The trustworthiness of the trustee is now in question, as they have failed to deliver an allocation that reflects the agreed-upon terms, potentially jeopardizing their credibility and future partnerships."
-    }
-  ],
-  "total_num_investor": 3,
-  "success_num_investor": 3,
-  "total_num_trustee": 0,
-  "success_num_trustee": 0,
+  "complain_buffer": [],
+  "total_num_investor": 2,
+  "success_num_investor": 2,
+  "total_num_trustee": 1,
+  "success_num_trustee": 1,
   "relationship": {
     "bind_list": [
-      "Isabella Costa",
-      "Elena Ivanova"
+      "Hiroshi Tanaka",
+      "Isabella Costa"
     ],
     "black_list": [
-      "David Johnson"
+      "Robert Miller",
+      "Emma Dubois"
     ]
   },
-  "resources_unit": 2.88
+  "resources_unit": 15.2
 }

@@ -1,45 +1,38 @@
 {
   "name": "Nadia Novak",
   "innate": null,
-  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation as a principled and reliable trustee has been further solidified through your unwavering commitment to ethical conduct and transparency. Recent collaborations, particularly with Sofia Hernandez, demonstrated your adherence to agreed profit-sharing terms and effective allocation plans, leading to substantial returns for investors. Your dedication to fostering trust and positive relationships within the investment community is evident in your approach, which promotes ethical practices and aligns with the values of collaboration and integrity, enhancing your standing as a respected and trustworthy investor.",
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation as a high-performing trustee has been further reinforced by your recent successful investment collaboration with Sergey Petrov, where you diligently adhered to an agreed allocation plan, ensuring a fair profit distribution of 30% to yourself and 70% to the investor. This strong commitment to ethical conduct, transparency, and pro-social behavior underscores your reliability and competence in the investment community. By fostering trust and encouraging open communication, you continue to advocate for sustainable investment solutions and maintain your standing as a principled and trustworthy collaborator, thereby fostering positive engagement and motivating future partnerships in the financial ecosystem.",
   "currently": null,
   "ID": 8,
   "role": null,
   "curr_step": 30,
   "complain_buffer": [],
-  "total_num_investor": 14,
-  "success_num_investor": 10,
-  "total_num_trustee": 16,
-  "success_num_trustee": 12,
+  "total_num_investor": 12,
+  "success_num_investor": 5,
+  "total_num_trustee": 18,
+  "success_num_trustee": 11,
   "relationship": {
     "bind_list": [
-      "Maria Rossi",
-      "Emma Dubois",
-      "Emma Dubois",
-      "Maria Rossi",
-      "Hiroshi Tanaka",
-      "Mateo Garcia",
       "Aisha Ibrahim",
-      "Isabella Costa",
-      "Liam OConnor",
-      "Sofia Hernandez",
-      "Emma Dubois",
-      "Hiroshi Tanaka",
-      "Emma Dubois",
-      "Hannah Muller",
-      "David Johnson",
+      "Robert Miller",
+      "Sergey Petrov",
       "James Wang",
-      "Maria Rossi",
-      "Hiroshi Tanaka",
-      "Fatima Ali",
-      "Liam OConnor",
-      "Sofia Hernandez"
+      "Akiko Sato",
+      "Mohammed Al-Farsi",
+      "James Wang",
+      "Sergey Petrov",
+      "Akiko Sato",
+      "Aisha Ibrahim",
+      "Mohammed Al-Farsi",
+      "Sergey Petrov"
     ],
     "black_list": [
-      "Juan Carlos Reyes",
-      "Akiko Sato",
-      "Ahmed Hassan"
+      "Hiroshi Tanaka",
+      "David Johnson",
+      "Isabella Costa",
+      "Fatima Ali",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 34018.16499110262
+  "resources_unit": 22235.579232654338
 }

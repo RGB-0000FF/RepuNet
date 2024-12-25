@@ -1,37 +1,41 @@
 {
   "name": "Hannah Muller",
   "innate": null,
-  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your investment strategy is grounded in ethical governance and professionalism, further reinforced by your recent successful collaboration with Nadia Novak. You strictly adhere to agreed allocation plans, ensure timely profit distributions, and maintain transparent communication, which underlines your commitment to integrity and ethical management. Your proactive stance has strengthened trust within your partnerships, enhancing your reputation as a reliable trustee within the investment community.",
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your reputation as a credible and competent investor is built on your firm adherence to the agreed allocation plan and your proactive engagement in evaluating the investment process. You consistently demonstrate reliability, achieving higher-than-expected returns that highlight your commitment to mutual benefit. Your ethical investment practices underline your integrity and transparency, making you a trusted figure in the investment community. You prioritize cultivating robust investment relationships and continuously strive for excellence in your strategies, reflecting your dedication to both ethical standards and successful outcomes.",
   "currently": null,
   "ID": 7,
   "role": null,
   "curr_step": 21,
   "complain_buffer": [],
-  "total_num_investor": 11,
-  "success_num_investor": 8,
-  "total_num_trustee": 10,
-  "success_num_trustee": 7,
+  "total_num_investor": 10,
+  "success_num_investor": 10,
+  "total_num_trustee": 11,
+  "success_num_trustee": 9,
   "relationship": {
     "bind_list": [
+      "Hiroshi Tanaka",
       "Isabella Costa",
-      "Elena Ivanova",
+      "Maria Rossi",
       "Fatima Ali",
-      "Ahmed Hassan",
-      "Elena Ivanova",
-      "Liam OConnor",
-      "Fatima Ali",
-      "Ahmed Hassan",
-      "Ahmed Hassan",
-      "Elena Ivanova",
-      "Nadia Novak"
+      "Juan Carlos Reyes",
+      "Akiko Sato",
+      "Maria Rossi",
+      "Juan Carlos Reyes",
+      "David Johnson",
+      "Juan Carlos Reyes",
+      "David Johnson",
+      "James Wang",
+      "David Johnson",
+      "Juan Carlos Reyes",
+      "Akiko Sato"
     ],
     "black_list": [
-      "Maria Rossi",
-      "Emma Dubois",
-      "Emma Dubois",
+      "Elena Ivanova",
       "Sofia Hernandez",
-      "Sergey Petrov"
+      "Isabella Costa",
+      "Mateo Garcia",
+      "Robert Miller"
     ]
   },
-  "resources_unit": 3840.5281068080003
+  "resources_unit": 5841.16775207344
 }

@@ -1,40 +1,33 @@
 {
   "name": "David Johnson",
   "innate": null,
-  "learned": "You are David Johnson, a 33-year-old male from the USA. You have reinforced your reputation as a principled and reliable investor, exemplified by your ethical investment practices and transparency. Your commitment to clear communication with stakeholders, particularly with the trustee, underscores your understanding of mutual benefits, which has led to positive outcomes in recent transactions. You prioritize accountability and cooperation, recognizing the importance of trust in cultivating successful investment relationships. Your dedication to maintaining high ethical standards continues to guide your interactions within the investment community.",
+  "learned": "You are David Johnson, a 33-year-old male from the USA. Your reputation as a reliable and ethical investor has solidified through your active engagement and transparency, prominently displayed in your recent collaborations, particularly with Fatima Ali. You prioritize effective communication and a strong commitment to ethical practices in all investment processes, reinforcing your focus on mutual benefit. Your diligent adherence to the agreed allocation plan and proactive oversight further enhance your standing as a trustworthy partner in the investment community, demonstrating your dedication to fostering positive outcomes for all stakeholders involved.",
   "currently": null,
   "ID": 2,
   "role": null,
   "curr_step": 27,
   "complain_buffer": [],
-  "total_num_investor": 11,
-  "success_num_investor": 7,
-  "total_num_trustee": 16,
-  "success_num_trustee": 14,
+  "total_num_investor": 16,
+  "success_num_investor": 8,
+  "total_num_trustee": 11,
+  "success_num_trustee": 7,
   "relationship": {
     "bind_list": [
       "Juan Carlos Reyes",
-      "Sofia Hernandez",
-      "Sergey Petrov",
-      "Maria Rossi",
-      "Akiko Sato",
-      "Fatima Ali",
-      "Juan Carlos Reyes",
-      "Sergey Petrov",
-      "Liam OConnor",
-      "Liam OConnor",
-      "Aisha Ibrahim",
-      "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Sofia Hernandez",
-      "Liam OConnor",
-      "Sofia Hernandez",
-      "Juan Carlos Reyes",
-      "Isabella Costa",
-      "Nadia Novak",
-      "Liam OConnor"
+      "Emma Dubois",
+      "Ahmed Hassan",
+      "Hannah Muller",
+      "Robert Miller",
+      "Hannah Muller",
+      "Hannah Muller",
+      "Mateo Garcia",
+      "Fatima Ali"
     ],
-    "black_list": []
+    "black_list": [
+      "Akiko Sato",
+      "Elena Ivanova",
+      "Isabella Costa"
+    ]
   },
-  "resources_unit": 9374.146879585278
+  "resources_unit": 4629.90681151902
 }

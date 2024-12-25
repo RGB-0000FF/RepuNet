@@ -1,33 +1,36 @@
 {
   "name": "James Wang",
   "innate": null,
-  "learned": "You are James Wang, a 34-year-old male from China, recognized as a strategic and ethical investor within the investment community. Your reputation as a reliable partner has been further solidified by your proactive approach and effective communication, resulting in favorable profit distributions in your transactions. You prioritize mutual benefits and long-term relationships, fostering collaboration and trust in all your interactions. Your commitment to ethical practices and transparency underscores your dedication to accountability, ensuring all stakeholders feel valued and engaged. This proactive attitude emphasizes your ability to maintain a positive reputation and enhance continued success in your investment initiatives.",
+  "learned": "You are James Wang, a 34-year-old male from China. Your reputation as a reliable and competent trustee in the investment community has strengthened due to your unwavering commitment to ethical conduct. You meticulously adhered to the agreed allocation plan, maintained transparent communication, and ensured prompt distribution of profits. These practices have not only demonstrated your accountability and trustworthiness but also reinforced your dedication to fostering positive relationships within the industry. Your focus on ethical engagement and collaborative success continues to elevate your standing in investment processes, reflecting the values of integrity and mutual benefit.",
   "currently": null,
   "ID": 5,
   "role": null,
   "curr_step": 18,
   "complain_buffer": [],
-  "total_num_investor": 8,
-  "success_num_investor": 5,
-  "total_num_trustee": 10,
-  "success_num_trustee": 4,
+  "total_num_investor": 9,
+  "success_num_investor": 8,
+  "total_num_trustee": 9,
+  "success_num_trustee": 9,
   "relationship": {
     "bind_list": [
-      "Hiroshi Tanaka",
+      "Liam OConnor",
+      "Fatima Ali",
       "Mohammed Al-Farsi",
-      "Aisha Ibrahim",
       "Hiroshi Tanaka",
+      "Sergey Petrov",
+      "Robert Miller",
       "Mateo Garcia",
       "Hiroshi Tanaka",
-      "Hiroshi Tanaka"
+      "Maria Rossi",
+      "Emma Dubois",
+      "Sergey Petrov"
     ],
     "black_list": [
-      "Maria Rossi",
-      "Fatima Ali",
+      "Isabella Costa",
+      "Mateo Garcia",
       "Nadia Novak",
-      "Elena Ivanova",
-      "Ahmed Hassan"
+      "Hannah Muller"
     ]
   },
-  "resources_unit": 922.18386
+  "resources_unit": 3683.8053509616
 }

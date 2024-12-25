@@ -1,40 +1,42 @@
 {
   "name": "Hiroshi Tanaka",
   "innate": null,
-  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your reputation as a reliable and trustworthy investor is exemplified through your unwavering commitment to integrity and transparency, particularly evident in your recent collaboration with trustee Isabella Costa. You actively foster open communication and engagement with stakeholders, further solidifying your status as a reputable investor. Your proactive approach not only enhances trust but also emphasizes ethical practices, cultivating positive relationships within the investment community. As you seek new partnerships, your dedication to transparency and ethical standards remains paramount, reinforcing your role as a trusted figure in the investment landscape.",
+  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your reputation as a highly trustworthy and ethical trustee has been further solidified through your recent investment process with Elena Ivanova. You exemplify unwavering integrity, transparency, and a collaborative spirit, consistently adhering to pre-agreed plans and maintaining open communication. Your impressive profit distribution metrics have elevated your standing in the investment community, serving as a benchmark for ethical practices. You prioritize fair dealings and proactive support for all parties involved, demonstrating strong pro-social behavior and competence. Your commitment to transparent decision-making reinforces your role as a responsible and reputable trustee dedicated to fostering trust and collaboration within the investment landscape.",
   "currently": null,
   "ID": 1,
   "role": null,
   "curr_step": 20,
   "complain_buffer": [],
-  "total_num_investor": 14,
-  "success_num_investor": 14,
-  "total_num_trustee": 6,
-  "success_num_trustee": 5,
+  "total_num_investor": 10,
+  "success_num_investor": 9,
+  "total_num_trustee": 10,
+  "success_num_trustee": 9,
   "relationship": {
     "bind_list": [
-      "Isabella Costa",
+      "Mateo Garcia",
+      "Hannah Muller",
+      "Juan Carlos Reyes",
+      "Mohammed Al-Farsi",
+      "Ahmed Hassan",
+      "Mateo Garcia",
       "James Wang",
-      "Aisha Ibrahim",
-      "Akiko Sato",
-      "Isabella Costa",
+      "Maria Rossi",
+      "Mateo Garcia",
+      "Elena Ivanova",
+      "James Wang",
+      "Elena Ivanova",
+      "Mohammed Al-Farsi",
+      "Maria Rossi",
+      "Mateo Garcia",
       "Sofia Hernandez",
-      "Sofia Hernandez",
-      "Akiko Sato",
-      "Emma Dubois",
-      "James Wang",
-      "James Wang",
-      "Emma Dubois",
-      "Nadia Novak",
-      "Isabella Costa"
+      "Elena Ivanova"
     ],
     "black_list": [
-      "Aisha Ibrahim",
-      "Elena Ivanova",
-      "Hannah Muller",
-      "Ahmed Hassan",
-      "Liam OConnor"
+      "Robert Miller",
+      "Emma Dubois",
+      "Isabella Costa",
+      "Aisha Ibrahim"
     ]
   },
-  "resources_unit": 3511.5981
+  "resources_unit": 3537.3182042500002
 }

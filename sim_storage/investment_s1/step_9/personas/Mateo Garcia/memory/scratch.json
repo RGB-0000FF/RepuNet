@@ -1,27 +1,28 @@
 {
   "name": "Mateo Garcia",
   "innate": null,
-  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized for your diligent and ethical approach as an investment trustee. Your adherence to agreed allocation plans ensures fair profit distribution while fostering transparent communication with investors and stakeholders. Your recent successes in investment management underscore your unwavering commitment to trustworthiness, pro-social behavior, and competence. You prioritize equitable benefits for all parties involved, further solidifying your reputation as a principled trustee dedicated to enhancing trust and fostering long-term relationships built on mutual respect and integrity.",
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized as a reliable and ethical trustee in the investment landscape. Your commitment to integrity and accountability is highlighted through your adherence to agreed-upon allocation plans and transparent communication. This diligence has solidified your reputation as a trustworthy partner who emphasizes fair and timely profit distribution. Your recent financial stewardship has not only enhanced your credibility but also reinforced your role as a cooperative collaborator, dedicated to fostering enduring relationships and shared success within the investment community.",
   "currently": null,
   "ID": 19,
   "role": null,
   "curr_step": 9,
   "complain_buffer": [],
-  "total_num_investor": 2,
-  "success_num_investor": 2,
-  "total_num_trustee": 7,
-  "success_num_trustee": 4,
+  "total_num_investor": 8,
+  "success_num_investor": 6,
+  "total_num_trustee": 1,
+  "success_num_trustee": 1,
   "relationship": {
     "bind_list": [
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Nadia Novak",
       "Mohammed Al-Farsi",
-      "Maria Rossi",
-      "Sofia Hernandez",
-      "Hannah Muller",
-      "Liam OConnor"
+      "Hiroshi Tanaka",
+      "Elena Ivanova"
     ],
     "black_list": [
-      "Emma Dubois"
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 117.34479999999999
+  "resources_unit": 75.1584
 }

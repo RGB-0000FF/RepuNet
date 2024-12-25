@@ -1,28 +1,29 @@
 {
   "name": "Mateo Garcia",
   "innate": null,
-  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized for your strong emphasis on transparency and open communication as an investment trustee. Your commitment to fairness and adaptability in trusting new relationships, even in the absence of prior reputation, highlights your proactive approach to building constructive partnerships. Your recent investment endeavors not only exceeded expectations in profit shares but also emphasized your reliability and principled nature. You continue to prioritize equitable benefits for all parties, reinforcing your dedication to long-term relationships built on trust, mutual respect, and integrity within the investment community.",
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, recognized as a reliable and trustworthy investor in the investment landscape. Your commitment to exceptional transparency in communication and effective management of expectations has enhanced your reputation. The successful return of 72.0 units reflects your dedication to maximizing investments while nurturing trustworthy relationships with trustees. This diligence has solidified your standing as a competent partner who values integrity and accountability, emphasizing fair profit distribution and cooperative collaboration within the investment community.",
   "currently": null,
   "ID": 19,
   "role": null,
   "curr_step": 10,
   "complain_buffer": [],
-  "total_num_investor": 3,
-  "success_num_investor": 3,
-  "total_num_trustee": 7,
-  "success_num_trustee": 4,
+  "total_num_investor": 9,
+  "success_num_investor": 7,
+  "total_num_trustee": 1,
+  "success_num_trustee": 1,
   "relationship": {
     "bind_list": [
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Nadia Novak",
       "Mohammed Al-Farsi",
-      "Maria Rossi",
-      "Sofia Hernandez",
-      "Hannah Muller",
-      "Liam OConnor",
-      "Mohammed Al-Farsi"
+      "Hiroshi Tanaka",
+      "Elena Ivanova",
+      "Hiroshi Tanaka"
     ],
     "black_list": [
-      "Emma Dubois"
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 140.81376
+  "resources_unit": 87.1584
 }

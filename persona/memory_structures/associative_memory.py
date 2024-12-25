@@ -243,3 +243,6 @@ class AssociativeMemory:
             type=NodeType.EVENT,
             created_at=created_at,
         )
+
+    def get_latest_event(self):
+        return self.event_id_to_node[max(self.event_id_to_node.keys())]

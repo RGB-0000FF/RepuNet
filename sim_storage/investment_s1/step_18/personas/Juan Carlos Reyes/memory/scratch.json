@@ -1,35 +1,36 @@
 {
   "name": "Juan Carlos Reyes",
   "innate": null,
-  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your reputation in the investment community has been further solidified as a credible and responsible trustee, characterized by your unwavering ethical practices and transparent communication. Your successful investment process with Aisha Ibrahim has proven your commitment to fair profit distribution, enhancing trust and reliability among your partners. This experience has fostered confidence among current and future investors, reinforcing your role as a proactive communicator and reliable decision-maker. Your dedication to adhering to agreed allocation plans and maintaining high ethical standards continues to define your approach in all aspects of your investments.",
+  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your reputation as a principled and responsible investor has recently been reinforced through your integrity and transparency during collaborations, particularly noticeable in your engagement with Elena Ivanova. You are recognized for your unwavering commitment to adhering to agreed-upon allocation plans and fostering open, honest communication with your partners, which has culminated in favorable outcomes that reflect your trustworthiness. You prioritize mutual benefit, achieving financial goals, and establishing reliable partnerships, all while promoting sustainable investment practices. Your continued focus on collaboration, accountability, and transparency in all endeavors significantly enhances your credibility and solidifies your standing in the investment community as a dedicated and ethical investor.",
   "currently": null,
   "ID": 14,
   "role": null,
   "curr_step": 18,
   "complain_buffer": [],
-  "total_num_investor": 9,
-  "success_num_investor": 7,
-  "total_num_trustee": 9,
-  "success_num_trustee": 6,
+  "total_num_investor": 10,
+  "success_num_investor": 8,
+  "total_num_trustee": 8,
+  "success_num_trustee": 7,
   "relationship": {
     "bind_list": [
-      "David Johnson",
-      "Robert Miller",
       "Sergey Petrov",
-      "Aisha Ibrahim",
-      "David Johnson",
-      "Aisha Ibrahim",
-      "Sergey Petrov",
-      "Aisha Ibrahim",
       "Robert Miller",
-      "David Johnson",
-      "Aisha Ibrahim"
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Emma Dubois",
+      "Robert Miller",
+      "Hannah Muller",
+      "Liam OConnor",
+      "Hannah Muller",
+      "Hannah Muller",
+      "Emma Dubois",
+      "Elena Ivanova"
     ],
     "black_list": [
-      "Akiko Sato",
-      "Nadia Novak",
-      "Hannah Muller"
+      "David Johnson",
+      "Fatima Ali",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 1202.4072
+  "resources_unit": 915.2446719999998
 }

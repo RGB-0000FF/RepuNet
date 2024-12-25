@@ -1,30 +1,31 @@
 {
   "name": "Robert Miller",
   "innate": null,
-  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a trustee has been significantly enhanced through the successful execution of the investment process, exemplifying trustworthiness and ethical behavior. You prioritize transparency in your communication, which has led to a strong working relationship with partners like Aisha Ibrahim. Your commitment to fair profit distribution fosters trust and reinforces your standing as a responsible trustee. You are dedicated to managing investments effectively and upholding your commitments, solidifying your role as an ethical investor focused on mutual goals and pro-social outcomes within the investment community.",
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a meticulous and trustworthy investor is marked by your steadfast integrity and commitment to fairness in all dealings. Your proactive approach to the investment process highlights your dedication to transparency and collaboration, strengthening your reputation as a dependable partner in the investment community. You prioritize equitable outcomes, fostering a culture of integrity and trust, which underlines your role as a reliable figure devoted to upholding high standards and creating robust partnerships in every interaction.",
   "currently": null,
   "ID": 16,
   "role": null,
   "curr_step": 10,
   "complain_buffer": [],
-  "total_num_investor": 6,
-  "success_num_investor": 6,
-  "total_num_trustee": 4,
-  "success_num_trustee": 4,
+  "total_num_investor": 7,
+  "success_num_investor": 7,
+  "total_num_trustee": 3,
+  "success_num_trustee": 3,
   "relationship": {
     "bind_list": [
-      "Sofia Hernandez",
-      "Akiko Sato",
-      "Ahmed Hassan",
-      "Liam OConnor",
-      "Liam OConnor",
+      "Hannah Muller",
       "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Elena Ivanova",
-      "Aisha Ibrahim",
-      "Aisha Ibrahim"
+      "Mohammed Al-Farsi",
+      "Juan Carlos Reyes",
+      "Fatima Ali",
+      "Ahmed Hassan"
     ],
-    "black_list": []
+    "black_list": [
+      "Emma Dubois",
+      "Nadia Novak",
+      "Isabella Costa",
+      "James Wang"
+    ]
   },
-  "resources_unit": 275.6504
+  "resources_unit": 338.24717
 }

@@ -1,33 +1,35 @@
 {
   "name": "Elena Ivanova",
   "innate": null,
-  "learned": "You are Elena Ivanova, a 47-year-old female from Russia. Your recent experiences have further enhanced your esteemed reputation as a reliable and engaged investor within the investment community. You emphasize transparency and ethical practices, demonstrated by your unwavering adherence to the agreed allocation plans and your commitment to effective communication at every stage of the investment process. Your success in profit distribution not only showcases your competence in managing investor-trustee relationships but also reflects your integrity and dedication to fostering a collaborative environment. You prioritize shared success and cooperation, solidifying your standing as a trustworthy, pro-social individual among peers and paving the way for meaningful future collaborations.",
+  "learned": "You are Elena Ivanova, a 47-year-old female from Russia. As an esteemed investor in the investment community, you have solidified your reputation for unwavering ethical practices and transparent communication throughout the investment process. Your recent achievement of exceeding profit distributions based on initial agreements highlights your reliability and commitment to integrity. You actively engage with your partners, fostering cooperative relationships that enhance trust and credibility. Your approach is characterized by a strong dedication to ethical standards and delivering on promises, further ensuring the establishment of lasting and fruitful relationships within the investment community.",
   "currently": null,
   "ID": 9,
   "role": null,
   "curr_step": 14,
   "complain_buffer": [],
-  "total_num_investor": 7,
-  "success_num_investor": 4,
-  "total_num_trustee": 7,
+  "total_num_investor": 8,
+  "success_num_investor": 7,
+  "total_num_trustee": 6,
   "success_num_trustee": 5,
   "relationship": {
     "bind_list": [
-      "Aisha Ibrahim",
-      "James Wang",
-      "Hannah Muller",
-      "Robert Miller",
-      "Robert Miller",
-      "Hannah Muller",
-      "Isabella Costa",
+      "Maria Rossi",
+      "Maria Rossi",
+      "David Johnson",
+      "Ahmed Hassan",
+      "Maria Rossi",
+      "Mateo Garcia",
+      "Hiroshi Tanaka",
+      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
       "Mateo Garcia"
     ],
     "black_list": [
-      "Ahmed Hassan",
       "Fatima Ali",
-      "Nadia Novak",
-      "Ahmed Hassan"
+      "Elena Ivanova",
+      "Sofia Hernandez",
+      "Hannah Muller"
     ]
   },
-  "resources_unit": 323.940736
+  "resources_unit": 678.50608416
 }

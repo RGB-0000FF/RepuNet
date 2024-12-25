@@ -1,49 +1,39 @@
 {
   "name": "Robert Miller",
   "innate": null,
-  "learned": "You are Robert Miller, a 44-year-old male from the UK. As a trustee, your reputation has been further solidified through your unwavering commitment to ethical investment practices and transparency. Your successful execution of the investment allocation plan with Juan Carlos Reyes has reinforced your reliability and trustworthiness in the investment community. You are recognized for ensuring fair profit distribution and fostering open communication, which enhances trust in the investment process. Your focus on ethical practices and cooperative relationships prioritizes transparency and positive outcomes in all investment endeavors.",
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a principled and diligent investor has been significantly enhanced by your strict adherence to the agreed allocation plan and a strong ethical approach to profit distribution. You have successfully distributed 70% of returns to investors within a timely manner, which exemplifies your commitment to transparency and accountability. Your consistent and reliable behavior throughout the investment process underscores your dedication to integrity, further solidifying your status as a trusted and competent trustee. You prioritize ethical interactions and have built positive connections within the investment community, reinforcing your standing as a pro-social and trustworthy individual. Your focus on maintaining clear communication and fostering strong partnerships enables mutually beneficial outcomes, making your approach increasingly appealing to potential future investment opportunities.",
   "currently": null,
   "ID": 16,
   "role": null,
   "curr_step": 27,
   "complain_buffer": [],
-  "total_num_investor": 12,
-  "success_num_investor": 12,
-  "total_num_trustee": 15,
-  "success_num_trustee": 15,
+  "total_num_investor": 14,
+  "success_num_investor": 11,
+  "total_num_trustee": 13,
+  "success_num_trustee": 8,
   "relationship": {
     "bind_list": [
-      "Sofia Hernandez",
-      "Akiko Sato",
+      "Hannah Muller",
+      "Mohammed Al-Farsi",
+      "Juan Carlos Reyes",
+      "Fatima Ali",
       "Ahmed Hassan",
-      "Liam OConnor",
-      "Liam OConnor",
-      "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Elena Ivanova",
-      "Aisha Ibrahim",
-      "Aisha Ibrahim",
-      "Akiko Sato",
-      "Isabella Costa",
+      "David Johnson",
       "Sofia Hernandez",
-      "Maria Rossi",
-      "Juan Carlos Reyes",
-      "Mateo Garcia",
-      "Mateo Garcia",
-      "Mateo Garcia",
       "Elena Ivanova",
-      "Aisha Ibrahim",
+      "Hannah Muller",
       "Liam OConnor",
+      "Ahmed Hassan",
       "Akiko Sato",
-      "Akiko Sato",
-      "Elena Ivanova",
-      "James Wang",
-      "Liam OConnor",
-      "Juan Carlos Reyes"
+      "Mohammed Al-Farsi"
     ],
     "black_list": [
-      "Hannah Muller"
+      "Nadia Novak",
+      "Isabella Costa",
+      "James Wang",
+      "Mateo Garcia",
+      "Juan Carlos Reyes"
     ]
   },
-  "resources_unit": 26700.543336992552
+  "resources_unit": 26716.302719979984
 }

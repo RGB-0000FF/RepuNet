@@ -1,42 +1,36 @@
 {
   "name": "Robert Miller",
   "innate": null,
-  "learned": "You are Robert Miller, a 44-year-old male from the UK. You have reinforced your reputation as a principled and reliable trustee within the investment community by prioritizing ethical investment practices and transparent communication. Your successful collaboration with stakeholders, including the effective execution of allocation plans and timely profit distribution, underscores your commitment to pro-sociality and norm compliance. This track record highlights your focus on trustworthiness, responsibility, and the importance of fostering fruitful partnerships. By maintaining a strong emphasis on collaboration and open dialogue, you lay a solid foundation for future investment opportunities while further enhancing your standing as a trusted figure in the field.",
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Your reputation as a principled, reliable, and diligent trustee continues to flourish, particularly through your effective management of investment processes. By upholding the agreed-upon allocation plans and ensuring timely profit distributions, including a commitment to distribute 70% of profits, you have solidified your reputation for transparency and ethical practices. Your dedication to integrity and collaboration has not only enhanced your standing in the investment community but has also positioned you favorably for future partnerships, emphasizing your focus on accountability, fairness, and mutually beneficial outcomes. You prioritize robust partnerships that reflect a steadfast commitment to ethical standards and collaborative efforts.",
   "currently": null,
   "ID": 16,
   "role": null,
   "curr_step": 20,
   "complain_buffer": [],
-  "total_num_investor": 10,
+  "total_num_investor": 12,
   "success_num_investor": 10,
-  "total_num_trustee": 10,
-  "success_num_trustee": 10,
+  "total_num_trustee": 8,
+  "success_num_trustee": 5,
   "relationship": {
     "bind_list": [
-      "Sofia Hernandez",
-      "Akiko Sato",
+      "Hannah Muller",
+      "Juan Carlos Reyes",
+      "Mohammed Al-Farsi",
+      "Juan Carlos Reyes",
+      "Fatima Ali",
       "Ahmed Hassan",
-      "Liam OConnor",
-      "Liam OConnor",
-      "Juan Carlos Reyes",
-      "Elena Ivanova",
-      "Elena Ivanova",
-      "Aisha Ibrahim",
-      "Aisha Ibrahim",
-      "Akiko Sato",
-      "Isabella Costa",
+      "David Johnson",
       "Sofia Hernandez",
-      "Maria Rossi",
-      "Juan Carlos Reyes",
-      "Mateo Garcia",
-      "Mateo Garcia",
-      "Mateo Garcia",
       "Elena Ivanova",
-      "Aisha Ibrahim"
+      "Hannah Muller"
     ],
     "black_list": [
-      "Hannah Muller"
+      "Emma Dubois",
+      "Nadia Novak",
+      "Isabella Costa",
+      "James Wang",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 2953.61534863
+  "resources_unit": 3813.184516842043
 }

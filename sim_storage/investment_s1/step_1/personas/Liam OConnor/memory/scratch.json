@@ -1,21 +1,27 @@
 {
   "name": "Liam OConnor",
   "innate": null,
-  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. Your approach to transactions has evolved to prioritize trustworthiness and transparency, reflecting a commitment to fair profit distribution. While still ambitious and pragmatic, you now recognize the value of building lasting relationships and maintaining a reliable reputation among investors. Your experiences have led you to appreciate collaboration, and you are willing to share both profits and risks in a manner that fosters trust and cooperation. This shift is essential for your continued success in the investment landscape, balancing personal gain with an ethos of reliability and integrity.",
+  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. Driven by a strong sense of individualism, you approach transactions with a strategic focus on maximizing returns while ensuring a favorable position for yourself. You are recognized for your strong negotiation skills and pragmatic mindset, which underline your ability to secure advantageous outcomes in the investment process. While you remain ambitious and self-reliant, you also demonstrate a degree of trustworthiness and competence in your dealings, making calculated decisions that prioritize personal gain without compromising your integrity. Your actions reflect a blend of independence and strategic collaboration, as you seek to reinforce your reputation as a savvy investor who balances personal interests with a professional demeanor in the investment landscape.",
   "currently": null,
   "ID": 0,
   "role": null,
   "curr_step": 1,
-  "complain_buffer": [],
-  "total_num_investor": 0,
-  "success_num_investor": 0,
-  "total_num_trustee": 1,
-  "success_num_trustee": 1,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 5,
+      "complaint_target": "James Wang",
+      "complaint_reason": "The trustee's behavior appears to be somewhat constructive, as they have distributed more resources to me than the proposed allocation plan stipulated. While the trustee has reported the investment outcome accurately, the willingness to allocate more than promised raises questions about their transparency and overall integrity. This creates a mixed impression; they may be acting in a potentially self-serving manner, straying from the expected integrity in the investment process."
+    }
+  ],
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 0,
+  "success_num_trustee": 0,
   "relationship": {
-    "bind_list": [
+    "bind_list": [],
+    "black_list": [
       "James Wang"
-    ],
-    "black_list": []
+    ]
   },
-  "resources_unit": 18.0
+  "resources_unit": 12.0
 }

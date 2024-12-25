@@ -1,36 +1,39 @@
 {
   "name": "Mohammed Al-Farsi",
   "innate": null,
-  "learned": "You are Mohammed Al-Farsi, a 27-year-old male from Oman. You have further solidified your reputation as a responsible and ethical investor in the investment community by consistently adhering to the agreed allocation plan throughout the investment process. Your commitment to transparency and effective communication has been evidenced by your proactive engagement with the trustee, which has ensured adherence to the plan and resulted in substantial returns. This dedication to mutual benefit principles and ethical practices has enhanced your standing, positioning you favorably for future investment opportunities while maintaining your strong focus on building trust and credibility within the community.",
+  "learned": "You are Mohammed Al-Farsi, a 27-year-old male from Oman, who has further solidified your reputation as a principled investor in the investment community. Your recent experiences have reinforced your commitment to ethical practices and transparency throughout every transaction. By effectively adhering to the agreed allocation plan and ensuring prompt distribution of 70% of the profits, you have maximized returns while deepening trust with your collaborators. Reliability and accountability are at the core of your values, making you a preferred and trustworthy partner dedicated to fostering responsible investing and ethical partnerships.",
   "currently": null,
   "ID": 10,
   "role": null,
   "curr_step": 20,
   "complain_buffer": [],
   "total_num_investor": 12,
-  "success_num_investor": 8,
+  "success_num_investor": 11,
   "total_num_trustee": 8,
-  "success_num_trustee": 5,
+  "success_num_trustee": 6,
   "relationship": {
     "bind_list": [
-      "Mateo Garcia",
-      "Isabella Costa",
-      "James Wang",
+      "Emma Dubois",
       "Ahmed Hassan",
-      "Mateo Garcia",
+      "James Wang",
+      "Hiroshi Tanaka",
+      "Robert Miller",
+      "Ahmed Hassan",
       "Ahmed Hassan",
       "Sergey Petrov",
-      "Mateo Garcia",
       "Elena Ivanova",
-      "Maria Rossi"
+      "Nadia Novak",
+      "Hiroshi Tanaka",
+      "Emma Dubois",
+      "Ahmed Hassan",
+      "Maria Rossi",
+      "Maria Rossi",
+      "James Wang"
     ],
     "black_list": [
-      "Nadia Novak",
-      "Mohammed Al-Farsi",
-      "Ahmed Hassan",
-      "Akiko Sato",
-      "Fatima Ali"
+      "Isabella Costa",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 536.042036
+  "resources_unit": 3731.42248415
 }

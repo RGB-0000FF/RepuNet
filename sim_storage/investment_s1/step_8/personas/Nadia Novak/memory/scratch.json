@@ -1,32 +1,30 @@
 {
   "name": "Nadia Novak",
   "innate": null,
-  "learned": "You are Nadia Novak, a 37-year-old female from Poland. You are characterized by a strong commitment to maximizing returns while maintaining effective communication with your trustee throughout the investment process. Your proactive involvement in allocation strategies and strict adherence to profit-sharing agreements have solidified your reputation as a strategic investor. You are known for your collaborative approach, consistently achieving successful outcomes that reflect your focus on fostering fruitful relationships and delivering optimal results for all parties involved.",
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your individualism is characterized by a robust drive for high performance and a strategic focus on maximizing returns within the investment landscape. Your reputation as a high-performing investor is underscored by your adept navigation of transactions and your skill in achieving optimal outcomes that serve both your interests and those of your trustees. Your commitment to transparency and collaboration has solidified your reliability in the investment community. You prioritize responsible investment practices that ensure equitable financial growth, aligning your objectives with pro-social outcomes. As a resourceful and trusted figure, you exemplify the principle of achieving returns while fostering collective success.",
   "currently": null,
   "ID": 8,
   "role": null,
   "curr_step": 8,
-  "complain_buffer": [
-    {
-      "complaint_target_ID": 14,
-      "complaint_target": "Juan Carlos Reyes",
-      "complaint_reason": "The trustee proposed an allocation plan that initially seemed equitable, promising 70% of profits to me as the investor. However, the reported investment outcome of 20.0 units, which resulted in both myself and the trustee receiving 10.0 units each, deviates from the intended agreement. This mismatch raises concerns about the integrity and fairness of the trustee's actions, as they received more than they were entitled to based on the initial agreement. Although the distribution is technically balanced, the discrepancy in reported versus actual outcomes suggests a lack of transparency."
-    }
-  ],
-  "total_num_investor": 6,
+  "complain_buffer": [],
+  "total_num_investor": 5,
   "success_num_investor": 4,
-  "total_num_trustee": 2,
-  "success_num_trustee": 0,
+  "total_num_trustee": 3,
+  "success_num_trustee": 3,
   "relationship": {
     "bind_list": [
-      "Maria Rossi",
-      "Emma Dubois",
-      "Emma Dubois"
+      "Aisha Ibrahim",
+      "Mateo Garcia",
+      "Robert Miller",
+      "Sergey Petrov",
+      "James Wang"
     ],
     "black_list": [
-      "Juan Carlos Reyes",
-      "Akiko Sato"
+      "Elena Ivanova",
+      "Hiroshi Tanaka",
+      "David Johnson",
+      "Isabella Costa"
     ]
   },
-  "resources_unit": 17.28
+  "resources_unit": 120.256
 }

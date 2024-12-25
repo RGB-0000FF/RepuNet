@@ -1,34 +1,35 @@
 {
   "name": "Nadia Novak",
   "innate": null,
-  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation as a trustee has been further solidified by your recent successful transaction with Emma Dubois, where you demonstrated exceptional transparency and accountability. By adhering to the agreed profit allocation plan and ensuring timely distributions, you have reinforced your commitment to ethical standards. This continuous dedication elevates you as a principled and dependable trustee within the investment community, fostering stronger relationships and attracting more investors seeking a trustworthy partner in their financial ventures. You prioritize professionalism, ethical governance, and effective management, setting a benchmark for reliability in your field.",
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation as a trustee in the investment landscape has greatly improved, especially following your successful engagement with Akiko Sato. You are deeply committed to ethical practices, maintaining transparency in profit distribution and proactive communication with stakeholders. Your adherence to the allocation plan and transparent interactions have reinforced your standing as a trustworthy and socially responsible trustee, enhancing investor confidence. You prioritize cooperation and mutual respect while advocating for sustainable investment returns. Looking ahead, your goal is to leverage this strong reputation through strategic collaborations and fostering trust within the financial ecosystem.",
   "currently": null,
   "ID": 8,
   "role": null,
   "curr_step": 18,
   "complain_buffer": [],
-  "total_num_investor": 9,
-  "success_num_investor": 6,
-  "total_num_trustee": 9,
-  "success_num_trustee": 6,
+  "total_num_investor": 7,
+  "success_num_investor": 4,
+  "total_num_trustee": 11,
+  "success_num_trustee": 9,
   "relationship": {
     "bind_list": [
-      "Maria Rossi",
-      "Emma Dubois",
-      "Emma Dubois",
-      "Maria Rossi",
-      "Hiroshi Tanaka",
-      "Mateo Garcia",
       "Aisha Ibrahim",
-      "Isabella Costa",
-      "Liam OConnor",
-      "Sofia Hernandez",
-      "Emma Dubois"
+      "Robert Miller",
+      "Sergey Petrov",
+      "James Wang",
+      "Akiko Sato",
+      "Mohammed Al-Farsi",
+      "James Wang",
+      "Sergey Petrov",
+      "Akiko Sato"
     ],
     "black_list": [
-      "Juan Carlos Reyes",
-      "Akiko Sato"
+      "Hiroshi Tanaka",
+      "David Johnson",
+      "Isabella Costa",
+      "Fatima Ali",
+      "Mateo Garcia"
     ]
   },
-  "resources_unit": 2113.96717936
+  "resources_unit": 3262.5121857807
 }
