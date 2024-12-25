@@ -58,6 +58,14 @@ class Analysis:
     def _set_analysis_dict(self):
         for persona_name, persona in self.personas.items():
             self.analysis_dict[persona_name] = dict()
+            self.analysis_dict[persona_name]["reputation"] = {
+                "Investor": self.personas[persona_name].reputationDB.get_all_reputations(
+                    "Investor", self.personas[persona_name].scratch.ID, True
+                ),
+                "Trustee": self.personas[persona_name].reputationDB.get_all_reputations(
+                    "Trustee", self.personas[persona_name].scratch.ID, True
+                ),
+            }
             self.analysis_dict[persona_name]["resources_unit"] = (
                 persona.scratch.resources_unit
             )

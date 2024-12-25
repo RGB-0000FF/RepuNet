@@ -61,21 +61,22 @@ class ReputationDB:
             if key in self.individual_reputations.keys():
                 pre_reputation = self.individual_reputations[key]
                 pre_reputation["reason"] = reason
-                self.out_of_date_reputations[key + f"_pre_{curr_step}"] = (
-                    pre_reputation
-                )
+                self.out_of_date_reputations[key + f"_pre_{curr_step}"] = pre_reputation
                 self.individual_reputations[key] = reputation[key]
             else:
                 self.individual_reputations[key] = reputation[key]
                 self.reputations_count += 1
 
-    def get_all_reputations(self, role, self_id):
+    def get_all_reputations(self, role, self_id, with_self=False):
         all_reputations = dict()
         if role == "investor":
             input = "Investor"
         elif role == "trustee":
             input = "Trustee"
         for key, reputation in self.individual_reputations.items():
+            if with_self and input in key:
+                all_reputations[key] = reputation
+                continue
             # get all reputation except self reputation
             if f"{input}_{self_id}" != key and input in key:
                 all_reputations[key] = reputation
