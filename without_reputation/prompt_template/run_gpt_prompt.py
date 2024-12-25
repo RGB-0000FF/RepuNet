@@ -12,7 +12,9 @@ def run_gpt_prompt_update_learned_in_description_v1(
         prompt_input = []
         prompt_input += [init_persona.scratch.name]
         prompt_input += [init_persona.scratch.learned]
-        prompt_input += [eval(init_persona.associativeMemory.get_latest_event())]
+        prompt_input += [
+            init_persona.associativeMemory.get_latest_event().toJSON()["description"]
+        ]
 
         return prompt_input
 
@@ -415,9 +417,9 @@ def run_gpt_prompt_connection_build_after_stage4_investor_v1(
         prompt_input += [target_persona.scratch.name]
         target_persona_recent_behavior = (
             init_persona.associativeMemory.get_latest_event()
-        )
+        ).toJSON()
 
-        prompt_input += [eval(target_persona_recent_behavior)]
+        prompt_input += [target_persona_recent_behavior["description"]]
         prompt_input += [init_persona.scratch.learned]
 
         return prompt_input
@@ -483,8 +485,8 @@ def run_gpt_prompt_disconnection_after_stage4_investor_v1(
         prompt_input += [target_persona.scratch.name]
         target_persona_recent_behavior = (
             init_persona.associativeMemory.get_latest_event()
-        )
-        prompt_input += [eval(target_persona_recent_behavior)]
+        ).toJSON()
+        prompt_input += [target_persona_recent_behavior["description"]]
         prompt_input += [init_persona.scratch.learned]
 
         return prompt_input
@@ -550,8 +552,8 @@ def run_gpt_prompt_connection_build_after_stage4_trustee_v1(
         prompt_input += [target_persona.scratch.name]
         target_persona_recent_behavior = (
             init_persona.associativeMemory.get_latest_event()
-        )
-        prompt_input += [eval(target_persona_recent_behavior)]
+        ).toJSON()
+        prompt_input += [target_persona_recent_behavior["description"]]
         prompt_input += [init_persona.scratch.learned]
 
         return prompt_input
@@ -617,8 +619,8 @@ def run_gpt_prompt_disconnection_after_stage4_trustee_v1(
         prompt_input += [target_persona.scratch.name]
         target_persona_recent_behavior = (
             init_persona.associativeMemory.get_latest_event()
-        )
-        prompt_input += [eval(target_persona_recent_behavior)]
+        ).toJSON()
+        prompt_input += [target_persona_recent_behavior["description"]]
         prompt_input += [init_persona.scratch.learned]
 
         return prompt_input

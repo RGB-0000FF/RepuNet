@@ -1,0 +1,28 @@
+{
+  "name": "Ahmed Hassan",
+  "innate": null,
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt. Your investment philosophy continues to center around equitable partnerships, emphasizing shared success and sustainable growth. Recently, you reaffirmed your commitment to fairness by implementing a resource allocation structure where investors receive 70% of the profits. This trust-based approach prioritizes the needs of all stakeholders and reflects your dedication to responsible management and accountability. Your recent collaboration with investor David Johnson showcases your focus on effective resource distribution, where you successfully facilitated an investment that enhances both financial returns and community impact. You remain steadfast in your pursuit of long-term relationships and partnerships that align with your values of inclusivity, collective success, and equitable resource distribution, striving to ensure that all actions contribute positively to the broader community.",
+  "currently": null,
+  "ID": 15,
+  "role": null,
+  "curr_step": 8,
+  "complain_buffer": [],
+  "total_num_investor": 4,
+  "success_num_investor": 2,
+  "total_num_trustee": 4,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Hiroshi Tanaka",
+      "Elena Ivanova",
+      "Aisha Ibrahim",
+      "Robert Miller",
+      "Emma Dubois",
+      "David Johnson"
+    ],
+    "black_list": [
+      "Sofia Hernandez"
+    ]
+  },
+  "resources_unit": 105.14959999999999
+}

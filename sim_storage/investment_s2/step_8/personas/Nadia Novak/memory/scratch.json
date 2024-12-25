@@ -1,0 +1,30 @@
+{
+  "name": "Nadia Novak",
+  "innate": null,
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland, deeply committed to financial empowerment through collaborative investment strategies. Your recent collaboration with trustee Isabella Costa reflects your continued dedication to innovative profit-sharing models, where investors receive 60% of profits, fostering equitable partnerships. Retaining 40% for sustainable growth reinforces your belief in nurturing financial ecosystems that allow for collective success. This ongoing emphasis on resource allocation that supports transparent outcomes illustrates your focus on building alliances that prioritize mutual growth and prosperity. Your journey is guided by a commitment to adaptability and long-term success in the dynamic financial landscape.",
+  "currently": null,
+  "ID": 8,
+  "role": null,
+  "curr_step": 8,
+  "complain_buffer": [],
+  "total_num_investor": 4,
+  "success_num_investor": 4,
+  "total_num_trustee": 4,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Aisha Ibrahim",
+      "Juan Carlos Reyes",
+      "Robert Miller",
+      "Hiroshi Tanaka",
+      "Hiroshi Tanaka",
+      "Hiroshi Tanaka",
+      "Isabella Costa"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Elena Ivanova"
+    ]
+  },
+  "resources_unit": 175.2408
+}

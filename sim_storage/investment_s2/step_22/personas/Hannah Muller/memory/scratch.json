@@ -1,0 +1,34 @@
+{
+  "name": "Hannah Muller",
+  "innate": null,
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany, steadfast in your commitment to ethical investment practices that champion equitable profit-sharing and transparent management of resources. In partnership with investor David Johnson, you uphold a resource allocation model where 70% of profits are distributed to investors while retaining 30% for your management role. This structured approach not only reflects your dedication to fair compensation for all stakeholders but also highlights your focus on collaboration and leveraging diverse strengths for sustainable growth. Your recent investment successes further reinforce your values of integrity and mutual success, demonstrating effective management and alignment with a dynamic and prosperous investment landscape.",
+  "currently": null,
+  "ID": 7,
+  "role": null,
+  "curr_step": 22,
+  "complain_buffer": [],
+  "total_num_investor": 8,
+  "success_num_investor": 4,
+  "total_num_trustee": 14,
+  "success_num_trustee": 9,
+  "relationship": {
+    "bind_list": [
+      "Isabella Costa",
+      "Mohammed Al-Farsi",
+      "Sofia Hernandez",
+      "Sofia Hernandez",
+      "Elena Ivanova",
+      "Fatima Ali",
+      "Mateo Garcia",
+      "Aisha Ibrahim",
+      "Aisha Ibrahim",
+      "Aisha Ibrahim",
+      "David Johnson"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "James Wang"
+    ]
+  },
+  "resources_unit": 859.7353465599999
+}

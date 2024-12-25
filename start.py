@@ -5,6 +5,7 @@ import errno
 import networkx as nx
 
 from task.investment.investment import *
+from task.investment_without_reputation.investment import *
 from utils import *
 
 from persona.persona import Persona
@@ -20,11 +21,13 @@ class Creation:
 
         self.step = reverie_meta["step"]
         self.personas = dict()
-        with_reputation = ("y" in with_reputation.lower())
+        self.with_reputation = (
+            "y" in with_reputation.lower() and "n" not in with_reputation.lower()
+        )
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder, with_reputation)
+            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
         self.set_graph()
 
@@ -60,11 +63,12 @@ class Creation:
             persona.save(save_folder)
             # save reputation and gossip
             reputation_folder = f"{sim_folder}/personas/{persona_name}/reputation"
-            persona.reputationDB.save(reputation_folder)
+            if self.with_reputation:
+                persona.reputationDB.save(reputation_folder)
             gossip_folder = f"{sim_folder}/personas/{persona_name}/reputation"
             persona.gossipDB.save(gossip_folder)
 
-    def start_server(self, int_counter):
+    def start_server_investment(self, int_counter):
         while True:
             # Done with this iteration if <int_counter> reaches 0.
             if int_counter == 0:
@@ -89,15 +93,26 @@ class Creation:
             print(
                 f"sim_code: {self.sim_code}-----------------------------------------------"
             )
-            pairs = pair_each(self.personas, self.G)
+            if self.with_reputation:
+                pairs = pair_each(self.personas, self.G)
 
-            for pair in pairs:
-                start_investment(
-                    pair,
-                    self.personas,
-                    self.G,
-                    f"{fs_storage}/{self.sim_code}/investment results",
-                )
+                for pair in pairs:
+                    start_investment(
+                        pair,
+                        self.personas,
+                        self.G,
+                        f"{fs_storage}/{self.sim_code}/investment results",
+                    )
+            else:
+                pairs = pair_each_without_reputation(self.personas, self.G)
+
+                for pair in pairs:
+                    start_investment_without_reputation(
+                        pair,
+                        self.personas,
+                        self.G,
+                        f"{fs_storage}/{self.sim_code}/investment results",
+                    )
 
             self.save()
             int_counter -= 1
@@ -146,11 +161,13 @@ class Creation:
                     # Example: save
                     self.save()
 
-                elif sim_command[:3].lower() == "run":
+                elif (
+                    sim_command[:3].lower() == "run" and "invest" in sim_command.lower()
+                ):
                     # Runs the number of steps specified in the prompt.
                     # Example: run 1000
                     int_count = int(sim_command.split()[-1])
-                    server.start_server(int_count)
+                    server.start_server_investment(int_count)
 
                 print(ret_str)
 

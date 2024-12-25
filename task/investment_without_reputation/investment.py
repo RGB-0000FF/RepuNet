@@ -10,7 +10,7 @@ from without_reputation.social_network import social_network_update_after_stage4
 from .prompt_template.run_gpt_prompt import *
 
 
-def pair_each(personas, G):
+def pair_each_without_reputation(personas, G):
     personas_keys = list(personas.keys())
     random.shuffle(personas_keys)
 
@@ -20,15 +20,6 @@ def pair_each(personas, G):
 
     print(pairs)
     return pairs
-
-
-def get_d_connect(init_persona, G):
-    d_connect_list = []
-    for edge in G.edges():
-        if edge[0] == init_persona.name:
-            if G.has_edge(edge[1], init_persona.name):
-                d_connect_list.append(edge[1])
-    return d_connect_list
 
 
 def start_investment_without_reputation(pair, personas, G, save_folder):
@@ -147,12 +138,12 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
 
         i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
             investor, "investor"
-        )
+        )[0]
         investor.scratch.learned = i_new_learned
-        
+
         t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
             trustee, "trustee"
-        )
+        )[0]
         trustee.scratch.learned = t_new_learned
 
         # gossip willing
@@ -191,13 +182,14 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
         }
 
         # gossip stage
-        if "yes" in investor_evaluation["gossip"].split(".")[0].lower().strip():
+        if "yes" in investor_evaluation["gossip"].split(",")[0].lower().strip():
             investor.scratch.complain_buffer.append(
                 {
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
                     "complaint_reason": investor_evaluation["gossip"]
-                    .split(".")[-1]
+                    .lower()
+                    .split("yes,")[-1]
                     .strip(),
                 }
             )
@@ -218,13 +210,14 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
                     G,
                 )
 
-        if "yes" in trustee_evaluation["gossip"].split(".")[0].lower().strip():
+        if "yes" in trustee_evaluation["gossip"].split(",")[0].lower().strip():
             trustee.scratch.complain_buffer.append(
                 {
                     "complaint_target_ID": investor.scratch.ID,
                     "complaint_target": investor.name,
                     "complaint_reason": trustee_evaluation["gossip"]
-                    .split(".")[-1]
+                    .lower()
+                    .split("yes,")[-1]
                     .strip(),
                 }
             )
