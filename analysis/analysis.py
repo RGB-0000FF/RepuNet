@@ -25,7 +25,7 @@ class Analysis:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder)
+            curr_persona = Persona(persona_name, persona_folder, True)
             self.personas[persona_name] = curr_persona
         self.G = self._set_graph()
         self._set_analysis_dict()
@@ -80,6 +80,12 @@ class Analysis:
                 )
                 self.analysis_dict[persona_name]["investor"] = investor
                 self.analysis_dict[persona_name]["trustee"] = trustee
+                self.analysis_dict[persona_name]["trustee_plan"] = (
+                    investment_event["description"]
+                    .split("trustee_plan is ")[-1]
+                    .split("stage 2:")[0]
+                    .strip()
+                )
                 if "stage 2" in investment_event["description"]:
                     a_unit = (
                         investment_event["description"]
