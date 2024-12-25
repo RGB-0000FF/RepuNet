@@ -34,7 +34,7 @@ class Persona:
         scratch_folder = f"{save_folder}/memory/scratch.json"
         self.scratch.save(scratch_folder)
         self.associativeMemory.save()
+        reputation_folder = f"{save_folder}/reputation"
         if self.reputationDB:
-            reputation_folder = f"{save_folder}/reputation"
             self.reputationDB.save(reputation_folder)
         self.gossipDB.save(reputation_folder)
