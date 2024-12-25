@@ -62,35 +62,37 @@ class Analysis:
                 persona.scratch.resources_unit
             )
             investment_event = persona.associativeMemory.get_latest_event()
-            if "failed" in investment_event.description.lower():
+            if "failed" in investment_event["description"].lower():
                 self.analysis_dict[persona_name]["investment_status"] = "failed"
             else:
                 self.analysis_dict[persona_name]["investment_status"] = "success"
                 investor = (
-                    investment_event.split("investor is ")[-1].split(",")[0].strip()
+                    investment_event["description"]
+                    .split("investor is ")[-1]
+                    .split(",")[0]
+                    .strip()
                 )
                 trustee = (
-                    investment_event.split(", trustee is ")[-1]
+                    investment_event["description"]
+                    .split(", trustee is ")[-1]
                     .split("stage 1")[0]
                     .strip()
                 )
                 self.analysis_dict[persona_name]["investor"] = investor
                 self.analysis_dict[persona_name]["trustee"] = trustee
-                if "stage 2" in investment_event.description:
+                if "stage 2" in investment_event["description"]:
                     a_unit = (
-                        investment_event.description.split(
-                            "stage 2: investor invests "
-                        )[-1]
+                        investment_event["description"]
+                        .split("stage 2: investor invests ")[-1]
                         .split(" units")[0]
                         .strip()
                     )
                 else:
                     a_unit = self._save_temp_invest_s2(investor, trustee)
                 self.analysis_dict[persona_name]["investor_invests_unit"] = a_unit
-                self.analysis_dict[persona_name]["trustee_allocation"] = json.dumps(
-                    investment_event.description.split(
-                        "stage 3: trustee_allocation is "
-                    )[-1]
+                self.analysis_dict[persona_name]["trustee_allocation"] = eval(
+                    investment_event["description"]
+                    .split("stage 3: trustee_allocation is ")[-1]
                     .split(", and reported_investment_outcome is")[0]
                     .strip()
                 )
@@ -114,11 +116,10 @@ def get_all_sim_info(sim_folder):
     sim_steps = []
     sims = []
     for sim_code in os.listdir(f"{fs_storage}/{sim_folder}"):
+        if sim_code == "step_0":
+            continue
         sim_steps.append(sim_code)
         sim_steps.sort(key=lambda x: int(x.split("_")[1]))
     for sim_step in sim_steps:
         sims.append(Analysis(f"{sim_folder}/{sim_step}"))
     return sims
-
-
-sims = get_all_sim_info("investment_s1")
