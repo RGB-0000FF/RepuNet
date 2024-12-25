@@ -1,0 +1,42 @@
+Variables:
+!<INPUT 0>! -- agent’s name
+!<INPUT 1>! -- listener’s name
+!<INPUT 2>! -- agent’s learned
+!<INPUT 3>! -- listener’s learned
+!<INPUT 4>! -- gossip reasons
+
+<commentblockmarker>###</commentblockmarker>
+
+**Gossip reasons for !<INPUT 0>!**
+
+!<INPUT 4>!
+
+**!<INPUT 0>!’s innate**
+
+!<INPUT 2>!
+
+**!<INPUT 1>!’s innate**
+
+!<INPUT 3>!
+
+---
+
+Task: Recently, !<INPUT 0>! encountered some things and he wants to share them with his friend !<INPUT 1>!. We have provided you with the **innate** of two individuals and the **gossip reasons** for !<INPUT 0>!. Please generate a gossip conversation based on this information.
+
+**Note**: 
+
+-Please use concise and condensed language to write this conversation, and the total number of times the two people speak should not exceed 10.
+
+-!<INPUT 0>! is the initiator of the conversation. Thus, please start with "I’ve got some gossip for you:<The sentence you want to writing>" said by !<INPUT 0>!. 
+
+-The conversation between the two takes turns, which means that if one person speaks in this round, the next round should be the other person speaking.
+
+-You only need to continue writing one person's speech, neither adding extra content nor omitting it.
+
+Output format: Output a text of the following format:
+
+!<INPUT 0>!:<The first paragraph of the speech>
+
+!<INPUT 1>!:<The second paragraph of the speech>
+
+......

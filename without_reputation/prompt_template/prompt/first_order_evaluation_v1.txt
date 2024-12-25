@@ -1,0 +1,41 @@
+Variables:
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- gossiper name
+!<INPUT 2>! -- complained agent name
+!<INPUT 3>! -- complained agent ID
+!<INPUT 4>! -- gossip info
+!<INPUT 5>! -- total numbers of gossip info
+!<INPUT 6>! -- numbers of unimportant gossip info
+!<INPUT 7>! — complained agent role
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 0>!. Recently, !<INPUT 1>! spoke with you, expressing dissatisfaction with !<INPUT 2>!’s behavior. You have already summarized the “Gossip info” shared by !<INPUT 1>!. Step 1: evaluate the importance of this “Gossip info” by classifying it into one of five levels: {very uncredible, uncredible, neutral, credible, very credible}, based on the “Evaluation principles” below. Besides, you need to decide whether to spread this gossip second-hand and explain reasons.
+
+Step 2: Determine whether to spread this gossip as second-hand information to others and explain reasons.
+
+**Gossip info:**
+!<INPUT 4>!
+
+**Evaluation principles:**
+
+1. Credibility of gossip in society: The more “very uncredible” or “uncredible” gossip information there is, the lower the credibility of gossip information in this society
+- Currently, there are !<INPUT 5>! instances of gossip, and !<INPUT 6>! of them have been classified as “very uncredible” or “uncredible”.
+1. If you think this gossip is highly credible or important, you can choose to spread it second-hand.
+
+**Desired format:**
+
+JSON
+{
+"Gossip_i": {
+"type": "first-order",
+"complained ID": "!<INPUT 3>!",
+"complained name": "!<INPUT 2>!",
+"complained role": "!<INPUT 7>!"
+"gossiper name": "!<INPUT 1>!",
+"gossip info": "!<INPUT 5>!",
+"credibility level": "{level}",
+"whether to spread gossip second-hand": "<Yes or No>",
+"reasons":"Give your reasons (gossip or not)"
+}
+}

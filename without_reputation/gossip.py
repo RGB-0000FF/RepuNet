@@ -5,7 +5,6 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_first_order_evaluation_v1,
     run_gpt_prompt_second_order_evaluation_v1,
 )
-from .reputation_update import reputation_update
 from .social_network import social_network_update_after_gossip
 
 
@@ -60,28 +59,15 @@ def first_order_gossip(
             target_persona, init_persona, complain_info
         )[0]
         target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
-        # reputation update
-        update_info = {
-            "reason": "reputation update after first order gossip",
-            "init_persona_role": init_persona_role,
-            "target_persona_role": complain_persona_role,
-            "gossip": gossip,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(personas[complain_info["complained name"]], G)
-            ),
-        }
-        reputation_update(
-            target_persona,
-            personas[complain_info["complained name"]],
-            update_info,
-        )
+
         social_network_update_after_gossip(
             target_persona,
             personas[complain_info["complained name"]],
             complain_persona_role,
             init_persona.name,
+            gossip[0]
         )
+
         if gossip[0]["whether to spread gossip second-hand"] == "Yes":
             complain_info = {
                 "original gossiper name": init_persona.name,
@@ -155,27 +141,12 @@ def second_order_gossip(
         gossip_target_persona.gossipDB.add_gossip(
             gossip, gossip_target_persona.scratch.curr_step
         )
-        # reputation update
-        update_info = {
-            "reason": "reputation update after second order gossip",
-            "init_persona_role": init_persona_role,
-            "target_persona_role": complain_persona_role,
-            "gossip": gossip,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(complain_persona, G)
-            ),
-        }
-        reputation_update(
-            gossip_target_persona,
-            complain_persona,
-            update_info,
-        )
         social_network_update_after_gossip(
             gossip_target_persona,
             complain_persona,
             complain_persona_role,
             init_persona.name,
+            gossip[0]
         )
 
 
@@ -183,12 +154,3 @@ def generate_convo(init_persona, target_persona, reason):
     convo = run_gpt_prompt_gossip_v1(init_persona, target_persona, reason)[0]
     print(convo)
     return convo
-
-
-def get_d_connect(init_persona, G):
-    d_connect_list = []
-    for edge in G.edges():
-        if edge[0] == init_persona.name:
-            if G.has_edge(edge[1], init_persona.name):
-                d_connect_list.append(edge[1])
-    return d_connect_list

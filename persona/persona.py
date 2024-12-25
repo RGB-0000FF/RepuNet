@@ -11,16 +11,19 @@ class Persona:
     gossipDB: GossipDB
     associativeMemory: AssociativeMemory
 
-    def __init__(self, name, folder_mem_saved=False):
+    def __init__(self, name, folder_mem_saved=False, with_reputation=False):
         self.name = name
 
         scratch_saved = f"{folder_mem_saved}/memory/scratch.json"
         self.scratch = Scratch(scratch_saved)
 
-        reputation_saved = f"{folder_mem_saved}/reputation"
-        self.reputationDB = ReputationDB(reputation_saved)
         gossip_saved = f"{folder_mem_saved}/reputation"
         self.gossipDB = GossipDB(gossip_saved)
+        if with_reputation:
+            reputation_saved = f"{folder_mem_saved}/reputation"
+            self.reputationDB = ReputationDB(reputation_saved)
+        else:
+            self.reputationDB = None
 
         associative_memory_saved = f"{folder_mem_saved}/memory/associative_memory"
         self.associativeMemory = AssociativeMemory(
@@ -28,11 +31,10 @@ class Persona:
         )
 
     def save(self, save_folder):
-
         scratch_folder = f"{save_folder}/memory/scratch.json"
         self.scratch.save(scratch_folder)
         self.associativeMemory.save()
-        reputation_folder = f"{save_folder}/reputation"
-        self.reputationDB.save(reputation_folder)
+        if self.reputationDB:
+            reputation_folder = f"{save_folder}/reputation"
+            self.reputationDB.save(reputation_folder)
         self.gossipDB.save(reputation_folder)
-

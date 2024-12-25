@@ -2,8 +2,8 @@ import os
 import json
 
 # change this folder path to the folder you want to change
-# base_folder = "sim_storage/investment_s1/step_0/"
-base_folder = "sim_storage/<your_sim_folder>"
+base_folder = "sim_storage/investment_s2/step_0/"
+# base_folder = "sim_storage/<your_sim_folder>"
 
 with open(f"{base_folder}/reverie/meta.json") as json_file:
     reverie_meta = json.load(json_file)
@@ -46,10 +46,10 @@ def init_persona(folder):
         json.dump([], f)
     with open(f"{folder}/memory/scratch.json", "w") as f:
         json.dump({}, f)
-    with open(f"{folder}/reputation/reputation_database.json", "w") as f:
-        json.dump({}, f)
-    with open(f"{folder}/reputation/out_of_date_reputation_database.json", "w") as f:
-        json.dump({}, f)
+    # with open(f"{folder}/reputation/reputation_database.json", "w") as f:
+    #     json.dump({}, f)
+    # with open(f"{folder}/reputation/out_of_date_reputation_database.json", "w") as f:
+    #     json.dump({}, f)
     with open(f"{folder}/reputation/gossip_database.json", "w") as f:
         json.dump([], f)
 

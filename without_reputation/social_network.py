@@ -25,9 +25,10 @@ def social_network_update_after_stage4(
             init_persona, target_persona, target_persona_role
         )[0]
         if disconnection_res["Disconnect"].lower() == "yes":
-            if target_persona.scratch.name in init_persona.scratch.relationship[
-                "bind_list"
-            ]:
+            if (
+                target_persona.scratch.name
+                in init_persona.scratch.relationship["bind_list"]
+            ):
                 init_persona.scratch.relationship["bind_list"].remove(
                     target_persona.scratch.name
                 )
@@ -48,9 +49,10 @@ def social_network_update_after_stage4(
             init_persona, target_persona, target_persona_role
         )[0]
         if disconnection_res["Disconnect"].lower() == "yes":
-            if target_persona.scratch.name in init_persona.scratch.relationship[
-                "bind_list"
-            ]:
+            if (
+                target_persona.scratch.name
+                in init_persona.scratch.relationship["bind_list"]
+            ):
                 init_persona.scratch.relationship["bind_list"].remove(
                     target_persona.scratch.name
                 )
@@ -60,15 +62,16 @@ def social_network_update_after_stage4(
 
 
 def social_network_update_after_gossip(
-    init_persona, target_persona, target_persona_role, gossiper_name
+    init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
 ):
     gossip_res = run_gpt_prompt_disconnection_after_gossip_v1(
-        init_persona, target_persona, target_persona_role, gossiper_name
+        init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
     )[0]
-    if gossip_res["Disconnect"].lower() == "yes":
-        if target_persona.scratch.name in init_persona.scratch.relationship[
-            "bind_list"
-        ]:
+    if gossip_res["Disconnect"] == "Yes":
+        if (
+            target_persona.scratch.name
+            in init_persona.scratch.relationship["bind_list"]
+        ):
             init_persona.scratch.relationship["bind_list"].remove(
                 target_persona.scratch.name
             )

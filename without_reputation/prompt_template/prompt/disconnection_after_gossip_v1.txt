@@ -1,0 +1,26 @@
+Variables:
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- target's name
+!<INPUT 2>! -- target's Gossip Info
+!<INPUT 3>! -- gossiper's name
+!<INPUT 4>! -- agent's learned
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 0>!. You heard gossip about !<INPUT 1>! from !<INPUT 3>!. Previously, you established a connection with  !<INPUT 1>! , but now it is necessary to reconsider whether it is appropriate to establish a connection with  !<INPUT 1>! . Do you want to disconnect with  !<INPUT 1>! ? Return “Yes”or "No" and explain the reasons based on your innate and **Gossip Info**.
+
+**Gossip Info:**
+!<INPUT 2>!
+
+**target's name:**
+!<INPUT 1>!
+
+**Your Innate:**
+!<INPUT 4>!
+
+**Desired format:**json
+
+{
+"Disconnect":"<Yes or No>",
+"Reason":"Give your reasons"
+}

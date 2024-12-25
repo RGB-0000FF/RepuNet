@@ -11,7 +11,7 @@ from persona.persona import Persona
 
 
 class Creation:
-    def __init__(self, sim_code):
+    def __init__(self, sim_code, with_reputation):
         self.sim_code = f"{sim_code}"
         sim_folder = sim_folder = f"{fs_storage}/{self.sim_code}"
 
@@ -20,12 +20,13 @@ class Creation:
 
         self.step = reverie_meta["step"]
         self.personas = dict()
+        with_reputation = ("y" in with_reputation.lower())
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder)
+            curr_persona = Persona(persona_name, persona_folder, with_reputation)
             self.personas[persona_name] = curr_persona
-        self.G = self.set_graph()
+        self.set_graph()
 
     def set_graph(self):
         G = nx.DiGraph()
@@ -39,7 +40,7 @@ class Creation:
                     if not G.has_node(bind):
                         G.add_nodes_from([bind])
                     G.add_edges_from([(persona.name, bind)])
-        return G
+        self.G = G
 
     def save(self):
         sim_folder = f"{fs_storage}/{self.sim_code}"
@@ -162,6 +163,6 @@ class Creation:
 
 if __name__ == "__main__":
     origin = input("Enter the name of the forked simulation: ").strip()
-    # cwd = os.getcwd()
-    server = Creation(origin)
+    with_reputation = input("Whether to use reputation (y/n): ").strip()
+    server = Creation(origin, with_reputation)
     server.open_server()
