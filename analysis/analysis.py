@@ -12,9 +12,10 @@ from utils import *
 
 
 class Analysis:
-    def __init__(self, sim_code):
+    def __init__(self, sim_code, with_reputation=True):
         self.sim_code = f"{sim_code}"
         sim_folder = f"{fs_storage}/{self.sim_code}"
+        self.with_reputation = with_reputation
 
         with open(f"{sim_folder}/reverie/meta.json") as json_file:
             reverie_meta = json.load(json_file)
@@ -58,12 +59,16 @@ class Analysis:
     def _set_analysis_dict(self):
         for persona_name, persona in self.personas.items():
             self.analysis_dict[persona_name] = dict()
-            if self.personas[persona_name].reputationDB:
+            if self.with_reputation:
                 self.analysis_dict[persona_name]["reputation"] = {
-                    "Investor": self.personas[persona_name].reputationDB.get_all_reputations(
+                    "Investor": self.personas[
+                        persona_name
+                    ].reputationDB.get_all_reputations(
                         "Investor", self.personas[persona_name].scratch.ID, True
                     ),
-                    "Trustee": self.personas[persona_name].reputationDB.get_all_reputations(
+                    "Trustee": self.personas[
+                        persona_name
+                    ].reputationDB.get_all_reputations(
                         "Trustee", self.personas[persona_name].scratch.ID, True
                     ),
                 }
@@ -153,9 +158,10 @@ def get_all_sim_info(sim_folder):
         sims.append(Analysis(f"{sim_folder}/{sim_step}"))
     return sims
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     sims = get_all_sim_info("investment_s1")
-    sim=sims[0]
+    sim = sims[0]
     print(sim.analysis_dict)
     with open("./analysis_dict.json", "w") as f:
-        json.dump(sim.analysis_dict, f,indent=4)
+        json.dump(sim.analysis_dict, f, indent=4)
