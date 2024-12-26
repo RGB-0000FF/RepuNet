@@ -14,8 +14,9 @@
 
 **Guidelines:**
 
-• Based on the recent investment information, modify “learned” information so that values and preferences are consistent with the agent’s current investment focus.
-• Focus on adjustments that reinforce or shift values and preferences in line with the characteristics of the recent investments.
+• Abstract the recent investment information to identify key themes, values, and priorities reflected in the agent’s actions and decisions.
+• Incorporate these themes into the updated “learned” information while maintaining the agent's core characteristics.
+• Focus on creating a cohesive narrative that aligns with the agent’s current focus and strategy without relying on specific transaction details.
 
 **Output:** Provide the updated “learned” information in a concise format, ensuring that it naturally aligns with the recent investment context.
 
