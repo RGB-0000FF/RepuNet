@@ -69,9 +69,9 @@ class ReputationDB:
 
     def get_all_reputations(self, role, self_id, with_self=False):
         all_reputations = dict()
-        if role == "investor":
+        if role.lower() == "investor":
             input = "Investor"
-        elif role == "trustee":
+        elif role.lower() == "trustee":
             input = "Trustee"
         for key, reputation in self.individual_reputations.items():
             if with_self and input in key:
