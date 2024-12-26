@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import os
-from analysis.analysis import get_all_sim_info
+from analysis import get_all_sim_info
 
 
 def get_d_connect(init_persona, G):
@@ -18,7 +18,7 @@ class SocialNetworkAnalysis:
         self.sim_folder = sim_folder
         self.sims = get_all_sim_info(sim_folder)
 
-    def draw_social_network(self):
+    def draw_social_network(self,save_folder):
         for sim in self.sims:
             G = sim.G
             plt.figure(figsize=(20, 20))
@@ -57,13 +57,21 @@ class SocialNetworkAnalysis:
                 )
 
             nx.draw_networkx_labels(G, pos, font_size=10)
-            self._save_social_network(G, sim, plt)
+            self._save_social_network(sim, plt,save_folder)
             plt.close()
 
-    def _save_social_network(self, sim, plt):
-        if not os.path.exists(f"{self.sim_folder}/social_network"):
-            os.makedirs(f"{self.sim_folder}/social_network")
-        plt.savefig(f"{self.sim_folder}/social_network/{sim.sim_code}.png")
+    def _save_social_network(self, sim, plt, save_folder):
+        # Convert to absolute path if save_folder is relative
+        if not os.path.isabs(save_folder):
+            save_folder = os.path.abspath(save_folder)
+        
+        # Create full path including sim_code subdirectory
+        save_path = os.path.join(save_folder, "social_network")
+        os.makedirs(save_path, exist_ok=True)
+        
+        file_path = os.path.join(save_path, f"{sim.step}.png")
+        plt.savefig(file_path)
+        # plt.show()
 
     def _set_nodes(self, G, ps):
         node_size = []
@@ -90,16 +98,18 @@ class SocialNetworkAnalysis:
             edge_color.append("gray")
             connection_style.append("arc3,rad=0.2")
             set_dict[(edge[1], edge[0])] = {
-                    "color": "gray",
-                    "style": "arc3,rad=-0.2",
-                }
+                "color": "gray",
+                "style": "arc3,rad=-0.2",
+            }
         return edge_color, connection_style
 
 
 if __name__ == "__main__":
     sim_folder = input("Please input the analysis sim folder: ")
-    sims = get_all_sim_info(sim_folder)
-    sa = SocialNetworkAnalysis(sims)
-    if os.path.exists(f"{sim_folder}_result"):
-        os.makedirs(f"{sim_folder}_result")
-    sa.draw_social_network()
+    # sims = get_all_sim_info(sim_folder)
+    sa = SocialNetworkAnalysis(sim_folder)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(current_dir)
+    if not os.path.exists(f"./{sim_folder}_result"):
+        os.makedirs(f"./{sim_folder}_result")
+    sa.draw_social_network(f"./{sim_folder}_result")
