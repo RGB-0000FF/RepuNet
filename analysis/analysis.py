@@ -26,7 +26,7 @@ class Analysis:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder, True)
+            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
         self.G = self._set_graph()
         self._set_analysis_dict()
