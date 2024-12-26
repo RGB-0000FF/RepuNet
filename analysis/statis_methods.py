@@ -32,7 +32,7 @@ class Linear_Regression:
         self.model = sm.Logit(Y, X).fit()
         self.result = self.model.summary()
         
-    def visualization(self,color_list=[]):
+    def visualization(self,color_list=[],color=None,label1=None,label2=None):
         if color_list:
             data=dict(self.data)
             data1={}
@@ -54,21 +54,21 @@ class Linear_Regression:
             data2[self.ylabel]=y2
             
             
-        plt.figure(figsize=(10, 6))
+        # plt.figure(figsize=(10, 6))
         if color_list:
             sns.scatterplot(x=self.xlabel, y=self.ylabel, data=data1, color="red", label="Sign up in the final round")
             sns.scatterplot(x=self.xlabel, y=self.ylabel, data=data2, color="blue", label="Not sign up in the final round")
         else:
-            sns.scatterplot(x=self.xlabel, y=self.ylabel, data=self.data, color='blue', label="Original data")
+            sns.scatterplot(x=self.xlabel, y=self.ylabel, data=self.data, color=color, label=label1)
         x1_vals = self.data[self.xlabel]
         predicted_y = self.model.predict(sm.add_constant(x1_vals))
-        plt.plot(x1_vals, predicted_y, color='orange', label='Fitted Line', linewidth=2)
+        plt.plot(x1_vals, predicted_y, color=color, label=label2, linewidth=2)
         # plt.title('Trial 1: Linear regression of the Number of Double Positive Connect and reputation')
-        plt.title(self.title)
-        plt.xlabel(self.xlabel)
-        plt.ylabel(self.ylabel)
-        plt.legend()
-        plt.show()
+        # plt.title(self.title)
+        # plt.xlabel(self.xlabel)
+        # plt.ylabel(self.ylabel)
+        # plt.legend()
+        # plt.show()
 
 def Gini_coef(analysis_dict):
     resource_list = [i["resources_unit"] for i in analysis_dict.values()]       
@@ -91,7 +91,15 @@ def persona_invest_willingness(analysis_dict):
     for i,j in list(analysis_dict.items()):
         if i==j["investor"]:
             if j["investment_status"]=="success":
-                invest_list[i]=float(j["investor_invests_unit"])/(float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"]))
+                print(i)
+                print(j["resources_unit"])
+                print(j["trustee_allocation"]["investor"])
+                print(j["investor_invests_unit"])
+                deno=float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"])
+                if deno:
+                    invest_list[i]=float(j["investor_invests_unit"])/deno
+                else:
+                    invest_list[i]=0
             elif j["investment_status"]=="failed":
                 invest_list[i]=0
     return invest_list
@@ -106,7 +114,7 @@ def invest_willingness(analysis_dict):
                 total_investor_units+=float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"])
             elif j["investment_status"]=="failed":
                 total_investment+=0
-                total_investor_units+=float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"])
+                total_investor_units+=float(j["resources_unit"])
     return total_investment/total_investor_units  
     
 def persona_income(analysis_dict):
@@ -141,7 +149,7 @@ def plot(x,y,title,xlabel,ylabel):
 def plot_distribution(data_list,label,color):
     
     data = []
-    for year, wealth_dict in enumerate(data_list):
+    for year, wealth_dict in enumerate(data_list,start=1):
         for person, wealth in wealth_dict.items():
             data.append({'year': year, 'person': person, 'wealth': wealth})
     
@@ -164,9 +172,55 @@ def plot_distribution(data_list,label,color):
     # plt.ylabel(ylabel)
     # plt.legend()
     # plt.show()
+def Satisfaction_rate_v1(analysis_dict):
+    total=0
+    satisfy=0
+    for i,j in list(analysis_dict.items()):
+        if j["investment_status"]=="success":
+            if i==j["trustee"]:
+                total+=1
+                try:
+                    p=float(j["trustee_plan"].split("retains")[-1].split("%")[0].strip())/100
+                    rate=float(j["trustee_allocation"]["investor"])/(float(j["trustee_allocation"]["investor"])+float(j["trustee_allocation"]["trustee"]))
+                    satisfy+=(rate>=p)
+                except:
+                    continue
+    return satisfy/total
 
+   
 if __name__ == "__main__":
     sims1 = get_all_sim_info("investment_s1")
     sims2 = get_all_sim_info("investment_s2")
-    for sim in sims1:
-        data=sim.analysis_dict   
+    data1=[Satisfaction_rate_v1(i.analysis_dict) for i in sims1]
+    data2=[Satisfaction_rate_v1(i.analysis_dict) for i in sims2]
+    plt.figure(figsize=(14, 7))
+    plt.plot(range(1,len(data1)+1),data1,label="with reputation",color="blue")
+    plt.scatter(range(1,len(data1)+1),data1,color="blue")
+    plt.plot(range(1,len(data2)+1),data2,label="without reputation",color="red")
+    plt.scatter(range(1,len(data2)+1),data2,color="red")
+    plt.title('Satisfaction rate(v1)')
+    plt.xlabel("Round")
+    plt.ylabel("Satisfaction rate")
+    plt.legend()
+    plt.show()
+    
+    # l1=Linear_Regression(range(1,len(data1)+1),data1,"Round","Invest willingness","")
+    # l2=Linear_Regression(range(1,len(data2)+1),data2,"Round","Invest willingness","")
+    # l1.OLS()
+    # l2.OLS()
+    # l1.visualization(color="blue",label1="Original data(with reputation)",label2="Regression results(with reputation)")
+    # l2.visualization(color="red",label1="Original data(without reputation)",label2="Regression results(without reputation)")
+    # plt.title('Gini coefficient')
+    # plt.xlabel("Round")
+    # plt.ylabel("Gini coefficient")
+    # plt.legend()
+    # plt.show()
+    #————————————————————————————————————————
+    # plt.figure(figsize=(14, 7))
+    # plot_distribution(data1,"with reputation","blue")
+    # plot_distribution(data2,"without reputation","red")
+    # plt.title("Persona invest willingness")
+    # plt.xlabel("Round")
+    # plt.ylabel("Invest willingness")
+    # plt.legend()
+    # plt.show()
