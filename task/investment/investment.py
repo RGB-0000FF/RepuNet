@@ -150,14 +150,14 @@ def start_investment(pair, personas, G, save_folder):
             subject=investor.name,
             predicate="investment",
             obj=trustee.name,
-            description="Failed investment",
+            description=f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.",
             created_at=investor.scratch.curr_step,
         )
         trustee.associativeMemory.add_event(
             subject=trustee.name,
             predicate="investment",
             obj=investor.name,
-            description="Failed investment",
+            description=f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.",
             created_at=investor.scratch.curr_step,
         )
         print_stage3 = None

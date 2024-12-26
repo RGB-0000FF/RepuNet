@@ -31,30 +31,26 @@ class Analysis:
         self.G = self._set_graph()
         self._set_analysis_dict()
 
-    def _save_temp_invest_s2(self, investor, trustee):
+    def _save_temp_invest_s2(self, name1, name2):
         with open(
             f"{fs_storage}/{self.sim_code}/investment results/investment_results_{self.step}.txt",
-            "w",
+            "r",
         ) as f:
             curr_all_investment_results = f.read()
             curr_all_investment_results = curr_all_investment_results.split(
                 "End of Investment"
             )
             for investment_result in curr_all_investment_results:
-                if (
-                    investor in investment_result
-                    and trustee in investment_result
-                    and "because they are in black list" not in investment_result
-                    and "decided Refuse" not in investment_result
-                ):
-                    a_unit = (
-                        investment_result.split(
-                            f"Investor: {investor}: investor decided Accept. Allocation "
-                        )[-1]
-                        .split(" units")[0]
+                if name1 in investment_result and name2 in investment_result:
+                    Trustee = (
+                        investment_result.split("| Trustee: ")[-1].split(":")[0].strip()
+                    )
+                    Investor = (
+                        investment_result.split("| Investor: ")[-1]
+                        .split(":")[0]
                         .strip()
                     )
-                    return a_unit
+                    return Trustee, Investor
 
     def _set_analysis_dict(self):
         for persona_name, persona in self.personas.items():
@@ -78,18 +74,23 @@ class Analysis:
             investment_event = persona.associativeMemory.get_latest_event()
             if "failed" in investment_event["description"].lower():
                 self.analysis_dict[persona_name]["investment_status"] = "failed"
-                investor = (
-                    investment_event["description"]
-                    .split("investor is ")[-1]
-                    .split(",")[0]
-                    .strip()
-                )
-                trustee = (
-                    investment_event["description"]
-                    .split(", trustee is ")[-1]
-                    .split("stage 1")[0]
-                    .strip()
-                )
+                if "Investor is " in investment_event["description"]:
+                    investor = (
+                        investment_event["description"]
+                        .split("Investor is ")[-1]
+                        .split(" and")[0]
+                        .strip()
+                    )
+                    trustee = (
+                        investment_event["description"]
+                        .split("Trustee is ")[-1]
+                        .split(".")[0]
+                        .strip()
+                    )
+                else:
+                    trustee, investor = self._save_temp_invest_s2(
+                        investment_event["subject"], investment_event["object"]
+                    )
                 self.analysis_dict[persona_name]["investor"] = investor
                 self.analysis_dict[persona_name]["trustee"] = trustee
             else:
