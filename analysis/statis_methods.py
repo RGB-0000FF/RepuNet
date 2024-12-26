@@ -91,7 +91,7 @@ def persona_invest_willingness(analysis_dict):
     for i,j in list(analysis_dict.items()):
         if i==j["investor"]:
             if j["investment_status"]=="success":
-                invest_list[i]=float(j["investor_invests_unit"])/float(j["resources_unit"])
+                invest_list[i]=float(j["investor_invests_unit"])/(float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"]))
             elif j["investment_status"]=="failed":
                 invest_list[i]=0
     return invest_list
@@ -103,10 +103,10 @@ def invest_willingness(analysis_dict):
         if i==j["investor"]:
             if j["investment_status"]=="success":
                 total_investment+=float(j["investor_invests_unit"])
-                total_investor_units+=float(j["resources_unit"])
+                total_investor_units+=float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"])
             elif j["investment_status"]=="failed":
                 total_investment+=0
-                total_investor_units+=float(j["resources_unit"])
+                total_investor_units+=float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"])
     return total_investment/total_investor_units  
     
 def persona_income(analysis_dict):
@@ -138,7 +138,7 @@ def plot(x,y,title,xlabel,ylabel):
     plt.xlim(0,len(x))
     plt.show()
     
-def plot_distribution(data_list, title,xlabel,ylabel):
+def plot_distribution(data_list,label,color):
     
     data = []
     for year, wealth_dict in enumerate(data_list):
@@ -152,27 +152,21 @@ def plot_distribution(data_list, title,xlabel,ylabel):
     h = stats['std'] * t.ppf((1 + confidence) / 2, stats['count'] - 1) / np.sqrt(stats['count'])
 
     
-    plt.figure(figsize=(14, 7))
+    # plt.figure(figsize=(14, 7))
 
     
-    plt.plot(stats['year'], stats['mean'], label=ylabel, color='blue')
+    plt.plot(stats['year'], stats['mean'], label=label, color=color)
 
     
-    plt.fill_between(stats['year'], stats['mean'] - h, stats['mean'] + h, color='lightblue', alpha=0.5, label='95% Confidence Interval')
-
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.legend()
-    plt.show()
+    plt.fill_between(stats['year'], stats['mean'] - h, stats['mean'] + h, color=color, alpha=0.5)
+    # plt.title(title)
+    # plt.xlabel(xlabel)
+    # plt.ylabel(ylabel)
+    # plt.legend()
+    # plt.show()
 
 if __name__ == "__main__":
-    sims = get_all_sim_info("investment_s1")
-    y=[cheat_coef(sim.analysis_dict) for sim in sims]
-    plot_distribution(y,"Cheat Coefficient","Round","Mean cheat Coefficient")
-    # x=list(range(1,len(y)+1))
-    # l=Linear_Regression(x,y,"Round","Gini Coefficient","Gini Coefficient of each round")
-    # l.OLS()
-    # l.visualization()
-    # print(l.return_result())
-    # plot_wealth_distribution(y,"Wealth Distribution","Round","Wealth")
+    sims1 = get_all_sim_info("investment_s1")
+    sims2 = get_all_sim_info("investment_s2")
+    for sim in sims1:
+        data=sim.analysis_dict   
