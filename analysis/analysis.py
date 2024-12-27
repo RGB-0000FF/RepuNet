@@ -63,20 +63,29 @@ class Analysis:
             )
             for investment_result in curr_all_investment_results:
                 if investor in investment_result and trustee in investment_result:
-                    Trustee_willing = (
+                    trustee_w = (
                         investment_result.split(
-                            "| Trustee: Nadia Novak: gossip willing"
+                            f"| Trustee: {trustee}: gossip willing"
                         )[-1]
-                        .split(",")[0]
+                        .split("| Investor: ")[0]
                         .strip()
+                        .lower()
                     )
-                    Investor_willing = (
+                    if "yes" in trustee_w:
+                        Trustee_willing = "yes"
+                    else:
+                        Trustee_willing = "no"
+                    investor_w = (
                         investment_result.split(
-                            "| Investor: Hiroshi Tanaka: gossip willing"
+                            f"| Investor: {investor}: gossip willing"
                         )[-1]
-                        .split(",")[0]
                         .strip()
+                        .lower()
                     )
+                    if "yes" in investor_w:
+                        Investor_willing = "yes"
+                    else:
+                        Investor_willing = "no"
                     return Trustee_willing, Investor_willing
 
     def _set_analysis_dict(self):
@@ -162,8 +171,8 @@ class Analysis:
                     investor, trustee
                 )
                 self.analysis_dict[persona_name]["gossip_willing"] = {
-                    "investor":i_gossip_willing,
-                    "trustee":t_gossip_willing,
+                    "investor": i_gossip_willing,
+                    "trustee": t_gossip_willing,
                 }
 
     def _set_graph(self):
