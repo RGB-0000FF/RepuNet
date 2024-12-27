@@ -67,26 +67,19 @@ class Analysis:
                         investment_result.split(
                             f"| Trustee: {trustee}: gossip willing"
                         )[-1]
-                        .split("| Investor: ")[0]
+                        .split(".")[0]
                         .strip()
                         .lower()
                     )
-                    if "yes" in trustee_w:
-                        Trustee_willing = "yes"
-                    else:
-                        Trustee_willing = "no"
                     investor_w = (
                         investment_result.split(
                             f"| Investor: {investor}: gossip willing"
                         )[-1]
+                        .split(".")[0]
                         .strip()
                         .lower()
                     )
-                    if "yes" in investor_w:
-                        Investor_willing = "yes"
-                    else:
-                        Investor_willing = "no"
-                    return Trustee_willing, Investor_willing
+                    return trustee_w, investor_w
 
     def _set_analysis_dict(self):
         for persona_name, persona in self.personas.items():
@@ -204,15 +197,15 @@ def get_all_sim_info(sim_folder):
 
 
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("investment_s1")
-    count = 0
-    for sim in sims1:
-        count += 1
-        with open(f"with_repu/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
-    sims2 = get_all_sim_info("investment_s2")
-    count = 0
-    for sim in sims2:
-        count += 1
-        with open(f"without_repu/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
+    sims1 = get_all_sim_info("investment_s2")
+    # count = 0
+    # for sim in sims1:
+    #     count += 1
+    #     with open(f"with_repu/analysis_{count}.json", "w") as f:
+    #         json.dump(sim.analysis_dict, f, indent=4)
+    # sims2 = get_all_sim_info("investment_s2")
+    # count = 0
+    # for sim in sims2:
+    #     count += 1
+    #     with open(f"without_repu/analysis_{count}.json", "w") as f:
+    #         json.dump(sim.analysis_dict, f, indent=4)

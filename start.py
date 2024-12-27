@@ -12,7 +12,7 @@ from persona.persona import Persona
 
 
 class Creation:
-    def __init__(self, sim_code, with_reputation):
+    def __init__(self, sim_code, with_reputation, with_gossip):
         self.sim_code = f"{sim_code}"
         sim_folder = sim_folder = f"{fs_storage}/{self.sim_code}"
 
@@ -24,6 +24,7 @@ class Creation:
         self.with_reputation = (
             "y" in with_reputation.lower() and "n" not in with_reputation.lower()
         )
+        self.with_gossip = "y" in with_gossip.lower() and "n" not in with_gossip.lower()
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
@@ -93,7 +94,7 @@ class Creation:
             print(
                 f"sim_code: {self.sim_code}-----------------------------------------------"
             )
-            if self.with_reputation:
+            if self.with_reputation and self.with_gossip:
                 pairs = pair_each(self.personas, self.G)
 
                 for pair in pairs:
@@ -103,7 +104,7 @@ class Creation:
                         self.G,
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
-            else:
+            elif not self.with_reputation and self.with_gossip:
                 pairs = pair_each_without_reputation(self.personas, self.G)
 
                 for pair in pairs:
@@ -113,6 +114,10 @@ class Creation:
                         self.G,
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
+            elif self.with_reputation and not self.with_gossip:
+                pass
+            elif not self.with_reputation and not self.with_gossip:
+                pass
 
             self.save()
             int_counter -= 1
@@ -181,5 +186,6 @@ class Creation:
 if __name__ == "__main__":
     origin = input("Enter the name of the forked simulation: ").strip()
     with_reputation = input("Whether to use reputation (y/n): ").strip()
-    server = Creation(origin, with_reputation)
+    with_gossip = input("Whether to use gossip (y/n): ").strip()
+    server = Creation(origin, with_reputation, with_gossip)
     server.open_server()
