@@ -52,6 +52,33 @@ class Analysis:
                     )
                     return Trustee, Investor
 
+    def _save_gossip_willing(self, investor, trustee):
+        with open(
+            f"{fs_storage}/{self.sim_code}/investment results/investment_results_{self.step}.txt",
+            "r",
+        ) as f:
+            curr_all_investment_results = f.read()
+            curr_all_investment_results = curr_all_investment_results.split(
+                "End of Investment"
+            )
+            for investment_result in curr_all_investment_results:
+                if investor in investment_result and trustee in investment_result:
+                    Trustee_willing = (
+                        investment_result.split(
+                            "| Trustee: Nadia Novak: gossip willing"
+                        )[-1]
+                        .split(",")[0]
+                        .strip()
+                    )
+                    Investor_willing = (
+                        investment_result.split(
+                            "| Investor: Hiroshi Tanaka: gossip willing"
+                        )[-1]
+                        .split(",")[0]
+                        .strip()
+                    )
+                    return Trustee_willing, Investor_willing
+
     def _set_analysis_dict(self):
         for persona_name, persona in self.personas.items():
             self.analysis_dict[persona_name] = dict()
@@ -131,6 +158,13 @@ class Analysis:
                     .split(", and reported_investment_outcome is")[0]
                     .strip()
                 )
+                i_gossip_willing, t_gossip_willing = self._save_gossip_willing(
+                    investor, trustee
+                )
+                self.analysis_dict[persona_name]["gossip_willing"] = {
+                    "investor":i_gossip_willing,
+                    "trustee":t_gossip_willing,
+                }
 
     def _set_graph(self):
         G = nx.DiGraph()
@@ -166,10 +200,10 @@ if __name__ == "__main__":
     for sim in sims1:
         count += 1
         with open(f"with_repu/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f,indent=4)
+            json.dump(sim.analysis_dict, f, indent=4)
     sims2 = get_all_sim_info("investment_s2")
     count = 0
     for sim in sims2:
         count += 1
         with open(f"without_repu/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f,indent=4)
+            json.dump(sim.analysis_dict, f, indent=4)
