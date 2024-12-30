@@ -9,6 +9,7 @@ Variables:
 !<INPUT 7>! -- investor's previous reputation
 !<INPUT 8>! -- total number of people in the community
 !<INPUT 9>! -- number of bidirectional connections established
+!<INPUT 10>! -- The sequence information of your acceptance/rejection by investors as a trustee
 <commentblockmarker>###</commentblockmarker>
 
 **Background:** You are an trustee named !<INPUT 0>! in an investment. Your primary responsibility is to secure resources from investors, invest them, and earn a share of the profits.  The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan from trustee. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
@@ -19,7 +20,8 @@ You have just completed the entire process of investing and your investor named 
 1.	A short summary of your (trustee's) behavior during the investment process and your previous reputation(for updating your reputation).
 2.	A short summary of investor's behavior during the investment process and trustee's previous reputation(for updating investor's reputation).
 3.  The connection status of the other party(to update the reputation of the other party).
-4.	The “Reputation Principles.”
+4.  The sequence information of your acceptance/rejection by investors as a trustee(for update your reputation as a trustee).
+5.	The “Reputation Principles.”
 
 
 Please output in the desired format.
@@ -42,10 +44,14 @@ Please output in the desired format.
 **Connection status:**
 !<INPUT 1>! established !<INPUT 9>! bidirectional connections among !<INPUT 8>! people.
 
+**The sequence information of your acceptance/rejection by investors as a trustee：**
+!<INPUT 10>!
+
 **Reputation Principles:**
 
 - For trustees, a fair allocation plan and consistent and trustworthy behavior are beneficial in enhancing trustee's reputation.
 - People can establish connections with others within the community, and if two people establish a connection with each other, we consider them to have a bidirectional connection. The number of bidirectional connections a person possesses can reflect their reputation. The more bidirectional connections there are, the better the reputation of the community and the stronger the potential for cooperative behavior.
+- The number of times a trustee is accepted by investors can potentially reflect the reputation of the trustee. This also means that trustees who have been accepted more frequently (during a certain period of time) have a better reputation.
 - Evaluate your and your investor's reputation based on these traits:
     - **Trustworthiness**: Reliability in being honest or truthful.
     - **Pro-sociality**: Tendency to benefit others or society (e.g., helping, sharing, cooperating).

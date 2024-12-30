@@ -1,16 +1,14 @@
 Variables:
 !<INPUT 0>! -- <'learned' in agent description>
-!<INPUT 1>! -- <Investor's Reputation>
-!<INPUT 2>! -- <Trustee's Reputation>
-!<INPUT 3>! -- <Stage 1 Allocation Plan Record>
-!<INPUT 4>! -- <Investor Resource Quantity>
-!<INPUT 5>! -- <k>
-!<INPUT 6>! -- <Actual Distributable Resource Quantity>
-!<INPUT 7>! -- <Trustee's Share>
-!<INPUT 8>! -- <Investor's Share>
-!<INPUT 9>! -- <Reported Resource Quantity>
-!<INPUT 10>! -- <Trustee's Allocated Resource Quantity>
-!<INPUT 11>! -- <Investor's Allocated Resource Quantity>
+!<INPUT 1>! -- <Stage 1 Allocation Plan Record>
+!<INPUT 2>! -- <Investor Resource Quantity>
+!<INPUT 3>! -- <k>
+!<INPUT 4>! -- <Actual Distributable Resource Quantity>
+!<INPUT 5>! -- <Trustee's Share>
+!<INPUT 6>! -- <Investor's Share>
+!<INPUT 7>! -- <Reported Resource Quantity>
+!<INPUT 8>! -- <Trustee's Allocated Resource Quantity>
+!<INPUT 9>! -- <Investor's Allocated Resource Quantity>
 
 
 <commentblockmarker>###</commentblockmarker>
@@ -26,40 +24,32 @@ Variables:
 
 Evaluate the trustee's behavior based on integrity and fairness. Complete the following tasks:
 
-1. **Provide a short reflection** summarizing the trustee's behavior to update its reputation.
-2. **Provide a short reflection** summarizing the your (investor) behavior to update your reputation as an investor.
-
+**Decide whether to gossip** about the trustee's performance with your friends based on their behavior in this transaction.
 
 **Principles:**
 
 - If the reported investment outcome differs from the actual investment outcome or if the proposed allocation differs from the actual allocation, the trustee's behavior lacks honesty.
 - The **actual allocation result** reflects the fairness of the trustee's distribution.
 - Your goal is to maximize your own returns!
-- Reputation reflects past behavior in profit distribution, affecting the likelihood of transaction success and overall satisfaction. "None" indicates no prior interactions with the opponent before.
 
-**Your Previous Reputation as Investor:** !<INPUT 1>!
-
-**Opponent's Previous Reputation as Trustee:** !<INPUT 2>!
 
 **History:**
 
 **Stage 1:**
 
-- Proposed Allocation Plan: *!<INPUT 3>!*
+- Proposed Allocation Plan: *!<INPUT 1>!*
 
 **Stage 2:**
 
-- Actual Investment Outcome: You provided *!<INPUT 4>!* units, which multiplied by *!<INPUT 5>!*, resulting in *!<INPUT 6>!* units. According to the allocation plan from Stage 1, the trustee is entitled to !<INPUT 7>!, while you, as the investor, are entitled to !<INPUT 8>!.
+- Actual Investment Outcome: You provided *!<INPUT 2>!* units, which multiplied by *!<INPUT 3>!*, resulting in *!<INPUT 4>!* units. According to the allocation plan from Stage 1, the trustee is entitled to !<INPUT 5>!, while you, as the investor, are entitled to !<INPUT 6>!.
 
 **Stage 3:**
 
-- Reported Investment Outcome: The current resource after investment reported by the trustee is *!<INPUT 9>!* units.
-- Actual Allocation Result: Trustee receives *!<INPUT 10>!* units, and the investor receives *!<INPUT 11>!* units.
+- Reported Investment Outcome: The current resource after investment reported by the trustee is *!<INPUT 7>!* units.
+- Actual Allocation Result: Trustee receives *!<INPUT 8>!* units, and the investor receives *!<INPUT 9>!* units.
 
 **Attention:** If the trustee allocates more resources to you than originally promised, this does not indicate a lack of transparency or honesty, as the trustee is acting in your best interest, which ultimately enhances your wealth.
 
 **Output:**
 
-1. **Self (Investor) Reputation Reflection:** *<Short reflection for self* **(Investor)***reputation update.>*
-2. **Trustee Reputation Reflection:** *<Short reflection for trustee reputation update.>*
-
+**Whether to Gossip:** *<Yes or No>, <reason in one sentence>.*
