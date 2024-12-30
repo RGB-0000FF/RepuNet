@@ -282,6 +282,7 @@ def start_investment(pair, personas, G, save_folder):
                 {
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
+                    "complaint_target_role": "trustee",
                     "complaint_reason": investor_evaluation["trustee_reputation"],
                 }
             )
@@ -307,6 +308,7 @@ def start_investment(pair, personas, G, save_folder):
                 {
                     "complaint_target_ID": investor.scratch.ID,
                     "complaint_target": investor.name,
+                    "complaint_target_role": "investor",
                     "complaint_reason": trustee_evaluation["investor_reputation"],
                 }
             )

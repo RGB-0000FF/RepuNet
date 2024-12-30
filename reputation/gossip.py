@@ -25,6 +25,8 @@ def first_order_gossip(
     """
     print("FIRST ORDER GOSSIP")
     for val in init_persona.scratch.complain_buffer:
+        if val["complaint_target_role"] != complain_persona_role:
+            continue
         reason = val["complaint_reason"]
         # gossip chat
         convo = generate_convo(init_persona, target_persona, reason)
