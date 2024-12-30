@@ -126,14 +126,14 @@ def persona_income(analysis_dict):
 def cheat_coef(analysis_dict):
     cheat_list={}
     for i,j in list(analysis_dict.items()):
-        if j["investment_status"]=="failed":
-            if i==j["trustee"]:
-                cheat_list[i]=0
-        elif j["investment_status"]=="success":
+        # if j["investment_status"]=="failed":
+        #     if i==j["trustee"]:
+        #         cheat_list[i]=0
+        if j["investment_status"]=="success":
             if i==j["trustee"]:
                 try:
                     p=float(j["trustee_plan"].split("retains")[-1].split("%")[0].strip())/100
-                    cheat_list[i]=max(0,1-(float(j["trustee_allocation"]["investor"])/((1+p)*float(j["investor_invests_unit"]))))
+                    cheat_list[i]=max(0,1-(float(j["trustee_allocation"]["investor"])/((2-p)*float(j["investor_invests_unit"]))))
                 except:
                     cheat_list[i]=0
     return cheat_list
@@ -181,28 +181,38 @@ def Satisfaction_rate_v1(analysis_dict):
                 total+=1
                 try:
                     p=float(j["trustee_plan"].split("retains")[-1].split("%")[0].strip())/100
+                    p=1.0-p
                     rate=float(j["trustee_allocation"]["investor"])/(float(j["trustee_allocation"]["investor"])+float(j["trustee_allocation"]["trustee"]))
-                    satisfy+=(rate>=p)
+                    satisfy+=(rate==p)
                 except:
                     continue
     return satisfy/total
-
+def Satisfaction_rate_v2(analysis_dict):
+    total=0
+    satisfy=0
+    for i,j in list(analysis_dict.items()):
+        if j["investment_status"]=="success":
+            if i==j["trustee"]:
+                total+=1
+                if j["gossip_willing"]["investor"].lower()=="no" and j["gossip_willing"]["trustee"].lower()=="no":
+                    satisfy+=1
+    return satisfy/total
    
 if __name__ == "__main__":
     sims1 = get_all_sim_info("investment_s1")
     sims2 = get_all_sim_info("investment_s2")
-    data1=[Satisfaction_rate_v1(i.analysis_dict) for i in sims1]
-    data2=[Satisfaction_rate_v1(i.analysis_dict) for i in sims2]
-    plt.figure(figsize=(14, 7))
-    plt.plot(range(1,len(data1)+1),data1,label="with reputation",color="blue")
-    plt.scatter(range(1,len(data1)+1),data1,color="blue")
-    plt.plot(range(1,len(data2)+1),data2,label="without reputation",color="red")
-    plt.scatter(range(1,len(data2)+1),data2,color="red")
-    plt.title('Satisfaction rate(v1)')
-    plt.xlabel("Round")
-    plt.ylabel("Satisfaction rate")
-    plt.legend()
-    plt.show()
+    data1=[cheat_coef(i.analysis_dict) for i in sims1]
+    data2=[cheat_coef(i.analysis_dict) for i in sims2]
+    # plt.figure(figsize=(14, 7))
+    # plt.plot(range(1,len(data1)+1),data1,label="with reputation",color="blue")
+    # plt.scatter(range(1,len(data1)+1),data1,color="blue")
+    # plt.plot(range(1,len(data2)+1),data2,label="without reputation",color="red")
+    # plt.scatter(range(1,len(data2)+1),data2,color="red")
+    # plt.title('Satisfaction rate(v2)')
+    # plt.xlabel("Round")
+    # plt.ylabel("Satisfaction rate")
+    # plt.legend()
+    # plt.show()
     
     # l1=Linear_Regression(range(1,len(data1)+1),data1,"Round","Invest willingness","")
     # l2=Linear_Regression(range(1,len(data2)+1),data2,"Round","Invest willingness","")
@@ -216,11 +226,11 @@ if __name__ == "__main__":
     # plt.legend()
     # plt.show()
     #————————————————————————————————————————
-    # plt.figure(figsize=(14, 7))
-    # plot_distribution(data1,"with reputation","blue")
-    # plot_distribution(data2,"without reputation","red")
-    # plt.title("Persona invest willingness")
-    # plt.xlabel("Round")
-    # plt.ylabel("Invest willingness")
-    # plt.legend()
-    # plt.show()
+    plt.figure(figsize=(14, 7))
+    plot_distribution(data1,"with reputation","blue")
+    plot_distribution(data2,"without reputation","red")
+    plt.title("Cheat coefficient")
+    plt.xlabel("Round")
+    plt.ylabel("Cheat coefficient")
+    plt.legend()
+    plt.show()

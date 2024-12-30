@@ -62,4 +62,4 @@ Evaluate the trustee's behavior based on integrity and fairness. Complete the fo
 
 1. **Self (Investor) Reputation Reflection:** *<Short reflection for self* **(Investor)***reputation update.>*
 2. **Trustee Reputation Reflection:** *<Short reflection for trustee reputation update.>*
-3. **Whether to Gossip:** *<Yes or No>*
+3. **Whether to Gossip:** *<Yes or No>,<reason in one sentence>.*

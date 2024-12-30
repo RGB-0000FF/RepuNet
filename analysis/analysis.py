@@ -197,15 +197,15 @@ def get_all_sim_info(sim_folder):
 
 
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("investment_s2")
-    # count = 0
-    # for sim in sims1:
-    #     count += 1
-    #     with open(f"with_repu/analysis_{count}.json", "w") as f:
-    #         json.dump(sim.analysis_dict, f, indent=4)
-    # sims2 = get_all_sim_info("investment_s2")
-    # count = 0
-    # for sim in sims2:
-    #     count += 1
-    #     with open(f"without_repu/analysis_{count}.json", "w") as f:
-    #         json.dump(sim.analysis_dict, f, indent=4)
+    sims1 = get_all_sim_info("investment_s1")
+    count = 0
+    for sim in sims1:
+        count += 1
+        with open(f"with_repu/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)
+    sims2 = get_all_sim_info("investment_s2")
+    count = 0
+    for sim in sims2:
+        count += 1
+        with open(f"without_repu/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)

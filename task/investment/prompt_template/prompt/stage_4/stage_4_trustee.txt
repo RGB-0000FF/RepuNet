@@ -46,4 +46,4 @@ Variables:
 
 1. **Self (Trustee) Reputation Reflection:** *<Short reflection for self reputation update.>*
 2. **Investor Reputation Reflection:** *<Short reflection for investor reputation update.>*
-3. **Whether to Gossip:** *<Yes or No>*
+3. **Whether to Gossip:** *<Yes or No>,<reason in one sentence>.*

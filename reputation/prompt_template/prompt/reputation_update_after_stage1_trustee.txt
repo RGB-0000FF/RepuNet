@@ -1,41 +1,42 @@
 Variables:
 !<INPUT 0>! -- agent's name
-!<INPUT 1>! -- trustee's name
+!<INPUT 1>! -- investor's name
 !<INPUT 2>! -- agent's ID
-!<INPUT 3>! -- trustee's ID
-!<INPUT 4>! -- summary of your behavior
-!<INPUT 5>! -- summary of trustee's behavior
+!<INPUT 3>! -- investor's ID
+!<INPUT 4>! -- Allocation plan proposed by the trustee
+!<INPUT 5>! -- The reason for investor's refusal of the trustee's allocation plan
 !<INPUT 6>! -- agent's previous reputation
-!<INPUT 7>! -- trustee's previous reputation
+!<INPUT 7>! -- investor's previous reputation
 !<INPUT 8>! -- total number of people in the community
 !<INPUT 9>! -- number of bidirectional connections established
 
 <commentblockmarker>###</commentblockmarker>
 
-**Background:** You are an investor named !<INPUT 0>!. Your primary goal is to entrust your resources to reliable trustees to accumulate wealth. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan from trustee. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+**Background:** You are an trustee named !<INPUT 0>!.Your investor in this round of investment is !<INPUT 1>!. Your primary responsibility is to secure resources from investors, invest them, and earn a share of the profits. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan from trustee. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
 
 **Task:**
-You have just completed the entire process of investing in your trustee named !<INPUT 1>!.Now you need to update *1.your own reputation* and *2. this trustee's reputation* based on the following information:
+You are currently in Stage 1. Just now, your investor rejected the allocation plan provided by you, which resulted in the failure and early termination of the investment.Now you need to update *1.your own reputation* and *2. this investor's reputation* based on the following information:
 
-1.	A short summary of your (investor's) behavior during the investment process and your previous reputation(for updating your reputation).
-2.	A short summary of trustee's behavior during the investment process and trustee's previous reputation(for updating trustee's reputation).
+1.  Allocation plan proposed by you.
+2.	The reason for your investor's refusal of the trustee's allocation plan.
 3.  The connection status of the other party(to update the reputation of the other party).
 4.	The “Reputation Principles.”
+
 
 
 Please output in the desired format.
 
 **Summarized content:**
--**A short summary of your (investor's) behavior during the investment process**:
+-**Allocation plan proposed by you**:
 !<INPUT 4>!
--**A short summary of trustee's behavior during the investment process**:
+-**The reason for your investor's refusal of the trustee's allocation plan**:
 !<INPUT 5>!
 
 **Previous reputation:**
 
 - **Your previous reputation:**
 !<INPUT 6>!
-- **trustee's previous reputation:**
+- **investor's previous reputation:**
 !<INPUT 7>!
 
 *Notes*：If a person's previous reputation is empty, it means that they are participating in investment activities for the first time in their current capacity, so they have not yet formed a reputation record.
@@ -56,21 +57,21 @@ Please output in the desired format.
 
 **Desired Format:** JSON
 {
-"Investor_!<INPUT 2>!": {
+"Trustee_!<INPUT 2>!": {
 "ID": !<INPUT 2>!,
 "scenario": "investment",
-"role": "investor",
+"role": "trustee",
 "name": "!<INPUT 0>!",
 "content": "a new detailed summarized description of your reputation",
 "numerical record": "(x1, x2, x3, x4, x5)"
 }
-"Trustee_!<INPUT 3>!": {
+"Investor_!<INPUT 3>!": {
 "ID": !<INPUT 3>!,
 "scenario": "investment",
-"role": "trustee",
+"role": "investor",
 "name": "!<INPUT 1>!",
 "relationship": "one of {negative, neutral, positive}",
-"content": "a new detailed summarized description of your trustee's reputation",
+"content": "a new detailed summarized description of your investor's reputation",
 "numerical record": "(x1, x2, x3, x4, x5)"
 }
 }

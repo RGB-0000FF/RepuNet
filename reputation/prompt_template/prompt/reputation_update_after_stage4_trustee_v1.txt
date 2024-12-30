@@ -18,7 +18,8 @@ You have just completed the entire process of investing and your investor named 
 
 1.	A short summary of your (trustee's) behavior during the investment process and your previous reputation(for updating your reputation).
 2.	A short summary of investor's behavior during the investment process and trustee's previous reputation(for updating investor's reputation).
-3.	The “Reputation Principles.”
+3.  The connection status of the other party(to update the reputation of the other party).
+4.	The “Reputation Principles.”
 
 
 Please output in the desired format.

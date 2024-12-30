@@ -3,8 +3,8 @@ Variables:
 !<INPUT 1>! -- trustee's name
 !<INPUT 2>! -- agent's ID
 !<INPUT 3>! -- trustee's ID
-!<INPUT 4>! -- summary of your behavior
-!<INPUT 5>! -- summary of trustee's behavior
+!<INPUT 4>! -- Allocation plan proposed by the trustee
+!<INPUT 5>! -- The reason for your refusal of the trustee's allocation plan
 !<INPUT 6>! -- agent's previous reputation
 !<INPUT 7>! -- trustee's previous reputation
 !<INPUT 8>! -- total number of people in the community
@@ -12,23 +12,24 @@ Variables:
 
 <commentblockmarker>###</commentblockmarker>
 
-**Background:** You are an investor named !<INPUT 0>!. Your primary goal is to entrust your resources to reliable trustees to accumulate wealth. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan from trustee. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+**Background:** You are an investor named !<INPUT 0>!.Your trustee in this round of investment is !<INPUT 1>!. Your primary goal is to entrust your resources to reliable trustees to accumulate wealth. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan from trustee. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
 
 **Task:**
-You have just completed the entire process of investing in your trustee named !<INPUT 1>!.Now you need to update *1.your own reputation* and *2. this trustee's reputation* based on the following information:
+You are currently in Stage 1. Just now, you rejected the allocation plan provided by your trustee, which resulted in the failure and early termination of the investment..Now you need to update *1.your own reputation* and *2. this trustee's reputation* based on the following information:
 
-1.	A short summary of your (investor's) behavior during the investment process and your previous reputation(for updating your reputation).
-2.	A short summary of trustee's behavior during the investment process and trustee's previous reputation(for updating trustee's reputation).
+1.  Allocation plan proposed by the trustee.
+2.	The reason for your refusal of the trustee's allocation plan.
 3.  The connection status of the other party(to update the reputation of the other party).
 4.	The “Reputation Principles.”
+
 
 
 Please output in the desired format.
 
 **Summarized content:**
--**A short summary of your (investor's) behavior during the investment process**:
+-**Allocation plan proposed by the trustee**:
 !<INPUT 4>!
--**A short summary of trustee's behavior during the investment process**:
+-**The reason for your refusal of the trustee's allocation plan**:
 !<INPUT 5>!
 
 **Previous reputation:**

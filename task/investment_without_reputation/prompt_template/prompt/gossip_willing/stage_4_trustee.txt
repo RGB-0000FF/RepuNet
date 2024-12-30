@@ -18,7 +18,7 @@ Variables:
 
 **Task:** You are currently in Stage 4. Based on the historical information from the previous stages:
 
-**Decide whether to gossip** about the trustee's performance with your friends based on their behavior in this transaction.
+**Decide whether to gossip** about the investor's performance with your friends based on their behavior in this transaction.
 
 
 **History:**
@@ -30,8 +30,8 @@ Variables:
 - Actual Investment Outcome: The investor provided *!<INPUT 2>!* units, which multiplied by *!<INPUT 3>!*, resulting in *!<INPUT 4>!* units. According to the allocation plan from Stage 1, you (the trustee) are entitled to !<INPUT 5>!, while the investor is entitled to !<INPUT 6>!.
 
 **Stage 3:**
-- Reported Investment Outcome: The current resource after investment reported by the trustee is *!<INPUT 7>!* units.
-- Actual Allocation Result: Trustee receives *!<INPUT 8>!* units, and the investor receives *!<INPUT 9>!* units.
+- Reported Investment Outcome: The current resource after investment reported by you is *!<INPUT 7>!* units.
+- Actual Allocation Result: You receives *!<INPUT 8>!* units, and the investor receives *!<INPUT 9>!* units.
 
 **Output:**
 
