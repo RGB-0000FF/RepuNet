@@ -16,18 +16,27 @@ def social_network_update_after_stage4(
             init_persona, target_persona, target_persona_role
         )[0]
         if bind_res["Connect"].lower() == "yes":
-            init_persona.scratch.relationship["bind_list"].append(
-                target_persona.scratch.name
-            )
+            try:
+                print(
+                    init_persona.scratch.relationship["bind_list"].index(
+                        target_persona.scratch.name
+                    )
+                )
+                print(f"{target_persona.scratch.name} has existed!")
+            except:
+                init_persona.scratch.relationship["bind_list"].append(
+                    target_persona.scratch.name
+                )
 
         # disconnection the target persona from the init persona
         disconnection_res = run_gpt_prompt_disconnection_after_stage4_investor_v1(
             init_persona, target_persona, target_persona_role
         )[0]
         if disconnection_res["Disconnect"].lower() == "yes":
-            if target_persona.scratch.name in init_persona.scratch.relationship[
-                "bind_list"
-            ]:
+            if (
+                target_persona.scratch.name
+                in init_persona.scratch.relationship["bind_list"]
+            ):
                 init_persona.scratch.relationship["bind_list"].remove(
                     target_persona.scratch.name
                 )
@@ -40,17 +49,26 @@ def social_network_update_after_stage4(
             init_persona, target_persona, target_persona_role
         )[0]
         if bind_res["Connect"].lower() == "yes":
-            init_persona.scratch.relationship["bind_list"].append(
-                target_persona.scratch.name
-            )
+            try:
+                print(
+                    init_persona.scratch.relationship["bind_list"].index(
+                        target_persona.scratch.name
+                    )
+                )
+                print(f"{target_persona.scratch.name} has existed!")
+            except:
+                init_persona.scratch.relationship["bind_list"].append(
+                    target_persona.scratch.name
+                )
         # disconnection the target persona from the init persona
         disconnection_res = run_gpt_prompt_disconnection_after_stage4_trustee_v1(
             init_persona, target_persona, target_persona_role
         )[0]
         if disconnection_res["Disconnect"].lower() == "yes":
-            if target_persona.scratch.name in init_persona.scratch.relationship[
-                "bind_list"
-            ]:
+            if (
+                target_persona.scratch.name
+                in init_persona.scratch.relationship["bind_list"]
+            ):
                 init_persona.scratch.relationship["bind_list"].remove(
                     target_persona.scratch.name
                 )
@@ -66,9 +84,10 @@ def social_network_update_after_gossip(
         init_persona, target_persona, target_persona_role, gossiper_name
     )[0]
     if gossip_res["Disconnect"].lower() == "yes":
-        if target_persona.scratch.name in init_persona.scratch.relationship[
-            "bind_list"
-        ]:
+        if (
+            target_persona.scratch.name
+            in init_persona.scratch.relationship["bind_list"]
+        ):
             init_persona.scratch.relationship["bind_list"].remove(
                 target_persona.scratch.name
             )
