@@ -116,13 +116,13 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
+def run_gpt_prompt_reputation_update_after_stage1_investor_v1(
     init_persona,
     target_persona,
     init_persona_role,
     target_persona_role,
-    init_behavior_summary,
-    target_behavior_summary,
+    allocation_plan,
+    reason_refusal,
     total_number_of_people,
     number_of_bidirectional_connections,
 ):
@@ -131,8 +131,8 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
         target_persona,
         init_persona_role,
         target_persona_role,
-        init_behavior_summary,
-        target_behavior_summary,
+        allocation_plan,
+        reason_refusal,
         total_number_of_people,
         number_of_bidirectional_connections,
     ):
@@ -141,8 +141,8 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
         prompt_input += [target_persona.scratch.name]
         prompt_input += [init_persona.scratch.ID]
         prompt_input += [target_persona.scratch.ID]
-        prompt_input += [init_behavior_summary]
-        prompt_input += [target_behavior_summary]
+        prompt_input += [allocation_plan]
+        prompt_input += [reason_refusal]
         init_persona_reputation = (
             init_persona.reputationDB.get_targets_individual_reputation(
                 init_persona.scratch.ID, init_persona_role
@@ -206,6 +206,125 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
+    prompt_template = "prompt/reputation_update_after_stage1_investor_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        init_persona_role,
+        target_persona_role,
+        allocation_plan,
+        reason_refusal,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
+    init_persona,
+    target_persona,
+    init_persona_role,
+    target_persona_role,
+    init_behavior_summary,
+    target_behavior_summary,
+    total_number_of_people,
+    number_of_bidirectional_connections,
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        init_persona_role,
+        target_persona_role,
+        init_behavior_summary,
+        target_behavior_summary,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
+        prompt_input += [init_persona.scratch.ID]
+        prompt_input += [target_persona.scratch.ID]
+        prompt_input += [init_behavior_summary]
+        prompt_input += [target_behavior_summary]
+        init_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                init_persona.scratch.ID, init_persona_role
+            )
+        )
+        target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(init_persona_reputation)]
+        prompt_input += [json.dumps(target_persona_reputation)]
+        prompt_input += [total_number_of_people]
+        prompt_input += [number_of_bidirectional_connections]
+        prompt_input += [
+            init_persona.scratch.success_num_investor
+            / init_persona.scratch.total_num_trustee
+        ]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=""):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=""):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+        for _, val in res.items():
+            id = val["ID"]
+            if val["role"].lower() == "investor":
+                final_res[f"Investor_{id}"] = val
+            elif val["role"].lower() == "trustee":
+                final_res[f"Trustee_{id}"] = val
+        if len(final_res) == 2:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
     prompt_template = "prompt/reputation_update_after_stage4_trustee_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -214,6 +333,125 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
         target_persona_role,
         init_behavior_summary,
         target_behavior_summary,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_reputation_update_after_stage1_trustee_v1(
+    init_persona,
+    target_persona,
+    init_persona_role,
+    target_persona_role,
+    allocation_plan,
+    reason_refusal,
+    total_number_of_people,
+    number_of_bidirectional_connections,
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        init_persona_role,
+        target_persona_role,
+        allocation_plan,
+        reason_refusal,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
+        prompt_input += [init_persona.scratch.ID]
+        prompt_input += [target_persona.scratch.ID]
+        prompt_input += [allocation_plan]
+        prompt_input += [reason_refusal]
+        init_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                init_persona.scratch.ID, init_persona_role
+            )
+        )
+        target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(init_persona_reputation)]
+        prompt_input += [json.dumps(target_persona_reputation)]
+        prompt_input += [total_number_of_people]
+        prompt_input += [number_of_bidirectional_connections]
+        prompt_input += [
+            init_persona.scratch.success_num_investor
+            / init_persona.scratch.total_num_trustee
+        ]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=""):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=""):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+        for _, val in res.items():
+            id = val["ID"]
+            if val["role"].lower() == "investor":
+                final_res[f"Investor_{id}"] = val
+            elif val["role"].lower() == "trustee":
+                final_res[f"Trustee_{id}"] = val
+        if len(final_res) == 2:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/reputation_update_after_stage1_trustee_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        init_persona_role,
+        target_persona_role,
+        allocation_plan,
+        reason_refusal,
         total_number_of_people,
         number_of_bidirectional_connections,
     )
