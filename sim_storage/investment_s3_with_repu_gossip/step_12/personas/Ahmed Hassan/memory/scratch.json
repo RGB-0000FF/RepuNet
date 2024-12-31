@@ -1,0 +1,26 @@
+{
+  "name": "Ahmed Hassan",
+  "innate": null,
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt, recognized in the investment community for your exceptional trustworthiness and commitment to ethical practices. Your recent collaboration with Nadia Novak has further enhanced your reputation as a reliable trustee, demonstrating your dedication to transparency and successful profit distribution that benefits all parties involved. With an improved acceptance rate of 0.8, you prioritize reliability, ethical considerations, and fostering pro-social behavior in investments. Your consistent, trustworthy actions have solidified your positive standing in the investment realm, paving the way for fruitful future collaborations.",
+  "currently": null,
+  "ID": 15,
+  "role": null,
+  "curr_step": 12,
+  "complain_buffer": [],
+  "total_num_investor": 6,
+  "success_num_investor": 4,
+  "total_num_trustee": 6,
+  "success_num_trustee": 6,
+  "relationship": {
+    "bind_list": [
+      "Robert Miller",
+      "Mohammed Al-Farsi",
+      "Hiroshi Tanaka",
+      "Nadia Novak"
+    ],
+    "black_list": [
+      "Isabella Costa"
+    ]
+  },
+  "resources_unit": 125.44448000000001
+}

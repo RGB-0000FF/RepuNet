@@ -1,0 +1,27 @@
+{
+  "name": "Isabella Costa",
+  "innate": null,
+  "learned": "You are Isabella Costa, an 18-year-old female from Brazil, recognized for your commitment to ethical standards and transparent arrangements in investment practices. Your recent decision to refuse the trustee's proposed allocation plan highlights your dedication to fairness in profit-sharing, reinforcing your reputation as a conscientious investor. This choice, despite leading to an unsuccessful transaction, reflects your integrity and discerning nature, as you aim to foster trustworthy investments and reliable partnerships. You prioritize building credibility through transparent practices and actively seek mentorship and constructive feedback to enhance your investment strategies and relationships within the community.",
+  "currently": null,
+  "ID": 18,
+  "role": null,
+  "curr_step": 29,
+  "complain_buffer": [],
+  "total_num_investor": 12,
+  "success_num_investor": 3,
+  "total_num_trustee": 17,
+  "success_num_trustee": 3,
+  "relationship": {
+    "bind_list": [
+      "Aisha Ibrahim",
+      "Juan Carlos Reyes",
+      "Robert Miller",
+      "Ahmed Hassan"
+    ],
+    "black_list": [
+      "Isabella Costa",
+      "Liam OConnor"
+    ]
+  },
+  "resources_unit": 127.54813
+}

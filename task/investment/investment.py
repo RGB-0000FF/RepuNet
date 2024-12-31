@@ -100,7 +100,7 @@ def get_reputation_score(target_persona, target_persona_role, personas):
                 score = 1
             elif score < -1:
                 score = -1
-            num += int(score)
+            num += score
     if count == 0:
         return 0
     return num / count
@@ -120,12 +120,10 @@ def start_investment(pair, personas, G, save_folder):
             "investor_decided": "Refuse. The investors refused because the parties might be on each other's blacklist.",
         }
         trustee_plan = print_stage1["plan"]
-        investor_decided = "Refuse. The investors refused because the parties might be on each other's blacklist."
+        investor_decided = print_stage1["investor_decided"]
     else:
         # stage 1
-        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
-            0
-        ]
+        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[0]
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
         trustee_part = trustee_plan.split("trustee retains")[-1].split(".")[0].strip()
@@ -198,12 +196,12 @@ def start_investment(pair, personas, G, save_folder):
             verbose=True,
         )[0]
         if "yes" in trustee_gossip_willing.split(",")[0].lower():
-            investor.scratch.complain_buffer.append(
+            trustee.scratch.complain_buffer.append(
                 {
-                    "complaint_target_ID": trustee.scratch.ID,
-                    "complaint_target": trustee.name,
-                    "complaint_target_role": "trustee",
-                    "complaint_reason": investor_evaluation["trustee_reputation"],
+                    "complaint_target_ID": investor.scratch.ID,
+                    "complaint_target": investor.name,
+                    "complaint_target_role": "investor",
+                    "complaint_reason": trustee_gossip_willing.split(",")[-1],
                 }
             )
         if "yes" in investor_gossip_willing.split(",")[0].lower():
@@ -212,7 +210,7 @@ def start_investment(pair, personas, G, save_folder):
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
                     "complaint_target_role": "trustee",
-                    "complaint_reason": investor_evaluation["trustee_reputation"],
+                    "complaint_reason": investor_gossip_willing.split(",")[-1],
                 }
             )
 
@@ -292,8 +290,8 @@ def start_investment(pair, personas, G, save_folder):
             verbose=True,
         )[0]
         trustee_evaluation = run_gpt_prompt_stage4_trustee_evaluation_v1(
-            investor,
             trustee,
+            investor,
             trustee_plan,
             a_unit,
             k,
@@ -306,7 +304,7 @@ def start_investment(pair, personas, G, save_folder):
             verbose=True,
         )[0]
 
-        # eputation update agter stage 4
+        # reputation update agter stage 4
         update_info_investor = {
             "reason": "reputation update agter stage 4",
             "init_persona_role": "investor",
@@ -330,8 +328,8 @@ def start_investment(pair, personas, G, save_folder):
         social_network_update_after_stage4(investor, trustee, "investor", "trustee")
         social_network_update_after_stage4(trustee, investor, "trustee", "investor")
         trustee_gossip_willing = run_gpt_prompt_stage4_trustee_gossip_v1(
-            investor,
             trustee,
+            investor,
             trustee_plan,
             a_unit,
             k,
@@ -343,7 +341,7 @@ def start_investment(pair, personas, G, save_folder):
             investor_allocation_part,
             verbose=True,
         )[0]
-        investor_gossip_willing = run_gpt_prompt_stage4_trustee_gossip_v1(
+        investor_gossip_willing = run_gpt_prompt_stage4_investor_gossip_v1(
             investor,
             trustee,
             trustee_plan,
@@ -358,12 +356,12 @@ def start_investment(pair, personas, G, save_folder):
             verbose=True,
         )[0]
         if "yes" in trustee_gossip_willing.split(",")[0].lower():
-            investor.scratch.complain_buffer.append(
+            trustee.scratch.complain_buffer.append(
                 {
-                    "complaint_target_ID": trustee.scratch.ID,
-                    "complaint_target": trustee.name,
-                    "complaint_target_role": "trustee",
-                    "complaint_reason": investor_evaluation["trustee_reputation"],
+                    "complaint_target_ID": investor.scratch.ID,
+                    "complaint_target": investor.name,
+                    "complaint_target_role": "investor",
+                    "complaint_reason": trustee_gossip_willing.split(",")[-1],
                 }
             )
         if "yes" in investor_gossip_willing.split(",")[0].lower():
@@ -372,7 +370,7 @@ def start_investment(pair, personas, G, save_folder):
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
                     "complaint_target_role": "trustee",
-                    "complaint_reason": investor_evaluation["trustee_reputation"],
+                    "complaint_reason": investor_gossip_willing.split(",")[-1],
                 }
             )
         print_stage4 = {

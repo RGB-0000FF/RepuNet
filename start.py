@@ -5,7 +5,10 @@ import errno
 import networkx as nx
 
 from task.investment.investment import *
+from task.investment_without_gossip.investment import *
 from task.investment_without_reputation.investment import *
+from task.investment_without_reputation_without_gossip.investment import *
+
 from utils import *
 
 from persona.persona import Persona
@@ -104,6 +107,16 @@ class Creation:
                         self.G,
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
+            elif self.with_reputation and not self.with_gossip:
+                pairs = pair_each_without_gossip(self.personas, self.G)
+
+                for pair in pairs:
+                    start_investment_without_gossip(
+                        pair,
+                        self.personas,
+                        self.G,
+                        f"{fs_storage}/{self.sim_code}/investment results",
+                    )
             elif not self.with_reputation and self.with_gossip:
                 pairs = pair_each_without_reputation(self.personas, self.G)
 
@@ -114,10 +127,17 @@ class Creation:
                         self.G,
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
-            elif self.with_reputation and not self.with_gossip:
-                pass
             elif not self.with_reputation and not self.with_gossip:
-                pass
+                pairs = pair_each_without_reputation_without_gossip(
+                    self.personas, self.G
+                )
+                for pair in pairs:
+                    start_investment_without_reputation_without_gossip(
+                        pair,
+                        self.personas,
+                        self.G,
+                        f"{fs_storage}/{self.sim_code}/investment results",
+                    )
 
             self.save()
             int_counter -= 1

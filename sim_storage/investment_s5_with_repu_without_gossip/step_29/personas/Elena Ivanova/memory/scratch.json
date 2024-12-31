@@ -1,0 +1,26 @@
+{
+  "name": "Elena Ivanova",
+  "innate": null,
+  "learned": "I am Elena Ivanova, a 47-year-old female from Russia. My investment strategies now emphasize the importance of aligning with reliable and competent trustees who can enhance my credibility in the investment community. Following my recent experience with Sergey Petrov\u2019s allocation plan, which I rejected due to his low reputation score of 0.05, I remain steadfast in my commitment to ethical investing practices. My focus is on forming partnerships rooted in trustworthiness and competence, which I believe are essential for achieving sustainable investment outcomes. I will continue to prioritize open communication, actively seek feedback, and foster trustworthy collaborations to restore and enhance my reputation in the field.",
+  "currently": null,
+  "ID": 9,
+  "role": null,
+  "curr_step": 29,
+  "complain_buffer": [],
+  "total_num_investor": 17,
+  "success_num_investor": 2,
+  "total_num_trustee": 12,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Maria Rossi",
+      "Juan Carlos Reyes",
+      "Akiko Sato"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Hiroshi Tanaka"
+    ]
+  },
+  "resources_unit": 394.16319488
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Sofia Hernandez",
+  "innate": null,
+  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico. Your reputation has shown stability despite recent challenges, specifically an early termination of an investment due to a lack of an allocation plan from your trustee. You are committed to maintaining a reliable and transparent investment environment, reflecting your dedication to trustworthiness and adherence to social norms. Moving forward, you prioritize cautious engagement with partners to ensure mutual reliability, and you remain proactive in rejecting plans that do not align with your high standards. You aim to enhance your reputation by continuing to demonstrate accountability and integrity in all transactions while fostering deeper connections through clear communication and thorough preparation. Your ultimate goal is to gradually increase acceptance rates, building credibility in the investment community through consistent, transparent practices.",
+  "currently": null,
+  "ID": 4,
+  "role": null,
+  "curr_step": 7,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 0,
+      "complaint_target": "Liam OConnor",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " the trustee's failure to allocate resources according to the agreed-upon plan raises concerns about their integrity and transparency."
+    }
+  ],
+  "total_num_investor": 4,
+  "success_num_investor": 3,
+  "total_num_trustee": 3,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [
+      "Liam OConnor"
+    ],
+    "black_list": [
+      "Hannah Muller"
+    ]
+  },
+  "resources_unit": 20.72
+}

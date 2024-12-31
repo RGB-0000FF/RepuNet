@@ -36,7 +36,7 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
             "investor_decided": "Refuse. The investors refused because the parties might be on each other's blacklist.",
         }
         trustee_plan = print_stage1["plan"]
-        investor_decided = "Refuse. The investors refused because the parties might be on each other's blacklist."
+        investor_decided = print_stage1["investor_decided"]
     else:
         # stage 1
         trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
@@ -93,12 +93,12 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
             verbose=True,
         )[0]
         if "yes" in trustee_gossip_willing.split(",")[0].lower():
-            investor.scratch.complain_buffer.append(
+            trustee.scratch.complain_buffer.append(
                 {
-                    "complaint_target_ID": trustee.scratch.ID,
-                    "complaint_target": trustee.name,
-                    "complaint_target_role": "trustee",
-                    "complaint_reason": investor_evaluation["trustee_reputation"],
+                    "complaint_target_ID": investor.scratch.ID,
+                    "complaint_target": investor.name,
+                    "complaint_target_role": "investor",
+                    "complaint_reason": trustee_gossip_willing.split(",")[-1],
                 }
             )
         if "yes" in investor_gossip_willing.split(",")[0].lower():
@@ -107,7 +107,7 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
                     "complaint_target_role": "trustee",
-                    "complaint_reason": investor_evaluation["trustee_reputation"],
+                    "complaint_reason": investor_gossip_willing.split(",")[-1],
                 }
             )
 
@@ -200,8 +200,8 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
             verbose=True,
         )[0]
         trustee_evaluation = run_gpt_prompt_trustee_evaluation_v1(
-            investor,
             trustee,
+            investor,
             trustee_plan,
             a_unit,
             k,
@@ -224,6 +224,7 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
                 {
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
+                    "complaint_target_role": "trustee",
                     "complaint_reason": investor_evaluation["gossip"]
                     .lower()
                     .split("yes,")[-1]
@@ -236,6 +237,7 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
                 {
                     "complaint_target_ID": investor.scratch.ID,
                     "complaint_target": investor.name,
+                    "complaint_target_role": "investor",
                     "complaint_reason": trustee_evaluation["gossip"]
                     .lower()
                     .split("yes,")[-1]

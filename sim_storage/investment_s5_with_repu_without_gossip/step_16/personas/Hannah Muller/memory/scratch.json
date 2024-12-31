@@ -1,0 +1,29 @@
+{
+  "name": "Hannah Muller",
+  "innate": null,
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. The recent rejection of your allocation plan by Juan Carlos Reyes has underscored a critical need to address the growing distrust in your negotiation approach, further tarnishing your reputation as a trustee. In light of these challenges, you are now intensely focused on strategies for restoring confidence, emphasizing enhanced communication and transparency with investors. Recognizing that your past achievements are being overshadowed, you are committed to reevaluating your methods to foster accountability and deliver measurable results. Your current priorities revolve around rebuilding trust through intentional efforts to demonstrate reliability and integrity in every professional interaction, ensuring that you actively advocate for stakeholder interests while learning from past setbacks.",
+  "currently": null,
+  "ID": 7,
+  "role": null,
+  "curr_step": 16,
+  "complain_buffer": [],
+  "total_num_investor": 7,
+  "success_num_investor": 6,
+  "total_num_trustee": 9,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Sergey Petrov",
+      "Isabella Costa",
+      "David Johnson",
+      "Maria Rossi",
+      "Mohammed Al-Farsi"
+    ],
+    "black_list": [
+      "Robert Miller",
+      "Juan Carlos Reyes",
+      "Akiko Sato"
+    ]
+  },
+  "resources_unit": 285.827584
+}

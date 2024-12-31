@@ -1,0 +1,26 @@
+{
+  "name": "Elena Ivanova",
+  "innate": null,
+  "learned": "I am Elena Ivanova, a 47-year-old female from Russia. I remain steadfast in my pursuit of establishing partnerships with trustworthy trustees. My recent decision to decline the proposed allocation plan from James Wang underscores my commitment to ethical investing, particularly in light of his low reputation score. I prioritize transparency, competence, and mutual respect in all financial dealings, and I actively seek collaborators who adhere to the same rigorous standards of integrity and ethical conduct. My goal continues to be the cultivation of a reputation marked by trustworthiness and a strong dedication to responsible investment practices.",
+  "currently": null,
+  "ID": 9,
+  "role": null,
+  "curr_step": 26,
+  "complain_buffer": [],
+  "total_num_investor": 15,
+  "success_num_investor": 2,
+  "total_num_trustee": 11,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Maria Rossi",
+      "Juan Carlos Reyes",
+      "Akiko Sato"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Hiroshi Tanaka"
+    ]
+  },
+  "resources_unit": 394.16319488
+}

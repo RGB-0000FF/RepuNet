@@ -23,7 +23,10 @@ def first_order_gossip(
     complain_persona_role: complained person role
     """
     print("FIRST ORDER GOSSIP")
+    finished = []
     for val in init_persona.scratch.complain_buffer:
+        if val["complaint_target_role"] != complain_persona_role:
+            continue
         reason = val["complaint_reason"]
         # gossip chat
         convo = generate_convo(init_persona, target_persona, reason)
@@ -65,7 +68,7 @@ def first_order_gossip(
             personas[complain_info["complained name"]],
             complain_persona_role,
             init_persona.name,
-            gossip[0]
+            gossip[0],
         )
 
         if gossip[0]["whether to spread gossip second-hand"] == "Yes":
@@ -89,7 +92,9 @@ def first_order_gossip(
                 personas,
                 G,
             )
-    init_persona.scratch.complain_buffer = []
+        finished.append(val)
+    for f in finished:
+        init_persona.scratch.complain_buffer.remove(f)
 
 
 def second_order_gossip(
@@ -146,7 +151,7 @@ def second_order_gossip(
             complain_persona,
             complain_persona_role,
             init_persona.name,
-            gossip[0]
+            gossip[0],
         )
 
 

@@ -1,0 +1,37 @@
+{
+  "name": "Nadia Novak",
+  "innate": null,
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation has recently taken a hit, particularly following the rejection of your allocation plan by Fatima Ali, which has raised serious concerns about your reliability as a trustee. This experience has shifted your approach to investment strategies, making you acutely aware of the need to enhance your proposals to regain trust within the investment community. You now prioritize not only developing appealing and trustworthy proposals but also actively seeking constructive feedback to refine your strategies. There is a growing emphasis on transparency and accountability as you work to reassure stakeholders of your commitment to improving your investment management skills. Balancing fairness with the necessity for reliability has become paramount as you aim to rebuild your standing and restore confidence among potential investors.",
+  "currently": null,
+  "ID": 8,
+  "role": null,
+  "curr_step": 19,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 4,
+      "complaint_target": "Sofia Hernandez",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " the trustee's low reputation and questionable reliability warrant caution and transparency to protect the investment community from potential risks."
+    },
+    {
+      "complaint_target_ID": 15,
+      "complaint_target": "Ahmed Hassan",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " indicating a lack of honesty and integrity."
+    }
+  ],
+  "total_num_investor": 8,
+  "success_num_investor": 1,
+  "total_num_trustee": 11,
+  "success_num_trustee": 1,
+  "relationship": {
+    "bind_list": [
+      "Elena Ivanova"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Liam OConnor"
+    ]
+  },
+  "resources_unit": 30.8
+}

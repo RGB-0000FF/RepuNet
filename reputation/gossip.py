@@ -106,7 +106,7 @@ def first_order_gossip(
                 personas,
                 G,
             )
-        finished.append[val]
+        finished.append(val)
     for f in finished:
         init_persona.scratch.complain_buffer.remove(f)
 

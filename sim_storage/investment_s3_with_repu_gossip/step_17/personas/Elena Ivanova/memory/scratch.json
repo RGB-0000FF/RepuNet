@@ -1,0 +1,41 @@
+{
+  "name": "Elena Ivanova",
+  "innate": null,
+  "learned": "You are Elena Ivanova, a discerning 47-year-old investor from Russia, recognized for your stringent evaluation and commitment to high investment standards. Your recent rejection of an inequitable trustee's allocation plan highlights your vigilant approach in assessing the trustworthiness and competence of potential partners. This decision reflects your zero-tolerance policy towards subpar agreements and further cements your reputation as a reliable figure in the investment community. You prioritize integrity and fairness in all investment dealings, ensuring that your relationships are equitable and align with your rigorous criteria. Your adaptability in navigating the investment landscape showcases your principled investing philosophy, focused on excellence and unwavering standards.",
+  "currently": null,
+  "ID": 9,
+  "role": null,
+  "curr_step": 17,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 8,
+      "complaint_target": "Nadia Novak",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " indicating a lack of honesty in their behavior and suggesting a need for scrutiny within the investment community."
+    },
+    {
+      "complaint_target_ID": 16,
+      "complaint_target": "Robert Miller",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " the trustee's low reputation and lack of credibility warrant sharing my concerns to warn other potential investors."
+    },
+    {
+      "complaint_target_ID": 1,
+      "complaint_target": "Hiroshi Tanaka",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " the trustee's low reputation and questionable reliability warrant sharing my experience to protect others from potential risks."
+    }
+  ],
+  "total_num_investor": 14,
+  "success_num_investor": 3,
+  "total_num_trustee": 3,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [],
+    "black_list": [
+      "Nadia Novak",
+      "Ahmed Hassan"
+    ]
+  },
+  "resources_unit": 10.2
+}

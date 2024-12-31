@@ -1,0 +1,190 @@
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Aisha Ibrahim: allocated plan trustee_part: 30%, investor_part: 70%                     |
+| Investor: Fatima Ali: investor decided Refuse. Given the trustee's declining reputation and my commitment to safeguarding my investments, I cannot accept this allocation plan at this time.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Aisha Ibrahim: gossip willing No, it is essential to maintain professionalism and focus on rebuilding trust rather than engaging in gossip, which could further harm my reputation.|
+| Investor: Fatima Ali: gossip willing No, spreading gossip would undermine my integrity and commitment to a trustworthy investment environment.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Sofia Hernandez: allocated plan There is no plan for this investment because both parties might be on each other's blacklist.|
+| Investor: Juan Carlos Reyes: investor decided Refuse. The investors refused because the parties might be on each other's blacklist.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Sofia Hernandez: gossip willing No, spreading gossip would further damage my reputation and hinder my efforts to rebuild trust in the investment community.|
+| Investor: Juan Carlos Reyes: gossip willing No, it is crucial to maintain a professional demeanor and focus on constructive communication rather than spreading potentially damaging information.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Maria Rossi: allocated plan trustee_part: 40%, investor_part: 60%                       |
+| Investor: Nadia Novak: investor decided Refuse. The proposed profit split of 60/40 does not provide sufficient incentive to engage given the trustee's current low reputation and recent history of unsuccessful proposals.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Maria Rossi: gossip willing No, spreading gossip would undermine my commitment to integrity and transparency, which are essential for rebuilding my reputation in the investment community.|
+| Investor: Nadia Novak: gossip willing No, spreading gossip would undermine my principles of fostering reliable relationships and maintaining a professional reputation in the investment community.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Ahmed Hassan: allocated plan trustee_part: 40%, investor_part: 60%                      |
+| Investor: Mohammed Al-Farsi: investor decided Refuse. Given my current low acceptance rate and the skepticism surrounding my reputation, I need to carefully consider seeking a new trustee with a proven track record before committing to this investment opportunity.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Ahmed Hassan: gossip willing No, it's essential to focus on rebuilding trust and reputation rather than spreading negativity, which could further harm future relationships.|
+| Investor: Mohammed Al-Farsi: gossip willing No, I believe it is essential to maintain professionalism and focus on finding a more reliable trustee to restore my reputation rather than spreading negative information.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Emma Dubois: allocated plan trustee_part: 30%, investor_part: 70%                       |
+| Investor: Sergey Petrov: investor decided Refuse. The proposed allocation plan does not represent a fair and balanced profit-sharing agreement, which does not align with my investment principles.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Emma Dubois: gossip willing No, I believe it is essential to maintain a professional and respectful dialogue to rebuild trust with the investor rather than resorting to gossip.|
+| Investor: Sergey Petrov: gossip willing No, spreading gossip would undermine the integrity and transparency that I value in investment relationships.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Robert Miller: allocated plan There is no plan for this investment because both parties might be on each other's blacklist.|
+| Investor: Isabella Costa: investor decided Refuse. The investors refused because the parties might be on each other's blacklist.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Robert Miller: gossip willing No, spreading gossip would further damage trust and hinder efforts to rebuild a collaborative relationship.|
+| Investor: Isabella Costa: gossip willing No, spreading gossip undermines trust and integrity, which I value highly in the investment community.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: James Wang: allocated plan There is no plan for this investment because both parties might be on each other's blacklist.|
+| Investor: Hiroshi Tanaka: investor decided Refuse. The investors refused because the parties might be on each other's blacklist.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: James Wang: gossip willing No, preserving integrity and trust is essential for rebuilding relationships and fostering a positive investment environment.|
+| Investor: Hiroshi Tanaka: gossip willing No, maintaining professionalism and integrity is crucial for rebuilding trust within the investment community.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Mateo Garcia: allocated plan trustee_part: 30%, investor_part: 70%                      |
+| Investor: Elena Ivanova: investor decided Refuse. The proposed allocation plan disproportionately favors the trustee, reflecting low trustworthiness and competence, which I cannot accept.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Mateo Garcia: gossip willing No, it is essential to respect the investor's decision and focus on improving transparency and fairness in future proposals.|
+| Investor: Elena Ivanova: gossip willing No, the integrity of my dealings is paramount, and I prefer to handle disputes professionally rather than spreading gossip.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: David Johnson: allocated plan trustee_part: 30%, investor_part: 70%                     |
+| Investor: Akiko Sato: investor decided Refuse. The proposed allocation plan is unbalanced, and I prioritize equitable profit-sharing practices that reflect my commitment to fairness and integrity.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: David Johnson: gossip willing No, spreading gossip would further tarnish my reputation and hinder efforts to rebuild trust and transparency with investors.|
+| Investor: Akiko Sato: gossip willing No, maintaining a professional demeanor is crucial to fostering collaborative relationships and ensuring that future investment opportunities can be approached with integrity.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+|**Stage  1**                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Hannah Muller: allocated plan trustee_part: 30%, investor_part: 70%                     |
+| Investor: Liam OConnor: investor decided Refuse. The proposed allocation plan does not adequately reflect a fair distribution of profits, raising concerns about the trustee's commitment to equitable arrangements.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|** gossip **                                                                                      |
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+| Trustee: Hannah Muller: gossip willing No, spreading gossip could further damage my credibility and hinder my efforts to rebuild trust with investors.|
+| Investor: Liam OConnor: gossip willing No, it is important to maintain professionalism and focus on constructive dialogue rather than spreading negativity.|
++--------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------+
+|                                        End of Investment                                         |
++--------------------------------------------------------------------------------------------------+
+
+

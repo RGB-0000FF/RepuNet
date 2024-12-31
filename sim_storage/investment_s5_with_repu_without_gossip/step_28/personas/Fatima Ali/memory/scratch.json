@@ -1,0 +1,28 @@
+{
+  "name": "Fatima Ali",
+  "innate": null,
+  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan, navigating the investment community as a trustee with a renewed focus on ethical standards and trustworthiness. Despite facing challenges with a low investor acceptance rate of 0.21, you are committed to rebuilding your reputation through transparency and integrity in all dealings. Your recent rejection of a proposed allocation plan reflects your dedication to prioritizing reliability and accountability in your investment practices. You seek to foster long-term, principled relationships with stakeholders who share your values, emphasizing a commitment to ethical investments that contribute to mutual growth and trust.",
+  "currently": null,
+  "ID": 17,
+  "role": null,
+  "curr_step": 28,
+  "complain_buffer": [],
+  "total_num_investor": 9,
+  "success_num_investor": 4,
+  "total_num_trustee": 19,
+  "success_num_trustee": 7,
+  "relationship": {
+    "bind_list": [
+      "Akiko Sato",
+      "Juan Carlos Reyes",
+      "Mateo Garcia",
+      "Robert Miller",
+      "Emma Dubois"
+    ],
+    "black_list": [
+      "Sergey Petrov",
+      "Isabella Costa"
+    ]
+  },
+  "resources_unit": 406.81228799999997
+}

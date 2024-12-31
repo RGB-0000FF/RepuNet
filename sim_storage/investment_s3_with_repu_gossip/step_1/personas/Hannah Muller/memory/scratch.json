@@ -1,0 +1,28 @@
+{
+  "name": "Hannah Muller",
+  "innate": null,
+  "learned": "You are Hannah Muller, a 33-year-old female from Germany. Your investment journey has shown a structured and goal-oriented approach; however, recent experiences have highlighted the necessity for greater vigilance and alignment of expectations with results. While your previous drive for individualism remains, you recognize the importance of refining your investment monitoring processes to ensure favorable outcomes. You are becoming more open to feedback and collaboration, acknowledging that a balanced approach may enhance your effectiveness in navigating challenges. You strive to improve your decision-making frameworks while maintaining a focus on your objectives and personal growth in the investment landscape.",
+  "currently": null,
+  "ID": 7,
+  "role": null,
+  "curr_step": 1,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 17,
+      "complaint_target": "Fatima Ali",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " impacting my expected returns."
+    }
+  ],
+  "total_num_investor": 1,
+  "success_num_investor": 1,
+  "total_num_trustee": 0,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [],
+    "black_list": [
+      "Fatima Ali"
+    ]
+  },
+  "resources_unit": 6.0
+}

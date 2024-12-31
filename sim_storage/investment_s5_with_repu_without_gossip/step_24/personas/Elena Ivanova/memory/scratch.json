@@ -1,0 +1,26 @@
+{
+  "name": "Elena Ivanova",
+  "innate": null,
+  "learned": "I am Elena Ivanova, a 47-year-old female from Russia. I have firmly established my investment strategy by exclusively engaging with trustworthy and reliable trustees. My recent decision to reject Aisha Ibrahim's allocation plan highlighted my unwavering commitment to ethical standards; I prioritize transparency and competence to safeguard my investment interests. I actively seek partnerships that mirror my values of integrity and ethical conduct, ensuring that my endeavors reflect high standards in all financial dealings. My objective is to cultivate a reputation characterized by trustworthiness and a dedication to ethical investing practices.",
+  "currently": null,
+  "ID": 9,
+  "role": null,
+  "curr_step": 24,
+  "complain_buffer": [],
+  "total_num_investor": 13,
+  "success_num_investor": 2,
+  "total_num_trustee": 11,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Maria Rossi",
+      "Juan Carlos Reyes",
+      "Akiko Sato"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Hiroshi Tanaka"
+    ]
+  },
+  "resources_unit": 394.16319488
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Robert Miller",
+  "innate": null,
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. After facing an eighth consecutive rejection of your trustee allocation plan, primarily due to concerns over potential blacklisting, your reputation within the investment community has been further strained. This ongoing series of challenges has amplified the scrutiny on your role as a trustee and highlighted the urgent need for you to cultivate reliance and trust with investors. As a result, you are now intensely focused on developing transparent, fair, and innovative allocation strategies while ensuring compliance with ethical standards. Prioritizing clear communication and transparency in all dealings is paramount to you. You recognize that effective risk management and equitable profit sharing are critical components in your journey towards restoring credibility and trust within the investment community.",
+  "currently": null,
+  "ID": 16,
+  "role": null,
+  "curr_step": 27,
+  "complain_buffer": [],
+  "total_num_investor": 14,
+  "success_num_investor": 5,
+  "total_num_trustee": 13,
+  "success_num_trustee": 2,
+  "relationship": {
+    "bind_list": [
+      "Ahmed Hassan"
+    ],
+    "black_list": [
+      "Mohammed Al-Farsi",
+      "Isabella Costa",
+      "Liam OConnor",
+      "Juan Carlos Reyes",
+      "Aisha Ibrahim"
+    ]
+  },
+  "resources_unit": 90.94428
+}

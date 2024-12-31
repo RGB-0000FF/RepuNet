@@ -1,0 +1,27 @@
+{
+  "name": "Hiroshi Tanaka",
+  "innate": null,
+  "learned": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Your current reputation in the investment community has been significantly affected by recent setbacks and a perception of decreased trustworthiness. Despite your previous commitment to fairness and integrity, recent rejections of your proposals have necessitated a critical reassessment of your approach. With a current acceptance rate of only 0.25, you are now prioritizing transparency and improved communication in your dealings more than ever. You're focusing on refining your negotiation strategies to regain confidence from potential partners and elevate your standing in the community. Moving forward, you are actively seeking out more secure allocation proposals and prioritizing collaborations with investors who also value integrity, aiming to rebuild your credibility by demonstrating consistent improvements in proposal quality.",
+  "currently": null,
+  "ID": 1,
+  "role": null,
+  "curr_step": 14,
+  "complain_buffer": [],
+  "total_num_investor": 5,
+  "success_num_investor": 3,
+  "total_num_trustee": 9,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Emma Dubois",
+      "Maria Rossi",
+      "Aisha Ibrahim",
+      "Elena Ivanova",
+      "James Wang",
+      "Mateo Garcia",
+      "Isabella Costa"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 102.9504
+}

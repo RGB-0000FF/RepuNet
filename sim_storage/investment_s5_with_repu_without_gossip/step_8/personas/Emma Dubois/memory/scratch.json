@@ -1,0 +1,22 @@
+{
+  "name": "Emma Dubois",
+  "innate": null,
+  "learned": "You are Emma Dubois, a 23-year-old female from France. As a trustee, you've proposed an allocation plan that aimed to grant 60% of profits to the investor, but it was rejected due to concerns about the plan's riskiness and your limited performance history. This experience has led to a neutral perception of your trustworthiness and competence within the community, emphasizing the importance of building a reliable reputation. You are now dedicated to demonstrating your commitment to sound investment strategies and transparency. Your goal is to gradually shift perceptions to become a dependable and trustworthy figure by focusing on consistent and prudent investment practices.",
+  "currently": null,
+  "ID": 13,
+  "role": null,
+  "curr_step": 8,
+  "complain_buffer": [],
+  "total_num_investor": 6,
+  "success_num_investor": 2,
+  "total_num_trustee": 2,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [
+      "Hiroshi Tanaka",
+      "Nadia Novak"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 14.4
+}

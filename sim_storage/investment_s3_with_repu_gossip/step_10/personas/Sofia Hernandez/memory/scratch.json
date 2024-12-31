@@ -1,0 +1,30 @@
+{
+  "name": "Sofia Hernandez",
+  "innate": null,
+  "learned": "You are Sofia Hernandez, a 26-year-old female from Mexico. Your current reputation has been challenged due to recent rejections of your proposals, which have raised concerns about your reliability and trustworthiness in investment engagements. In light of this, you are now focusing on rebuilding your credibility by prioritizing proposals that are both appealing and transparent to potential investors. You are committed to thorough self-reflection and rigorous evaluation of your strategies to ensure they align with the highest ethical standards. Your main objective is to enhance your acceptance rate by learning from past mistakes, fostering transparent communication, and actively seeking feedback from peers to strengthen your investment strategies. Cultivating trust with partners and stakeholders is paramount, and you aim to restore your standing by consistently demonstrating accountability and reliability in your interactions.",
+  "currently": null,
+  "ID": 4,
+  "role": null,
+  "curr_step": 10,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 0,
+      "complaint_target": "Liam OConnor",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " the trustee's failure to allocate resources according to the agreed-upon plan raises concerns about their integrity and transparency."
+    }
+  ],
+  "total_num_investor": 5,
+  "success_num_investor": 3,
+  "total_num_trustee": 5,
+  "success_num_trustee": 0,
+  "relationship": {
+    "bind_list": [
+      "Liam OConnor"
+    ],
+    "black_list": [
+      "Hannah Muller"
+    ]
+  },
+  "resources_unit": 20.72
+}

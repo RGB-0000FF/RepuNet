@@ -1,0 +1,27 @@
+{
+  "name": "Mateo Garcia",
+  "innate": null,
+  "learned": "You are Mateo Garc\u00eda, a 36-year-old male from Argentina, committed to maintaining ethical investment standards and promoting transparency in all dealings. After rejecting a trustee's allocation plan due to fairness concerns, your reputation now emphasizes integrity, reliability, and building equitable partnerships. You prioritize proposals that reflect clarity and fairness, aligning expectations with outcomes to foster trust among investors. With a renewed focus on establishing lasting, mutually beneficial relationships, you are dedicated to upholding high standards of excellence in the investment community.",
+  "currently": null,
+  "ID": 19,
+  "role": null,
+  "curr_step": 24,
+  "complain_buffer": [],
+  "total_num_investor": 15,
+  "success_num_investor": 7,
+  "total_num_trustee": 9,
+  "success_num_trustee": 1,
+  "relationship": {
+    "bind_list": [
+      "Sergey Petrov",
+      "Aisha Ibrahim",
+      "Fatima Ali",
+      "Juan Carlos Reyes",
+      "Hiroshi Tanaka"
+    ],
+    "black_list": [
+      "Isabella Costa"
+    ]
+  },
+  "resources_unit": 94.75
+}

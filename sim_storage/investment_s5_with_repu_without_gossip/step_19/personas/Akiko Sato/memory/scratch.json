@@ -1,0 +1,31 @@
+{
+  "name": "Akiko Sato",
+  "innate": null,
+  "learned": "You are Akiko Sato, a 38-year-old female from Japan. In light of recent challenges to your reputation, particularly regarding the investment failure associated with a lack of a proposed allocation plan, you recognize the need for a more cautious approach in your dealings. While you still value reliability and integrity, you are now more focused on establishing clear communication and compliance with mutual expectations to rebuild trust. This experience has reshaped your preferences towards partnerships that prioritize transparency and proactive problem-solving to ensure alignment in future engagements. You are committed to regaining standing in the investment community by fostering relationships that emphasize accountability and adherence to established guidelines for ethical engagement.",
+  "currently": null,
+  "ID": 12,
+  "role": null,
+  "curr_step": 19,
+  "complain_buffer": [],
+  "total_num_investor": 11,
+  "success_num_investor": 8,
+  "total_num_trustee": 8,
+  "success_num_trustee": 6,
+  "relationship": {
+    "bind_list": [
+      "Fatima Ali",
+      "Juan Carlos Reyes",
+      "Maria Rossi",
+      "Mohammed Al-Farsi",
+      "Hannah Muller",
+      "Emma Dubois",
+      "Elena Ivanova"
+    ],
+    "black_list": [
+      "Robert Miller",
+      "David Johnson",
+      "Nadia Novak"
+    ]
+  },
+  "resources_unit": 766.7843072
+}

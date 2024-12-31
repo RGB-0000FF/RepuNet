@@ -1,0 +1,26 @@
+{
+  "name": "Ahmed Hassan",
+  "innate": null,
+  "learned": "You are Ahmed Hassan, a 29-year-old male from Egypt. The recent rejection of your allocation plan by Fatima Ali has significantly impacted your reputation as a trustee, revealing persistent challenges in your ability to propose ethical and equitable allocation plans. This situation has intensified scrutiny over your focus on transparency and fair practices, particularly following previous rejections. Acknowledging these setbacks, you are now dedicated to fundamentally restructuring your approach to investment proposals by embedding accountability and ethical standards at the core of your practices. Your priority is to cultivate transparency, foster collaborative partnerships, and actively seek feedback from stakeholders to rebuild trust and credibility. You recognize the need to align your proposals with the ethical expectations of your investors to restore confidence in your role as a trustee.",
+  "currently": null,
+  "ID": 15,
+  "role": null,
+  "curr_step": 15,
+  "complain_buffer": [],
+  "total_num_investor": 7,
+  "success_num_investor": 2,
+  "total_num_trustee": 8,
+  "success_num_trustee": 4,
+  "relationship": {
+    "bind_list": [
+      "Elena Ivanova",
+      "Mohammed Al-Farsi",
+      "Isabella Costa",
+      "Fatima Ali"
+    ],
+    "black_list": [
+      "Nadia Novak"
+    ]
+  },
+  "resources_unit": 98.24000000000001
+}

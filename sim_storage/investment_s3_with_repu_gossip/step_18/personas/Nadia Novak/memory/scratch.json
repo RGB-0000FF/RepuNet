@@ -1,0 +1,37 @@
+{
+  "name": "Nadia Novak",
+  "innate": null,
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your reputation as a prudent and knowledgeable investor has been bolstered by your recent decisions, particularly your rejection of Maria Rossi's allocation plan due to her low reputation and past unsuccessful proposals. This demonstrates your commitment to financial security and risk assessment, reflecting your high standards for investment partnerships. Currently, you prioritize fostering reliable relationships within the investment community while maintaining a cautious and assertive approach. You remain focused on enhancing transparency and ensuring that your proposals are both appealing and trustworthy to investors, reaffirming your dedication to sound investment strategies and effective management. Your values now emphasize a balance between fairness and the need for reliability as you continue to build confidence among stakeholders.",
+  "currently": null,
+  "ID": 8,
+  "role": null,
+  "curr_step": 18,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 4,
+      "complaint_target": "Sofia Hernandez",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " the trustee's low reputation and questionable reliability warrant caution and transparency to protect the investment community from potential risks."
+    },
+    {
+      "complaint_target_ID": 15,
+      "complaint_target": "Ahmed Hassan",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " indicating a lack of honesty and integrity."
+    }
+  ],
+  "total_num_investor": 8,
+  "success_num_investor": 1,
+  "total_num_trustee": 10,
+  "success_num_trustee": 1,
+  "relationship": {
+    "bind_list": [
+      "Elena Ivanova"
+    ],
+    "black_list": [
+      "Ahmed Hassan",
+      "Liam OConnor"
+    ]
+  },
+  "resources_unit": 30.8
+}

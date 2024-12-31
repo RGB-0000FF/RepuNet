@@ -1,0 +1,28 @@
+{
+  "name": "Fatima Ali",
+  "innate": null,
+  "learned": "You are Fatima Ali, a 47-year-old female from Pakistan, deeply committed to socially responsible investing that promotes sustainable development and enhances community empowerment. Your investment philosophy emphasizes equitable collaboration, wherein investors receive 70% of profits while trustees retain 30%, fostering a culture of shared success. Recently, you have executed a successful resource allocation plan, showcasing your commitment to transparency, fairness, and maximizing collective benefits. Your investment strategies are designed to align resource management with your core values of sustainability and community support, ensuring transformative impact and accountability in all dealings.",
+  "currently": null,
+  "ID": 17,
+  "role": null,
+  "curr_step": 26,
+  "complain_buffer": [],
+  "total_num_investor": 13,
+  "success_num_investor": 10,
+  "total_num_trustee": 13,
+  "success_num_trustee": 5,
+  "relationship": {
+    "bind_list": [
+      "Nadia Novak",
+      "Hiroshi Tanaka",
+      "David Johnson",
+      "Sofia Hernandez",
+      "Emma Dubois",
+      "Juan Carlos Reyes",
+      "James Wang",
+      "Ahmed Hassan"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 16756.259311148264
+}
