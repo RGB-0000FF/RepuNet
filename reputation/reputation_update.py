@@ -6,15 +6,22 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_reputation_update_after_stage1_trustee_v1,
     run_gpt_prompt_reputation_update_after_stage1_investor_v1,
 )
+from .social_network import *
 
 
 def reputation_update(init_persona, target_persona, update_info):
     if "stage 1" in update_info["reason"]:
-        return reputation_update_after_stage1(init_persona, target_persona, update_info)
+        reputation_update_after_stage1(init_persona, target_persona, update_info)
     elif "stage 4" in update_info["reason"]:
-        return reputation_update_after_stage4(init_persona, target_persona, update_info)
+        reputation_update_after_stage4(init_persona, target_persona, update_info)
     elif "gossip" in update_info["reason"]:
-        return reputation_update_after_gossip(init_persona, target_persona, update_info)
+        reputation_update_after_gossip(init_persona, target_persona, update_info)
+        return
+
+    if update_info["init_persona_role"] == "investor":
+        social_network_update(init_persona, target_persona, "investor", "trustee")
+    elif update_info["init_persona_role"] == "trustee":
+        social_network_update(init_persona, target_persona, "trustee", "investor")
 
 
 def reputation_update_after_gossip(init_persona, target_persona, update_info):

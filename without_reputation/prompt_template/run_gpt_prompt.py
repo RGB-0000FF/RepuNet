@@ -404,7 +404,7 @@ def run_gpt_prompt_second_order_evaluation_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_connection_build_after_stage4_investor_v1(
+def run_gpt_prompt_connection_build_investor_v1(
     init_persona, target_persona, target_persona_role
 ):
     def create_prompt_input(
@@ -452,7 +452,7 @@ def run_gpt_prompt_connection_build_after_stage4_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/connection_build_after_stage4_investor_v1.txt"
+    prompt_template = "prompt/connection_build_investor_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -472,7 +472,7 @@ def run_gpt_prompt_connection_build_after_stage4_investor_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_disconnection_after_stage4_investor_v1(
+def run_gpt_prompt_disconnection_investor_v1(
     init_persona, target_persona, target_persona_role
 ):
     def create_prompt_input(
@@ -519,7 +519,7 @@ def run_gpt_prompt_disconnection_after_stage4_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/disconnection_after_stage4_investor_v1.txt"
+    prompt_template = "prompt/disconnection_investor_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -539,7 +539,7 @@ def run_gpt_prompt_disconnection_after_stage4_investor_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_connection_build_after_stage4_trustee_v1(
+def run_gpt_prompt_connection_build_trustee_v1(
     init_persona, target_persona, target_persona_role
 ):
     def create_prompt_input(
@@ -586,7 +586,7 @@ def run_gpt_prompt_connection_build_after_stage4_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/connection_build_after_stage4_trustee_v1.txt"
+    prompt_template = "prompt/connection_build_trustee_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -606,7 +606,7 @@ def run_gpt_prompt_connection_build_after_stage4_trustee_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_disconnection_after_stage4_trustee_v1(
+def run_gpt_prompt_disconnection_trustee_v1(
     init_persona, target_persona, target_persona_role
 ):
     def create_prompt_input(
@@ -653,7 +653,7 @@ def run_gpt_prompt_disconnection_after_stage4_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/disconnection_after_stage4_trustee_v1.txt"
+    prompt_template = "prompt/disconnection_trustee_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,

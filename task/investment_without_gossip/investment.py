@@ -2,7 +2,6 @@ import random
 
 
 from reputation.reputation_update import reputation_update
-from reputation.social_network import social_network_update_after_stage4
 
 from .prompt_template.run_gpt_prompt import *
 
@@ -144,9 +143,7 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         # total investment num +1
         investor.scratch.total_num_investor += 1
         trustee.scratch.total_num_trustee += 1
-        description = (
-            f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}",
-        )
+        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}"
         investor.associativeMemory.add_event(
             subject=investor.name,
             predicate="investment",
@@ -288,10 +285,6 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         }
         reputation_update(investor, trustee, update_info_investor)
         reputation_update(trustee, investor, update_info_trustee)
-
-        # social network update after stage 4
-        social_network_update_after_stage4(investor, trustee, "investor", "trustee")
-        social_network_update_after_stage4(trustee, investor, "trustee", "investor")
 
         print_stage4 = None
 

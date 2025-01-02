@@ -190,10 +190,9 @@ class SocialNetworkAnalysis:
 
 
 if __name__ == "__main__":
-    sim_folder = input("Please input the analysis sim folder: ")
-    with_repu = input("With reputation? (y/n)")
-    # sims = get_all_sim_info(sim_folder)
-    with_repu = "y" in with_repu.lower() and "n" not in with_repu.lower()
+    # init set
+    sim_folder = "investment_s6_without_repu_gossip"
+    with_repu = False
     sa = SocialNetworkAnalysis(sim_folder, with_repu)
     current_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(current_dir)

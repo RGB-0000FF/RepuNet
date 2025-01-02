@@ -5,7 +5,6 @@ from reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_gossip_listener_select_v1,
 )
 from reputation.reputation_update import reputation_update
-from reputation.social_network import social_network_update_after_stage4
 
 from .prompt_template.run_gpt_prompt import *
 
@@ -123,7 +122,9 @@ def start_investment(pair, personas, G, save_folder):
         investor_decided = print_stage1["investor_decided"]
     else:
         # stage 1
-        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[0]
+        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
+            0
+        ]
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
         trustee_part = trustee_plan.split("trustee retains")[-1].split(".")[0].strip()
@@ -145,9 +146,7 @@ def start_investment(pair, personas, G, save_folder):
         # total investment num +1
         investor.scratch.total_num_investor += 1
         trustee.scratch.total_num_trustee += 1
-        description = (
-            f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}",
-        )
+        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}"
         investor.associativeMemory.add_event(
             subject=investor.name,
             predicate="investment",
@@ -324,9 +323,6 @@ def start_investment(pair, personas, G, save_folder):
         reputation_update(investor, trustee, update_info_investor)
         reputation_update(trustee, investor, update_info_trustee)
 
-        # social network update after stage 4
-        social_network_update_after_stage4(investor, trustee, "investor", "trustee")
-        social_network_update_after_stage4(trustee, investor, "trustee", "investor")
         trustee_gossip_willing = run_gpt_prompt_stage4_trustee_gossip_v1(
             trustee,
             investor,

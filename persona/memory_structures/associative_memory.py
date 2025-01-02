@@ -131,6 +131,9 @@ class AssociativeMemory:
         saved_nodes = json.load(open(f"{base_path}/nodes.json"))
         for node in saved_nodes:
             n_type = node["type"]
+            # SAVE DESCRIPTION!!!!!TODO
+            if type(node["description"]) is list:
+                node["description"] = node["description"][0]
             if n_type != NodeType.CHAT.name:
                 self.id_to_node[node["id"]] = Node(
                     node["id"],

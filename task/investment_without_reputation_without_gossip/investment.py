@@ -3,7 +3,7 @@ import random
 from without_reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_update_learned_in_description_v1,
 )
-from without_reputation.social_network import social_network_update_after_stage4
+from without_reputation.social_network import social_network_update
 
 from .prompt_template.run_gpt_prompt import *
 
@@ -61,9 +61,7 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         # total investment num +1
         investor.scratch.total_num_investor += 1
         trustee.scratch.total_num_trustee += 1
-        description = (
-            f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}",
-        )
+        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}"
         investor.associativeMemory.add_event(
             subject=investor.name,
             predicate="investment",
@@ -135,9 +133,6 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
             "trustee_actual_allocation_part": trustee_allocation_part,
             "reported_investment_outcome": reported_investment_outcome,
         }
-        # social network update after investment
-        social_network_update_after_stage4(investor, trustee, "investor", "trustee")
-        social_network_update_after_stage4(trustee, investor, "trustee", "investor")
 
         i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
             investor, "investor"
@@ -149,6 +144,10 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         )[0]
         trustee.scratch.learned = t_new_learned
         print_stage4 = None
+
+    # social network update after investment
+    social_network_update(investor, trustee, "investor", "trustee")
+    social_network_update(trustee, investor, "trustee", "investor")
 
     print_investment_result(
         investor, trustee, print_stage1, print_stage3, print_stage4, save_folder
