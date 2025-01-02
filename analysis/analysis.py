@@ -37,10 +37,25 @@ class Analysis:
             "r",
         ) as f:
             curr_all_investment_results = f.read()
+            print(self.step)
             curr_all_investment_results = curr_all_investment_results.split(
                 "End of Investment"
             )
             for investment_result in curr_all_investment_results:
+                investment_results = investment_result.split("Stage  1")
+                if len(investment_results) != 2:
+                    for investment_result in investment_results:
+                        if name1 in investment_result and name2 in investment_result:
+                            Trustee = (
+                                investment_result.split("| Trustee: ")[-1].split(":")[0].strip()
+                            )
+                            Investor = (
+                                investment_result.split("| Investor: ")[-1]
+                                .split(":")[0]
+                                .strip()
+                            )
+                            return Trustee, Investor
+
                 if name1 in investment_result and name2 in investment_result:
                     Trustee = (
                         investment_result.split("| Trustee: ")[-1].split(":")[0].strip()
