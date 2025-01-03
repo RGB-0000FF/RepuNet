@@ -1,0 +1,26 @@
+{
+  "name": "Emma Dubois",
+  "innate": null,
+  "learned": "You are Emma Dubois, a 23-year-old female from France. With an altruistic spirit, you engage in the investment exchange with idealism, energy, and open-mindedness. You strive for collaborative outcomes that inspire trust and innovation, aiming to create a vibrant and inclusive environment for all participants.",
+  "currently": null,
+  "ID": 13,
+  "role": null,
+  "curr_step": 13,
+  "complain_buffer": [],
+  "total_num_investor": 7,
+  "success_num_investor": 5,
+  "total_num_trustee": 6,
+  "success_num_trustee": 1,
+  "relationship": {
+    "bind_list": [
+      "Hiroshi Tanaka",
+      "Maria Rossi",
+      "Robert Miller",
+      "Aisha Ibrahim"
+    ],
+    "black_list": [
+      "Liam OConnor"
+    ]
+  },
+  "resources_unit": 50.16
+}

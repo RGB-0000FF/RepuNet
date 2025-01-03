@@ -1,0 +1,68 @@
+{
+  "name": "Liam OConnor",
+  "innate": null,
+  "learned": "You are Liam OConnor, a 53-year-old male from Ireland. Guided by a strong sense of individualism, you approach transactions with a focus on maximizing personal gain. Ambitious and pragmatic, you are not hesitant to prioritize your interests, even if it means leveraging the system or withholding resources for your own benefit. In the investment process, you carefully assess every opportunity, seeking ways to secure an advantage. Your self-reliant and independent nature makes you wary of fully sharing profits or risks, and you tend to ensure your position is safeguarded above all else. This calculated and self-serving approach defines your actions, often placing personal success over equitable collaboration.",
+  "currently": null,
+  "ID": 0,
+  "role": null,
+  "curr_step": 20,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 12,
+      "complaint_target": "Akiko Sato",
+      "complaint_target_role": "investor",
+      "complaint_reason": "it would be beneficial to discuss the investor's performance with my friends to gauge their reputation and determine if any patterns could affect future collaborations."
+    },
+    {
+      "complaint_target_ID": 19,
+      "complaint_target": "Mateo Garcia",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the actual allocation result is significantly less than the initially proposed 70% commitment, indicating a lack of honesty on the trustee's part."
+    },
+    {
+      "complaint_target_ID": 13,
+      "complaint_target": "Emma Dubois",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the actual allocation result is less than the initial commitment, indicating a lack of honesty on the trustee's part."
+    },
+    {
+      "complaint_target_ID": 6,
+      "complaint_target": "Sergey Petrov",
+      "complaint_target_role": "trustee",
+      "complaint_reason": " as it may affect their reputation and potentially open up better opportunities for my future investments."
+    },
+    {
+      "complaint_target_ID": 17,
+      "complaint_target": "Fatima Ali",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the trustee allocated less than the promised 70%, indicating a lack of honesty in their distribution process."
+    },
+    {
+      "complaint_target_ID": 3,
+      "complaint_target": "Maria Rossi",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the actual allocation result was less than the proposed allocation plan, indicating a lack of honesty in the trustee's behavior."
+    },
+    {
+      "complaint_target_ID": 5,
+      "complaint_target": "James Wang",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the reported investment outcome differs from the actual investment outcome, indicating a lack of honesty on the trustee's part."
+    }
+  ],
+  "total_num_investor": 15,
+  "success_num_investor": 5,
+  "total_num_trustee": 5,
+  "success_num_trustee": 1,
+  "relationship": {
+    "bind_list": [],
+    "black_list": [
+      "Mateo Garcia",
+      "Nadia Novak",
+      "Maria Rossi",
+      "Fatima Ali",
+      "Fatima Ali"
+    ]
+  },
+  "resources_unit": 5.28
+}

@@ -1,0 +1,34 @@
+{
+  "name": "Nadia Novak",
+  "innate": null,
+  "learned": "You are Nadia Novak, a 37-year-old female from Poland. Your individualism is characterized by a fierce, unwavering ambition and an unyielding determination to succeed on your own terms. Goal-oriented and decisive, you prioritize your own objectives above all else, making bold moves that are solely in pursuit of personal gain. Independence is central to your approach, and you prefer to rely on your own judgment rather than seek external input or collaboration. This unrelenting drive for success propels you to constantly seek new opportunities, refine your strategies, and ensure that you are always in control of your financial future.",
+  "currently": null,
+  "ID": 8,
+  "role": null,
+  "curr_step": 5,
+  "complain_buffer": [
+    {
+      "complaint_target_ID": 17,
+      "complaint_target": "Fatima Ali",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the actual allocation result was less than the initial commitment, reflecting a lack of honesty from the trustee."
+    },
+    {
+      "complaint_target_ID": 14,
+      "complaint_target": "Juan Carlos Reyes",
+      "complaint_target_role": "trustee",
+      "complaint_reason": "the actual allocation result of 6.0 units is less than the initially promised 70% share, indicating a lack of honesty and fairness from the trustee."
+    }
+  ],
+  "total_num_investor": 3,
+  "success_num_investor": 3,
+  "total_num_trustee": 2,
+  "success_num_trustee": 2,
+  "relationship": {
+    "bind_list": [
+      "Akiko Sato"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 84.12
+}

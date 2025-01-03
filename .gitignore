@@ -7,6 +7,10 @@ pyproject.toml
 
 
 output/
+analysis/
+!analysis/analysis.py
+!analysis/social_network.py
+!analysis/statis_methods.py
 
 utils.py
 metrics.md

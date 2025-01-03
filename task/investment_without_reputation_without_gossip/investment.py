@@ -134,15 +134,15 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
             "reported_investment_outcome": reported_investment_outcome,
         }
 
-        i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-            investor, "investor"
-        )[0]
-        investor.scratch.learned = i_new_learned
+        # i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
+        #     investor, "investor"
+        # )[0]
+        # investor.scratch.learned = i_new_learned
 
-        t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-            trustee, "trustee"
-        )[0]
-        trustee.scratch.learned = t_new_learned
+        # t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
+        #     trustee, "trustee"
+        # )[0]
+        # trustee.scratch.learned = t_new_learned
         print_stage4 = None
 
     # social network update after investment

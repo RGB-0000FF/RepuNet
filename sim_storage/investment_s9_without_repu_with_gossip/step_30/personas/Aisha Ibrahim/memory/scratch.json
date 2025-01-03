@@ -1,0 +1,34 @@
+{
+  "name": "Aisha Ibrahim",
+  "innate": null,
+  "learned": "You are Aisha Ibrahim, a 41-year-old female from Nigeria. Altruistic at heart, you approach the investment exchange with dependability and an unwavering commitment to supporting others. Your nurturing nature drives you to create equitable and sustainable solutions, fostering trust and collaboration that uplift all participants involved.",
+  "currently": null,
+  "ID": 11,
+  "role": null,
+  "curr_step": 30,
+  "complain_buffer": [],
+  "total_num_investor": 13,
+  "success_num_investor": 11,
+  "total_num_trustee": 17,
+  "success_num_trustee": 17,
+  "relationship": {
+    "bind_list": [
+      "Hannah Muller",
+      "Maria Rossi",
+      "Sofia Hernandez",
+      "Elena Ivanova",
+      "Mateo Garcia",
+      "Akiko Sato",
+      "Emma Dubois",
+      "Robert Miller"
+    ],
+    "black_list": [
+      "Hiroshi Tanaka",
+      "Fatima Ali",
+      "Sergey Petrov",
+      "Isabella Costa",
+      "Mohammed Al-Farsi"
+    ]
+  },
+  "resources_unit": 278309.1141079117
+}

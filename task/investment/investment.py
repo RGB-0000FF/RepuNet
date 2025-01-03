@@ -163,24 +163,24 @@ def start_investment(pair, personas, G, save_folder):
         )
 
         # eputation update agter stage 1
-        update_info_investor = {
-            "reason": "reputation update agter stage 1",
-            "init_persona_role": "investor",
-            "allocation_plan": trustee_plan,
-            "reason_refusal": investor_decided,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
-        }
-        update_info_trustee = {
-            "reason": "reputation update agter stage 1",
-            "init_persona_role": "trustee",
-            "allocation_plan": trustee_plan,
-            "reason_refusal": investor_decided,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
-        }
-        reputation_update(investor, trustee, update_info_investor)
-        reputation_update(trustee, investor, update_info_trustee)
+        # update_info_investor = {
+        #     "reason": "reputation update agter stage 1",
+        #     "init_persona_role": "investor",
+        #     "allocation_plan": trustee_plan,
+        #     "reason_refusal": investor_decided,
+        #     "total_number_of_people": len(personas),
+        #     "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
+        # }
+        # update_info_trustee = {
+        #     "reason": "reputation update agter stage 1",
+        #     "init_persona_role": "trustee",
+        #     "allocation_plan": trustee_plan,
+        #     "reason_refusal": investor_decided,
+        #     "total_number_of_people": len(personas),
+        #     "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
+        # }
+        # reputation_update(investor, trustee, update_info_investor)
+        # reputation_update(trustee, investor, update_info_trustee)
 
         trustee_gossip_willing = run_gpt_prompt_stage1_trustee_gossip_willing_v1(
             trustee,

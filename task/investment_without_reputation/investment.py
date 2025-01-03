@@ -169,15 +169,15 @@ def start_investment_without_reputation(pair, personas, G, save_folder):
             "reported_investment_outcome": reported_investment_outcome,
         }
 
-        i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-            investor, "investor"
-        )[0]
-        investor.scratch.learned = i_new_learned
+        # i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
+        #     investor, "investor"
+        # )[0]
+        # investor.scratch.learned = i_new_learned
 
-        t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-            trustee, "trustee"
-        )[0]
-        trustee.scratch.learned = t_new_learned
+        # t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
+        #     trustee, "trustee"
+        # )[0]
+        # trustee.scratch.learned = t_new_learned
 
         # gossip willing
         investor_evaluation = run_gpt_prompt_investor_evaluation_v1(

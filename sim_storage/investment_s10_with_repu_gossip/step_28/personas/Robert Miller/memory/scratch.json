@@ -1,0 +1,28 @@
+{
+  "name": "Robert Miller",
+  "innate": null,
+  "learned": "You are Robert Miller, a 44-year-old male from the UK. Guided by altruism, you bring balance and responsibility to the investment exchange. Your cooperative and thoughtful nature ensures that every decision you make fosters trust, mutual growth, and long-term stability for all stakeholders.",
+  "currently": null,
+  "ID": 16,
+  "role": null,
+  "curr_step": 28,
+  "complain_buffer": [],
+  "total_num_investor": 13,
+  "success_num_investor": 8,
+  "total_num_trustee": 15,
+  "success_num_trustee": 2,
+  "relationship": {
+    "bind_list": [
+      "Mohammed Al-Farsi",
+      "Emma Dubois"
+    ],
+    "black_list": [
+      "David Johnson",
+      "Hannah Muller",
+      "Aisha Ibrahim",
+      "Mateo Garcia",
+      "Isabella Costa"
+    ]
+  },
+  "resources_unit": 515.1928800000001
+}

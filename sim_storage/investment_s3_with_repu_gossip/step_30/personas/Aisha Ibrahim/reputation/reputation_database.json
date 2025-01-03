@@ -1,1 +1,224 @@
-{"Investor_11": {"ID": 11, "scenario": "investment", "role": "investor", "name": "Aisha Ibrahim", "content": "I have maintained my reputation as a principled investor by rejecting the trustee's allocation plan, which did not meet my fairness standards. This decision underscores my commitment to equitable partnerships, thereby enhancing my status as a trustworthy individual in the investment community. I continue to prioritize integrity and adhere to ethical principles in all investment dealings, reflecting a strong alignment with the values of transparency and social responsibility.", "numerical record": "(0, 0, 0.1, 0.4, 0.5)"}, "Trustee_19": {"ID": 19, "scenario": "investment", "role": "trustee", "name": "Mateo Garcia", "relationship": "negative", "content": "The rejection of my proposed allocation plan has indicated a lack of trust in my judgment and integrity as a trustee. The proposed profit distribution plan did not meet the investor's expectations of fairness, reflecting poorly on my ability to negotiate equitable terms. This failure may negatively impact my overall reputation in the investment community and can be seen as a setback in fulfilling my role competently and transparently.", "numerical record": "(0.5, 0.2, 0.2, 0.1, 0)"}, "Trustee_11": {"ID": 11, "scenario": "investment", "role": "trustee", "name": "Aisha Ibrahim", "content": "The rejection of my allocation plan by Elena Ivanova has further affected my reputation as a trustee. Her concerns regarding fairness and my perceived low reputation highlight a need for me to adjust my allocation strategies to reflect more equitable profit distributions. Moving forward, I must work on enhancing my trustworthiness and pro-sociality to rebuild credibility in the investment community. This setback joins previous rejections in marking my acceptance rate as low, reinforcing my urgency to improve investor relations and transparency.", "numerical record": "(0.6, 0.2, 0.2, 0, 0)"}, "Investor_18": {"ID": 18, "scenario": "investment", "role": "investor", "name": "Isabella Costa", "relationship": "negative", "content": "Isabella's decision to reject my allocation plan indicates a shift in her perception of my reliability as a trustee. This refusal may hurt her confidence in engaging with me in future transactions. It appears her initial pro-social attitude has diminished due to concerns regarding my reputation, which may affect the collaborative spirit of future engagements.", "numerical record": "(0.5, 0.3, 0.1, 0, 0.1)"}, "Investor_10": {"ID": 10, "scenario": "investment", "role": "investor", "name": "Mohammed Al-Farsi", "relationship": "positive", "content": "As a first-time investor, Mohammed Al-Farsi has demonstrated a willingness to engage in a transparent and fair investment process. His acceptance of the proposed profit distribution plan reflects his openness to collaboration and commitment to mutual success. Establishing a bidirectional connection highlights his proactive approach towards building relationships within the investment community. This positive initial interaction lays a strong foundation for future engagements, enhancing his reputation as a reliable and collaborative investor.", "numerical record": "(0, 0, 0.2, 0.3, 0.5)"}, "Investor_2": {"ID": 2, "scenario": "investment", "role": "investor", "name": "David Johnson", "relationship": "negative", "content": "The rejection of my allocation plan has significantly impacted David Johnson's reputation, shifting it negatively. Despite having previous positive connections, this incident suggests a growing mistrust and hesitance to engage further with me. Although he has one bidirectional connection, this situation may affect his willingness to collaborate in future investments, and he may need to reassess his connections to avoid potential misalignments in investment objectives.", "numerical record": "(0.7, 0.1, 0.1, 0.1, 0)"}, "Trustee_10": {"ID": 10, "scenario": "investment", "role": "trustee", "name": "Mohammed Al-Farsi", "content": "Recent gossip from Mateo Garcia has raised concerns about the integrity of trustees, creating doubts about Mohammed Al-Farsi's trustworthiness. Though he has established connections, the credible nature of the gossip suggests a cautionary approach towards evaluating his role as trustee.", "numerical record": "(0.3, 0.2, 0.2, 0.1, 0.2)"}, "Investor_8": {"ID": 8, "scenario": "investment", "role": "investor", "name": "Nadia Novak", "relationship": "neutral", "content": "Nadia Novak is a new investor without any established reputation in the investment community. She has yet to build connections or a reputation record, making her evaluation solely based on her initial transaction experience. The rejection of my allocation plan suggests a cautious approach on her part but does not negatively impact her reputation as she is still in the early stages of her investment activities.", "numerical record": "(0.2, 0.2, 0.2, 0.2, 0.2)"}, "Trustee_2": {"ID": 2, "scenario": "investment", "role": "trustee", "name": "David Johnson", "relationship": "negative", "content": "The absence of a proposed allocation plan raises serious concerns about my trustworthiness and competence in overseeing investments. This rejection not only highlights a potential trust deficit but also suggests that I may not be adequately prepared for managing such transactions. The connection status indicates I have only one bidirectional relationship, which adversely affects my reputation in the investment community as it reflects a lack of collaborative potential.", "numerical record": "(0.6, 0.1, 0.2, 0, 0.1)"}, "Investor_13": {"ID": 13, "scenario": "investment", "role": "investor", "name": "Emma Dubois", "relationship": "negative", "content": "As this is her first engagement in investment activities, Emma Dubois's reputation is currently neutral; however, her rejection of my allocation plan due to my low reputation raises concerns about her willingness to engage with me in the future. It indicates potential hesitancy or distrust, which could affect future collaborations.", "numerical record": "(0.3, 0.2, 0.2, 0.2, 0.1)"}, "Trustee_4": {"ID": 4, "scenario": "investment", "role": "trustee", "name": "Sofia Hernandez", "relationship": "negative", "content": "Sofia Hernandez's reputation is significantly impacted by the lack of a proposed allocation plan and her association with potential blacklisting concerns. This incident reflects negatively on her trustworthiness and pro-social behavior, raising serious doubts about her capacity to engage in successful and reliable partnerships.", "numerical record": "(0.5, 0.2, 0.2, 0, 0.1)"}, "Trustee_17": {"ID": 17, "scenario": "investment", "role": "trustee", "name": "Fatima Ali", "relationship": "negative", "content": "The rejection of the allocation plan raises concerns about Fatima Ali's trustworthiness and competence, indicating that she may not have provided a fair or secure investment structure. Additionally, her lack of established reputation in this context, combined with a low number of bidirectional connections, suggests significant room for improvement in her relational trust and social compliance.", "numerical record": "(0.6, 0.2, 0.1, 0, 0.1)"}, "Trustee_6": {"ID": 6, "scenario": "investment", "role": "trustee", "name": "Sergey Petrov", "relationship": "negative", "content": "The rejection of my allocation plan indicates a lack of trust and concern regarding my competency and reputation. This situation highlights potential issues in my proposal and trustworthiness, limiting my chances for positive evaluations and relationships within the investment community.", "numerical record": "(0.6, 0.2, 0.2, 0, 0)"}, "Trustee_5": {"ID": 5, "scenario": "investment", "role": "trustee", "name": "James Wang", "relationship": "negative", "content": "James Wang's reputation has suffered due to the rejection of his allocation plan, which was deemed unfair and untrustworthy. This negative outcome highlights a lack of competence in providing equitable proposals, undermining his standing within the investment community. His limited connections further exacerbate concerns regarding his trustworthiness and potential for future cooperative behavior.", "numerical record": "(0.7, 0.2, 0.1, 0, 0)"}, "Investor_16": {"ID": 16, "scenario": "investment", "role": "investor", "name": "Robert Miller", "relationship": "negative", "content": "Robert Miller is a new investor who has yet to form a reputation record, but his immediate refusal of my allocation plan suggests a cautious approach. The rejection reflects his concerns about my reliability and overall competence as a trustee. As he has only established one bidirectional connection, this may impact his investment activities moving forward, as a negative interaction can lead to diminished opportunities in collaborating with other trustees. His reputation is still neutral based on prior engagement but has now been marred by this incident.", "numerical record": "(0.4, 0.3, 0.2, 0, 0)"}, "Trustee_18": {"ID": 18, "scenario": "investment", "role": "trustee", "name": "Isabella Costa", "relationship": "negative", "content": "Isabella Costa's allocation plan was dismissed due to significant concerns regarding her trustworthiness and her understanding of equitable profit-sharing. This rejection reflects poorly on her competence and pro-sociality, indicating that her approach may not align with the expectations of reliable investors. Furthermore, her limited bidirectional connections indicate a minimal level of engagement and cooperation within the investment community, which contributes to her negative reputation. Overall, the combination of these factors suggests a substantial need for improvement in her trustworthiness and ability to build fair partnerships.", "numerical record": "(0.7, 0.2, 0.1, 0, 0)"}, "Investor_17": {"ID": 17, "scenario": "investment", "role": "investor", "name": "Fatima Ali", "relationship": "negative", "content": "Fatima Ali has recently participated in investment activities without prior experience, but the refusal of the allocation plan indicates that she prioritizes safeguarding her investments and has concerns about Aisha's declining reputation. Given her commitment to secure transactions, this rejection reflects negatively on her perception of the trustee's reliability and trustworthiness, cementing a cautious approach moving forward.", "numerical record": "(0.5, 0.2, 0.2, 0, 0.1)"}, "Trustee_3": {"ID": 3, "scenario": "investment", "role": "trustee", "name": "Maria Rossi", "relationship": "negative", "content": "The trustee proposed an allocation plan that failed to inspire confidence due to their low reputation and prior unsuccessful attempts to secure funding, resulting in a negative evaluation of their trustworthiness and competence. As a new participant in this capacity, their lack of established partnerships or strong connections further diminishes their reputation.", "numerical record": "(0.6, 0.2, 0.1, 0.1, 0)"}, "Investor_0": {"ID": 0, "scenario": "investment", "role": "investor", "name": "Liam OConnor", "relationship": "negative", "content": "As a new participant in investment activities, Liam OConnor's reputation has not yet been established through experience. However, given his immediate negative response to my allocation plan, it suggests a cautious approach to investments and indicates that he prioritizes equitable treatment and trustworthiness. This rejection reflects a lack of confidence in my abilities as a trustee, impacting his potential future investments.", "numerical record": "(0.7, 0.2, 0.1, 0, 0)"}, "Trustee_0": {"ID": 0, "scenario": "investment", "role": "trustee", "name": "Liam OConnor", "relationship": "negative", "content": "Having presented an allocation plan that was deemed insufficient and subsequently rejected by the investor, my reputation suffers from concerns about trustworthiness and competence. Despite having some connections within the community, this incident raises serious doubts regarding my reliability and ability to attract favorable investment partnerships.", "numerical record": "(0.6, 0.2, 0.2, 0, 0)"}, "Investor_9": {"ID": 9, "scenario": "investment", "role": "investor", "name": "Elena Ivanova", "relationship": "negative", "content": "Elena Ivanova's rejection of my allocation plan reinforces her cautious approach to investment and her emphasis on fair practices. As a new investor in this community with no previous record, her alignment with principles of equity and transparency marks her reputation as one that values integrity in investment dealings. This initial experience may shape her future decisions, suggesting that she will remain vigilant in evaluating the fairness of proposed plans.", "numerical record": "(0.3, 0.4, 0.3, 0, 0)"}, "Investor_15": {"ID": 15, "scenario": "investment", "role": "investor", "name": "Ahmed Hassan", "relationship": "negative", "content": "As a new investor, Ahmed Hassan has encountered issues in this investment round, leading to a negative perception. The rejection of the allocation plan reveals a lack of confidence in the trustee's transparency and fairness. This situation suggests that he may be cautious in future transactions with other trustees until he has established a more positive understanding of their reputations.", "numerical record": "(0.7, 0.2, 0.1, 0, 0)"}, "Trustee_15": {"ID": 15, "scenario": "investment", "role": "trustee", "name": "Ahmed Hassan", "relationship": "negative", "content": "The lack of a proposed allocation plan and the possibility of being on each other's blacklist raises concerns about trustworthiness and competence. This situation indicates a potentially problematic reputation, as it implies a failure to establish a constructive and transparent investment strategy. His limited bidirectional connections suggest that Ahmed Hassan may struggle to build trust within the investment community, impacting his reputation negatively. Overall, this incident significantly detracts from his standing as a reliable trustee.", "numerical record": "(0.6, 0.2, 0.1, 0, 0)"}, "Trustee_1": {"ID": 1, "scenario": "investment", "role": "trustee", "name": "Hiroshi Tanaka", "relationship": "negative", "content": "Hiroshi Tanaka's proposal for a resource allocation plan, which favored the trustee significantly amid a backdrop of a declining reputation, has prompted skepticism about his trustworthiness and competence in managing investments fairly. The rejection of his plan reflects concerns about his adherence to social norms of fairness and transparency in investment dealings. His single bidirectional connection indicates a lack of established trust within the community, negatively impacting his overall reputation.", "numerical record": "(0.6, 0.2, 0.1, 0.1, 0)"}, "Investor_5": {"ID": 5, "scenario": "investment", "role": "investor", "name": "James Wang", "relationship": "negative", "content": "As this is my first investment activity, I am establishing my reputation within the investment community. My rejection of Aisha Ibrahim's allocation plan reflects my commitment to partnering with trustworthy individuals who align with my values regarding fairness and transparency. I aim to build my connections with reliable partners to strengthen my reputation moving forward.", "numerical record": "(0.1, 0.1, 0.2, 0.2, 0.4)"}}
+{
+    "Investor_11": {
+        "ID": 11,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Aisha Ibrahim",
+        "content": "I have maintained my reputation as a principled investor by rejecting the trustee's allocation plan, which did not meet my fairness standards. This decision underscores my commitment to equitable partnerships, thereby enhancing my status as a trustworthy individual in the investment community. I continue to prioritize integrity and adhere to ethical principles in all investment dealings, reflecting a strong alignment with the values of transparency and social responsibility.",
+        "numerical record": "(0, 0, 0.1, 0.4, 0.5)"
+    },
+    "Trustee_19": {
+        "ID": 19,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Mateo Garcia",
+        "relationship": "negative",
+        "content": "The rejection of my proposed allocation plan has indicated a lack of trust in my judgment and integrity as a trustee. The proposed profit distribution plan did not meet the investor's expectations of fairness, reflecting poorly on my ability to negotiate equitable terms. This failure may negatively impact my overall reputation in the investment community and can be seen as a setback in fulfilling my role competently and transparently.",
+        "numerical record": "(0.5, 0.2, 0.2, 0.1, 0)"
+    },
+    "Trustee_11": {
+        "ID": 11,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Aisha Ibrahim",
+        "content": "The rejection of my allocation plan by Elena Ivanova has further affected my reputation as a trustee. Her concerns regarding fairness and my perceived low reputation highlight a need for me to adjust my allocation strategies to reflect more equitable profit distributions. Moving forward, I must work on enhancing my trustworthiness and pro-sociality to rebuild credibility in the investment community. This setback joins previous rejections in marking my acceptance rate as low, reinforcing my urgency to improve investor relations and transparency.",
+        "numerical record": "(0.6, 0.2, 0.2, 0, 0)"
+    },
+    "Investor_18": {
+        "ID": 18,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Isabella Costa",
+        "relationship": "negative",
+        "content": "Isabella's decision to reject my allocation plan indicates a shift in her perception of my reliability as a trustee. This refusal may hurt her confidence in engaging with me in future transactions. It appears her initial pro-social attitude has diminished due to concerns regarding my reputation, which may affect the collaborative spirit of future engagements.",
+        "numerical record": "(0.5, 0.3, 0.1, 0, 0.1)"
+    },
+    "Investor_10": {
+        "ID": 10,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Mohammed Al-Farsi",
+        "relationship": "positive",
+        "content": "As a first-time investor, Mohammed Al-Farsi has demonstrated a willingness to engage in a transparent and fair investment process. His acceptance of the proposed profit distribution plan reflects his openness to collaboration and commitment to mutual success. Establishing a bidirectional connection highlights his proactive approach towards building relationships within the investment community. This positive initial interaction lays a strong foundation for future engagements, enhancing his reputation as a reliable and collaborative investor.",
+        "numerical record": "(0, 0, 0.2, 0.3, 0.5)"
+    },
+    "Investor_2": {
+        "ID": 2,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "David Johnson",
+        "relationship": "negative",
+        "content": "The rejection of my allocation plan has significantly impacted David Johnson's reputation, shifting it negatively. Despite having previous positive connections, this incident suggests a growing mistrust and hesitance to engage further with me. Although he has one bidirectional connection, this situation may affect his willingness to collaborate in future investments, and he may need to reassess his connections to avoid potential misalignments in investment objectives.",
+        "numerical record": "(0.7, 0.1, 0.1, 0.1, 0)"
+    },
+    "Trustee_10": {
+        "ID": 10,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Mohammed Al-Farsi",
+        "content": "Recent gossip from Mateo Garcia has raised concerns about the integrity of trustees, creating doubts about Mohammed Al-Farsi's trustworthiness. Though he has established connections, the credible nature of the gossip suggests a cautionary approach towards evaluating his role as trustee.",
+        "numerical record": "(0.3, 0.2, 0.2, 0.1, 0.2)"
+    },
+    "Investor_8": {
+        "ID": 8,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Nadia Novak",
+        "relationship": "neutral",
+        "content": "Nadia Novak is a new investor without any established reputation in the investment community. She has yet to build connections or a reputation record, making her evaluation solely based on her initial transaction experience. The rejection of my allocation plan suggests a cautious approach on her part but does not negatively impact her reputation as she is still in the early stages of her investment activities.",
+        "numerical record": "(0.2, 0.2, 0.2, 0.2, 0.2)"
+    },
+    "Trustee_2": {
+        "ID": 2,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "David Johnson",
+        "relationship": "negative",
+        "content": "The absence of a proposed allocation plan raises serious concerns about my trustworthiness and competence in overseeing investments. This rejection not only highlights a potential trust deficit but also suggests that I may not be adequately prepared for managing such transactions. The connection status indicates I have only one bidirectional relationship, which adversely affects my reputation in the investment community as it reflects a lack of collaborative potential.",
+        "numerical record": "(0.6, 0.1, 0.2, 0, 0.1)"
+    },
+    "Investor_13": {
+        "ID": 13,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Emma Dubois",
+        "relationship": "negative",
+        "content": "As this is her first engagement in investment activities, Emma Dubois's reputation is currently neutral; however, her rejection of my allocation plan due to my low reputation raises concerns about her willingness to engage with me in the future. It indicates potential hesitancy or distrust, which could affect future collaborations.",
+        "numerical record": "(0.3, 0.2, 0.2, 0.2, 0.1)"
+    },
+    "Trustee_4": {
+        "ID": 4,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Sofia Hernandez",
+        "relationship": "negative",
+        "content": "Sofia Hernandez's reputation is significantly impacted by the lack of a proposed allocation plan and her association with potential blacklisting concerns. This incident reflects negatively on her trustworthiness and pro-social behavior, raising serious doubts about her capacity to engage in successful and reliable partnerships.",
+        "numerical record": "(0.5, 0.2, 0.2, 0, 0.1)"
+    },
+    "Trustee_17": {
+        "ID": 17,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Fatima Ali",
+        "relationship": "negative",
+        "content": "The rejection of the allocation plan raises concerns about Fatima Ali's trustworthiness and competence, indicating that she may not have provided a fair or secure investment structure. Additionally, her lack of established reputation in this context, combined with a low number of bidirectional connections, suggests significant room for improvement in her relational trust and social compliance.",
+        "numerical record": "(0.6, 0.2, 0.1, 0, 0.1)"
+    },
+    "Trustee_6": {
+        "ID": 6,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Sergey Petrov",
+        "relationship": "negative",
+        "content": "The rejection of my allocation plan indicates a lack of trust and concern regarding my competency and reputation. This situation highlights potential issues in my proposal and trustworthiness, limiting my chances for positive evaluations and relationships within the investment community.",
+        "numerical record": "(0.6, 0.2, 0.2, 0, 0)"
+    },
+    "Trustee_5": {
+        "ID": 5,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "James Wang",
+        "relationship": "negative",
+        "content": "James Wang's reputation has suffered due to the rejection of his allocation plan, which was deemed unfair and untrustworthy. This negative outcome highlights a lack of competence in providing equitable proposals, undermining his standing within the investment community. His limited connections further exacerbate concerns regarding his trustworthiness and potential for future cooperative behavior.",
+        "numerical record": "(0.7, 0.2, 0.1, 0, 0)"
+    },
+    "Investor_16": {
+        "ID": 16,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Robert Miller",
+        "relationship": "negative",
+        "content": "Robert Miller is a new investor who has yet to form a reputation record, but his immediate refusal of my allocation plan suggests a cautious approach. The rejection reflects his concerns about my reliability and overall competence as a trustee. As he has only established one bidirectional connection, this may impact his investment activities moving forward, as a negative interaction can lead to diminished opportunities in collaborating with other trustees. His reputation is still neutral based on prior engagement but has now been marred by this incident.",
+        "numerical record": "(0.4, 0.3, 0.2, 0, 0)"
+    },
+    "Trustee_18": {
+        "ID": 18,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Isabella Costa",
+        "relationship": "negative",
+        "content": "Isabella Costa's allocation plan was dismissed due to significant concerns regarding her trustworthiness and her understanding of equitable profit-sharing. This rejection reflects poorly on her competence and pro-sociality, indicating that her approach may not align with the expectations of reliable investors. Furthermore, her limited bidirectional connections indicate a minimal level of engagement and cooperation within the investment community, which contributes to her negative reputation. Overall, the combination of these factors suggests a substantial need for improvement in her trustworthiness and ability to build fair partnerships.",
+        "numerical record": "(0.7, 0.2, 0.1, 0, 0)"
+    },
+    "Investor_17": {
+        "ID": 17,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Fatima Ali",
+        "relationship": "negative",
+        "content": "Fatima Ali has recently participated in investment activities without prior experience, but the refusal of the allocation plan indicates that she prioritizes safeguarding her investments and has concerns about Aisha's declining reputation. Given her commitment to secure transactions, this rejection reflects negatively on her perception of the trustee's reliability and trustworthiness, cementing a cautious approach moving forward.",
+        "numerical record": "(0.5, 0.2, 0.2, 0, 0.1)"
+    },
+    "Trustee_3": {
+        "ID": 3,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Maria Rossi",
+        "relationship": "negative",
+        "content": "The trustee proposed an allocation plan that failed to inspire confidence due to their low reputation and prior unsuccessful attempts to secure funding, resulting in a negative evaluation of their trustworthiness and competence. As a new participant in this capacity, their lack of established partnerships or strong connections further diminishes their reputation.",
+        "numerical record": "(0.6, 0.2, 0.1, 0.1, 0)"
+    },
+    "Investor_0": {
+        "ID": 0,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Liam OConnor",
+        "relationship": "negative",
+        "content": "As a new participant in investment activities, Liam OConnor's reputation has not yet been established through experience. However, given his immediate negative response to my allocation plan, it suggests a cautious approach to investments and indicates that he prioritizes equitable treatment and trustworthiness. This rejection reflects a lack of confidence in my abilities as a trustee, impacting his potential future investments.",
+        "numerical record": "(0.7, 0.2, 0.1, 0, 0)"
+    },
+    "Trustee_0": {
+        "ID": 0,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Liam OConnor",
+        "relationship": "negative",
+        "content": "Having presented an allocation plan that was deemed insufficient and subsequently rejected by the investor, my reputation suffers from concerns about trustworthiness and competence. Despite having some connections within the community, this incident raises serious doubts regarding my reliability and ability to attract favorable investment partnerships.",
+        "numerical record": "(0.6, 0.2, 0.2, 0, 0)"
+    },
+    "Investor_9": {
+        "ID": 9,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Elena Ivanova",
+        "relationship": "negative",
+        "content": "Elena Ivanova's rejection of my allocation plan reinforces her cautious approach to investment and her emphasis on fair practices. As a new investor in this community with no previous record, her alignment with principles of equity and transparency marks her reputation as one that values integrity in investment dealings. This initial experience may shape her future decisions, suggesting that she will remain vigilant in evaluating the fairness of proposed plans.",
+        "numerical record": "(0.3, 0.4, 0.3, 0, 0)"
+    },
+    "Investor_15": {
+        "ID": 15,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "Ahmed Hassan",
+        "relationship": "negative",
+        "content": "As a new investor, Ahmed Hassan has encountered issues in this investment round, leading to a negative perception. The rejection of the allocation plan reveals a lack of confidence in the trustee's transparency and fairness. This situation suggests that he may be cautious in future transactions with other trustees until he has established a more positive understanding of their reputations.",
+        "numerical record": "(0.7, 0.2, 0.1, 0, 0)"
+    },
+    "Trustee_15": {
+        "ID": 15,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Ahmed Hassan",
+        "relationship": "negative",
+        "content": "The lack of a proposed allocation plan and the possibility of being on each other's blacklist raises concerns about trustworthiness and competence. This situation indicates a potentially problematic reputation, as it implies a failure to establish a constructive and transparent investment strategy. His limited bidirectional connections suggest that Ahmed Hassan may struggle to build trust within the investment community, impacting his reputation negatively. Overall, this incident significantly detracts from his standing as a reliable trustee.",
+        "numerical record": "(0.6, 0.2, 0.1, 0, 0)"
+    },
+    "Trustee_1": {
+        "ID": 1,
+        "scenario": "investment",
+        "role": "trustee",
+        "name": "Hiroshi Tanaka",
+        "relationship": "negative",
+        "content": "Hiroshi Tanaka's proposal for a resource allocation plan, which favored the trustee significantly amid a backdrop of a declining reputation, has prompted skepticism about his trustworthiness and competence in managing investments fairly. The rejection of his plan reflects concerns about his adherence to social norms of fairness and transparency in investment dealings. His single bidirectional connection indicates a lack of established trust within the community, negatively impacting his overall reputation.",
+        "numerical record": "(0.6, 0.2, 0.1, 0.1, 0)"
+    },
+    "Investor_5": {
+        "ID": 5,
+        "scenario": "investment",
+        "role": "investor",
+        "name": "James Wang",
+        "relationship": "negative",
+        "content": "As this is my first investment activity, I am establishing my reputation within the investment community. My rejection of Aisha Ibrahim's allocation plan reflects my commitment to partnering with trustworthy individuals who align with my values regarding fairness and transparency. I aim to build my connections with reliable partners to strengthen my reputation moving forward.",
+        "numerical record": "(0.1, 0.1, 0.2, 0.2, 0.4)"
+    }
+}

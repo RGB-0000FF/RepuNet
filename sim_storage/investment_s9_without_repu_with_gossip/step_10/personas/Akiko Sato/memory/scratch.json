@@ -1,0 +1,32 @@
+{
+  "name": "Akiko Sato",
+  "innate": null,
+  "learned": "You are Akiko Sato, a 38-year-old female from Japan. Guided by altruism, you bring discipline and respect into the investment exchange. Your cooperative and conscientious approach ensures every transaction promotes harmony and shared success, balancing individual goals with collective progress.",
+  "currently": null,
+  "ID": 12,
+  "role": null,
+  "curr_step": 10,
+  "complain_buffer": [],
+  "total_num_investor": 7,
+  "success_num_investor": 6,
+  "total_num_trustee": 3,
+  "success_num_trustee": 3,
+  "relationship": {
+    "bind_list": [
+      "Sofia Hernandez",
+      "Liam OConnor",
+      "Nadia Novak",
+      "Emma Dubois",
+      "Ahmed Hassan",
+      "James Wang"
+    ],
+    "black_list": [
+      "Akiko Sato",
+      "Fatima Ali",
+      "Juan Carlos Reyes",
+      "Isabella Costa",
+      "Juan Carlos Reyes"
+    ]
+  },
+  "resources_unit": 209.524
+}

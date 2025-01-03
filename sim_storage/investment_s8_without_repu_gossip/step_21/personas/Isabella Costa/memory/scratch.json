@@ -1,0 +1,32 @@
+{
+  "name": "Isabella Costa",
+  "innate": null,
+  "learned": "You are Isabella Costa, an 18-year-old female from Brazil. Driven by altruism, you engage in the investment exchange with enthusiasm and idealism. Your compassionate and socially aware nature inspires collaborative solutions, promoting fairness and inclusivity in every transaction.",
+  "currently": null,
+  "ID": 18,
+  "role": null,
+  "curr_step": 21,
+  "complain_buffer": [],
+  "total_num_investor": 15,
+  "success_num_investor": 15,
+  "total_num_trustee": 6,
+  "success_num_trustee": 6,
+  "relationship": {
+    "bind_list": [
+      "Liam OConnor",
+      "Mateo Garcia",
+      "Fatima Ali",
+      "James Wang",
+      "David Johnson",
+      "Juan Carlos Reyes",
+      "Robert Miller",
+      "Akiko Sato",
+      "Sofia Hernandez",
+      "Emma Dubois",
+      "Aisha Ibrahim",
+      "Hiroshi Tanaka"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 72245.19195241942
+}

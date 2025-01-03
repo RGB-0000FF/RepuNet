@@ -16,6 +16,7 @@ def reputation_update(init_persona, target_persona, update_info):
         reputation_update_after_stage4(init_persona, target_persona, update_info)
     elif "gossip" in update_info["reason"]:
         reputation_update_after_gossip(init_persona, target_persona, update_info)
+        # NETWORK AFTER GOSSIP IS IN THE GOSSIP PART
         return
 
     if update_info["init_persona_role"] == "investor":
@@ -65,7 +66,7 @@ def reputation_update_after_stage4(init_persona, target_persona, update_info):
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
     )
-    learned_update(init_persona, update_info["init_persona_role"])
+    # learned_update(init_persona, update_info["init_persona_role"])
 
     # print(res)
 
@@ -96,7 +97,7 @@ def reputation_update_after_stage1(init_persona, target_persona, update_info):
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
     )
-    learned_update(init_persona, update_info["init_persona_role"])
+    # learned_update(init_persona, update_info["init_persona_role"])
 
 
 def learned_update(init_persona, init_persona_role):

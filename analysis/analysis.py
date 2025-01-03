@@ -47,7 +47,9 @@ class Analysis:
                     for investment_result in investment_results:
                         if name1 in investment_result and name2 in investment_result:
                             Trustee = (
-                                investment_result.split("| Trustee: ")[-1].split(":")[0].strip()
+                                investment_result.split("| Trustee: ")[-1]
+                                .split(":")[0]
+                                .strip()
                             )
                             Investor = (
                                 investment_result.split("| Investor: ")[-1]
@@ -212,15 +214,18 @@ def get_all_sim_info(sim_folder):
 
 
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("investment_s1")
+    sims1 = get_all_sim_info("investment_s10_with_repu_gossip")
     count = 0
+    os.makedirs("with_repu/s_10", exist_ok=True)
     for sim in sims1:
         count += 1
-        with open(f"with_repu/analysis_{count}.json", "w") as f:
+        with open(f"with_repu/s_10/analysis_{count}.json", "w") as f:
             json.dump(sim.analysis_dict, f, indent=4)
-    sims2 = get_all_sim_info("investment_s2")
+
+    sims2 = get_all_sim_info("investment_s7_with_repu_without_gossip")
     count = 0
+    os.makedirs("with_repu/s_7", exist_ok=True)
     for sim in sims2:
         count += 1
-        with open(f"without_repu/analysis_{count}.json", "w") as f:
+        with open(f"with_repu/s_7/analysis_{count}.json", "w") as f:
             json.dump(sim.analysis_dict, f, indent=4)

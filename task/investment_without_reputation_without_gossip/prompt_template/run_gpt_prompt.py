@@ -23,7 +23,7 @@ def run_gpt_prompt_investor_decided_v1(
 
     def __func_clean_up(gpt_response, prompt=""):
         if "Refuse" in gpt_response:
-            return "Refuse"
+            return gpt_response.split("*", "")
         elif "Accept" in gpt_response:
             allocation = gpt_response.split("Allocate")[-1].split("units")[0].strip()
             return f"Accept. Allocation {allocation} unit."

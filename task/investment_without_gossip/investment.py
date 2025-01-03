@@ -160,24 +160,24 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         )
 
         # eputation update agter stage 1
-        update_info_investor = {
-            "reason": "reputation update agter stage 1",
-            "init_persona_role": "investor",
-            "allocation_plan": trustee_plan,
-            "reason_refusal": investor_decided,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
-        }
-        update_info_trustee = {
-            "reason": "reputation update agter stage 1",
-            "init_persona_role": "trustee",
-            "allocation_plan": trustee_plan,
-            "reason_refusal": investor_decided,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
-        }
-        reputation_update(investor, trustee, update_info_investor)
-        reputation_update(trustee, investor, update_info_trustee)
+        # update_info_investor = {
+        #     "reason": "reputation update agter stage 1",
+        #     "init_persona_role": "investor",
+        #     "allocation_plan": trustee_plan,
+        #     "reason_refusal": investor_decided,
+        #     "total_number_of_people": len(personas),
+        #     "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
+        # }
+        # update_info_trustee = {
+        #     "reason": "reputation update agter stage 1",
+        #     "init_persona_role": "trustee",
+        #     "allocation_plan": trustee_plan,
+        #     "reason_refusal": investor_decided,
+        #     "total_number_of_people": len(personas),
+        #     "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
+        # }
+        # reputation_update(investor, trustee, update_info_investor)
+        # reputation_update(trustee, investor, update_info_trustee)
 
         print_stage3 = None
         print_stage4 = None

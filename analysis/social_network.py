@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import os
+import json
 from analysis import get_all_sim_info
 
 
@@ -43,7 +44,7 @@ def get_reputation_score(target_persona, target_persona_role, personas):
             num += score
     if count == 0:
         return 0
-    return num / count
+    return round((num / count), 3)
 
 
 class SocialNetworkAnalysis:
@@ -51,6 +52,25 @@ class SocialNetworkAnalysis:
         self.sim_folder = sim_folder
         self.sims = get_all_sim_info(sim_folder)
         self.with_repu = with_repu
+
+    def save_social_network_detail(self, save_folder):
+        save_path = os.path.join(save_folder, "social_network_detail")
+        os.makedirs(save_path, exist_ok=True)
+        for sim in self.sims:
+            result = dict()
+            G = sim.G
+            for n in G.nodes():
+                p = sim.personas[n]
+                d_connect = get_d_connect(p, G)
+                repu_score_i = get_reputation_score(p, "investor", sim.personas)
+                repu_score_t = get_reputation_score(p, "trustee", sim.personas)
+                result[n] = {
+                    "d_connect": d_connect,
+                    "repu_score_i": repu_score_i,
+                    "repu_score_t": repu_score_t,
+                }
+            with open(save_path + f"/{sim.step}.json", "w") as f:
+                json.dump(result, f, indent=4)
 
     def draw_social_network(self, save_folder):
         for sim in self.sims:
@@ -135,7 +155,10 @@ class SocialNetworkAnalysis:
         for n in G.nodes():
             p = ps[n]
             d_connect = get_d_connect(p, G)
-            node_size.append(len(d_connect) * 1000)
+            if len(d_connect) == 0:
+                node_size.append(500)
+            else:
+                node_size.append(len(d_connect) * 1000)
 
             # Get reputation scores for both roles
             repu_score_i = get_reputation_score(p, "investor", ps)
@@ -166,7 +189,7 @@ class SocialNetworkAnalysis:
             p = ps[n]
             d_connect = get_d_connect(p, G)
             node_size.append(len(d_connect) * 1000)
-            outer_color.append((0.663, 0.820, 0.557))  # Light green
+            outer_color.append((0.55, 1, 1))  # Light blue
 
         return node_size, outer_color
 
@@ -191,11 +214,20 @@ class SocialNetworkAnalysis:
 
 if __name__ == "__main__":
     # init set
-    sim_folder = "investment_s6_without_repu_gossip"
-    with_repu = False
-    sa = SocialNetworkAnalysis(sim_folder, with_repu)
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    os.chdir(current_dir)
-    if not os.path.exists(f"./{sim_folder}_result"):
-        os.makedirs(f"./{sim_folder}_result")
-    sa.draw_social_network(f"./{sim_folder}_result")
+    sim_folders = [
+        "investment_s10_with_repu_gossip",
+        "investment_s7_with_repu_without_gossip",
+        "investment_s8_without_repu_gossip",
+        "investment_s9_without_repu_with_gossip",
+    ]
+    with_repu = [True, True, False, False]
+    for i, sim_folder in enumerate(sim_folders):
+        if i != 0:
+            os.chdir("../")
+        sa = SocialNetworkAnalysis(sim_folder, with_repu[i])
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(current_dir)
+        if not os.path.exists(f"./{sim_folder}_result"):
+            os.makedirs(f"./{sim_folder}_result")
+        sa.draw_social_network(f"./{sim_folder}_result")
+        sa.save_social_network_detail(f"./{sim_folder}_result")

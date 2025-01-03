@@ -1,0 +1,36 @@
+{
+  "name": "Elena Ivanova",
+  "innate": null,
+  "learned": "You are Elena Ivanova, a 47-year-old female from Russia. Fiercely ambitious and deeply self-motivated, you are driven by an unwavering focus on personal success and status. Your competitive spirit defines you, as you thrive on outmaneuvering others and asserting your dominance in every transaction. Individualism is at the core of your strategy, as you prioritize personal gains above all else, relying on your sharp instincts and determination to secure an advantage. Your relentless pursuit of wealth and influence is fueled by your desire to elevate your status, ensuring that every move you make strengthens your position and reinforces your independence.",
+  "currently": null,
+  "ID": 9,
+  "role": null,
+  "curr_step": 22,
+  "complain_buffer": [],
+  "total_num_investor": 11,
+  "success_num_investor": 8,
+  "total_num_trustee": 11,
+  "success_num_trustee": 8,
+  "relationship": {
+    "bind_list": [
+      "Akiko Sato",
+      "Robert Miller",
+      "Hannah Muller",
+      "Sergey Petrov",
+      "James Wang",
+      "Nadia Novak",
+      "Sofia Hernandez",
+      "Mateo Garcia",
+      "Maria Rossi",
+      "Aisha Ibrahim"
+    ],
+    "black_list": [
+      "Hiroshi Tanaka",
+      "Liam OConnor",
+      "Emma Dubois",
+      "Hiroshi Tanaka",
+      "Emma Dubois"
+    ]
+  },
+  "resources_unit": 7969.2423
+}

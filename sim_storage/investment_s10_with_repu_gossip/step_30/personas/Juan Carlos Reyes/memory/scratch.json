@@ -1,0 +1,32 @@
+{
+  "name": "Juan Carlos Reyes",
+  "innate": null,
+  "learned": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your altruism is evident in your thoughtful and compassionate approach to the investment exchange. You foster cooperative relationships built on trust and mutual benefit, ensuring your actions consistently support the well-being of others while promoting stability and fairness.",
+  "currently": null,
+  "ID": 14,
+  "role": null,
+  "curr_step": 30,
+  "complain_buffer": [],
+  "total_num_investor": 17,
+  "success_num_investor": 8,
+  "total_num_trustee": 13,
+  "success_num_trustee": 6,
+  "relationship": {
+    "bind_list": [
+      "Akiko Sato",
+      "Hiroshi Tanaka",
+      "Sergey Petrov",
+      "Emma Dubois",
+      "Liam OConnor",
+      "Mateo Garcia"
+    ],
+    "black_list": [
+      "Robert Miller",
+      "Hannah Muller",
+      "Fatima Ali",
+      "Elena Ivanova",
+      "Maria Rossi"
+    ]
+  },
+  "resources_unit": 636.6016
+}

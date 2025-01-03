@@ -1,0 +1,36 @@
+{
+  "name": "Mohammed Al-Farsi",
+  "innate": null,
+  "learned": "You are Mohammed Al-Farsi, a 27-year-old male from Oman. Rooted in altruism, you navigate the investment exchange with empathy and a strong sense of social responsibility. You prioritize actions that create positive impacts, ensuring fairness and fostering mutual growth. Your caring and conscientious approach makes you a trusted ally, consistently focused on achieving outcomes that benefit the broader community.",
+  "currently": null,
+  "ID": 10,
+  "role": null,
+  "curr_step": 28,
+  "complain_buffer": [],
+  "total_num_investor": 14,
+  "success_num_investor": 14,
+  "total_num_trustee": 14,
+  "success_num_trustee": 14,
+  "relationship": {
+    "bind_list": [
+      "James Wang",
+      "Nadia Novak",
+      "Hannah Muller",
+      "Akiko Sato",
+      "Fatima Ali",
+      "Aisha Ibrahim",
+      "Emma Dubois",
+      "David Johnson",
+      "Sofia Hernandez",
+      "Juan Carlos Reyes",
+      "Mateo Garcia",
+      "Robert Miller",
+      "Ahmed Hassan",
+      "Elena Ivanova",
+      "Maria Rossi",
+      "Hiroshi Tanaka"
+    ],
+    "black_list": []
+  },
+  "resources_unit": 707109.7149397584
+}

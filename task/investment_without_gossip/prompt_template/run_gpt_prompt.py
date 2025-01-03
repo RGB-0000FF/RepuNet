@@ -13,7 +13,7 @@ def run_gpt_prompt_investor_decided_v1(
             init_persona.scratch.ID, "investor"
         )
         target_reputation = (
-            target_persona.reputationDB.get_targets_individual_reputation(
+            init_persona.reputationDB.get_targets_individual_reputation(
                 target_persona.scratch.ID, "trustee"
             )
         )
@@ -82,7 +82,7 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
             init_persona.scratch.ID, "trustee"
         )
         target_reputation = (
-            target_persona.reputationDB.get_targets_individual_reputation(
+            init_persona.reputationDB.get_targets_individual_reputation(
                 target_persona.scratch.ID, "investor"
             )
         )
