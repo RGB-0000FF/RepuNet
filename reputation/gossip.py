@@ -71,7 +71,7 @@ def first_order_gossip(
             "gossip": gossip,
             "total_number_of_people": len(personas),
             "number_of_bidirectional_connections": len(
-                get_d_connect(personas[complain_info["complained name"]], G)
+                get_d_connect(personas[complain_info["complained name"]], G[complain_info["complained role"]])
             ),
         }
         reputation_update(
@@ -168,7 +168,7 @@ def second_order_gossip(
             "gossip": gossip,
             "total_number_of_people": len(personas),
             "number_of_bidirectional_connections": len(
-                get_d_connect(complain_persona, G)
+                get_d_connect(complain_persona, G[complain_info["complained role"]])
             ),
         }
         reputation_update(

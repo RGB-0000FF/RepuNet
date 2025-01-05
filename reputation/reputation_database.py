@@ -40,12 +40,12 @@ class ReputationDB:
 
     def save(self, reputation_folder):
         with open(reputation_folder + "/reputation_database.json", "w") as f:
-            json.dump(self.individual_reputations, f)
+            json.dump(self.individual_reputations, f, indent=4)
 
         with open(
             reputation_folder + "/out_of_date_reputation_database.json", "w"
         ) as f:
-            json.dump(self.out_of_date_reputations, f)
+            json.dump(self.out_of_date_reputations, f, indent=4)
 
     def get_targets_individual_reputation(self, target_ID, role):
         target_reputation = dict()
@@ -61,7 +61,8 @@ class ReputationDB:
             if key in self.individual_reputations.keys():
                 pre_reputation = self.individual_reputations[key]
                 pre_reputation["reason"] = reason
-                self.out_of_date_reputations[key + f"_pre_{curr_step}"] = pre_reputation
+                self.out_of_date_reputations[key +
+                                             f"_pre_{curr_step}"] = pre_reputation
                 self.individual_reputations[key] = reputation[key]
             else:
                 self.individual_reputations[key] = reputation[key]
