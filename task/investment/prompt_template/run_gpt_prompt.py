@@ -44,7 +44,7 @@ def run_gpt_prompt_investor_decided_v1(
         return False
 
     def get_fail_safe():
-        fs = "Refuse"
+        fs = "Error"
         return fs
 
     gpt_param = {

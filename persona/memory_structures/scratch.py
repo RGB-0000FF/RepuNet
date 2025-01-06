@@ -46,6 +46,8 @@ class Scratch:
     success_num_investor: int
     total_num_trustee: int
     success_num_trustee: int
+    total_chat_num: int
+    success_chat_num: int
 
     relationship: dict
     resources_unit: int
@@ -72,6 +74,8 @@ class Scratch:
         self.success_num_investor = 0
         self.total_num_trustee = 0
         self.success_num_trustee = 0
+        self.total_chat_num = 0
+        self.success_chat_num = 0
 
         self.relationship = dict()
         self.resources_unit = 0
@@ -96,6 +100,8 @@ class Scratch:
             self.success_num_investor = scratch_load["success_num_investor"]
             self.total_num_trustee = scratch_load["total_num_trustee"]
             self.success_num_trustee = scratch_load["success_num_trustee"]
+            self.total_chat_num = scratch_load["total_chat_num"]
+            self.success_chat_num = scratch_load["success_chat_num"]
 
             self.relationship = {
                 "bind_list": scratch_load["relationship"]["bind_list"],
@@ -132,6 +138,8 @@ class Scratch:
         scratch["success_num_investor"] = self.success_num_investor
         scratch["total_num_trustee"] = self.total_num_trustee
         scratch["success_num_trustee"] = self.success_num_trustee
+        scratch["total_chat_num"] = self.total_chat_num
+        scratch["success_chat_num"] = self.success_chat_num
 
         scratch["relationship"] = {
             "bind_list": list(self.relationship["bind_list"]),

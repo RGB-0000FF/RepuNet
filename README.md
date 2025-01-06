@@ -1,8 +1,6 @@
-# Setting up the environments 
+# Setting up the environments
 
 To set up your environment, you will need to generate a `utils.py` file that contains your OpenAI API key and download the necessary packages.
-
-
 
 ### Step 1. Generate Utils File
 
@@ -20,13 +18,9 @@ fs_storage = './sim_storage'
 
 Replace `<Your OpenAI API>` with your OpenAI API key, and `<name>` with your name.
 
-
-
 ### Step 2. Install requirements.txt
 
 Install everything listed in the `requirements.txt` file (I strongly recommend first setting up a virtualenv as usual). A  note on Python version: we tested our environment on Python 3.9.
-
-
 
 ### Step 3. create a simulation seed
 
@@ -41,12 +35,9 @@ Next, open the `change_sim_folder.py` script and update the following:
 
 This setup initializes the simulation and prepares it to generate subsequent steps based on the defined starting conditions in `step_0`.
 
-
-
 It is important to note that your `step_0` folder needs to contain two subfolders:
 
 1. **`personas`**: This can be empty, as it will be initialized by `change_sim_folder.py`.
-
 2. **`reverie`**: This folder must include a `meta.json` file with the following format:
 
    ```python
@@ -58,26 +49,15 @@ It is important to note that your `step_0` folder needs to contain two subfolder
      ],
      "step": 0
    }
-   
    ```
-
-
-
 
 
 # Running a Simulation
 
 Run `start.py` in your terminal.
 
-When prompted with `Enter the name of the forked simulation:`, input the path to your simulation folder and step, in the format `<your_sim_folder>/step_<step>`.
+When prompted with `Enter the name of the forked simulation:`, input the path to your simulation folder and step, in the format `<your_sim_folder>/step_<step>`.For example,
 
-- For example: `investment_s1/step_0`.
+ `investment_s1/step_0`
 
-
-
-
-
-
-
-
-
+Then, run the simulation you want. If you wish to run an investment simulation, enter `run invest <step>`. Additionally, you can choose to run the simulation either with reputation or with gossip.

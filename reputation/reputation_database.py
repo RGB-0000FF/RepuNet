@@ -61,8 +61,7 @@ class ReputationDB:
             if key in self.individual_reputations.keys():
                 pre_reputation = self.individual_reputations[key]
                 pre_reputation["reason"] = reason
-                self.out_of_date_reputations[key +
-                                             f"_pre_{curr_step}"] = pre_reputation
+                self.out_of_date_reputations[key + f"_pre_{curr_step}"] = pre_reputation
                 self.individual_reputations[key] = reputation[key]
             else:
                 self.individual_reputations[key] = reputation[key]
@@ -74,6 +73,8 @@ class ReputationDB:
             input = "Investor"
         elif role.lower() == "trustee":
             input = "Trustee"
+        elif role.lower() == "resident":
+            input = "Resident"
         for key, reputation in self.individual_reputations.items():
             if with_self and input in key:
                 all_reputations[key] = reputation

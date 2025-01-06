@@ -5,8 +5,8 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_first_order_evaluation_v1,
     run_gpt_prompt_second_order_evaluation_v1,
 )
-from .reputation_update import reputation_update
-from .social_network import social_network_update_after_gossip
+from .reputation_update import reputation_update_invest
+from .social_network import social_network_update_after_gossip_invest
 
 
 def first_order_gossip(
@@ -71,15 +71,18 @@ def first_order_gossip(
             "gossip": gossip,
             "total_number_of_people": len(personas),
             "number_of_bidirectional_connections": len(
-                get_d_connect(personas[complain_info["complained name"]], G[complain_info["complained role"]])
+                get_d_connect(
+                    personas[complain_info["complained name"]],
+                    G[complain_info["complained role"]],
+                )
             ),
         }
-        reputation_update(
+        reputation_update_invest(
             target_persona,
             personas[complain_info["complained name"]],
             update_info,
         )
-        social_network_update_after_gossip(
+        social_network_update_after_gossip_invest(
             target_persona,
             personas[complain_info["complained name"]],
             complain_persona_role,
@@ -171,12 +174,12 @@ def second_order_gossip(
                 get_d_connect(complain_persona, G[complain_info["complained role"]])
             ),
         }
-        reputation_update(
+        reputation_update_invest(
             gossip_target_persona,
             complain_persona,
             update_info,
         )
-        social_network_update_after_gossip(
+        social_network_update_after_gossip_invest(
             gossip_target_persona,
             complain_persona,
             complain_persona_role,

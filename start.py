@@ -9,13 +9,16 @@ from task.investment_without_gossip.investment import *
 from task.investment_without_reputation.investment import *
 from task.investment_without_reputation_without_gossip.investment import *
 
+from task.sign_up.sign_up import *
+
 from utils import *
 
 from persona.persona import Persona
+from reputation.reputation_update import reputation_init_sign_up
 
 
 class Creation:
-    def __init__(self, sim_code, with_reputation, with_gossip):
+    def __init__(self, sim_code, with_reputation, with_gossip, sim=None):
         self.sim_code = f"{sim_code}"
         sim_folder = sim_folder = f"{fs_storage}/{self.sim_code}"
 
@@ -32,13 +35,37 @@ class Creation:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(
-                persona_name, persona_folder, self.with_reputation)
+            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
-        self.set_graph_i()
-        self.set_graph_t()
 
-    def set_graph_i(self):
+        if sim and "invest" in sim:
+            self.set_graph_invest()
+        elif sim and "sign" in sim:
+            self.set_graph_sign_up()
+
+    def set_graph_sign_up(self):
+        self._set_graph_r()
+
+    def set_graph_invest(self):
+        self._set_graph_i()
+        self._set_graph_t()
+
+    def _set_graph_r(self):
+        # investor graph
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind[0] not in black_list:
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
+        self.G["investor"] = G
+
+    def _set_graph_i(self):
         # investor graph
         G = nx.DiGraph()
         for _, persona in self.personas.items():
@@ -48,12 +75,12 @@ class Creation:
             bind_list = list(persona.scratch.relationship["bind_list"])
             for bind in bind_list:
                 if bind[0] not in black_list and bind[1] != "trustee":
-                    if not G.has_node(bind):
-                        G.add_nodes_from([bind])
-                    G.add_edges_from([(persona.name, bind)])
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
         self.G["investor"] = G
 
-    def set_graph_t(self):
+    def _set_graph_t(self):
         # trustee graph
         G = nx.DiGraph()
         for _, persona in self.personas.items():
@@ -63,9 +90,9 @@ class Creation:
             bind_list = list(persona.scratch.relationship["bind_list"])
             for bind in bind_list:
                 if bind[0] not in black_list and bind[1] != "investor":
-                    if not G.has_node(bind):
-                        G.add_nodes_from([bind])
-                    G.add_edges_from([(persona.name, bind)])
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
         self.G["trustee"] = G
 
     def save(self):
@@ -112,8 +139,7 @@ class Creation:
 
             if os.path.exists(f"{new_sim_folder}/investment results"):
                 shutil.rmtree(f"{new_sim_folder}/investment results")
-            self.set_graph_i()
-            self.set_graph_t()
+            self.set_graph_invest()
             print(
                 f"sim_code: {self.sim_code}-----------------------------------------------"
             )
@@ -162,13 +188,61 @@ class Creation:
             self.save()
             int_counter -= 1
 
+    def start_server_sign_up(self, int_counter):
+        while True:
+            # Done with this iteration if <int_counter> reaches 0.
+            if int_counter == 0:
+                break
+            if self.step == 0:
+                # persona reputation init
+                for persona_name, persona in self.personas.items():
+                    reputation_init_sign_up(persona)
+
+            self.step += 1
+            for persona_name, persona in self.personas.items():
+                persona.scratch.curr_step += 1
+            origin_sim_folder = f"{fs_storage}/{self.sim_code}"
+            new_sim_code = self.sim_code.split("/")[0] + f"/step_{self.step}"
+            new_sim_folder = f"{fs_storage}/{new_sim_code}"
+            self.sim_code = new_sim_code
+            # copy the investment data to the new simulation folder
+            shutil.copytree(
+                f"{origin_sim_folder}",
+                f"{new_sim_folder}",
+            )
+
+            if os.path.exists(f"{new_sim_folder}/sign up results"):
+                shutil.rmtree(f"{new_sim_folder}/sign up result")
+
+            self.set_graph_sign_up()
+            print(
+                f"sim_code: {self.sim_code}-----------------------------------------------"
+            )
+
+            sign_up_flag = False
+            if (self.step - 1) % 5 == 0:
+                sign_up_flag = True
+
+            if self.with_reputation and self.with_gossip:
+                start_sign_up(self.personas, self.G, sign_up_flag)
+
+            elif self.with_reputation and not self.with_gossip:
+                pass
+            elif not self.with_reputation and self.with_gossip:
+                pass
+            elif not self.with_reputation and not self.with_gossip:
+                pass
+
+            self.save()
+            int_counter -= 1
+
     def open_server(self):
         """
         Open up an interactive terminal prompt that lets you run the simulation
         step by step and probe agent state.
 
         INPUT
-          None
+          Noneh
         OUTPUT
           None
         """
@@ -207,13 +281,18 @@ class Creation:
                     self.save()
 
                 elif (
-                    sim_command[:3].lower() == "run"
-                    and "invest" in sim_command.lower()
+                    sim_command[:3].lower() == "run" and "invest" in sim_command.lower()
                 ):
                     # Runs the number of steps specified in the prompt.
                     # Example: run 1000
                     int_count = int(sim_command.split()[-1])
                     server.start_server_investment(int_count)
+
+                elif sim_command[:3].lower() == "run" and "sign" in sim_command.lower():
+                    # Runs the number of steps specified in the prompt.
+                    # Example: run 1000
+                    int_count = int(sim_command.split()[-1])
+                    server.start_server_sign_up(int_count)
 
                 print(ret_str)
 

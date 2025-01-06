@@ -40,6 +40,10 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
             0
         ]
+
+        if "error" in trustee_plan.lower():
+            raise Exception("GPT ERROR")
+
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
         trustee_part = trustee_plan.split("trustee retains")[-1].split(".")[0].strip()
@@ -51,6 +55,9 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         investor_decided = run_gpt_prompt_investor_decided_v1(
             investor, trustee, trustee_plan, verbose=True
         )[0]
+
+        if "error" in investor_decided.lower():
+            raise Exception("GPT ERROR")
 
         print_stage1 = {
             "plan": f"trustee_part: {trustee_part}, investor_part: {investor_part}",
@@ -88,8 +95,8 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         trustee.scratch.success_num_trustee += 1
 
         # stage 2
-        a_unit = float(
-            investor_decided.split("Allocation")[-1].split("unit")[0].strip()
+        a_unit = round(
+            float(investor_decided.split("Allocation")[-1].split("unit")[0].strip()), 3
         )
         investor.scratch.resources_unit -= a_unit
         # k is 2
@@ -100,8 +107,8 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
             investor, trustee, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
-        trustee_allocation_part = float(trustee_allocation["trustee"])
-        investor_allocation_part = float(trustee_allocation["investor"])
+        trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
+        investor_allocation_part = round(float(trustee_allocation["investor"]), 3)
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part

@@ -1,3 +1,5 @@
+from utils import *
+from persona.persona import Persona
 import json
 import networkx as nx
 import os
@@ -6,9 +8,6 @@ import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
-
-from persona.persona import Persona
-from utils import *
 
 
 class Analysis:
@@ -26,7 +25,8 @@ class Analysis:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
+            curr_persona = Persona(
+                persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
         self.G = self._set_graph()
         self._set_analysis_dict()
@@ -60,7 +60,8 @@ class Analysis:
 
                 if name1 in investment_result and name2 in investment_result:
                     Trustee = (
-                        investment_result.split("| Trustee: ")[-1].split(":")[0].strip()
+                        investment_result.split(
+                            "| Trustee: ")[-1].split(":")[0].strip()
                     )
                     Investor = (
                         investment_result.split("| Investor: ")[-1]
@@ -105,12 +106,12 @@ class Analysis:
                 self.analysis_dict[persona_name]["reputation"] = {
                     "Investor": self.personas[
                         persona_name
-                    ].reputationDB.get_all_reputations(
+                    ].reputationDB.get_all_reputations_invest(
                         "Investor", self.personas[persona_name].scratch.ID, True
                     ),
                     "Trustee": self.personas[
                         persona_name
-                    ].reputationDB.get_all_reputations(
+                    ].reputationDB.get_all_reputations_invest(
                         "Trustee", self.personas[persona_name].scratch.ID, True
                     ),
                 }
@@ -200,7 +201,7 @@ class Analysis:
         return G
 
 
-def get_all_sim_info(sim_folder):
+def get_all_sim_info(sim_folder, with_reputation=True):
     sim_steps = []
     sims = []
     for sim_code in os.listdir(f"{fs_storage}/{sim_folder}"):
@@ -209,7 +210,7 @@ def get_all_sim_info(sim_folder):
         sim_steps.append(sim_code)
         sim_steps.sort(key=lambda x: int(x.split("_")[1]))
     for sim_step in sim_steps:
-        sims.append(Analysis(f"{sim_folder}/{sim_step}"))
+        sims.append(Analysis(f"{sim_folder}/{sim_step}", with_reputation))
     return sims
 
 

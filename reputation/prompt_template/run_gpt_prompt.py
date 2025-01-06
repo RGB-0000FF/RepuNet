@@ -1,6 +1,36 @@
 from .gpt_structure import *
 
 
+def replace_full_name(name):
+    # TODO change to the actual sim persona names
+    personas = [
+        "Liam OConnor",
+        "Hiroshi Tanaka",
+        "David Johnson",
+        "Maria Rossi",
+        "Sofia Hernandez",
+        "James Wang",
+        "Sergey Petrov",
+        "Hannah Muller",
+        "Nadia Novak",
+        "Elena Ivanova",
+        "Mohammed Al-Farsi",
+        "Aisha Ibrahim",
+        "Akiko Sato",
+        "Emma Dubois",
+        "Juan Carlos Reyes",
+        "Ahmed Hassan",
+        "Robert Miller",
+        "Fatima Ali",
+        "Isabella Costa",
+        "Mateo Garcia",
+    ]
+    for persona in personas:
+        if name in persona:
+            return persona
+    return None
+
+
 def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
     init_persona,
     target_persona,
@@ -656,13 +686,8 @@ def run_gpt_prompt_gossip_listener_select_v1(
         prompt_input = []
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        prompt_input += [
-            json.dumps(
-                init_persona.reputationDB.get_all_reputations(
-                    init_persona_role, init_persona.scratch.ID
-                )
-            )
-        ]
+        bind_list = list(init_persona.scratch.relationship["bind_list"])
+        prompt_input += [[i[0] for i in bind_list]]
 
         return prompt_input
 
@@ -1351,31 +1376,75 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def replace_full_name(name):
-    # TODO change to the actual sim persona names
-    personas = [
-        "Liam OConnor",
-        "Hiroshi Tanaka",
-        "David Johnson",
-        "Maria Rossi",
-        "Sofia Hernandez",
-        "James Wang",
-        "Sergey Petrov",
-        "Hannah Muller",
-        "Nadia Novak",
-        "Elena Ivanova",
-        "Mohammed Al-Farsi",
-        "Aisha Ibrahim",
-        "Akiko Sato",
-        "Emma Dubois",
-        "Juan Carlos Reyes",
-        "Ahmed Hassan",
-        "Robert Miller",
-        "Fatima Ali",
-        "Isabella Costa",
-        "Mateo Garcia",
-    ]
-    for persona in personas:
-        if name in persona:
-            return persona
-    return None
+def run_gpt_prompt_self_reputation_init_sign_upv1(
+    init_persona, target_persona, complain_info
+):
+    def create_prompt_input(
+        init_persona,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.learned]
+        prompt_input += [target_persona.scratch.ID]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+
+        if len(final_res) == 1:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "Error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/first_order_evaluation_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        complain_info,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]

@@ -50,7 +50,7 @@ def get_reputation_score(target_persona, target_persona_role, personas):
 class SocialNetworkAnalysis:
     def __init__(self, sim_folder, with_repu):
         self.sim_folder = sim_folder
-        self.sims = get_all_sim_info(sim_folder)
+        self.sims = get_all_sim_info(sim_folder, with_repu)
         self.with_repu = with_repu
 
     def save_social_network_detail(self, save_folder):

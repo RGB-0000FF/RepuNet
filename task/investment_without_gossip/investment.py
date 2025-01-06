@@ -1,7 +1,7 @@
 import random
 
 
-from reputation.reputation_update import reputation_update
+from reputation.reputation_update import reputation_update_invest
 
 from .prompt_template.run_gpt_prompt import *
 
@@ -99,7 +99,7 @@ def get_reputation_score(target_persona, target_persona_role, personas):
             num += score
     if count == 0:
         return 0
-    return num / count
+    return round((num / count), 3)
 
 
 def start_investment_without_gossip(pair, personas, G, save_folder):
@@ -122,6 +122,10 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
             0
         ]
+
+        if "error" in trustee_plan.lower():
+            raise Exception("GPT ERROR")
+
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
         trustee_part = trustee_plan.split("trustee retains")[-1].split(".")[0].strip()
@@ -133,6 +137,9 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         investor_decided = run_gpt_prompt_investor_decided_v1(
             investor, trustee, trustee_plan, verbose=True
         )[0]
+
+        if "error" in investor_decided.lower():
+            raise Exception("GPT ERROR")
 
         print_stage1 = {
             "plan": f"trustee_part: {trustee_part}, investor_part: {investor_part}",
@@ -190,8 +197,8 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         trustee.scratch.success_num_trustee += 1
 
         # stage 2
-        a_unit = float(
-            investor_decided.split("Allocation")[-1].split("unit")[0].strip()
+        a_unit = round(
+            float(investor_decided.split("Allocation")[-1].split("unit")[0].strip()), 3
         )
         investor.scratch.resources_unit -= a_unit
         # k is 2
@@ -202,8 +209,8 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
             investor, trustee, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
-        trustee_allocation_part = float(trustee_allocation["trustee"])
-        investor_allocation_part = float(trustee_allocation["investor"])
+        trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
+        investor_allocation_part = round(float(trustee_allocation["investor"]), 3)
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part
@@ -266,6 +273,11 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             verbose=True,
         )[0]
 
+        if type(investor_evaluation) is str and "error" in investor_evaluation.lower():
+            raise Exception("GPT ERROR")
+        if type(trustee_evaluation) is str and "error" in trustee_evaluation.lower():
+            raise Exception("GPT ERROR")
+
         # eputation update agter stage 4
         update_info_investor = {
             "reason": "reputation update agter stage 4",
@@ -273,7 +285,9 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             "init_behavior_summary": investor_evaluation["self_reputation"],
             "target_behavior_summary": investor_evaluation["trustee_reputation"],
             "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(trustee, G["trustee"]),),
+            "number_of_bidirectional_connections": len(
+                get_d_connect(trustee, G["trustee"]),
+            ),
         }
         update_info_trustee = {
             "reason": "reputation update agter stage 4",
@@ -281,10 +295,12 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             "init_behavior_summary": trustee_evaluation["self_reputation"],
             "target_behavior_summary": trustee_evaluation["investor_reputation"],
             "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(investor, G["investor"]),),
+            "number_of_bidirectional_connections": len(
+                get_d_connect(investor, G["investor"]),
+            ),
         }
-        reputation_update(investor, trustee, update_info_investor)
-        reputation_update(trustee, investor, update_info_trustee)
+        reputation_update_invest(investor, trustee, update_info_investor)
+        reputation_update_invest(trustee, investor, update_info_trustee)
 
         print_stage4 = None
 

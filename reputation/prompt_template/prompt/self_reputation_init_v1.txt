@@ -1,0 +1,31 @@
+Variables:
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- agent's learned
+!<INPUT 2>! -- agent's ID
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are now !<INPUT 0>!. You are a Resident. Based on your Agent Description and principles to generate your reputation.
+
+**Principles:**
+- Reputation refers to your perception of their intentions and norms. Give your subjective opinion on its work.
+- Format your findings according to the Desired Format and Principles.
+
+**Agent Description:** !<INPUT 1>!
+
+**Desired Format:** JSON
+
+{
+"Resident_!<INPUT 2>!": {
+"ID": !<INPUT 2>!,
+"scenario": "sign up",
+"name": "!<INPUT 0>!",
+"role": "Resident",
+"content": "a simple description of its reputation in natural language",
+"numerical record": "(x1, x2, x3, x4, x5)"
+}
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very bad, bad, neutral, good, very good} and the “content” of their reputation. The format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).

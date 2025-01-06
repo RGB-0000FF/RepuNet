@@ -68,6 +68,8 @@ def init_scratch(folder, persona_name, count):
     scratch["success_num_investor"] = 0
     scratch["total_num_trustee"] = 0
     scratch["success_num_trustee"] = 0
+    scratch["total_chat_num"] = 0
+    scratch["success_chat_num"] = 0
     scratch["relationship"] = {
         "bind_list": [],
         "black_list": [],
@@ -75,7 +77,7 @@ def init_scratch(folder, persona_name, count):
     scratch["resources_unit"] = 10
 
     with open(f"{folder}/memory/scratch.json", "w") as f:
-        json.dump(scratch, f, indent=2)
+        json.dump(scratch, f, indent=4)
 
 
 

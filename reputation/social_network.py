@@ -7,7 +7,12 @@ from .prompt_template.run_gpt_prompt import (
 )
 
 
-def social_network_update(
+def social_network_update_sign_up(init_persona, sign_up_info):
+    # TODO: Implement sign up social network update
+    pass
+
+
+def social_network_update_invest(
     init_persona, target_persona, init_persona_role, target_persona_role
 ):
     if init_persona_role == "investor":
@@ -41,12 +46,12 @@ def social_network_update(
             init_persona.scratch.relationship["bind_list"].append(
                 (target_persona.scratch.name, target_persona_role)
             )
-            
+
     if disconnection_res["Disconnect"].lower() == "yes":
         if (
-            (target_persona.scratch.name, target_persona_role)
-            in init_persona.scratch.relationship["bind_list"]
-        ):
+            target_persona.scratch.name,
+            target_persona_role,
+        ) in init_persona.scratch.relationship["bind_list"]:
             init_persona.scratch.relationship["bind_list"].remove(
                 (target_persona.scratch.name, target_persona_role)
             )
@@ -55,7 +60,7 @@ def social_network_update(
         )
 
 
-def social_network_update_after_gossip(
+def social_network_update_after_gossip_invest(
     init_persona, target_persona, target_persona_role, gossiper_name
 ):
     gossip_res = run_gpt_prompt_disconnection_after_gossip_v1(
