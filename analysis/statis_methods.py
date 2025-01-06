@@ -91,10 +91,6 @@ def persona_invest_willingness(analysis_dict):
     for i,j in list(analysis_dict.items()):
         if i==j["investor"]:
             if j["investment_status"]=="success":
-                print(i)
-                print(j["resources_unit"])
-                print(j["trustee_allocation"]["investor"])
-                print(j["investor_invests_unit"])
                 deno=float(j["resources_unit"])-float(j["trustee_allocation"]["investor"])+float(j["investor_invests_unit"])
                 if deno:
                     invest_list[i]=float(j["investor_invests_unit"])/deno
@@ -116,6 +112,18 @@ def invest_willingness(analysis_dict):
                 total_investment+=0
                 total_investor_units+=float(j["resources_unit"])
     return total_investment/total_investor_units  
+# def invest_willingness(analysis_dict):
+#     total_investment=0
+#     total_investor_units=0
+#     for i,j in list(analysis_dict.items()):
+#         if i==j["investor"]:
+#             if j["investment_status"]=="success":
+#                 total_investment+=float(j["investor_invests_unit"])
+#                 total_investor_units+=float(j["resources_unit"])
+#             elif j["investment_status"]=="failed":
+#                 total_investment+=0
+#                 total_investor_units+=float(j["resources_unit"])
+#     return total_investment/total_investor_units  
     
 def persona_income(analysis_dict):
     result={}
@@ -133,9 +141,12 @@ def cheat_coef(analysis_dict):
             if i==j["trustee"]:
                 try:
                     p=float(j["trustee_plan"].split("retains")[-1].split("%")[0].strip())/100
-                    cheat_list[i]=max(0,1-(float(j["trustee_allocation"]["investor"])/((2-p)*float(j["investor_invests_unit"]))))
+                    p=1.0-p
+                    cheat_list[i]=max(0,1-(float(j["trustee_allocation"]["investor"])/((1+p)*float(j["investor_invests_unit"]))))
                 except:
                     cheat_list[i]=0
+            elif j["investment_status"]=="failed":
+                cheat_list[i]=0.5              
     return cheat_list
 
 def plot(x,y,title,xlabel,ylabel):
@@ -157,7 +168,7 @@ def plot_distribution(data_list,label,color):
     # 平均值和95%置信区间
     stats = df.groupby('year')['wealth'].agg(['mean', 'count', 'std']).reset_index()
     confidence = 0.95
-    h = stats['std'] * t.ppf((1 + confidence) / 2, stats['count'] - 1) / np.sqrt(stats['count'])
+    h = stats['std'] * t .ppf((1 + confidence) / 2, stats['count'] - 1) / np.sqrt(stats['count'])
 
     
     # plt.figure(figsize=(14, 7))
@@ -186,7 +197,7 @@ def Satisfaction_rate_v1(analysis_dict):
                     satisfy+=(rate==p)
                 except:
                     continue
-    return satisfy/total
+    return satisfy/total if total else 0
 def Satisfaction_rate_v2(analysis_dict):
     total=0
     satisfy=0
@@ -194,43 +205,69 @@ def Satisfaction_rate_v2(analysis_dict):
         if j["investment_status"]=="success":
             if i==j["trustee"]:
                 total+=1
-                if j["gossip_willing"]["investor"].lower()=="no" and j["gossip_willing"]["trustee"].lower()=="no":
+                if j["gossip_willing"]["investor"].split(",")[0].lower()=="no" and j["gossip_willing"]["trustee"].split(",")[0].lower()=="no":
                     satisfy+=1
-    return satisfy/total
+    return satisfy/total if total else 0
    
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("investment_s1")
-    sims2 = get_all_sim_info("investment_s2")
-    data1=[cheat_coef(i.analysis_dict) for i in sims1]
-    data2=[cheat_coef(i.analysis_dict) for i in sims2]
+    # sims1 = get_all_sim_info("investment_s7_with_repu_without_gossip")
+    # sims2 = get_all_sim_info("investment_s8_without_repu_gossip")
+    # sims3 = get_all_sim_info("investment_s9_without_repu_with_gossip")
+    # sims4= get_all_sim_info("investment_s10_with_repu_gossip")
+    sims1=get_all_sim_info("investment_s1")
+    sims2=get_all_sim_info("investment_s2")
+    sims3=get_all_sim_info("investment_s8_without_repu_gossip")
+    data1=[invest_willingness(i.analysis_dict) for i in sims1]  
+    data2=[invest_willingness(i.analysis_dict) for i in sims2]
+    data3=[invest_willingness(i.analysis_dict) for i in sims3]
+           
+    # data1=[Satisfaction_rate_v2(i.analysis_dict) for i in sims1]
+    # data2=[Satisfaction_rate_v2(i.analysis_dict) for i in sims2]
+    # data3=[Satisfaction_rate_v2(i.analysis_dict) for i in sims3]
+    # data4=[Satisfaction_rate_v2(i.analysis_dict) for i in sims4]
     # plt.figure(figsize=(14, 7))
-    # plt.plot(range(1,len(data1)+1),data1,label="with reputation",color="blue")
-    # plt.scatter(range(1,len(data1)+1),data1,color="blue")
-    # plt.plot(range(1,len(data2)+1),data2,label="without reputation",color="red")
-    # plt.scatter(range(1,len(data2)+1),data2,color="red")
+    # plt.plot(range(1,len(data1)+1),data4,label="with reputation and gossip",color="blue")
+    # plt.scatter(range(1,len(data1)+1),data4,color="blue")
+    # plt.plot(range(1,len(data2)+1),data3,label="without reputation but with gossip",color="red")
+    # plt.scatter(range(1,len(data2)+1),data3,color="red")
+    # plt.plot(range(1,len(data2)+1),data1,label="with reputation but without gossip",color="orange")
+    # plt.scatter(range(1,len(data2)+1),data1,color="orange")
+    # plt.plot(range(1,len(data2)+1),data2,label="without reputation and gossip",color="cyan")
+    # plt.scatter(range(1,len(data2)+1),data2,color="cyan")
     # plt.title('Satisfaction rate(v2)')
     # plt.xlabel("Round")
     # plt.ylabel("Satisfaction rate")
     # plt.legend()
     # plt.show()
     
-    # l1=Linear_Regression(range(1,len(data1)+1),data1,"Round","Invest willingness","")
-    # l2=Linear_Regression(range(1,len(data2)+1),data2,"Round","Invest willingness","")
-    # l1.OLS()
-    # l2.OLS()
-    # l1.visualization(color="blue",label1="Original data(with reputation)",label2="Regression results(with reputation)")
-    # l2.visualization(color="red",label1="Original data(without reputation)",label2="Regression results(without reputation)")
-    # plt.title('Gini coefficient')
-    # plt.xlabel("Round")
-    # plt.ylabel("Gini coefficient")
-    # plt.legend()
-    # plt.show()
-    #————————————————————————————————————————
-    plt.figure(figsize=(14, 7))
-    plot_distribution(data1,"with reputation","blue")
-    plot_distribution(data2,"without reputation","red")
-    plt.title("Cheat coefficient")
+    l1=Linear_Regression(range(1,len(data1)+1),data1,"Round","Invest willingness","")
+    l2=Linear_Regression(range(1,len(data2)+1),data2,"Round","Invest willingness","")
+    l3=Linear_Regression(range(1,len(data3)+1),data3,"Round","Invest willingness","")
+    # # l4=Linear_Regression(range(1,len(data4)+1),data4,"Round","Invest willingness","")
+    l1.OLS()
+    l2.OLS()
+    l3.OLS()
+    # # l4.OLS()
+    l1.visualization(color="blue",label1="Original data(with reputation and gossip)",label2="Regression results(with reputation and gossip)")
+    l2.visualization(color="red",label1="Original data(without reputation but with gossip)",label2="Regression results(without reputation but with gossip)")
+    # # l1.visualization(color="orange",label1="Original data(with reputation but without gossip)",label2="Regression results(with reputation but without gossip)")
+    l3.visualization(color="cyan",label1="Original data(without reputation and gossip)",label2="Regression results(without reputation and gossip)")
+    plt.title('Invest willingness')
     plt.xlabel("Round")
-    plt.ylabel("Cheat coefficient")
+    plt.ylabel("Invest willingness")
     plt.legend()
     plt.show()
+    #————————————————————————————————————————
+    # plt.figure(figsize=(14, 7))
+    # plot_distribution(data4,"with reputation and gossip","blue")
+    # plot_distribution(data3,"without reputation but with gossip","red")
+    # plot_distribution(data1,"with reputation but without gossip","orange")
+    # plot_distribution(data2,"without reputation and gossip","cyan")
+    # plot_distribution(data1,"Original data(with reputation and gossip)","blue")
+    # plot_distribution(data2,"Original data(without reputation but with gossip)","red")
+    # plot_distribution(data3,"Original data(without reputation and gossip)","cyan")
+    # plt.title("Cheat coefficient")
+    # plt.xlabel("Round")
+    # plt.ylabel("Cheat coefficient")
+    # plt.legend()
+    # plt.show()

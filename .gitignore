@@ -15,5 +15,4 @@ analysis/
 utils.py
 metrics.md
 plot/
-with_repu/
-without_repu/
+analysis_return/

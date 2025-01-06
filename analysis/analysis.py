@@ -214,18 +214,28 @@ def get_all_sim_info(sim_folder):
 
 
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("investment_s10_with_repu_gossip")
-    count = 0
-    os.makedirs("with_repu/s_10", exist_ok=True)
+    sims1 = get_all_sim_info("investment_s7_with_repu_without_gossip")
+    sims2 = get_all_sim_info("investment_s8_without_repu_gossip")
+    sims3 = get_all_sim_info("investment_s9_without_repu_with_gossip")
+    sims4= get_all_sim_info("investment_s10_with_repu_gossip")
+    count=0
     for sim in sims1:
-        count += 1
-        with open(f"with_repu/s_10/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
-
-    sims2 = get_all_sim_info("investment_s7_with_repu_without_gossip")
-    count = 0
-    os.makedirs("with_repu/s_7", exist_ok=True)
+        count+=1
+        with open(f"./with_repu_without_gossip/analysis_{count}.json","w") as f:
+            json.dump(sim.analysis_dict,f,indent=4)
+    count=0
     for sim in sims2:
-        count += 1
-        with open(f"with_repu/s_7/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
+        count+=1
+        with open(f"./without_repu_without_gossip/analysis_{count}.json","w") as f:
+            json.dump(sim.analysis_dict,f,indent=4)
+    count=0
+    for sim in sims3:
+        count+=1
+        with open(f"./without_repu_with_gossip/analysis_{count}.json","w") as f:
+            json.dump(sim.analysis_dict,f,indent=4)
+    count=0
+    for sim in sims4:
+        count+=1
+        with open(f"./with_repu_gossip/analysis_{count}.json","w") as f:
+            json.dump(sim.analysis_dict,f,indent=4)
+    
