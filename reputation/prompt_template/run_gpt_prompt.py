@@ -499,7 +499,7 @@ def run_gpt_prompt_reputation_update_after_stage1_trustee_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_reputation_update_after_gossip_v1(
+def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
     init_persona,
     target_persona,
     gossip,
@@ -583,7 +583,114 @@ def run_gpt_prompt_reputation_update_after_gossip_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/reputation_update_after_gossip_v1.txt"
+    prompt_template = "prompt/reputation_update_after_gossip_invest_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        gossip,
+        target_persona_role,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
+    init_persona,
+    target_persona,
+    gossip,
+    target_persona_role,
+    total_number_of_people,
+    number_of_bidirectional_connections,
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        gossip,
+        target_persona_role,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
+        prompt_input += [target_persona.scratch.ID]
+        prompt_input += [gossip["gossiper name"]]
+        target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(target_persona_reputation)]
+        prompt_input += [json.dumps(gossip)]
+        if target_persona_role.lower() == "investor":
+            prompt_input += ["Investor"]
+        elif target_persona_role.lower() == "trustee":
+            prompt_input += ["Trustee"]
+        prompt_input += [total_number_of_people]
+        prompt_input += [number_of_bidirectional_connections]
+        prompt_input += [target_persona_role]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=""):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=""):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+        for _, val in res.items():
+            id = val["ID"]
+            if val["role"].lower() == "investor":
+                final_res[f"Investor_{id}"] = val
+            elif val["role"].lower() == "trustee":
+                final_res[f"Trustee_{id}"] = val
+        if len(final_res) == 1:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/reputation_update_after_gossip_sign_up_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -1310,6 +1417,143 @@ def run_gpt_prompt_disconnection_trustee_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
+def run_gpt_prompt_connection_build_after_chat_sign_up_v1(
+    init_persona, target_persona, target_persona_role
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        target_persona_role,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
+        target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(target_persona_reputation)]
+        prompt_input += [init_persona.scratch.learned]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        res = json.loads(response)
+        return res
+
+    def get_fail_safe():
+        fs = []
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/connection_build_after_chat_sign_up_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        target_persona_role,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+def run_gpt_prompt_disconnection_after_chat_sign_up_v1(
+    init_persona, target_persona, target_persona_role
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        target_persona_role,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
+        target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(target_persona_reputation)]
+        prompt_input += [init_persona.scratch.learned]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        res = json.loads(response)
+        return res
+
+    def get_fail_safe():
+        fs = []
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/disconnection_after_chat_sign_up_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        target_persona_role,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
 def run_gpt_prompt_disconnection_after_gossip_v1(
     init_persona, target_persona, target_persona_role, gossiper_name
 ):
@@ -1376,16 +1620,12 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_self_reputation_init_sign_upv1(
-    init_persona, target_persona, complain_info
-):
-    def create_prompt_input(
-        init_persona,
-    ):
+def run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona):
+    def create_prompt_input(init_persona):
         prompt_input = []
         prompt_input += [init_persona.scratch.name]
-        prompt_input += [target_persona.scratch.learned]
-        prompt_input += [target_persona.scratch.ID]
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.ID]
 
         return prompt_input
 
@@ -1430,11 +1670,182 @@ def run_gpt_prompt_self_reputation_init_sign_upv1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/first_order_evaluation_v1.txt"
+    prompt_template = "prompt/self_reputation_init_sign_up_v1.txt"
+    prompt_input = create_prompt_input(init_persona)
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
+    init_persona, sum_convo
+):
+    def create_prompt_input(init_persona, sum_convo):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [init_persona.scratch.ID]
+        prompt_input += [sum_convo]
+        prompt_input += [
+            round(
+                (
+                    init_persona.scratch.success_chat_num
+                    / init_persona.scratch.total_chat_num
+                ),
+                3,
+            )
+        ]
+        self_repu = init_persona.reputationDB.get_targets_individual_reputation(
+            init_persona.scratch.ID, "resident"
+        )
+        prompt_input += [json.dumps(self_repu)]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+
+        if len(final_res) == 1:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "Error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/self_reputation_update_after_chat_sign_up_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        sum_convo,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
+    init_persona,
+    target_persona,
+    sum_convo,
+    total_number_of_people,
+    number_of_bidirectional_connections,
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        sum_convo,
+        total_number_of_people,
+        number_of_bidirectional_connections,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.name]
+        prompt_input += [target_persona.name]
+        prompt_input += [sum_convo]
+        prompt_input += [target_persona.scratch.ID]
+        other_repu = init_persona.reputationDB.get_targets_individual_reputation(
+            target_persona.scratch.ID, "resident"
+        )
+        prompt_input += [json.dumps(other_repu)]
+        prompt_input += [total_number_of_people]
+        prompt_input += [number_of_bidirectional_connections]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+
+        if len(final_res) == 1:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "Error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/other_reputation_update_after_chat_sign_up_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
-        complain_info,
+        sum_convo,
+        total_number_of_people,
+        number_of_bidirectional_connections,
     )
     prompt = generate_prompt(prompt_input, prompt_template)
 

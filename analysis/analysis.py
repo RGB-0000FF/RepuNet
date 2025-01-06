@@ -11,7 +11,7 @@ sys.path.append(parent_dir)
 
 
 class Analysis:
-    def __init__(self, sim_code, with_reputation=True):
+    def __init__(self, sim_code, sim, with_reputation=True):
         self.sim_code = f"{sim_code}"
         sim_folder = f"{fs_storage}/{self.sim_code}"
         self.with_reputation = with_reputation
@@ -25,11 +25,65 @@ class Analysis:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(
-                persona_name, persona_folder, self.with_reputation)
+            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
-        self.G = self._set_graph()
         self._set_analysis_dict()
+        if sim and "invest" in sim:
+            self.set_graph_invest()
+        elif sim and "sign" in sim:
+            self.set_graph_sign_up()
+
+    def set_graph_sign_up(self):
+        self._set_graph_r()
+
+    def set_graph_invest(self):
+        self._set_graph_i()
+        self._set_graph_t()
+
+    def _set_graph_r(self):
+        # investor graph
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind[0] not in black_list:
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
+        self.G["resident"] = G
+
+    def _set_graph_i(self):
+        # investor graph
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind[0] not in black_list and bind[1] != "trustee":
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
+        self.G["investor"] = G
+
+    def _set_graph_t(self):
+        # trustee graph
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind[0] not in black_list and bind[1] != "investor":
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
+        self.G["trustee"] = G
 
     def _save_temp_invest_s2(self, name1, name2):
         with open(
@@ -60,8 +114,7 @@ class Analysis:
 
                 if name1 in investment_result and name2 in investment_result:
                     Trustee = (
-                        investment_result.split(
-                            "| Trustee: ")[-1].split(":")[0].strip()
+                        investment_result.split("| Trustee: ")[-1].split(":")[0].strip()
                     )
                     Investor = (
                         investment_result.split("| Investor: ")[-1]
@@ -186,22 +239,8 @@ class Analysis:
                     "trustee": t_gossip_willing,
                 }
 
-    def _set_graph(self):
-        G = nx.DiGraph()
-        for _, persona in self.personas.items():
-            if not G.has_node(persona.name):
-                G.add_nodes_from([persona.name])
-            black_list = list(persona.scratch.relationship["black_list"])
-            bind_list = list(persona.scratch.relationship["bind_list"])
-            for bind in bind_list:
-                if bind not in black_list:
-                    if not G.has_node(bind):
-                        G.add_nodes_from([bind])
-                    G.add_edges_from([(persona.name, bind)])
-        return G
 
-
-def get_all_sim_info(sim_folder, with_reputation=True):
+def get_all_sim_info(sim_folder, sim, with_reputation=True):
     sim_steps = []
     sims = []
     for sim_code in os.listdir(f"{fs_storage}/{sim_folder}"):
@@ -210,7 +249,7 @@ def get_all_sim_info(sim_folder, with_reputation=True):
         sim_steps.append(sim_code)
         sim_steps.sort(key=lambda x: int(x.split("_")[1]))
     for sim_step in sim_steps:
-        sims.append(Analysis(f"{sim_folder}/{sim_step}", with_reputation))
+        sims.append(Analysis(f"{sim_folder}/{sim_step}", sim, with_reputation))
     return sims
 
 
@@ -218,25 +257,24 @@ if __name__ == "__main__":
     sims1 = get_all_sim_info("investment_s7_with_repu_without_gossip")
     sims2 = get_all_sim_info("investment_s8_without_repu_gossip")
     sims3 = get_all_sim_info("investment_s9_without_repu_with_gossip")
-    sims4= get_all_sim_info("investment_s10_with_repu_gossip")
-    count=0
+    sims4 = get_all_sim_info("investment_s10_with_repu_gossip")
+    count = 0
     for sim in sims1:
-        count+=1
-        with open(f"./with_repu_without_gossip/analysis_{count}.json","w") as f:
-            json.dump(sim.analysis_dict,f,indent=4)
-    count=0
+        count += 1
+        with open(f"./with_repu_without_gossip/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)
+    count = 0
     for sim in sims2:
-        count+=1
-        with open(f"./without_repu_without_gossip/analysis_{count}.json","w") as f:
-            json.dump(sim.analysis_dict,f,indent=4)
-    count=0
+        count += 1
+        with open(f"./without_repu_without_gossip/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)
+    count = 0
     for sim in sims3:
-        count+=1
-        with open(f"./without_repu_with_gossip/analysis_{count}.json","w") as f:
-            json.dump(sim.analysis_dict,f,indent=4)
-    count=0
+        count += 1
+        with open(f"./without_repu_with_gossip/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)
+    count = 0
     for sim in sims4:
-        count+=1
-        with open(f"./with_repu_gossip/analysis_{count}.json","w") as f:
-            json.dump(sim.analysis_dict,f,indent=4)
-    
+        count += 1
+        with open(f"./with_repu_gossip/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)

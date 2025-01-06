@@ -1,0 +1,20 @@
+Variables:
+!<INPUT 0>! -- focal agent name
+!<INPUT 1>! -- target agent name
+!<INPUT 2>! -- conversation content
+
+
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:**
+You are !<INPUT 0>!. Summarize your recent conversation with !<INPUT 1>!.
+Include the main topics discussed and the viewpoints of each agent.
+
+**Conversation**
+!<INPUT 2>!
+
+**Output:**
+- summary:
+- !<INPUT 0>!'s Viewpoint:
+- !<INPUT 1>!'s Viewpoint:

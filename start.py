@@ -63,7 +63,7 @@ class Creation:
                     if not G.has_node(bind[0]):
                         G.add_nodes_from([bind[0]])
                     G.add_edges_from([(persona.name, bind[0])])
-        self.G["investor"] = G
+        self.G["resident"] = G
 
     def _set_graph_i(self):
         # investor graph

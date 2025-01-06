@@ -1,0 +1,18 @@
+Variables:
+!<INPUT 0>! -- agent learned
+!<INPUT 1>! -- target name
+!<INPUT 2>! -- communication Info
+!<INPUT 3>! -- agent name
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. A satisfactory interaction depends on your “Learned”. Based on the “Communication Info” and your “Innate”, are you satisfied with !<INPUT 1>!’s behavior? Output “Yes” and explain why if you are satisfied. If not, output “No” and explain why.
+
+**Communication Info:**
+!<INPUT 2>!
+
+**Innate:**
+!<INPUT 0>!
+
+**Desired format:**
+<Yes or No>, <Reason in one sentence>.

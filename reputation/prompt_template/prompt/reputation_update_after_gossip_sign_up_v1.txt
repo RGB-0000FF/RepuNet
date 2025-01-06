@@ -1,0 +1,59 @@
+Variables:
+!<INPUT 0>! -- agent's name
+!<INPUT 1>! -- target's name
+!<INPUT 2>! -- target's ID
+!<INPUT 3>! -- gossiper's name
+!<INPUT 4>! -- target's previous reputation
+!<INPUT 5>! -- gossip content
+!<INPUT 6>! -- target's identity(Investor/Trustee)
+!<INPUT 7>! -- total number of people in the community
+!<INPUT 8>! -- number of bidirectional connections established
+!<INPUT 9>! — target’s role
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Recently, you heard gossip about !<INPUT 1>! as !<INPUT 9>! from !<INPUT 3>!. This has changed !<INPUT 1>!'s reputation in your heart. Please update a brand new reputation based on !<INPUT 1>!'s previous reputation and evaluated gossip info.
+
+Please output in the desired format.
+
+**Evaluated Gossip INFO:**
+!<INPUT 5>!
+
+**Previous reputation:**
+!<INPUT 4>!
+
+**Connection status:**
+!<INPUT 1>! established !<INPUT 8>! bidirectional connections among !<INPUT 7>! people.
+
+**Reputation Principles:**
+
+- The higher the credibility level of the evaluated gossip information, the more trustworthy the gossip is, and the greater its impact on the complained agent’s reputation. Conversely, the lower the credibility, the less impact it has on the complained agent’s reputation.
+- People can establish connections with others within the community, and if two people establish a connection with each other, we consider them to have a bidirectional connection. The number of bidirectional connections a person possesses can reflect their reputation. The more bidirectional connections there are, the better the reputation of the community and the stronger the potential for cooperative behavior.
+- Evaluate your and complained agent’s reputation based on these traits:
+    - **Trustworthiness**: Reliability in being honest or truthful.
+    - **Pro-sociality**: Tendency to benefit others or society (e.g., helping, sharing, cooperating).
+    - **Competence**: Ability to complete tasks successfully or efficiently.
+    - **Dominance**: Power and influence over others.
+    - **Norm compliance**: Adherence to social norms.
+
+**Desired Format:** JSON
+{
+"!<INPUT 6>!_!<INPUT 2>!": {
+"ID": !<INPUT 2>!,
+"scenario": "investment",
+"role": "!<INPUT 9>!",
+"name": "!<INPUT 1>!",
+"content": "a brief description of !<INPUT 1>! reputation",
+"numerical record": "(x1, x2, x3, x4, x5)"
+}
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very
+bad, bad, neutral, good, very good} and the “content” of their reputation. The
+format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+
+Note: only output the reputation in desired format.

@@ -6,7 +6,9 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_second_order_evaluation_v1,
 )
 from .reputation_update import reputation_update_invest
-from .social_network import social_network_update_after_gossip_invest
+from .reputation_update import reputation_update_sign_up
+
+from .social_network import social_network_update_after_gossip
 
 
 def first_order_gossip(
@@ -64,30 +66,53 @@ def first_order_gossip(
         )[0]
         target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
         # reputation update
-        update_info = {
-            "reason": "reputation update after first order gossip",
-            "init_persona_role": init_persona_role,
-            "target_persona_role": complain_persona_role,
-            "gossip": gossip,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(
-                    personas[complain_info["complained name"]],
-                    G[complain_info["complained role"]],
-                )
-            ),
-        }
-        reputation_update_invest(
-            target_persona,
-            personas[complain_info["complained name"]],
-            update_info,
-        )
-        social_network_update_after_gossip_invest(
+        if complain_info["complained role"] != "resident":
+            update_info = {
+                "reason": "reputation update after first order gossip",
+                "init_persona_role": init_persona_role,
+                "target_persona_role": complain_persona_role,
+                "gossip": gossip,
+                "total_number_of_people": len(personas),
+                "number_of_bidirectional_connections": len(
+                    get_d_connect(
+                        personas[complain_info["complained name"]],
+                        G[complain_info["complained role"]],
+                    )
+                ),
+            }
+            reputation_update_invest(
+                target_persona,
+                personas[complain_info["complained name"]],
+                update_info,
+            )
+
+        else:
+            update_info = {
+                "reason": "reputation update after first order gossip",
+                "init_persona_role": init_persona_role,
+                "target_persona_role": complain_persona_role,
+                "gossip": gossip,
+                "total_number_of_people": len(personas),
+                "number_of_bidirectional_connections": len(
+                    get_d_connect(
+                        personas[complain_info["complained name"]],
+                        G[complain_info["complained role"]],
+                    )
+                ),
+            }
+            reputation_update_sign_up(
+                target_persona,
+                personas[complain_info["complained name"]],
+                update_info,
+            )
+
+        social_network_update_after_gossip(
             target_persona,
             personas[complain_info["complained name"]],
             complain_persona_role,
             init_persona.name,
         )
+
         if gossip[0]["whether to spread gossip second-hand"] == "Yes":
             complain_info = {
                 "original gossiper name": init_persona.name,
@@ -164,22 +189,39 @@ def second_order_gossip(
             gossip, gossip_target_persona.scratch.curr_step
         )
         # reputation update
-        update_info = {
-            "reason": "reputation update after second order gossip",
-            "init_persona_role": init_persona_role,
-            "target_persona_role": complain_persona_role,
-            "gossip": gossip,
-            "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(complain_persona, G[complain_info["complained role"]])
-            ),
-        }
-        reputation_update_invest(
-            gossip_target_persona,
-            complain_persona,
-            update_info,
-        )
-        social_network_update_after_gossip_invest(
+        if complain_info["complained role"] != "resident":
+            update_info = {
+                "reason": "reputation update after second order gossip",
+                "init_persona_role": init_persona_role,
+                "target_persona_role": complain_persona_role,
+                "gossip": gossip,
+                "total_number_of_people": len(personas),
+                "number_of_bidirectional_connections": len(
+                    get_d_connect(complain_persona, G[complain_info["complained role"]])
+                ),
+            }
+            reputation_update_invest(
+                gossip_target_persona,
+                complain_persona,
+                update_info,
+            )
+        else:
+            update_info = {
+                "reason": "reputation update after second order gossip",
+                "init_persona_role": init_persona_role,
+                "target_persona_role": complain_persona_role,
+                "gossip": gossip,
+                "total_number_of_people": len(personas),
+                "number_of_bidirectional_connections": len(
+                    get_d_connect(complain_persona, G[complain_info["complained role"]])
+                ),
+            }
+            reputation_update_sign_up(
+                gossip_target_persona,
+                complain_persona,
+                update_info,
+            )
+        social_network_update_after_gossip(
             gossip_target_persona,
             complain_persona,
             complain_persona_role,

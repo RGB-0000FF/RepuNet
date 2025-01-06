@@ -1,0 +1,53 @@
+Variables:
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- target name
+!<INPUT 2>! -- Encounter derived info
+!<INPUT 3>! -- Target ID
+!<INPUT 4>! -- previous reputation
+!<INPUT 5>! -- total number of people in the community
+!<INPUT 6>! -- number of bidirectional connections established
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 0>!. Update !<INPUT 1>!'s reputation based on:
+1. "Updated info," 2. "Reputation Principles." 3. “Number of bidirectional connections.”4. "!<INPUT 1>!'s Previous Reputation"
+Please output in the desired format.
+
+**Updated Info:**
+- Encounter derived info: !<INPUT 2>!
+
+
+**total number of people in the community:**!<INPUT 5>!
+**number of bidirectional connections established:**!<INPUT 6>!
+
+**Reputation Principles:**
+Evaluate the agent based on the following qualities:
+- **Trustworthiness**: Reliability in being honest or truthful.
+- **Prosociality**: Tendency to benefit others or society (e.g., helping, sharing, cooperating).
+- **Competence**: Ability to complete tasks successfully or efficiently.
+- **Dominance**: Power and influence over others.
+- **Norm compliance**: Adherence to social norms.
+- **Number of bidirectional connections:**The more bidirectional connections established, the better reputation a person has in the group.
+
+**!<INPUT 1>!'s Previous Reputation:**
+!<INPUT 4>!
+
+**Desired Format:**
+
+{
+"Resident_!<INPUT 3>!": {
+"ID": !<INPUT 3>!,
+"name": "!<INPUT 1>!",
+"scenario": "which community it belongs to, A or B",
+"relationship": "choose one from {negative, neutral, positive} to describe your relationship with this individual",
+"content": "a simple description of its reputation in natural language",
+"numerical record": "(x1, x2, x3, x4, x5)"
+}
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very
+bad, bad, neutral, good, very good} and the “content” of their reputation. The
+format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).

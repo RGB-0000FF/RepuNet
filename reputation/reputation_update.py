@@ -1,18 +1,21 @@
 from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_reputation_update_after_stage4_investor_v1,
     run_gpt_prompt_reputation_update_after_stage4_trustee_v1,
-    run_gpt_prompt_reputation_update_after_gossip_v1,
+    run_gpt_prompt_reputation_update_after_gossip_invest_v1,
+    run_gpt_prompt_reputation_update_after_gossip_sign_up_v1,
     run_gpt_prompt_update_learned_in_description_v1,
     run_gpt_prompt_reputation_update_after_stage1_trustee_v1,
     run_gpt_prompt_reputation_update_after_stage1_investor_v1,
-    run_gpt_prompt_self_reputation_init_sign_upv1,
+    run_gpt_prompt_self_reputation_init_sign_up_v1,
+    run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1,
+    run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1,
 )
 from .social_network import *
 
 
 def reputation_init_sign_up(init_persona):
-    res = run_gpt_prompt_self_reputation_init_sign_upv1(init_persona)[0]
-    if "error" in res.lower():
+    res = run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona)[0]
+    if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
     init_persona.reputationDB.init_individual_reputation(
         res, init_persona.scratch.curr_step, "sign up repu init"
@@ -39,22 +42,23 @@ def reputation_update_invest(init_persona, target_persona, update_info):
         )
 
 
-def reputation_update_sign_up(init_persona, update_info):
+def reputation_update_sign_up(init_persona, target_persona, update_info):
     if "interaction" in update_info["reason"]:
-        reputation_update_after_interaction_sign_up(init_persona, update_info)
+        reputation_update_after_interaction_sign_up(
+            init_persona, target_persona, update_info
+        )
+    elif "gossip" in update_info["reason"]:
+        reputation_update_after_gossip_sign_up(
+            init_persona, target_persona, update_info
+        )
+        # NETWORK AFTER GOSSIP IS IN THE GOSSIP PART
+        return
 
-    social_network_update_sign_up(init_persona, update_info)
- 
+    social_network_update_sign_up(init_persona, target_persona)
 
 
-
-def reputation_update_after_interaction_sign_up(init_persona, target_persona):
-    # TODO: Implement sign up reputation update
-    pass
-
-
-def reputation_update_after_gossip_invest(init_persona, target_persona, update_info):
-    res = run_gpt_prompt_reputation_update_after_gossip_v1(
+def reputation_update_after_gossip_sign_up(init_persona, target_persona, update_info):
+    res = run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
         init_persona,
         target_persona,
         update_info["gossip"][0],
@@ -62,7 +66,52 @@ def reputation_update_after_gossip_invest(init_persona, target_persona, update_i
         update_info["total_number_of_people"],
         update_info["number_of_bidirectional_connections"],
     )[0]
-    if "error" in res.lower():
+    if type(res) is str and "error" in res.lower():
+        raise Exception("GPT ERROR")
+    init_persona.reputationDB.update_individual_reputation(
+        res, init_persona.scratch.curr_step, update_info["reason"]
+    )
+    # print(res)
+
+
+def reputation_update_after_interaction_sign_up(
+    init_persona, target_persona, update_info
+):
+    # Init persona self reputation update
+    res_s = run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
+        init_persona, update_info["sum_convo"]
+    )[0]
+    res_o = run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
+        init_persona,
+        target_persona,
+        update_info["sum_convo"],
+        update_info["total_number_of_people"],
+        update_info["number_of_bidirectional_connections"],
+    )[0]
+    if type(res_s) is str and "error" in res_s.lower():
+        raise Exception("GPT ERROR")
+    if type(res_o) is str and "error" in res_o.lower():
+        raise Exception("GPT ERROR")
+
+    init_persona.reputationDB.update_individual_reputation(
+        res_o, init_persona.scratch.curr_step, update_info["reason"]
+    )
+    init_persona.reputationDB.update_individual_reputation(
+        res_s, init_persona.scratch.curr_step, update_info["reason"]
+    )
+    learned_update(init_persona, "resident")
+
+
+def reputation_update_after_gossip_invest(init_persona, target_persona, update_info):
+    res = run_gpt_prompt_reputation_update_after_gossip_invest_v1(
+        init_persona,
+        target_persona,
+        update_info["gossip"][0],
+        update_info["target_persona_role"],
+        update_info["total_number_of_people"],
+        update_info["number_of_bidirectional_connections"],
+    )[0]
+    if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
@@ -93,7 +142,7 @@ def reputation_update_after_stage4_invest(init_persona, target_persona, update_i
             update_info["total_number_of_people"],
             update_info["number_of_bidirectional_connections"],
         )[0]
-    if "error" in res.lower():
+    if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
@@ -126,7 +175,7 @@ def reputation_update_after_stage1_invest(init_persona, target_persona, update_i
             update_info["total_number_of_people"],
             update_info["number_of_bidirectional_connections"],
         )[0]
-    if "error" in res.lower():
+    if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
@@ -138,6 +187,8 @@ def learned_update(init_persona, init_persona_role):
     res = run_gpt_prompt_update_learned_in_description_v1(
         init_persona, init_persona_role
     )[0]
+    if "error" in res.lower():
+        raise Exception("GPT ERROR")
     init_persona.scratch.learned = res
 
 

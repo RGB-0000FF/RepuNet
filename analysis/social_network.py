@@ -58,85 +58,71 @@ class SocialNetworkAnalysis:
         os.makedirs(save_path, exist_ok=True)
         for sim in self.sims:
             result = dict()
-            G = sim.G
-            for n in G.nodes():
-                p = sim.personas[n]
-                d_connect = get_d_connect(p, G)
-                repu_score_i = get_reputation_score(
-                    p, "investor", sim.personas)
-                repu_score_t = get_reputation_score(p, "trustee", sim.personas)
-                result[n] = {
-                    "d_connect": d_connect,
-                    "repu_score_i": repu_score_i,
-                    "repu_score_t": repu_score_t,
-                }
-            with open(save_path + f"/{sim.step}.json", "w") as f:
-                json.dump(result, f, indent=4)
+            Gs = sim.G
+            for key, G in Gs.items():
+                for n in G.nodes():
+                    p = sim.personas[n]
+                    d_connect = get_d_connect(p, G)
+                    repu_score = get_reputation_score(p, key, sim.personas)
+                    result[n] = {
+                        "d_connect": d_connect,
+                        f"repu_score_{key}": repu_score,
+                    }
+                with open(save_path + f"/{key}_{sim.step}.json", "w") as f:
+                    json.dump(result, f, indent=4)
 
     def draw_social_network(self, save_folder):
         for sim in self.sims:
-            G = sim.G
-            plt.figure(figsize=(20, 20))
-            pos = nx.spring_layout(G, k=1.5, iterations=150)
-            if self.with_repu:
-                node_sizes, node_colors, inner_colors = self._set_nodes_reputation(
-                    G, sim.personas
-                )
-            else:
-                node_sizes, node_colors = self._set_nodes_without_reputation(
-                    G, sim.personas
-                )
-            edge_colors, edge_styles = self._set_edges(G, sim.personas)
-
-            # Draw outer circles first
-            # investor reputation color
-            for i, node in enumerate(G.nodes()):
-                nx.draw_networkx_nodes(
-                    G,
-                    pos,
-                    nodelist=[node],
-                    node_size=node_sizes[i],
-                    node_color=[node_colors[i]],
-                    node_shape="o",
-                    alpha=0.5,
-                )
+            Gs = sim.G
+            for key, G in Gs.items():
+                plt.figure(figsize=(20, 20))
+                pos = nx.spring_layout(G, k=1.5, iterations=150)
                 if self.with_repu:
-                    # Draw inner circles
-                    # trustee reputation color
+                    node_sizes, node_colors = self._set_nodes_reputation(
+                        G, sim.personas, key
+                    )
+                else:
+                    node_sizes, node_colors = self._set_nodes_without_reputation(
+                        G, sim.personas
+                    )
+                edge_colors, edge_styles = self._set_edges(G, sim.personas)
+
+                # Draw outer circles first
+                # investor reputation color
+                for i, node in enumerate(G.nodes()):
                     nx.draw_networkx_nodes(
                         G,
                         pos,
                         nodelist=[node],
-                        node_size=node_sizes[i]
-                        * 0.6,  # Inner circle is 60% of outer circle
-                        node_color=[inner_colors[i]],
+                        node_size=node_sizes[i],
+                        node_color=[node_colors[i]],
                         node_shape="o",
-                        alpha=0.7,
+                        alpha=0.5,
                     )
 
-            for i, (u, v) in enumerate(G.edges()):
-                if edge_colors[i] == "red":
-                    alpha = 1
-                elif edge_colors[i] == "blue":
-                    alpha = 0.5
-                else:
-                    alpha = 0.3
-                nx.draw_networkx_edges(
-                    G,
-                    pos,
-                    edgelist=[(u, v)],  # 只绘制当前的边
-                    edge_color=[edge_colors[i]],  # 设置边的颜色为 RGB
-                    connectionstyle=edge_styles[i],  # 设置连接样式
-                    arrowstyle="->",
-                    arrowsize=15,
-                    alpha=alpha,
-                )
+                for i, (u, v) in enumerate(G.edges()):
+                    if edge_colors[i] == "red":
+                        alpha = 1
+                    elif edge_colors[i] == "blue":
+                        alpha = 0.5
+                    else:
+                        alpha = 0.3
+                    nx.draw_networkx_edges(
+                        G,
+                        pos,
+                        edgelist=[(u, v)],  # 只绘制当前的边
+                        edge_color=[edge_colors[i]],  # 设置边的颜色为 RGB
+                        connectionstyle=edge_styles[i],  # 设置连接样式
+                        arrowstyle="->",
+                        arrowsize=15,
+                        alpha=alpha,
+                    )
 
-            nx.draw_networkx_labels(G, pos, font_size=10)
-            self._save_social_network(sim, plt, save_folder)
-            plt.close()
+                nx.draw_networkx_labels(G, pos, font_size=10)
+                self._save_social_network(sim, plt, save_folder, key)
+                plt.close()
 
-    def _save_social_network(self, sim, plt, save_folder):
+    def _save_social_network(self, sim, plt, save_folder, key):
         # Convert to absolute path if save_folder is relative
         if not os.path.isabs(save_folder):
             save_folder = os.path.abspath(save_folder)
@@ -145,14 +131,13 @@ class SocialNetworkAnalysis:
         save_path = os.path.join(save_folder, "social_network")
         os.makedirs(save_path, exist_ok=True)
 
-        file_path = os.path.join(save_path, f"{sim.step}.png")
+        file_path = os.path.join(save_path, f"{key}_{sim.step}.png")
         plt.savefig(file_path)
         # plt.show()
 
-    def _set_nodes_reputation(self, G, ps):
+    def _set_nodes_reputation(self, G, ps, key):
         node_size = []
         outer_color = []  # investor reputation color
-        inner_color = []  # trustee reputation color
         for n in G.nodes():
             p = ps[n]
             d_connect = get_d_connect(p, G)
@@ -162,26 +147,18 @@ class SocialNetworkAnalysis:
                 node_size.append(len(d_connect) * 1000)
 
             # Get reputation scores for both roles
-            repu_score_i = get_reputation_score(p, "investor", ps)
-            repu_score_t = get_reputation_score(p, "trustee", ps)
+            repu_score = get_reputation_score(p, key, ps)
 
             # Set outer color (investor reputation)
-            if repu_score_i > 0:
+            if repu_score > 0:
                 outer_color.append((0.663, 0.820, 0.557))  # Light green
-            elif repu_score_i < 0:
+            elif repu_score < 0:
                 outer_color.append((0.788, 0.494, 0.506))  # Light red
             else:
                 outer_color.append((0.5, 0.5, 0.5))  # Light gray
 
-            # Set inner color (trustee reputation)
-            if repu_score_t > 0:
-                inner_color.append((0.4, 0.7, 0.4))  # Dark green
-            elif repu_score_t < 0:
-                inner_color.append((0.7, 0.4, 0.4))  # Dark red
-            else:
-                inner_color.append((0.3, 0.3, 0.3))  # Dark gray
 
-        return node_size, outer_color, inner_color
+        return node_size, outer_color
 
     def _set_nodes_without_reputation(self, G, ps):
         node_size = []
