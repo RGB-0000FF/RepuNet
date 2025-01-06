@@ -38,11 +38,12 @@ class GossipDB:
                     self.gossips_incredible_count += 1
 
         else:
-            print(f"INIT GossipDB: {f_saved}/gossip_database.json could not find")
+            print(
+                f"INIT GossipDB: {f_saved}/gossip_database.json could not find")
 
     def save(self, gossip_folder):
         with open(gossip_folder + "/gossip_database.json", "w") as f:
-            json.dump(self.gossips, f)
+            json.dump(self.gossips, f, indent=4)
 
     def add_gossip(self, gossips, curr_step):
         print("GossipDB.add_gossip()")

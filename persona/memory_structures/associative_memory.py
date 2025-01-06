@@ -170,6 +170,7 @@ class AssociativeMemory:
         json.dump(
             [node.toJSON() for node in self.id_to_node.values()],
             open(f"{self.base_path}/nodes.json", "w"),
+            indent=4,
         )
 
     def _add(

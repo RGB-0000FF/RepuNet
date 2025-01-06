@@ -62,7 +62,8 @@ class SocialNetworkAnalysis:
             for n in G.nodes():
                 p = sim.personas[n]
                 d_connect = get_d_connect(p, G)
-                repu_score_i = get_reputation_score(p, "investor", sim.personas)
+                repu_score_i = get_reputation_score(
+                    p, "investor", sim.personas)
                 repu_score_t = get_reputation_score(p, "trustee", sim.personas)
                 result[n] = {
                     "d_connect": d_connect,
@@ -215,12 +216,12 @@ class SocialNetworkAnalysis:
 if __name__ == "__main__":
     # init set
     sim_folders = [
-        "investment_s10_with_repu_gossip",
-        "investment_s7_with_repu_without_gossip",
-        "investment_s8_without_repu_gossip",
-        "investment_s9_without_repu_with_gossip",
+        "investment_s1",
+        "investment_s2",
+        # "investment_s8_without_repu_gossip",
+        # "investment_s9_without_repu_with_gossip",
     ]
-    with_repu = [True, True, False, False]
+    with_repu = [True, False]
     for i, sim_folder in enumerate(sim_folders):
         if i != 0:
             os.chdir("../")

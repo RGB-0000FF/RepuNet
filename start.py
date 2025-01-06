@@ -24,6 +24,7 @@ class Creation:
 
         self.step = reverie_meta["step"]
         self.personas = dict()
+        self.G = dict()
         self.with_reputation = (
             "y" in with_reputation.lower() and "n" not in with_reputation.lower()
         )
@@ -31,11 +32,14 @@ class Creation:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
+            curr_persona = Persona(
+                persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
-        self.set_graph()
+        self.set_graph_i()
+        self.set_graph_t()
 
-    def set_graph(self):
+    def set_graph_i(self):
+        # investor graph
         G = nx.DiGraph()
         for _, persona in self.personas.items():
             if not G.has_node(persona.name):
@@ -43,11 +47,26 @@ class Creation:
             black_list = list(persona.scratch.relationship["black_list"])
             bind_list = list(persona.scratch.relationship["bind_list"])
             for bind in bind_list:
-                if bind not in black_list:
+                if bind[0] not in black_list and bind[1] != "trustee":
                     if not G.has_node(bind):
                         G.add_nodes_from([bind])
                     G.add_edges_from([(persona.name, bind)])
-        self.G = G
+        self.G["investor"] = G
+
+    def set_graph_t(self):
+        # trustee graph
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind[0] not in black_list and bind[1] != "investor":
+                    if not G.has_node(bind):
+                        G.add_nodes_from([bind])
+                    G.add_edges_from([(persona.name, bind)])
+        self.G["trustee"] = G
 
     def save(self):
         sim_folder = f"{fs_storage}/{self.sim_code}"
@@ -93,7 +112,8 @@ class Creation:
 
             if os.path.exists(f"{new_sim_folder}/investment results"):
                 shutil.rmtree(f"{new_sim_folder}/investment results")
-            self.set_graph()
+            self.set_graph_i()
+            self.set_graph_t()
             print(
                 f"sim_code: {self.sim_code}-----------------------------------------------"
             )
@@ -187,7 +207,8 @@ class Creation:
                     self.save()
 
                 elif (
-                    sim_command[:3].lower() == "run" and "invest" in sim_command.lower()
+                    sim_command[:3].lower() == "run"
+                    and "invest" in sim_command.lower()
                 ):
                     # Runs the number of steps specified in the prompt.
                     # Example: run 1000

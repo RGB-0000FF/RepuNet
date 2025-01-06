@@ -29,7 +29,7 @@ def pair_each_without_gossip(personas, G):
     # chosen trustee for each investor
     for investor_k in investor_list:
         investor = personas[investor_k]
-        d_connect_list = get_d_connect(investor, G)
+        d_connect_list = get_d_connect(investor, G["investor"])
         d_connect_list_clean = [
             d_connect for d_connect in d_connect_list if d_connect not in investor_list
         ]
@@ -273,7 +273,7 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             "init_behavior_summary": investor_evaluation["self_reputation"],
             "target_behavior_summary": investor_evaluation["trustee_reputation"],
             "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
+            "number_of_bidirectional_connections": len(get_d_connect(trustee, G["trustee"]),),
         }
         update_info_trustee = {
             "reason": "reputation update agter stage 4",
@@ -281,7 +281,7 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             "init_behavior_summary": trustee_evaluation["self_reputation"],
             "target_behavior_summary": trustee_evaluation["investor_reputation"],
             "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
+            "number_of_bidirectional_connections": len(get_d_connect(investor, G["investor"]),),
         }
         reputation_update(investor, trustee, update_info_investor)
         reputation_update(trustee, investor, update_info_trustee)

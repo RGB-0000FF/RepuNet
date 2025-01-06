@@ -15,66 +15,44 @@ def social_network_update(
         bind_res = run_gpt_prompt_connection_build_investor_v1(
             init_persona, target_persona, target_persona_role
         )[0]
-        if bind_res["Connect"].lower() == "yes":
-            try:
-                print(
-                    init_persona.scratch.relationship["bind_list"].index(
-                        target_persona.scratch.name
-                    )
-                )
-                print(f"{target_persona.scratch.name} has existed!")
-            except:
-                init_persona.scratch.relationship["bind_list"].append(
-                    target_persona.scratch.name
-                )
 
         # disconnection the target persona from the init persona
         disconnection_res = run_gpt_prompt_disconnection_investor_v1(
             init_persona, target_persona, target_persona_role
         )[0]
-        if disconnection_res["Disconnect"].lower() == "yes":
-            if (
-                target_persona.scratch.name
-                in init_persona.scratch.relationship["bind_list"]
-            ):
-                init_persona.scratch.relationship["bind_list"].remove(
-                    target_persona.scratch.name
-                )
-            init_persona.scratch.relationship["black_list"].append(
-                target_persona.scratch.name
-            )
+
     elif init_persona_role == "trustee":
         # bind the target persona to the init persona
         bind_res = run_gpt_prompt_connection_build_trustee_v1(
             init_persona, target_persona, target_persona_role
         )[0]
-        if bind_res["Connect"].lower() == "yes":
-            try:
-                print(
-                    init_persona.scratch.relationship["bind_list"].index(
-                        target_persona.scratch.name
-                    )
-                )
-                print(f"{target_persona.scratch.name} has existed!")
-            except:
-                init_persona.scratch.relationship["bind_list"].append(
-                    target_persona.scratch.name
-                )
+
         # disconnection the target persona from the init persona
         disconnection_res = run_gpt_prompt_disconnection_trustee_v1(
             init_persona, target_persona, target_persona_role
         )[0]
-        if disconnection_res["Disconnect"].lower() == "yes":
-            if (
-                target_persona.scratch.name
-                in init_persona.scratch.relationship["bind_list"]
-            ):
-                init_persona.scratch.relationship["bind_list"].remove(
-                    target_persona.scratch.name
-                )
-            init_persona.scratch.relationship["black_list"].append(
-                target_persona.scratch.name
+
+    if bind_res["Connect"].lower() == "yes":
+        try:
+            init_persona.scratch.relationship["bind_list"].remove(
+                (target_persona.scratch.name, target_persona_role)
             )
+        except:
+            init_persona.scratch.relationship["bind_list"].append(
+                (target_persona.scratch.name, target_persona_role)
+            )
+            
+    if disconnection_res["Disconnect"].lower() == "yes":
+        if (
+            (target_persona.scratch.name, target_persona_role)
+            in init_persona.scratch.relationship["bind_list"]
+        ):
+            init_persona.scratch.relationship["bind_list"].remove(
+                (target_persona.scratch.name, target_persona_role)
+            )
+        init_persona.scratch.relationship["black_list"].append(
+            (target_persona.scratch.name, target_persona_role)
+        )
 
 
 def social_network_update_after_gossip(
