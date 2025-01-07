@@ -1641,7 +1641,6 @@ def run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona):
     def __func_clean_up(gpt_response, prompt=None):
         response = gpt_response.split("```json")[-1].split("```")[0].strip()
         # print(response)
-        final_res = dict()
         res = json.loads(response)
 
         for _, val in res.items():
@@ -1652,8 +1651,8 @@ def run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona):
                 print(f"Full name not found for {val['name']}")
                 return False
 
-        if len(final_res) == 1:
-            return final_res
+        if len(res) == 1:
+            return res
         return False
 
     def get_fail_safe():
@@ -1721,8 +1720,7 @@ def run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
 
     def __func_clean_up(gpt_response, prompt=None):
         response = gpt_response.split("```json")[-1].split("```")[0].strip()
-        # print(response)
-        final_res = dict()
+        # print(response
         res = json.loads(response)
 
         for _, val in res.items():
@@ -1733,8 +1731,8 @@ def run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
                 print(f"Full name not found for {val['name']}")
                 return False
 
-        if len(final_res) == 1:
-            return final_res
+        if len(res) == 1:
+            return res
         return False
 
     def get_fail_safe():
@@ -1810,7 +1808,6 @@ def run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
     def __func_clean_up(gpt_response, prompt=None):
         response = gpt_response.split("```json")[-1].split("```")[0].strip()
         # print(response)
-        final_res = dict()
         res = json.loads(response)
 
         for _, val in res.items():
@@ -1821,8 +1818,8 @@ def run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
                 print(f"Full name not found for {val['name']}")
                 return False
 
-        if len(final_res) == 1:
-            return final_res
+        if len(res) == 1:
+            return res
         return False
 
     def get_fail_safe():

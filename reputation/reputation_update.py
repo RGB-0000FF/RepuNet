@@ -17,7 +17,7 @@ def reputation_init_sign_up(init_persona):
     res = run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona)[0]
     if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
-    init_persona.reputationDB.init_individual_reputation(
+    init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, "sign up repu init"
     )
 

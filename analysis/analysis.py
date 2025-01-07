@@ -1,5 +1,3 @@
-from utils import *
-from persona.persona import Persona
 import json
 import networkx as nx
 import os
@@ -8,6 +6,9 @@ import sys
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
+
+from utils import *
+from persona.persona import Persona
 
 
 class Analysis:
@@ -22,6 +23,7 @@ class Analysis:
         self.step = reverie_meta["step"]
         self.personas = dict()
         self.analysis_dict = dict()
+        self.G = dict()
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
@@ -159,12 +161,12 @@ class Analysis:
                 self.analysis_dict[persona_name]["reputation"] = {
                     "Investor": self.personas[
                         persona_name
-                    ].reputationDB.get_all_reputations_invest(
+                    ].reputationDB.get_all_reputations(
                         "Investor", self.personas[persona_name].scratch.ID, True
                     ),
                     "Trustee": self.personas[
                         persona_name
-                    ].reputationDB.get_all_reputations_invest(
+                    ].reputationDB.get_all_reputations(
                         "Trustee", self.personas[persona_name].scratch.ID, True
                     ),
                 }
@@ -231,7 +233,7 @@ class Analysis:
                     .split(", and reported_investment_outcome is")[0]
                     .strip()
                 )
-                i_gossip_willing, t_gossip_willing = self._save_gossip_willing(
+                t_gossip_willing, i_gossip_willing = self._save_gossip_willing(
                     investor, trustee
                 )
                 self.analysis_dict[persona_name]["gossip_willing"] = {
@@ -254,27 +256,27 @@ def get_all_sim_info(sim_folder, sim, with_reputation=True):
 
 
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("investment_s7_with_repu_without_gossip")
-    sims2 = get_all_sim_info("investment_s8_without_repu_gossip")
-    sims3 = get_all_sim_info("investment_s9_without_repu_with_gossip")
-    sims4 = get_all_sim_info("investment_s10_with_repu_gossip")
-    count = 0
-    for sim in sims1:
-        count += 1
-        with open(f"./with_repu_without_gossip/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
-    count = 0
-    for sim in sims2:
-        count += 1
-        with open(f"./without_repu_without_gossip/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
-    count = 0
-    for sim in sims3:
-        count += 1
-        with open(f"./without_repu_with_gossip/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
-    count = 0
-    for sim in sims4:
-        count += 1
-        with open(f"./with_repu_gossip/analysis_{count}.json", "w") as f:
-            json.dump(sim.analysis_dict, f, indent=4)
+    # sims1 = get_all_sim_info("investment_s7_with_repu_without_gossip")
+    # sims2 = get_all_sim_info("investment_s8_without_repu_gossip")
+    # sims3 = get_all_sim_info("investment_s9_without_repu_with_gossip")
+    sims4 = get_all_sim_info("investment_s11_with_repu_gossip", "invest")
+    # count = 0
+    # for sim in sims1:
+    #     count += 1
+    #     with open(f"./with_repu_without_gossip/analysis_{count}.json", "w") as f:
+    #         json.dump(sim.analysis_dict, f, indent=4)
+    # count = 0
+    # for sim in sims2:
+    #     count += 1
+    #     with open(f"./without_repu_without_gossip/analysis_{count}.json", "w") as f:
+    #         json.dump(sim.analysis_dict, f, indent=4)
+    # count = 0
+    # for sim in sims3:
+    #     count += 1
+    #     with open(f"./without_repu_with_gossip/analysis_{count}.json", "w") as f:
+    #         json.dump(sim.analysis_dict, f, indent=4)
+    # count = 0
+    # for sim in sims4:
+    #     count += 1
+    #     with open(f"./with_repu_gossip/analysis_{count}.json", "w") as f:
+    #         json.dump(sim.analysis_dict, f, indent=4)

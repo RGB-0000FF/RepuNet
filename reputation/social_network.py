@@ -37,7 +37,7 @@ def social_network_update_sign_up(init_persona, target_persona):
                 (target_persona.scratch.name, "resident")
             )
         init_persona.scratch.relationship["black_list"].append(
-            (target_persona.scratch.name, "resident")
+            [target_persona.scratch.name, "resident"]
         )
 
 
@@ -85,7 +85,7 @@ def social_network_update_invest(
                 (target_persona.scratch.name, target_persona_role)
             )
         init_persona.scratch.relationship["black_list"].append(
-            (target_persona.scratch.name, target_persona_role)
+            [target_persona.scratch.name, target_persona_role]
         )
 
 
@@ -101,8 +101,8 @@ def social_network_update_after_gossip(
             in init_persona.scratch.relationship["bind_list"]
         ):
             init_persona.scratch.relationship["bind_list"].remove(
-                target_persona.scratch.name
+                (target_persona.scratch.name, target_persona_role)
             )
         init_persona.scratch.relationship["black_list"].append(
-            target_persona.scratch.name
+            [target_persona.scratch.name, target_persona_role]
         )

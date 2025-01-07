@@ -193,10 +193,6 @@ class Creation:
             # Done with this iteration if <int_counter> reaches 0.
             if int_counter == 0:
                 break
-            if self.step == 0:
-                # persona reputation init
-                for persona_name, persona in self.personas.items():
-                    reputation_init_sign_up(persona)
 
             self.step += 1
             for persona_name, persona in self.personas.items():
@@ -211,8 +207,13 @@ class Creation:
                 f"{new_sim_folder}",
             )
 
-            if os.path.exists(f"{new_sim_folder}/sign up results"):
+            if os.path.exists(f"{new_sim_folder}/sign up result"):
                 shutil.rmtree(f"{new_sim_folder}/sign up result")
+
+            # if self.step == 1:
+            #     # persona reputation init
+            #     for persona_name, persona in self.personas.items():
+            #         reputation_init_sign_up(persona)
 
             self.set_graph_sign_up()
             print(
@@ -224,7 +225,13 @@ class Creation:
                 sign_up_flag = True
 
             if self.with_reputation and self.with_gossip:
-                start_sign_up(self.personas, self.G, sign_up_flag)
+                start_sign_up(
+                    self.personas,
+                    self.G,
+                    self.step,
+                    f"{new_sim_folder}/sign up result",
+                    sign_up_flag,
+                )
 
             elif self.with_reputation and not self.with_gossip:
                 pass

@@ -7,6 +7,11 @@ pyproject.toml
 
 
 output/
+
+sim_storage/*
+!sim_storage/change_sim_folder.py
+
+
 analysis/*
 !analysis/analysis.py
 !analysis/social_network.py

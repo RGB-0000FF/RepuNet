@@ -12,9 +12,7 @@ Variables:
 
 **Principle:**
 
-- First, review your “Reputation list” and **choose gossip targets with positive or neutral reputation. Avoid selecting agents with a negative reputation.**
-- Then, generate a list including selected persons' IDs and names.
-- Do not include the gossip object !<INPUT 1>! in the list.
+- Avoid picking the person you want to gossip
 - Do not select more than one people.
 
 **Desired Format:** :

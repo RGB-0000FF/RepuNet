@@ -7,8 +7,7 @@ Variables:
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** You are !<INPUT 0>!. You currently live in community !<INPUT 3>!.
-You are a / an !<INPUT 4>!.
+**Task:** You are !<INPUT 0>!.
 Update your reputation based on:
 
 	1.	The probability that others were satisfied with their interactions with you.

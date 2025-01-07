@@ -8,7 +8,7 @@ Variables:
 <commentblockmarker>###</commentblockmarker>
 
 **Task:**
-You are !<INPUT 0>!. Summarize your recent conversation with !<INPUT 1>!.
+Provide a summary of the recent conversation between !<INPUT 0>! and !<INPUT 1>!.
 Include the main topics discussed and the viewpoints of each agent.
 
 **Conversation**

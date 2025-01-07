@@ -37,8 +37,8 @@ Evaluate the agent based on the following qualities:
 "Resident_!<INPUT 3>!": {
 "ID": !<INPUT 3>!,
 "name": "!<INPUT 1>!",
-"scenario": "which community it belongs to, A or B",
-"relationship": "choose one from {negative, neutral, positive} to describe your relationship with this individual",
+"role": "resident",
+"scenario": "sign up",
 "content": "a simple description of its reputation in natural language",
 "numerical record": "(x1, x2, x3, x4, x5)"
 }

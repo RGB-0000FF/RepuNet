@@ -70,7 +70,6 @@ Please output in the desired format.
 "scenario": "investment",
 "role": "trustee",
 "name": "!<INPUT 1>!",
-"relationship": "one of {negative, neutral, positive}",
 "content": "a new detailed summarized description of your trustee's reputation",
 "numerical record": "(x1, x2, x3, x4, x5)"
 }

@@ -107,10 +107,8 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
     investor = personas[pair[0]]
     trustee = personas[pair[1]]
 
-    if (
-        trustee.name in investor.scratch.relationship["black_list"]
-        or investor.name in trustee.scratch.relationship["black_list"]
-    ):
+    if ([trustee.name, "trustee"] in investor.scratch.relationship["black_list"]
+        or [investor.name,"investor"] in trustee.scratch.relationship["black_list"]):
         print_stage1 = {
             "plan": "There is no plan for this investment because both parties might be on each other's blacklist.",
             "investor_decided": "Refuse. The investors refused because the parties might be on each other's blacklist.",
