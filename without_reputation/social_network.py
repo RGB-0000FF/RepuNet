@@ -25,6 +25,9 @@ def social_network_update(
             disconnection_res = run_gpt_prompt_disconnection_trustee_v1(
                 init_persona, target_persona, target_persona_role
             )[0]
+        elif init_persona_role == "resident":
+            # TODO: disconnection after chat sign up
+            pass
         else:
             disconnection_res = "error"
 
@@ -51,6 +54,9 @@ def social_network_update(
             bind_res = run_gpt_prompt_connection_build_trustee_v1(
                 init_persona, target_persona, target_persona_role
             )[0]
+        elif init_persona_role == "resident":
+            # TODO: connection after chat sign up
+            pass
         else:
             bind_res = "error"
 

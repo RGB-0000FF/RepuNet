@@ -1,0 +1,22 @@
+**system prompt: You are now an expert for summarizing dialogues.**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- system prompt
+!<INPUT 1>! -- focal agent name
+!<INPUT 2>! -- target agent name
+!<INPUT 3>! -- conversation content
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Based on the “Conversation”, summarize the conversation between !<INPUT 1>! and !<INPUT 2>!, including the main topics discussed and the viewpoints of each agent.
+
+**Conversation:**
+!<INPUT 3>!
+
+**Output:**
+
+- summary: <in one simple sentence>
+- !<INPUT 1>!'s Viewpoint:<in one simple sentence>
+- !<INPUT 2>!'s Viewpoint:<in one simple sentence>

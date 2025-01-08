@@ -27,7 +27,5 @@
 
 **Note:** only output the “Learned” in desired format.
 
-**Desired Format:**
+**Output Desired Format:**
 Updated “learned” information:
-
-**Output:**

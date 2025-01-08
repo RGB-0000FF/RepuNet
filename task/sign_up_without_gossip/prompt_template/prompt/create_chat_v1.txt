@@ -1,0 +1,43 @@
+Variables:
+!<INPUT 0>! -- agent1’s name
+!<INPUT 1>! -- agent2’s name
+!<INPUT 2>! -- agent1’s learned
+!<INPUT 3>! -- agent2’s learned
+!<INPUT 4>! -- agent1’s sign up info
+!<INPUT 5>! -- agent2’s sign up info
+
+<commentblockmarker>###</commentblockmarker>
+
+
+Task: You will play the roles of !<INPUT 0>! and !<INPUT 1>!. Generate a conversation between them based on the following details:
+
+**Personality Traits (Innate):**
+!<INPUT 0>!: !<INPUT 2>!
+!<INPUT 1>!: !<INPUT 3>!
+
+**Sign-Up Information:**
+!<INPUT 4>!
+!<INPUT 5>!
+
+**Background Context:**
+There is a demand response program now. It aims to reduce energy consumption during peak times by installing a free radio-activated switch on your air conditioning unit. By participating, you can help alleviate the strain on energy resources during high-demand periods. However, this may lead to reduced cooling comfort, and you will have no control over when the switch is activated. Overall, while the program promotes collective energy conservation, it requires you to sacrifice some personal comfort and control over your electricity usage during peak demand.
+
+**Objective:**
+Generate a dialogue in which !<INPUT 0>! and !<INPUT 1>! discuss their respective decisions about signing up for the program. Focus on their reasoning, concerns, and motivations related to their choices. Avoid suggesting alternative solutions or exploring topics beyond the sign-up decision.
+
+
+**Note**: 
+
+-Please use concise and condensed language to write this conversation, and the total number of times the two people speak should not exceed 10.
+
+-The conversation between the two takes turns, which means that if one person speaks in this round, the next round should be the other person speaking.
+
+-You only need to continue writing one person's speech, neither adding extra content nor omitting it.
+
+Output format: Output a text of the following format:
+
+!<INPUT 0>!:<The first paragraph of the speech>
+
+!<INPUT 1>!:<The second paragraph of the speech>
+
+......

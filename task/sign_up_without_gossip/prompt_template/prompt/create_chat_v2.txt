@@ -1,0 +1,51 @@
+**system prompt: You are now a dialogue generation expert.**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- system prompt
+!<INPUT 1>! -- agent1’s name
+!<INPUT 2>! -- agent2’s name
+!<INPUT 3>! -- agent1’s learned
+!<INPUT 4>! -- agent2’s learned
+!<INPUT 5>! -- agent1’s sign up info
+!<INPUT 6>! -- agent2’s sign up info
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Currently, !<INPUT 1>! wants to talk with !<INPUT 2>!, about their sign-up results for the program. The background of the program is described in “Background Context”.
+
+Please generate a conversation between !<INPUT 1>! and !<INPUT 2>! based on "Innate" traits and “Sign-up result” of both !<INPUT 1>! and !<INPUT 2>!, and the "Generation Principles."
+
+**Background Context:**
+There is a demand response program now. It aims to reduce energy consumption during peak times by installing a free radio-activated switch on your air conditioning unit. By participating, you can help alleviate the strain on energy resources during high-demand periods. However, this may lead to reduced cooling comfort, and you will have no control over when the switch is activated. Overall, while the program promotes collective energy conservation, it requires you to sacrifice some personal comfort and control over your electricity usage during peak demand.
+
+**!<INPUT 1>!’s Innate:**
+!<INPUT 3>!
+
+**!<INPUT 1>!’s Sign-up result:**
+
+!<INPUT 5>!
+
+**!<INPUT 2>!’s Innate:**
+!<INPUT 4>!
+
+**!<INPUT 2>!’s Sign-up result:**
+
+!<INPUT 6>!
+
+**Generation Principles:**
+
+- The conversation should focus entirely on the sign-up program and not include unrelated talk.
+- Generate a dialogue in which !<INPUT 1>! and !<INPUT 2>! discuss their respective decisions about signing up for the program. Focus on their reasoning, concerns, and motivations related to their choices.
+- !<INPUT 1>! is the initiator of the conversation, and the total number of exchanges between the two should not exceed 10.
+- The conversation should alternate between the two agents, meaning if one speaks in a round, the other should speak in the next round.
+- Avoid suggesting alternative solutions or exploring topics beyond the sign-up decision.
+
+**Desired Format:**
+
+!<INPUT 1>!:……
+
+!<INPUT 2>!: ……
+
+......
