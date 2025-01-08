@@ -623,6 +623,7 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
         number_of_bidirectional_connections,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [target_persona.scratch.ID]
@@ -743,7 +744,7 @@ def run_gpt_prompt_update_learned_in_description_v1(
         return response
 
     def get_fail_safe():
-        fs = []
+        fs = "error"
         return fs
 
     gpt_param = {
