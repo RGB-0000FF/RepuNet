@@ -1,0 +1,51 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent' learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- gossiper name
+!<INPUT 3>! -- complained agent name
+!<INPUT 4>! -- complained agent ID
+!<INPUT 5>! -- gossiper's reputation
+!<INPUT 6>! -- gossip info
+!<INPUT 7>! -- total numbers of gossip info
+!<INPUT 8>! -- numbers of unimportant gossip info
+!<INPUT 9>! — complained agent role
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Based on the Background, think and complete the task step by step.
+
+**Background:** You are !<INPUT 1>!. !<INPUT 2>! recently spoke with you and shared its viewpoint on !<INPUT 3>!’s behavior. You have already summarized the “Gossip info” shared by !<INPUT 2>!. 
+
+**Step 1:** based on the “Evaluation principles”, evaluate the importance of this “Gossip info” by classifying it into one of five levels: {very uncredible, uncredible, neutral, credible, very credible}.
+
+**Step 2:** determine whether you want to gossip further with someone else about !<INPUT 3>!’s behavior described in the “**Gossip info**”. Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior.
+
+**Gossip info:**
+!<INPUT 6>!
+
+**Evaluation principles:**
+
+1. Source of gossip info: The higher the reputation of the gossiper, the more credible the gossip info it provides.
+- gossiper's reputation: !<INPUT 5>!
+1. Credibility of gossip in society: The more “very uncredible” or “uncredible” gossip information there is, the lower the credibility of gossip information in this society.
+- Currently, the number of gossip is !<INPUT 7>!, and !<INPUT 8>! of them have been classified as “very uncredible” or “uncredible”.
+1. If some aspect of !<INPUT 3>!’s behavior you are (dis)satisfied with and you think this gossip from !<INPUT 2>! is (very) credible, you can choose to spread it in second-order gossip.
+
+**Desired format:** JSON
+{
+"Gossip_i": {
+"type": "first-order",
+"complained ID": "!<INPUT 4>!",
+"complained name": "!<INPUT 3>!",
+"complained role": "!<INPUT 9>!"
+"gossiper name": "!<INPUT 2>!",
+"gossip info": "!<INPUT 6>!",
+"credibility level": "{level}",
+"whether to spread gossip second-hand": "<Yes or No>",
+"reasons":"Give your reasons (gossip or not)"
+}
+}

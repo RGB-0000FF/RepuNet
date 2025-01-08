@@ -6,7 +6,7 @@ Variables:
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** "You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Whether you want gossip depends on your “Learned”. Based on the “Communication Info” and your “Innate”, do you want gossip about !<INPUT 1>!’s behavior? Output “Yes” and explain why if you want gossip. If not, output “No” and explain why."
+**Task:** "You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Communication Info” and your “Innate”, would you like to gossip with someone else about !<INPUT 1>!’s behavior described in the “Communication Info”? Output “Yes” and explain which aspect of their behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about their behavior in the “Communication Info”."
 
 **Communication Info:**
 !<INPUT 2>!
