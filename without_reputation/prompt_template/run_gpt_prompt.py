@@ -452,7 +452,7 @@ def run_gpt_prompt_connection_build_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/connection_build_investor_v1.txt"
+    prompt_template = "prompt/investment/connection_build_investor_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -519,7 +519,7 @@ def run_gpt_prompt_disconnection_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/disconnection_investor_v1.txt"
+    prompt_template = "prompt/investment/disconnection_investor_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -586,7 +586,7 @@ def run_gpt_prompt_connection_build_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/connection_build_trustee_v1.txt"
+    prompt_template = "prompt/investment/connection_build_trustee_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -653,7 +653,7 @@ def run_gpt_prompt_disconnection_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/disconnection_trustee_v1.txt"
+    prompt_template = "prompt/investment/disconnection_trustee_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
