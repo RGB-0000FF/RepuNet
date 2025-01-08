@@ -25,6 +25,8 @@ def get_reputation_score(target_persona, target_persona_role, personas):
             input = "Investor"
         elif target_persona_role == "trustee":
             input = "Trustee"
+        elif target_persona_role == "resident":
+            input = "Resident"
         if reputation:
             count += 1
             repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
@@ -48,9 +50,9 @@ def get_reputation_score(target_persona, target_persona_role, personas):
 
 
 class SocialNetworkAnalysis:
-    def __init__(self, sim_folder, with_repu):
+    def __init__(self, sim_folder, sim, with_repu):
         self.sim_folder = sim_folder
-        self.sims = get_all_sim_info(sim_folder, with_repu)
+        self.sims = get_all_sim_info(sim_folder, sim, with_repu)
         self.with_repu = with_repu
 
     def save_social_network_detail(self, save_folder):
@@ -157,7 +159,6 @@ class SocialNetworkAnalysis:
             else:
                 outer_color.append((0.5, 0.5, 0.5))  # Light gray
 
-
         return node_size, outer_color
 
     def _set_nodes_without_reputation(self, G, ps):
@@ -193,8 +194,8 @@ class SocialNetworkAnalysis:
 if __name__ == "__main__":
     # init set
     sim_folders = [
-        "investment_s1",
-        "investment_s2",
+        "sign_s4",
+        # "investment_s2",
         # "investment_s8_without_repu_gossip",
         # "investment_s9_without_repu_with_gossip",
     ]
@@ -202,7 +203,7 @@ if __name__ == "__main__":
     for i, sim_folder in enumerate(sim_folders):
         if i != 0:
             os.chdir("../")
-        sa = SocialNetworkAnalysis(sim_folder, with_repu[i])
+        sa = SocialNetworkAnalysis(sim_folder,"sign", with_repu[i])
         current_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(current_dir)
         if not os.path.exists(f"./{sim_folder}_result"):

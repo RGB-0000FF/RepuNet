@@ -29,7 +29,10 @@ class Analysis:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
             curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
-        self._set_analysis_dict()
+        if "invest" in sim:
+            self._set_analysis_dict_invest()
+        elif "sign" in sim:
+            self._set_analysis_dict_sign_up()
         if sim and "invest" in sim:
             self.set_graph_invest()
         elif sim and "sign" in sim:
@@ -154,7 +157,11 @@ class Analysis:
                     )
                     return trustee_w, investor_w
 
-    def _set_analysis_dict(self):
+
+    def _set_analysis_dict_sign_up(self):
+        pass
+
+    def _set_analysis_dict_invest(self):
         for persona_name, persona in self.personas.items():
             self.analysis_dict[persona_name] = dict()
             if self.with_reputation:
