@@ -1,0 +1,18 @@
+Variables:
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- target name
+!<INPUT 2>! -- bind list
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 0>!.  You have decided to spread gossip about  !<INPUT 1>!. Now you want to choose a listener that you want to share your (dis)satisfaction on  !<INPUT 1>!’s behavior from your “Social Network”. Output the name of the listener you select.
+
+**Social Network:**
+!<INPUT 2>!
+
+**Principle:**
+
+- Avoid picking the person you want to gossip about, that is, !<INPUT 1>!.
+- Only select one agent as the listener and only output its name.
+
+**Output:**
