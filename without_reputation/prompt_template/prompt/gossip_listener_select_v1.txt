@@ -13,6 +13,7 @@ Variables:
 **Principle:**
 
 - Avoid picking the person you want to gossip
+- Do not select more than one people.
 
 **Desired Format:** :
-Selected person's list:[{"ID":ID_1,"name":name_1}, ...., {"ID":ID_n,"name":name_n}].
+Selected person's list:[{"ID":ID_1,"name":name_1}].

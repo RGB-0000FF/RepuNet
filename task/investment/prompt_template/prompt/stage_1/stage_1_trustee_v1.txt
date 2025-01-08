@@ -2,7 +2,7 @@ Variables:
 !<INPUT 0>! -- <'learned' in agent description>
 !<INPUT 1>! -- <Trustee's Reputation>
 !<INPUT 2>! -- <Investor's Reputation>
-
+!<INPUT 3>! -- <Recent investment memories from the past few rounds>
 
 
 <commentblockmarker>###</commentblockmarker>
@@ -20,9 +20,12 @@ Variables:
 - Presenting an equitable or investor-favorable plan may increase the likelihood of acceptance, enabling you to access resources and secure future opportunities.
 - No agreement in Stage 1 means no access to investment resources or potential profits.
 - Reputation reflects past behavior in profit distribution, affecting the likelihood of transaction success and overall satisfaction. “None” indicates no prior interactions with the opponent before.
-
+- The memory list provides your recent transaction records in order. These memories have significant reference value for your decision-making, please refer to them carefully when making decisions.If the memory list is empty, it means you currently do not have any transaction records.
 **Your Previous Reputation as Trustee:** !<INPUT 1>!
 
 **Opponent's Previous Reputation as Investor:** !<INPUT 2>!
+
+**Recent investment memories from the past few rounds:**
+!<INPUT 3>!
 
 **Output in desired format (ONLY ONE SENTENCE):** Trustee proposes a resource allocation plan where investor receives X% of the disposable units after investment while trustee retains Y%.

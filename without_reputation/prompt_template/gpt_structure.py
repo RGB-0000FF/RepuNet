@@ -94,7 +94,7 @@ def generate_prompt(curr_input, prompt_lib_file):
     curr_input = [str(i) for i in curr_input]
     prompt_lib_file = os.path.join(os.path.dirname(__file__), prompt_lib_file)
 
-    f = open(prompt_lib_file, "r")
+    f = open(prompt_lib_file, "r",encoding="utf-8")
     prompt = f.read()
     f.close()
     for count, i in enumerate(curr_input):

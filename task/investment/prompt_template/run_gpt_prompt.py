@@ -1,10 +1,16 @@
 from .gpt_structure import *
-
-
+text1="You have never been an investor before, so you are not sure about your reputation."
+text2="This trustee had little interaction with you and your friends in the past, and you were not very aware of its reputation."
+text3="You have never been an trustee before, so you were not sure about your reputation."
+text4="This investor had little interaction with you and your friends in the past, and you were not very aware of its reputation."
 def run_gpt_prompt_investor_decided_v1(
     init_persona, target_persona, allocation_plan, verbose=False
 ):
+    global text1 
+    global text2
     def create_prompt_input(init_persona, target_persona, allocation_plan):
+        global text1
+        global text2
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
         prompt_input += [allocation_plan]
@@ -18,12 +24,17 @@ def run_gpt_prompt_investor_decided_v1(
             )
         )
         if not init_reputation:
-            init_reputation = "None"
+            init_reputation = text1
         if not target_reputation:
-            target_reputation = "None"
+            target_reputation = text2
         prompt_input += [init_reputation]
         prompt_input += [target_reputation]
+        memory_list,_=init_persona.get_latest_memory_list()
+        memory=""
+        for m in memory_list:
+            memory+="Memory:" + m + "\n"
 
+        prompt_input.append(memory)
         return prompt_input
 
     def __func_validate(gpt_response, prompt=""):
@@ -57,9 +68,15 @@ def run_gpt_prompt_investor_decided_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/stage_1/stage_1_investor_v1.txt"
     prompt_input = create_prompt_input(init_persona, target_persona, allocation_plan)
-    prompt = generate_prompt_role_play(prompt_input, prompt_template)
+    if prompt_input[3] == text1 and prompt_input[4] == text2:
+        prompt_input.pop(3)
+        prompt_input.pop(3)
+        prompt_template="prompt/stage_1/stage_1_investor_v2.txt"
+        prompt = generate_prompt_role_play(prompt_input, prompt_template)
+    else:
+        prompt_template="prompt/stage_1/stage_1_investor_v1.txt"
+        prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -75,7 +92,11 @@ def run_gpt_prompt_investor_decided_v1(
 
 
 def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
+    global text3
+    global text4
     def create_prompt_input(init_persona, target_persona):
+        global text3
+        global text4
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
         init_reputation = init_persona.reputationDB.get_targets_individual_reputation(
@@ -87,12 +108,16 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
             )
         )
         if not init_reputation:
-            init_reputation = "None"
+            init_reputation = text3
         if not target_reputation:
-            target_reputation = "None"
+            target_reputation = text4
         prompt_input += [init_reputation]
         prompt_input += [target_reputation]
-
+        _,memory_list=init_persona.get_latest_memory_list()
+        memory=""
+        for m in memory_list:
+            memory+="Memory:" + m + "\n"
+        prompt_input.append(memory)
         return prompt_input
 
     def __func_validate(gpt_response, prompt=""):
@@ -123,10 +148,17 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/stage_1/stage_1_trustee_v1.txt"
+    
     prompt_input = create_prompt_input(init_persona, target_persona)
-    prompt = generate_prompt_role_play(prompt_input, prompt_template)
-
+    
+    if prompt_input[1] == text3 and prompt_input[2] == text4:
+        prompt_input.pop(1)
+        prompt_input.pop(1)
+        prompt_template="prompt/stage_1/stage_1_trustee_v2.txt"
+        prompt = generate_prompt_role_play(prompt_input, prompt_template)
+    else:
+        prompt_template="prompt/stage_1/stage_1_trustee_v1.txt"
+        prompt = generate_prompt_role_play(prompt_input, prompt_template)
     fail_safe = get_fail_safe()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
@@ -840,5 +872,90 @@ def run_gpt_prompt_stage4_trustee_gossip_v1(
         print_run_prompts(
             prompt_template, init_persona, gpt_param, prompt_input, prompt, output
         )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+def run_gpt_prompt_select_trustee(
+    init_persona,
+    learned,
+    repu_list,
+):
+    def replace_full_name(name):
+    # TODO change to the actual sim persona names
+        personas = [
+            "Liam OConnor",
+            "Hiroshi Tanaka",
+            "David Johnson",
+            "Maria Rossi",
+            "Sofia Hernandez",
+            "James Wang",
+            "Sergey Petrov",
+            "Hannah Muller",
+            "Nadia Novak",
+            "Elena Ivanova",
+            "Mohammed Al-Farsi",
+            "Aisha Ibrahim",
+            "Akiko Sato",
+            "Emma Dubois",
+            "Juan Carlos Reyes",
+            "Ahmed Hassan",
+            "Robert Miller",
+            "Fatima Ali",
+            "Isabella Costa",
+            "Mateo Garcia",
+        ]
+        for persona in personas:
+            if name in persona:
+                return persona
+        return None
+    
+    def create_prompt_input(
+        learned,
+        init_persona_name,
+        repu_list
+    ):
+        prompt_input = []
+        prompt_input.append(learned)
+        prompt_input.append(init_persona_name)
+        prompt_input.append(repu_list)
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        return True
+
+    def __func_clean_up(gpt_response, prompt=None):
+        return str(gpt_response).strip()
+    
+    def get_fail_safe():
+        fs = []
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/stage_1/stage_1_investor_select_trustee.txt"
+    prompt_input = create_prompt_input(
+        learned=learned,
+        init_persona_name=init_persona.name,
+        repu_list=repu_list,
+    )
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]

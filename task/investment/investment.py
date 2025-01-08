@@ -34,22 +34,41 @@ def pair_each(personas, G):
         investor = personas[investor_k]
         d_connect_list = get_d_connect(investor, G["investor"])
         d_connect_list_clean = [
-            d_connect for d_connect in d_connect_list if d_connect not in investor_list
+            d_connect for d_connect in d_connect_list if d_connect not in investor_list and not check_if_chosen(pairs,d_connect_list)
         ]
-        unchosen_list = []
-        weight_list = []
-        for d_connect_trustee in d_connect_list_clean:
-            if not check_if_chosen(pairs, d_connect_trustee):
-                unchosen_list.append(d_connect_trustee)
-                weight_list.append(2)
-        for unchosen_trustee in trustee_list:
-            if (
-                not check_if_chosen(pairs, unchosen_trustee)
-                and unchosen_trustee not in unchosen_list
-            ):
-                unchosen_list.append(unchosen_trustee)
-                weight_list.append(1)
-        chosen_trustee = random.choices(unchosen_list, weight_list)[0]
+        
+        if random.random()>=0.5 and d_connect_list_clean:
+            learned=personas[investor_k].scratch.learned
+            repu_list=""
+            for persona in d_connect_list_clean:
+                repu=personas[investor_k].reputationDB.get_targets_individual_reputation(personas[persona].scratch.ID, "trustee")
+                repu_list+=personas[persona].scratch.name+":"+list(repu.values())[0]["content"]+"\n"
+            # for name,reputation in list(repu.items()):
+            #     repu_list+=name+":"+ reputation + "\n"    
+            while True:
+                result,_=run_gpt_prompt_select_trustee(personas[investor_k],learned,repu_list)
+                if result in d_connect_list_clean:
+                    break
+                else:
+                    print("Value error: The trustee selected by the investor does not exist.")
+            chosen_trustee=result
+        
+        else:
+            unchosen_list = []
+            # for d_connect_trustee in d_connect_list_clean:
+            #     if not check_if_chosen(pairs, d_connect_trustee):
+            #         unchosen_list.append(d_connect_trustee)
+            # for unchosen_trustee in trustee_list:
+            #     if (
+            #         not check_if_chosen(pairs, unchosen_trustee)
+            #         and unchosen_trustee not in unchosen_list
+            #     ):
+            #         unchosen_list.append(unchosen_trustee)
+            for trustee in trustee_list:
+                if not check_if_chosen(pairs,trustee):
+                    unchosen_list.append(trustee)
+            chosen_trustee=random.choice(unchosen_list)
+        
         pairs.append((investor_k, chosen_trustee))
 
     print(pairs)

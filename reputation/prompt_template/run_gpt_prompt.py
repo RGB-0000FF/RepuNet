@@ -1856,3 +1856,75 @@ def run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
     )
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_select_trustee(
+    init_persona_name,
+    learned,
+    repu_list,
+):
+    def create_prompt_input(
+        init_persona_name,
+        learned,
+        repu_list
+    ):
+        prompt_input = []
+        prompt_input.append(init_persona_name)
+        prompt_input.append(learned)
+        prompt_input.append(repu_list)
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("Selected person's list:")[-1].strip()
+        res = json.loads(response)
+        for val in res:
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+        return res
+
+    def get_fail_safe():
+        fs = []
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/stage_1/stage_1_investor_select_trustee.txt"
+    prompt_input = create_prompt_input(
+        init_persona_name,
+        learned,
+        repu_list,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona_name, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]

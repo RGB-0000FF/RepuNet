@@ -2,7 +2,7 @@ Variables:
 !<INPUT 0>! -- <'learned' in agent description>
 !<INPUT 1>! -- <Trustee's Allocation Plan>
 !<INPUT 2>! -- You currently hold **X** units of resources
-!<INPUT 3>! -- <Recent investment memories from the past few rounds>
+
 
 
 <commentblockmarker>###</commentblockmarker>
@@ -15,11 +15,7 @@ Variables:
 
 - **If you accept**, the agreement is established, and you must decide how many of your current resources to invest. You currently hold **!<INPUT 2>!** units of resources.
 - **If you reject**, the agreement fails, and you need to seek a new trustee.
-**Principles:**
-The memory list provides your recent transaction records in order. These memories have significant reference value for your decision-making, please refer to them carefully when making decisions.If the memory list is empty, it means you currently do not have any transaction records.
 
-**Recent investment memories from the past few rounds:**
-!<INPUT 3>!
 
 **Desired Format:**
 

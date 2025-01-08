@@ -4,7 +4,7 @@ Variables:
 !<INPUT 2>! -- You currently hold **X** units of resources
 !<INPUT 3>! -- <Investor's Reputation>
 !<INPUT 4>! -- <Trustee's Reputation>
-
+!<INPUT 5>! -- <Recent investment memories from the past few rounds>
 
 <commentblockmarker>###</commentblockmarker>
 
@@ -23,9 +23,14 @@ Variables:
 
 - If the trustee's reputation is high, it signifies trustworthiness, suggesting that a substantial allocation of resources for investment may be appropriate. Conversely, a low reputation indicates skepticism, warranting cautious resource allocation or possibly declining the investment opportunity.
 
+- The memory list provides your recent transaction records in order. These memories have significant reference value for your decision-making, please refer to them carefully when making decisions.If the memory list is empty, it means you currently do not have any transaction records.
+
 **Your Previous Reputation as Investor:** !<INPUT 3>!
 
 **Opponent's Previous Reputation as Trustee:** !<INPUT 4>!
+
+**Recent investment memories from the past few rounds:**
+!<INPUT 5>!
 
 **Desired Format:**
 
