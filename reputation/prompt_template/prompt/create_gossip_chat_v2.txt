@@ -1,0 +1,39 @@
+**system prompt: You are now a dialogue generation expert.**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- sys prompt
+!<INPUT 1>! -- agent’s name
+!<INPUT 2>! -- listener’s name
+!<INPUT 3>! -- agent’s learned
+!<INPUT 4>! -- listener’s learned
+!<INPUT 5>! -- gossip reasons
+
+!<INPUT 6>! — complained-about target
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Currently, !<INPUT 1>! wants to gossip with their close associate, !<INPUT 2>!, about !<INPUT 6>!. The specific reason for gossiping is as follows: !<INPUT 5>!.
+
+Please generate a gossip conversation based on the "Innate" traits of both !<INPUT 1>! and !<INPUT 2>! as well as the "Generation Principles."
+
+**!<INPUT 1>!’s Innate:**
+!<INPUT 3>!
+
+**!<INPUT 2>!’s Innate:**
+!<INPUT 4>!
+
+**Generation Principles:**
+
+- The conversation should focus entirely on the gossip reason and not include unrelated talk.
+- The total number of exchanges between the two should not exceed 10.
+- !<INPUT 1>! is the initiator of the conversation. So, start the dialogue with “I want to gossip about !<INPUT 6>! with you: <the sentence you want to write>,” said by !<INPUT 1>!.
+- The conversation should alternate between the two agents, meaning if one speaks in a round, the other should speak in the next round.
+- The listener is unaware of !<INPUT 6>!’s previous behavior. Therefore, the initial part of the conversation should involve !<INPUT 1>! describing !<INPUT 6>!’s past interactions with them, as the listener is unfamiliar with !<INPUT 6>!’s behavior.
+
+**Desired Format:**
+
+!<INPUT 1>!: I want to gossip about !<INPUT 6>! with you. ……
+
+!<INPUT 2>!: ……

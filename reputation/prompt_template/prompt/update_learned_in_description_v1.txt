@@ -1,15 +1,15 @@
 **Variables:**
-!<INPUT 0>! -- agent name
-!<INPUT 1>! -- Previous “learned” information
+!<INPUT 0>! -- Previous “learned” information
+!<INPUT 1>! -- agent name
 !<INPUT 2>! -- Current reputation
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** You are !<INPUT 0>!. Update your “learned” information in the agent description to reflect values and preferences that align with your current reputation.
+**Task:** You are !<INPUT 1>!. Update your “learned” information in the agent description to reflect values and preferences that align with your current reputation.
 
 **Input:**
 
-1.	Previous “learned” information: !<INPUT 1>!
+1.	Previous “learned” information: !<INPUT 0>!
 2.	Current reputation: !<INPUT 2>!
 
 

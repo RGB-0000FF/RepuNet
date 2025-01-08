@@ -33,11 +33,11 @@ def reputation_update_invest(init_persona, target_persona, update_info):
         return
 
     if update_info["init_persona_role"] == "investor":
-        social_network_update_invest(
+        social_network_update(
             init_persona, target_persona, "investor", "trustee"
         )
     elif update_info["init_persona_role"] == "trustee":
-        social_network_update_invest(
+        social_network_update(
             init_persona, target_persona, "trustee", "investor"
         )
 
@@ -54,7 +54,7 @@ def reputation_update_sign_up(init_persona, target_persona, update_info):
         # NETWORK AFTER GOSSIP IS IN THE GOSSIP PART
         return
 
-    social_network_update_sign_up(init_persona, target_persona)
+    social_network_update(init_persona, target_persona, "resident", "resident")
 
 
 def reputation_update_after_gossip_sign_up(init_persona, target_persona, update_info):
@@ -79,7 +79,7 @@ def reputation_update_after_interaction_sign_up(
 ):
     # Init persona self reputation update
     res_s = run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
-        init_persona, update_info["sum_convo"]
+        init_persona, update_info["sum_convo"], update_info["ava_satisfy"]
     )[0]
     res_o = run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
         init_persona,
@@ -87,6 +87,7 @@ def reputation_update_after_interaction_sign_up(
         update_info["sum_convo"],
         update_info["total_number_of_people"],
         update_info["number_of_bidirectional_connections"],
+        update_info["ava_num_bibd_connections"],
     )[0]
     if type(res_s) is str and "error" in res_s.lower():
         raise Exception("GPT ERROR")

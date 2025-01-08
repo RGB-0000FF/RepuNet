@@ -1,5 +1,6 @@
 from .prompt_template.run_gpt_prompt import (
-    run_gpt_prompt_gossip_v1,
+    # run_gpt_prompt_gossip_v1,
+    run_gpt_prompt_gossip_v2,
     run_gpt_prompt_gossip_listener_select_v1,
     run_gpt_prompt_identify_and_summary_gossip_info_v1,
     run_gpt_prompt_first_order_evaluation_v1,
@@ -32,7 +33,9 @@ def first_order_gossip(
             continue
         reason = val["complaint_reason"]
         # gossip chat
-        convo = generate_convo(init_persona, target_persona, reason)
+        convo = generate_convo(
+            init_persona, target_persona, reason, val["complaint_target"]
+        )
         init_persona.associativeMemory.add_chat(
             subject=init_persona.name,
             predicate="gossip",
@@ -154,10 +157,13 @@ def second_order_gossip(
     )[0]
 
     for gossip_target in gossip_target_investor:
-        gossip_target_persona = personas[gossip_target["name"]]
+        gossip_target_persona = personas[gossip_target]
         # CHAT
         convo = generate_convo(
-            init_persona, gossip_target_persona, complain_info["complain reason"]
+            init_persona,
+            gossip_target_persona,
+            complain_info["complain reason"],
+            complain_info["complained name"],
         )
         gossip_target_persona.associativeMemory.add_chat(
             subject=init_persona.name,
@@ -229,8 +235,10 @@ def second_order_gossip(
         )
 
 
-def generate_convo(init_persona, target_persona, reason):
-    convo = run_gpt_prompt_gossip_v1(init_persona, target_persona, reason)[0]
+def generate_convo(init_persona, target_persona, reason, complain_target):
+    convo = run_gpt_prompt_gossip_v2(
+        init_persona, target_persona, reason, complain_target
+    )[0]
     print(convo)
     return convo
 

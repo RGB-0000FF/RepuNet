@@ -1,0 +1,61 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- target name
+!<INPUT 3>! -- Encounter derived info
+!<INPUT 4>! -- Target ID
+!<INPUT 5>! -- previous reputation
+!<INPUT 6>! -- total number of people in the community
+!<INPUT 7>! -- number of bidirectional connections established
+!<INPUT 7>! — average of agents bidirectional established connections
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. Update !<INPUT 2>!'s reputation based on “!<INPUT 2>!'s Previous Reputation”, !<INPUT 2>!'s performance in “Summarized conversation”, and the “Reputation Principles”.
+
+**!<INPUT 2>!'s Previous Reputation:**
+!<INPUT 5>!
+
+**Summarized conversation:**
+
+!<INPUT 3>!
+
+**Reputation Principles:**
+
+- Number of bidirectional connections:
+    
+    Currently, !<INPUT 2>! has !<INPUT 7>! bidirectional established connections, while the total number of people in the community is !<INPUT 6>!.
+    If the number of bidirectional connections exceeds !<INPUT 7>!, it suggests a relatively positive reputation in the community, indicating others’ willingness to interact with !<INPUT 2>!. Otherwise, it reflects a negative reputation.
+    
+- Evaluate !<INPUT 2>!’s reputation based on these traits:
+    - Trustworthiness: Your reliability and honesty.
+    - Prosociality: Your inclination to help and cooperate with others.
+    - Competence: Your ability to perform tasks effectively.
+    - Dominance: Your influence and authority over others.
+    - Norm compliance: How well you follow social norms.
+
+**Desired Format:** JSON
+{
+"Resident_!<INPUT 2>!": {
+"ID": !<INPUT 2>!,
+"name": "!<INPUT 2>!",
+"role": "resident",
+"scenario": "sign up",
+"content": "<a brief description of your reputation>",
+"numerical record": "(x1, x2, x3, x4, x5)"
+}
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very
+bad, bad, neutral, good, very good} and the “content” of their reputation. The
+format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+
+Note: only output the reputation in desired format.

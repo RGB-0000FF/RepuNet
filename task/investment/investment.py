@@ -426,7 +426,7 @@ def start_investment(pair, personas, G, save_folder):
         )[0]
         for gossip_target in gossip_target_investor:
             # gossip chat
-            gossip_target_persona = personas[gossip_target["name"]]
+            gossip_target_persona = personas[gossip_target]
             first_order_gossip(
                 investor,
                 gossip_target_persona,
@@ -443,7 +443,7 @@ def start_investment(pair, personas, G, save_folder):
         )[0]
         for gossip_target in gossip_target_trustee:
             # gossip chat
-            gossip_target_persona = personas[gossip_target["name"]]
+            gossip_target_persona = personas[gossip_target]
             first_order_gossip(
                 trustee,
                 gossip_target_persona,

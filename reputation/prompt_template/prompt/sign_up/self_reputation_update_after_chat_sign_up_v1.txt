@@ -45,7 +45,7 @@ A score above 0.5 suggests a relatively positive reputation in the community; ot
 **Desired Format:** JSON
 {
   "Resident_!<INPUT 1>!": {
-    "ID": "!<INPUT 1>!",
+    "ID": !<INPUT 1>!,
     "name": "!<INPUT 0>!",
 	"role": "resident",
     "scenario": "sign up",

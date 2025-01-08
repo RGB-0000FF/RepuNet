@@ -1,0 +1,23 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- gossiper name
+!<INPUT 3>! -- complained agent name
+!<INPUT 4>! -- complained agent ID
+!<INPUT 5>! -- Gossip chat
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. !<INPUT 2>! recently spoke with you and shared its viewpoint on !<INPUT 3>!’s behavior. Now you need to identify the key gossip information that !<INPUT 2>! conveyed to you based on the "Gossip chat" and summarized the gossip information in “Desired format”.
+
+**Gossip chat:**
+!<INPUT 5>!
+
+**Desired format:**
+Complained agent ID: !<INPUT 4>!
+Complained agent name:!<INPUT 3>!
+Gossip info: {simple sentences}

@@ -36,7 +36,7 @@ def run_gpt_prompt_init_sign_up_v1(init_persona):
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/init_sign_up_request_v1.txt"
+    prompt_template = "prompt/init_sign_up_request_v2.txt"
     prompt_input = create_prompt_input(init_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -92,7 +92,7 @@ def run_gpt_prompt_sign_up_v1(init_persona):
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/sign_up_request_v1.txt"
+    prompt_template = "prompt/sign_up_request_v2.txt"
     prompt_input = create_prompt_input(init_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -126,7 +126,7 @@ def run_gpt_prompt_decide_to_talk_v1(init_persona, target_persona):
         try:
             response = gpt_response.replace("**", "")
 
-            if "yes" in response.lower() or "no" in response.lower():
+            if "step 1" in response.lower() or "step 2" in response.lower():
                 return True
             return False
         except:
@@ -149,7 +149,7 @@ def run_gpt_prompt_decide_to_talk_v1(init_persona, target_persona):
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/decide_to_talk_v1.txt"
+    prompt_template = "prompt/decide_to_talk_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -168,11 +168,16 @@ def run_gpt_prompt_decide_to_talk_v1(init_persona, target_persona):
 def run_gpt_prompt_create_chat_v1(init_persona, target_persona):
     def create_prompt_input(init_persona, target_persona):
         prompt_input = []
+        prompt_input += ["You are now a dialogue generation expert."]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [init_persona.scratch.learned]
         prompt_input += [target_persona.scratch.learned]
-        latest_sign_up_info = init_persona.associativeMemory.get_latest_event().toJSON()
+        info = init_persona.associativeMemory.get_latest_event()
+        if type(info) is dict:
+            latest_sign_up_info = info
+        else:
+            latest_sign_up_info = info.toJSON()
         latest_sign_up_info = latest_sign_up_info["description"]
         latest_sign_up_info = latest_sign_up_info.splitlines()
         init_p_sign_up_info = ""
@@ -212,7 +217,7 @@ def run_gpt_prompt_create_chat_v1(init_persona, target_persona):
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/create_chat_v1.txt"
+    prompt_template = "prompt/create_chat_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template, role_play=False)
 
@@ -231,6 +236,7 @@ def run_gpt_prompt_create_chat_v1(init_persona, target_persona):
 def run_gpt_prompt_summarize_chat_v1(init_persona, target_persona, convo):
     def create_prompt_input(init_persona, target_persona, convo):
         prompt_input = []
+        prompt_input += ["You are now an expert for summarizing dialogues."]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [convo]
@@ -263,9 +269,9 @@ def run_gpt_prompt_summarize_chat_v1(init_persona, target_persona, convo):
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/summarize_basic_chat_v1.txt"
+    prompt_template = "prompt/summarize_basic_chat_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona, convo)
-    prompt = generate_prompt_role_play(prompt_input, prompt_template, role_play=False)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
