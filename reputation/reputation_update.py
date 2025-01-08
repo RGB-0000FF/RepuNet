@@ -33,11 +33,11 @@ def reputation_update_invest(init_persona, target_persona, update_info):
         return
 
     if update_info["init_persona_role"] == "investor":
-        social_network_update_invest(
+        social_network_update(
             init_persona, target_persona, "investor", "trustee"
         )
     elif update_info["init_persona_role"] == "trustee":
-        social_network_update_invest(
+        social_network_update(
             init_persona, target_persona, "trustee", "investor"
         )
 
@@ -54,7 +54,7 @@ def reputation_update_sign_up(init_persona, target_persona, update_info):
         # NETWORK AFTER GOSSIP IS IN THE GOSSIP PART
         return
 
-    social_network_update_sign_up(init_persona, target_persona)
+    social_network_update(init_persona, target_persona, "resident", "resident")
 
 
 def reputation_update_after_gossip_sign_up(init_persona, target_persona, update_info):
