@@ -28,6 +28,23 @@ def get_d_connect(init_persona, G):
     return d_connect_list
 
 
+def get_ava_satisfy(ps):
+    sum_s = 0
+    for persona_name, persona in ps.items():
+        if persona.scratch.total_chat_num == 0:
+            sum_s += 0
+        else:
+            sum_s += persona.scratch.success_chat_num / persona.scratch.total_chat_num
+    return round(sum_s / len(ps), 2)
+
+
+def get_ava_num_bibd_connections(ps, G):
+    sum_s = 0
+    for persona_name, persona in ps.items():
+        sum_s += len(get_d_connect(persona, G))
+    return round(sum_s / len(ps), 2)
+
+
 def chat_pair(personas):
     personas_keys = list(personas.keys())
     random.shuffle(personas_keys)
@@ -84,7 +101,8 @@ def start_chat(pair, G, ps):
         if [pair[1], "resident"] in pair[0].scratch.relationship["black_list"]:
             p0_willing = "no"
         else:
-            p0_willing = run_gpt_prompt_decide_to_talk_v1(pair[0], pair[1])[0]
+            p0_res = run_gpt_prompt_decide_to_talk_v1(pair[0], pair[1])[0]
+            p0_willing = p0_res.split("step 2:")[-1].strip()
             if "error" in p0_willing.lower():
                 raise Exception("GPT ERROR")
     else:
@@ -94,7 +112,8 @@ def start_chat(pair, G, ps):
         if [pair[0], "resident"] in pair[1].scratch.relationship["black_list"]:
             p1_willing = "no"
         else:
-            p1_willing = run_gpt_prompt_decide_to_talk_v1(pair[1], pair[0])[0]
+            p1_res = run_gpt_prompt_decide_to_talk_v1(pair[1], pair[0])[0]
+            p1_willing = p1_res.split("step 2:")[-1].strip()
             if "error" in p1_willing.lower():
                 raise Exception("GPT ERROR")
     else:
@@ -163,6 +182,8 @@ def start_chat(pair, G, ps):
             "number_of_bidirectional_connections": len(
                 get_d_connect(pair[1], G["resident"])
             ),
+            "ava_satisfy": get_ava_satisfy(ps),
+            "ava_num_bibd_connections": get_ava_num_bibd_connections(ps, G["resident"]),
         }
         update_info_1 = {
             "reason": "reputation update after interaction",
@@ -171,6 +192,8 @@ def start_chat(pair, G, ps):
             "number_of_bidirectional_connections": len(
                 get_d_connect(pair[0], G["resident"])
             ),
+            "ava_satisfy": get_ava_satisfy(ps),
+            "ava_num_bibd_connections": get_ava_num_bibd_connections(ps, G["resident"]),
         }
         reputation_update_sign_up(pair[0], pair[1], update_info_0)
         reputation_update_sign_up(pair[1], pair[0], update_info_1)

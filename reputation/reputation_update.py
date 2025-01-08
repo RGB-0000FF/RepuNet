@@ -79,7 +79,7 @@ def reputation_update_after_interaction_sign_up(
 ):
     # Init persona self reputation update
     res_s = run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
-        init_persona, update_info["sum_convo"]
+        init_persona, update_info["sum_convo"], update_info["ava_satisfy"]
     )[0]
     res_o = run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
         init_persona,
@@ -87,6 +87,7 @@ def reputation_update_after_interaction_sign_up(
         update_info["sum_convo"],
         update_info["total_number_of_people"],
         update_info["number_of_bidirectional_connections"],
+        update_info["ava_num_bibd_connections"],
     )[0]
     if type(res_s) is str and "error" in res_s.lower():
         raise Exception("GPT ERROR")
