@@ -197,7 +197,7 @@ def start_sign_up(personas, G, step, save_floder, sign_up_f=False):
             )[0]
             for gossip_target in gossip_target_investor:
                 # gossip chat
-                gossip_target_persona = personas[gossip_target["name"]]
+                gossip_target_persona = personas[gossip_target]
                 first_order_gossip(
                     pair[0],
                     gossip_target_persona,
@@ -214,7 +214,7 @@ def start_sign_up(personas, G, step, save_floder, sign_up_f=False):
             )[0]
             for gossip_target in gossip_target_investor:
                 # gossip chat
-                gossip_target_persona = personas[gossip_target["name"]]
+                gossip_target_persona = personas[gossip_target]
                 first_order_gossip(
                     pair[1],
                     gossip_target_persona,

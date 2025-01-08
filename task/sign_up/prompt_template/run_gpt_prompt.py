@@ -172,7 +172,11 @@ def run_gpt_prompt_create_chat_v1(init_persona, target_persona):
         prompt_input += [target_persona.scratch.name]
         prompt_input += [init_persona.scratch.learned]
         prompt_input += [target_persona.scratch.learned]
-        latest_sign_up_info = init_persona.associativeMemory.get_latest_event().toJSON()
+        info = init_persona.associativeMemory.get_latest_event()
+        if type(info) is dict:
+            latest_sign_up_info = info
+        else:
+            latest_sign_up_info = info.toJSON()
         latest_sign_up_info = latest_sign_up_info["description"]
         latest_sign_up_info = latest_sign_up_info.splitlines()
         init_p_sign_up_info = ""
