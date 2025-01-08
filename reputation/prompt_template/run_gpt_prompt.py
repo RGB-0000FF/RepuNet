@@ -634,13 +634,12 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
         )
         prompt_input += [json.dumps(target_persona_reputation)]
         prompt_input += [json.dumps(gossip)]
-        if target_persona_role.lower() == "investor":
-            prompt_input += ["Investor"]
-        elif target_persona_role.lower() == "trustee":
-            prompt_input += ["Trustee"]
-        prompt_input += [total_number_of_people]
-        prompt_input += [number_of_bidirectional_connections]
+        if target_persona_role.lower() == "resident":
+            prompt_input += ["Resident"]
+        # prompt_input += [total_number_of_people]
+        # prompt_input += [number_of_bidirectional_connections]
         prompt_input += [target_persona_role]
+        prompt_input += [gossip["credibility level"]]
 
         return prompt_input
 
@@ -656,7 +655,6 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
     def __func_clean_up(gpt_response, prompt=""):
         response = gpt_response.split("```json")[-1].split("```")[0].strip()
         # print(response)
-        final_res = dict()
         res = json.loads(response)
 
         for _, val in res.items():
@@ -666,14 +664,8 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
             else:
                 print(f"Full name not found for {val['name']}")
                 return False
-        for _, val in res.items():
-            id = val["ID"]
-            if val["role"].lower() == "investor":
-                final_res[f"Investor_{id}"] = val
-            elif val["role"].lower() == "trustee":
-                final_res[f"Trustee_{id}"] = val
-        if len(final_res) == 1:
-            return final_res
+        if len(res) == 1:
+            return res
         return False
 
     def get_fail_safe():
@@ -690,7 +682,7 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/sign_up/reputation_update_after_gossip_sign_up_v1.txt"
+    prompt_template = "prompt/sign_up/reputation_update_after_gossip_sign_up_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -699,7 +691,7 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
         total_number_of_people,
         number_of_bidirectional_connections,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -791,6 +783,7 @@ def run_gpt_prompt_gossip_listener_select_v1(
         init_persona_role,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         bind_list = list(init_persona.scratch.relationship["bind_list"])
@@ -836,7 +829,7 @@ def run_gpt_prompt_gossip_listener_select_v1(
         target_persona,
         init_persona_role,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -977,6 +970,7 @@ def run_gpt_prompt_identify_and_summary_gossip_info_v1(
         complain_info,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [complain_info["complained name"]]
@@ -1012,13 +1006,13 @@ def run_gpt_prompt_identify_and_summary_gossip_info_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/identify_and_summary_gossip_info_v1.txt"
+    prompt_template = "prompt/identify_and_summary_gossip_info_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
         complain_info,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -1041,6 +1035,7 @@ def run_gpt_prompt_first_order_evaluation_v1(
         complain_info,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [complain_info["complained name"]]
@@ -1089,13 +1084,13 @@ def run_gpt_prompt_first_order_evaluation_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/first_order_evaluation_v1.txt"
+    prompt_template = "prompt/first_order_evaluation_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
         complain_info,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -1118,6 +1113,7 @@ def run_gpt_prompt_second_order_evaluation_v1(
         complain_info,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [complain_info["original gossiper name"]]
         prompt_input += [complain_info["complained name"]]
@@ -1175,13 +1171,13 @@ def run_gpt_prompt_second_order_evaluation_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/second_order_evaluation_v1.txt"
+    prompt_template = "prompt/second_order_evaluation_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
         complain_info,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -1616,6 +1612,7 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
         init_persona, target_persona, target_persona_role, gossiper_name
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         target_persona_reputation = (
@@ -1624,8 +1621,7 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
             )
         )
         prompt_input += [json.dumps(target_persona_reputation)]
-        prompt_input += [gossiper_name]
-        prompt_input += [init_persona.scratch.learned]
+        # prompt_input += [gossiper_name]
 
         return prompt_input
 
@@ -1657,7 +1653,7 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/disconnection_after_gossip_v1.txt"
+    prompt_template = "prompt/disconnection_after_gossip_v2.txt"
     prompt_input = create_prompt_input(
         init_persona, target_persona, target_persona_role, gossiper_name
     )
