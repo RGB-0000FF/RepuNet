@@ -1,3 +1,7 @@
+**system prompt: <!<INPUT 3>!’s learned>**
+
+**user prompt:**
+
 Variables:
 !<INPUT 0>! -- agent learned
 !<INPUT 1>! -- target name
@@ -6,7 +10,7 @@ Variables:
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** "You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Communication Info” and your “Innate”, would you like to gossip with someone else about !<INPUT 1>!’s behavior described in the “Communication Info”? Output “Yes” and explain which aspect of their behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about their behavior in the “Communication Info”."
+**Task:** "You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Communication Info” and your “Innate”, would you like to gossip with someone else about !<INPUT 1>!’s behavior described in the “Communication Info”? Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior in the “Communication Info”."
 
 **Communication Info:**
 !<INPUT 2>!

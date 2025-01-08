@@ -1,0 +1,30 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+!<INPUT 0>! -- init name learned
+!<INPUT 1>! -- init name
+!<INPUT 2>! -- target name
+!<INPUT 3>! -- target's reputation
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. Determine whether to initiate a conversation with !<INPUT 2>! based on the following steps:
+
+Step 1: Check if !<INPUT 2>!’s reputation aligns with your innate traits. If aligned, you are more likely to engage; if not, you are less inclined to start a conversation.
+
+Step 2: Based on !<INPUT 2>!’s reputation and the result of Step 1, decide if you want to initiate a conversation with !<INPUT 2>!. If aligned, you are more likely to engage; if not, you are less inclined to start a conversation.
+
+**Your Innate:**
+
+!<INPUT 0>!
+
+**!<INPUT 2>!’s Reputation:**
+
+!<INPUT 3>!
+
+**Output Format:**
+
+step 1: ...
+
+step 2: <Yes or No>

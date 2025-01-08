@@ -1,0 +1,61 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- “learned” in the agent
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- agent ID
+!<INPUT 3>! -- summarized conversation
+!<INPUT 4>! -- score of the satisfaction in conversations
+!<INPUT 5>! -- agent previous reputation
+!<INPUT 6>! -- average of satisfaction degree in all agents
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. Update your reputation based on “Your Innate”, “Your Previous Reputation”, your performance in “Summarized conversation”, and the “Reputation Principles”.
+
+**Your Innate:**
+
+!<INPUT 0>! 
+
+**Your Previous Reputation:**
+!<INPUT 5>!
+
+**Summarized conversation:**
+
+!<INPUT 3>!
+
+**Reputation Principles:**
+
+- Conversation Success Probability:
+You have participated in several conversations. This score represents the satisfaction level of these interactions: s = !<INPUT 4>!.
+A score above !<INPUT 6>! suggests a relatively positive reputation in the community, reflecting others’ willingness to interact with you; otherwise, it indicates a negative reputation.
+- Evaluate your reputation based on these traits:
+    - Trustworthiness: Your reliability and honesty.
+    - Prosociality: Your inclination to help and cooperate with others.
+    - Competence: Your ability to perform tasks effectively.
+    - Dominance: Your influence and authority over others.
+    - Norm compliance: How well you follow social norms.
+
+**Desired Format:** JSON
+{
+"Resident_!<INPUT 2>!": {
+"ID": !<INPUT 2>!,
+"name": "!<INPUT 1>!",
+"role": "resident",
+"scenario": "sign up",
+"content": "<a brief description of your reputation>",
+"numerical record": "(x1, x2, x3, x4, x5)"
+}
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very
+bad, bad, neutral, good, very good} and the “content” of their reputation. The
+format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+
+Note: only output the reputation in desired format.
