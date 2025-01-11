@@ -194,12 +194,12 @@ class SocialNetworkAnalysis:
 if __name__ == "__main__":
     # init set
     sim_folders = [
-        "sign_s4",
+        "s15_with_repu_gossip",
         # "investment_s2",
         # "investment_s8_without_repu_gossip",
         # "investment_s9_without_repu_with_gossip",
     ]
-    with_repu = [True, False]
+    with_repu = [True, True]
     for i, sim_folder in enumerate(sim_folders):
         if i != 0:
             os.chdir("../")

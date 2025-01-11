@@ -9,7 +9,11 @@ def run_gpt_prompt_investor_decided_v1(
         prompt_input += [init_persona.scratch.learned]
         prompt_input += [allocation_plan]
         prompt_input += [init_persona.scratch.resources_unit]
-
+        memory_list,_=init_persona.get_latest_memory_list()
+        memory=""
+        for m in memory_list:
+            memory+="Memory:" + m + "\n"
+        prompt_input.append(memory)
         return prompt_input
 
     def __func_validate(gpt_response, prompt=""):
@@ -23,7 +27,7 @@ def run_gpt_prompt_investor_decided_v1(
 
     def __func_clean_up(gpt_response, prompt=""):
         if "Refuse" in gpt_response:
-            return gpt_response.split("*", "")
+            return gpt_response.replace("*", "")
         elif "Accept" in gpt_response:
             allocation = gpt_response.split("Allocate")[-1].split("units")[0].strip()
             return f"Accept. Allocation {allocation} unit."
@@ -64,7 +68,11 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
     def create_prompt_input(init_persona, target_persona):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
-
+        _,memory_list=init_persona.get_latest_memory_list()
+        memory=""
+        for m in memory_list:
+            memory+="Memory:" + m+ "\n"
+        prompt_input.append(memory)
         return prompt_input
 
     def __func_validate(gpt_response, prompt=""):

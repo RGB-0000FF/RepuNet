@@ -2,7 +2,7 @@ import os
 import json
 
 # change this folder path to the folder you want to change
-base_folder = "sim_storage/s18_no_repu_gossip/step_0/"
+base_folder = "sim_storage/s15_with_repu_gossip/step_0/"
 # base_folder = "sim_storage/<your_sim_folder>"
 
 with open(f"{base_folder}/reverie/meta.json") as json_file:

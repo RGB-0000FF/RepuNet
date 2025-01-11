@@ -32,9 +32,9 @@ def pair_each(personas, G):
     # chosen trustee for each investor
     for investor_k in investor_list:
         investor = personas[investor_k]
-        d_connect_list = get_d_connect(investor, G["investor"])
+        d_connect_list = get_s_connect(investor, G["trustee"])
         d_connect_list_clean = [
-            d_connect for d_connect in d_connect_list if d_connect not in investor_list and not check_if_chosen(pairs,d_connect_list)
+            d_connect for d_connect in d_connect_list if (d_connect not in investor_list) and (not check_if_chosen(pairs,d_connect))
         ]
         
         if random.random()>=0.5 and d_connect_list_clean:
@@ -90,6 +90,12 @@ def get_d_connect(init_persona, G):
                 d_connect_list.append(edge[1])
     return d_connect_list
 
+def get_s_connect(init_persona, G):
+    d_connect_list = []
+    for edge in G.edges():
+        if edge[0] == init_persona.name:
+            d_connect_list.append(edge[1])
+    return d_connect_list
 
 def get_reputation_score(target_persona, target_persona_role, personas):
     count = 0
