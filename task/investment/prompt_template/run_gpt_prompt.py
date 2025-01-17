@@ -69,7 +69,7 @@ def run_gpt_prompt_investor_decided_v1(
         "stop": None,
     }
     prompt_input = create_prompt_input(init_persona, target_persona, allocation_plan)
-    if prompt_input[3] == text1 and prompt_input[4] == text2:
+    if prompt_input[3] == text1 or prompt_input[4] == text2:
         prompt_input.pop(3)
         prompt_input.pop(3)
         prompt_template="prompt/stage_1/stage_1_investor_v2.txt"
@@ -151,7 +151,7 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
     
     prompt_input = create_prompt_input(init_persona, target_persona)
     
-    if prompt_input[1] == text3 and prompt_input[2] == text4:
+    if prompt_input[1] == text3 or prompt_input[2] == text4:
         prompt_input.pop(1)
         prompt_input.pop(1)
         prompt_template="prompt/stage_1/stage_1_trustee_v2.txt"
