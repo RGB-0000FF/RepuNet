@@ -33,10 +33,14 @@ class Analysis:
             self._set_analysis_dict_invest()
         elif "sign" in sim:
             self._set_analysis_dict_sign_up()
-        if sim and "invest" in sim:
+
+        if self.with_reputation and sim and "invest" in sim:
             self.set_graph_invest()
-        elif sim and "sign" in sim:
+        elif self.with_reputation and sim and "sign" in sim:
             self.set_graph_sign_up()
+
+        if not self.with_reputation:
+            self._set_graph_without()
 
     def set_graph_sign_up(self):
         self._set_graph_r()
@@ -44,6 +48,21 @@ class Analysis:
     def set_graph_invest(self):
         self._set_graph_i()
         self._set_graph_t()
+
+    def _set_graph_without(self):
+        # trustee graph
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind not in black_list and bind != "investor":
+                    if not G.has_node(bind):
+                        G.add_nodes_from([bind])
+                    G.add_edges_from([(persona.name, bind)])
+        self.G["without_repu"] = G
 
     def _set_graph_r(self):
         # investor graph
@@ -156,7 +175,6 @@ class Analysis:
                         .lower()
                     )
                     return trustee_w, investor_w
-
 
     def _set_analysis_dict_sign_up(self):
         pass

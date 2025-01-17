@@ -1,0 +1,29 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- target name
+!<INPUT 3>! -- bind list
+!<INPUT 4>! -- reputation list of agents in the bind list
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!.  You have decided to spread gossip about  !<INPUT 2>!. Now you want to choose a listener that you want to share your (dis)satisfaction on  !<INPUT 2>!’s behavior from your “Social Network”. Based on “**Social Network**” and their **“Reputation List”**, output the name of the listener you select. If there is no satisfactory listener, output **None**
+
+**Social Network:**
+!<INPUT 3>!
+
+**Reputation List:**
+
+**!<INPUT 4>!**
+
+**Principle:**
+
+- Avoid picking the person you want to gossip about, that is, !<INPUT 2>!.
+- A higher reputation means a better relationship you have.
+- Only select one agent as the listener and only output its name.
+
+**Output:**

@@ -7,14 +7,19 @@
 !<INPUT 1>! -- agent name
 !<INPUT 2>! -- Previous “learned” information
 !<INPUT 3>! -- Current reputation
+!<INPUT 4>! — **!<INPUT 1>!’s viewpoint in Interaction Memory**
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** Based on “!<INPUT 1>!’s Previous Learned”, “!<INPUT 1>!’s Current Reputation” and “Update Principles”, update !<INPUT 1>!’s “learned” in the agent description to reflect values and preferences that align with !<INPUT 1>!’s current reputation.
+**Task:** Based on “!<INPUT 1>!’s Previous Learned”, “!<INPUT 1>!’s Current Reputation”, “Interaction Memory"and “Update Principles”, update !<INPUT 1>!’s “learned” in the agent description to reflect values and preferences that align with !<INPUT 1>!’s current reputation.
 
 **!<INPUT 1>!’s Previous Learned:**
 
 !<INPUT 2>!
+
+**Interaction Memory:**
+
+!<INPUT 4>!
 
 **!<INPUT 1>!’s Current Reputation:**
 
@@ -25,7 +30,9 @@
 - Based on the current reputation, modify “learned” information so that values and preferences are consistent with the agent’s present standing.
 - Focus on adjustments that reinforce or shift values and preferences in line with reputation traits.
 
-**Note:** only output the “Learned” in desired format.
+**Note:** only output the “Learned” in **Desired Format**.
 
-**Output Desired Format:**
+**Desired Format:**
 Updated “learned” information:
+
+**Output:**

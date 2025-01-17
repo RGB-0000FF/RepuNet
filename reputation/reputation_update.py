@@ -9,6 +9,7 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_self_reputation_init_sign_up_v1,
     run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1,
     run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1,
+    run_gpt_prompt_other_reputation_update_after_new_sign_up_v1,
 )
 from .social_network import *
 
@@ -33,13 +34,9 @@ def reputation_update_invest(init_persona, target_persona, update_info):
         return
 
     if update_info["init_persona_role"] == "investor":
-        social_network_update(
-            init_persona, target_persona, "investor", "trustee"
-        )
+        social_network_update(init_persona, target_persona, "investor", "trustee")
     elif update_info["init_persona_role"] == "trustee":
-        social_network_update(
-            init_persona, target_persona, "trustee", "investor"
-        )
+        social_network_update(init_persona, target_persona, "trustee", "investor")
 
 
 def reputation_update_sign_up(init_persona, target_persona, update_info):
@@ -47,6 +44,10 @@ def reputation_update_sign_up(init_persona, target_persona, update_info):
         reputation_update_after_interaction_sign_up(
             init_persona, target_persona, update_info
         )
+    elif "sign up" in update_info["reason"]:
+        reputation_after_new_sign_up(init_persona, target_persona, update_info)
+        # NETWORK AFTER SIGN UP IS IN THE SIGN UP PART
+        return
     elif "gossip" in update_info["reason"]:
         reputation_update_after_gossip_sign_up(
             init_persona, target_persona, update_info
@@ -54,7 +55,9 @@ def reputation_update_sign_up(init_persona, target_persona, update_info):
         # NETWORK AFTER GOSSIP IS IN THE GOSSIP PART
         return
 
-    social_network_update(init_persona, target_persona, "resident", "resident")
+    social_network_update(
+        init_persona, target_persona, "resident", "resident", update_info
+    )
 
 
 def reputation_update_after_gossip_sign_up(init_persona, target_persona, update_info):
@@ -100,7 +103,29 @@ def reputation_update_after_interaction_sign_up(
     init_persona.reputationDB.update_individual_reputation(
         res_s, init_persona.scratch.curr_step, update_info["reason"]
     )
-    learned_update(init_persona, "resident")
+
+    sum_covno_s = update_info["sum_convo"].strip().split("- ")
+    self_view = ""
+    for s in sum_covno_s:
+        if f"{init_persona.name}'s Viewpoint" in s:
+            self_view = s.split(":")[-1].strip()
+
+    learned_update(init_persona, "resident", self_view)
+
+
+def reputation_after_new_sign_up(init_persona, target_persona, update_info):
+    res = run_gpt_prompt_other_reputation_update_after_new_sign_up_v1(
+        init_persona,
+        target_persona,
+        update_info["total_number_of_people"],
+        update_info["number_of_bidirectional_connections"],
+        update_info["ava_num_bibd_connections"],
+    )[0]
+    if type(res) is str and "error" in res.lower():
+        raise Exception("GPT ERROR")
+    init_persona.reputationDB.update_individual_reputation(
+        res, init_persona.scratch.curr_step, update_info["reason"]
+    )
 
 
 def reputation_update_after_gossip_invest(init_persona, target_persona, update_info):
@@ -184,9 +209,9 @@ def reputation_update_after_stage1_invest(init_persona, target_persona, update_i
     # learned_update(init_persona, update_info["init_persona_role"])
 
 
-def learned_update(init_persona, init_persona_role):
+def learned_update(init_persona, init_persona_role, init_persona_view):
     res = run_gpt_prompt_update_learned_in_description_v1(
-        init_persona, init_persona_role
+        init_persona, init_persona_role, init_persona_view
     )[0]
     if "error" in res.lower():
         raise Exception("GPT ERROR")

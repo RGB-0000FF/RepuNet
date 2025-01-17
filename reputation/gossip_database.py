@@ -50,6 +50,9 @@ class GossipDB:
         for gossip in gossips:
             gossip["created_at"] = curr_step
             self.gossips.append(gossip)
+            self.gossips_count += 1
+            if gossip["credibility level"] in ["very uncredible", "uncredible"]:
+                self.gossips_incredible_count += 1
 
     def get_target_gossips_info(self, target_persona):
         infos = ""

@@ -6,7 +6,7 @@ Variables:
 !<INPUT 0>! -- “learned” in the agent
 !<INPUT 1>! -- agent name
 !<INPUT 2>! -- agent ID
-!<INPUT 3>! -- summarized conversation
+!<INPUT 3>! -- Interaction Memory
 !<INPUT 4>! -- score of the satisfaction in conversations
 !<INPUT 5>! -- agent previous reputation
 !<INPUT 6>! -- average of satisfaction degree in all agents
@@ -22,7 +22,7 @@ Variables:
 **Your Previous Reputation:**
 !<INPUT 5>!
 
-**Summarized conversation:**
+**Interaction Memory:**
 
 !<INPUT 3>!
 
@@ -44,7 +44,7 @@ A score above !<INPUT 6>! suggests a relatively positive reputation in the commu
 "ID": !<INPUT 2>!,
 "name": "!<INPUT 1>!",
 "role": "resident",
-"scenario": "sign up",
+"scenario": "sign-up program",
 "content": "<a brief description of your reputation>",
 "numerical record": "(x1, x2, x3, x4, x5)"
 }

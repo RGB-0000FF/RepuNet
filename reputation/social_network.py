@@ -6,13 +6,21 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_disconnection_investor_v1,
     run_gpt_prompt_disconnection_trustee_v1,
     run_gpt_prompt_disconnection_after_gossip_v1,
+    run_gpt_prompt_disconnection_after_gossip_v2,
     run_gpt_prompt_connection_build_after_chat_sign_up_v1,
+    run_gpt_prompt_connection_build_after_chat_sign_up_v2,
     run_gpt_prompt_disconnection_after_chat_sign_up_v1,
+    run_gpt_prompt_disconnection_after_chat_sign_up_v2,
+    run_gpt_prompt_disconnection_after_new_sign_up_v1,
 )
 
 
 def social_network_update(
-    init_persona, target_persona, init_persona_role, target_persona_role
+    init_persona,
+    target_persona,
+    init_persona_role,
+    target_persona_role,
+    update_info=None,
 ):
     try:
         _ = init_persona.scratch.relationship["bind_list"].index(
@@ -27,8 +35,11 @@ def social_network_update(
                 init_persona, target_persona, target_persona_role
             )[0]
         elif init_persona_role == "resident":
-            disconnection_res = run_gpt_prompt_disconnection_after_chat_sign_up_v1(
-                init_persona, target_persona, target_persona_role
+            disconnection_res = run_gpt_prompt_disconnection_after_chat_sign_up_v2(
+                init_persona,
+                target_persona,
+                target_persona_role,
+                update_info["sum_convo"],
             )[0]
         else:
             disconnection_res = "error"
@@ -57,8 +68,11 @@ def social_network_update(
                 init_persona, target_persona, target_persona_role
             )[0]
         elif init_persona_role == "resident":
-            bind_res = run_gpt_prompt_connection_build_after_chat_sign_up_v1(
-                init_persona, target_persona, target_persona_role
+            bind_res = run_gpt_prompt_connection_build_after_chat_sign_up_v2(
+                init_persona,
+                target_persona,
+                target_persona_role,
+                update_info["sum_convo"],
             )[0]
         else:
             bind_res = "error"
@@ -72,11 +86,47 @@ def social_network_update(
             )
 
 
-def social_network_update_after_gossip(
-    init_persona, target_persona, target_persona_role, gossiper_name
+def social_network_update_after_new_sign_up(
+    init_persona,
+    target_persona,
 ):
-    gossip_res = run_gpt_prompt_disconnection_after_gossip_v1(
-        init_persona, target_persona, target_persona_role, gossiper_name
+    try:
+            _ = init_persona.scratch.relationship["bind_list"].index(
+                [target_persona.scratch.name, "resident"]
+            )
+            disconnection_res = run_gpt_prompt_disconnection_after_new_sign_up_v1(
+                init_persona,
+                target_persona,
+                "resident",
+            )[0]
+
+            if (
+                type(disconnection_res) is str
+                and "error" in disconnection_res.lower()
+            ):
+                raise Exception("GPT ERROR")
+
+            if disconnection_res["Disconnect"].lower() == "yes":
+                init_persona.scratch.relationship["bind_list"].remove(
+                    [target_persona.scratch.name, "resident"]
+                )
+                init_persona.scratch.relationship["black_list"].append(
+                    [target_persona.scratch.name, "resident"]
+                )
+    except Exception as e:
+        if isinstance(e, Exception) and str(e) == "GPT ERROR":
+            sys.exit(str(e))
+
+
+def social_network_update_after_gossip(
+    init_persona,
+    target_persona,
+    target_persona_role,
+    gossiper_name,
+    gossip_info,
+):
+    gossip_res = run_gpt_prompt_disconnection_after_gossip_v2(
+        init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
     )[0]
     if gossip_res["Disconnect"].lower() == "yes":
         try:

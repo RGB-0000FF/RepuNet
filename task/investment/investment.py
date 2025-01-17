@@ -2,7 +2,7 @@ import random
 
 from reputation.gossip import first_order_gossip
 from reputation.prompt_template.run_gpt_prompt import (
-    run_gpt_prompt_gossip_listener_select_v1,
+    run_gpt_prompt_gossip_listener_select_v2,
 )
 from reputation.reputation_update import reputation_update_invest
 
@@ -427,7 +427,7 @@ def start_investment(pair, personas, G, save_folder):
     # gossip stage
     if investor.scratch.complain_buffer:
         # gossip target choose
-        gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
+        gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
             investor, "investor", trustee
         )[0]
         for gossip_target in gossip_target_investor:
@@ -444,7 +444,7 @@ def start_investment(pair, personas, G, save_folder):
 
     if trustee.scratch.complain_buffer:
         # gossip target choose
-        gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v1(
+        gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v2(
             trustee, "trustee", investor
         )[0]
         for gossip_target in gossip_target_trustee:

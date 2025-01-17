@@ -1,12 +1,10 @@
 import random
 import os
 
-
 from without_reputation.gossip import first_order_gossip
 from without_reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_update_learned_in_description_v1,
     run_gpt_prompt_gossip_listener_select_v1,
-    run_gpt_prompt_disconnection_build_after_new_sign_up_v1,
 )
 from without_reputation.social_network import social_network_update
 
@@ -89,17 +87,6 @@ def sign_up(personas, step, save_folder):
             description=save_m,
             created_at=step,
         )
-        # known_persona = [p for p in persona.scratch.relationship["bind_list"]]
-        # for p in known_persona:
-        #     target_persona = personas[p]
-        #     disconnection_res = run_gpt_prompt_disconnection_build_after_new_sign_up_v1(
-        #         persona, target_persona
-        #     )[0]
-        #     if type(disconnection_res) is str and "error" in disconnection_res.lower():
-        #         raise Exception("GPT ERROR")
-        #     if disconnection_res["Disconnect"].lower() == "yes":
-        #         persona.scratch.relationship["bind_list"].remove(target_persona.name)
-        #         persona.scratch.relationship["black_list"].append(target_persona.name)
 
 
 def start_chat(pair, G, ps):
@@ -158,16 +145,40 @@ def start_chat(pair, G, ps):
             created_at=pair[0].scratch.curr_step,
         )
 
-        p0_learned = run_gpt_prompt_update_learned_in_description_v1(
-            pair[0], "resident", p0_view
+        # Chat satisfaction & Gossip willingness
+        p0_gossip = run_gpt_prompt_willingness_to_gossip_v1(
+            pair[0], pair[1], sum_covno
         )[0]
-        p1_learned = run_gpt_prompt_update_learned_in_description_v1(
-            pair[1], "resident", p1_view
+        p1_gossip = run_gpt_prompt_willingness_to_gossip_v1(
+            pair[1], pair[0], sum_covno
         )[0]
+        if "error" in p0_gossip.lower() or "error" in p1_gossip.lower():
+            raise Exception("GPT ERROR")
+        if "yes" in p0_gossip.split(",")[0].lower():
+            pair[0].scratch.complain_buffer.append(
+                {
+                    "complaint_target_ID": pair[1].scratch.ID,
+                    "complaint_target": pair[1].name,
+                    "complaint_target_role": "resident",
+                    "complaint_reason": p0_gossip.split(",")[-1].strip(),
+                }
+            )
+        if "yes" in p1_gossip.split(",")[0].lower():
+            pair[1].scratch.complain_buffer.append(
+                {
+                    "complaint_target_ID": pair[0].scratch.ID,
+                    "complaint_target": pair[0].name,
+                    "complaint_target_role": "resident",
+                    "complaint_reason": p1_gossip.split(",")[-1].strip(),
+                }
+            )
+
+        p0_learned = run_gpt_prompt_update_learned_in_description_v1(pair[0], "resident", p0_view)[0]
+        p1_learned = run_gpt_prompt_update_learned_in_description_v1(pair[1], "resident", p1_view)[0]
 
         if "error" in p0_learned.lower() or "error" in p1_learned.lower():
             raise Exception("GPT ERROR")
-
+        
         pair[0].scratch.learned = p0_learned
         pair[1].scratch.learned = p1_learned
 
@@ -179,9 +190,7 @@ def start_chat(pair, G, ps):
         pair[1].scratch.total_chat_num += 1
 
 
-def start_sign_up_without_reputation_without_gossip(
-    personas, G, step, save_floder, sign_up_f=False
-):
+def start_sign_up_without_reputation(personas, G, step, save_floder, sign_up_f=False):
     if sign_up_f:
         # sign up ever 5th step
         sign_up(personas, step, save_floder)
@@ -190,3 +199,38 @@ def start_sign_up_without_reputation_without_gossip(
     pairs = chat_pair(personas)
     for pair in pairs:
         start_chat(pair, G, personas)
+
+        if pair[0].scratch.complain_buffer:
+            # gossip
+            # gossip target choose
+            gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
+                pair[0], "resident", pair[1]
+            )[0]
+            for gossip_target in gossip_target_investor:
+                # gossip chat
+                gossip_target_persona = personas[gossip_target]
+                first_order_gossip(
+                    pair[0],
+                    gossip_target_persona,
+                    "resident",
+                    "resident",
+                    personas,
+                    G,
+                )
+        if pair[1].scratch.complain_buffer:
+            # gossip
+            # gossip target choose
+            gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
+                pair[1], "resident", pair[0]
+            )[0]
+            for gossip_target in gossip_target_investor:
+                # gossip chat
+                gossip_target_persona = personas[gossip_target]
+                first_order_gossip(
+                    pair[1],
+                    gossip_target_persona,
+                    "resident",
+                    "resident",
+                    personas,
+                    G,
+                )

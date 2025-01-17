@@ -1,0 +1,28 @@
+**system prompt: <!<INPUT 3>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent learned
+!<INPUT 1>! -- target name
+!<INPUT 2>! -- Interaction History
+!<INPUT 3>! -- agent name
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** "You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Interaction History”, “Guiding Principles for Gossip”, and your “Innate”, would you like to gossip with someone else about !<INPUT 1>!’s behavior described in the “Interaction History”? Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior in the “Interaction History”."
+
+**Guiding Principles for Gossip:**
+1. Gossiping is a tool for sharing experiences that help the community identify trustworthy and untrustworthy trustees.
+2. Avoiding gossip solely to preserve the trustee’s reputation is discouraged if their behavior risks harming other investors.
+
+1. Focus on your personal judgments regarding interaction history.
+
+**Interaction History:**
+!<INPUT 2>!
+
+**Innate:**
+!<INPUT 0>!
+
+**Desired format:**
+<Yes or No>, <Reason in one sentence>.

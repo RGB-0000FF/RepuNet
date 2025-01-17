@@ -1,0 +1,27 @@
+**system prompt: <!<INPUT 3>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent learned
+!<INPUT 1>! -- target name
+!<INPUT 2>! -- Interaction History
+!<INPUT 3>! -- agent name
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** "You are  !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Interaction History”, “Guiding Principles”, and your “Innate”, would you like to share it with someone else about !<INPUT 1>!’s behavior described in the “Interaction History”?
+
+- If output “Yes”, explain which aspect of its behavior you want to share based on the “Interaction History”.
+- If output “No”, explain why you do not want to share about its behavior in the “Interaction History”.
+
+**Guiding Principles:** If you notice that your perspective differs from someone else’s, sharing it with a friend in your network can be an effective and constructive way to highlight. This can foster deeper connections and collective understanding.
+
+**Interaction History:**
+!<INPUT 2>!
+
+**Innate:**
+!<INPUT 0>!
+
+**Desired format:**
+<Yes or No>, <Reason in one sentence>.

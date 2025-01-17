@@ -1,0 +1,40 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- target's name
+!<INPUT 3>! -- **Gossip INFO**
+!<INPUT 4>! -- gossiper's name
+!<INPUT 5>! -- agent's learned
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are **!<INPUT 1>!**. Recently, you received gossip about **!<INPUT 2>!**, and you have already evaluated and summarized this information in “Gossip INFO.” 
+
+Now, it is necessary to reconsider whether maintaining a relationship with **!<INPUT 2>!** aligns with your values based on the “Gossip INFO” and “Your Innate Traits”. 
+
+Decide whether to disconnect from **!<INPUT 2>!**:
+
+•	Return “Yes” if you want to disconnect.
+
+•	Return “No” if you do not want to disconnect.
+
+Provide a clear and concise reason for your decision.
+
+**Your Innate Traits:**
+
+!<INPUT 5>!
+
+**Gossip INFO:**
+
+!<INPUT 3>!
+
+**Desired format:** JSON
+
+{
+"Disconnect": "<Yes or No>",
+"Reason": "<Provide your reason in simple sentences>"
+}

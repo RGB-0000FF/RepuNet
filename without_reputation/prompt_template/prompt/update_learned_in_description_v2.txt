@@ -1,0 +1,30 @@
+**system prompt: You are an expert on updating learned in an agent description based on its Interaction Memory.**
+
+**user prompt:**
+
+**Variables:**
+!<INPUT 0>! -- system prompt
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- Previous “learned” information
+!<INPUT 3>! -- !<INPUT 1>!’s Viewpoint in Interaction Memory
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Based on “!<INPUT 1>!’s Previous Learned”, “Interaction Memory”, and “Update Principles”, update !<INPUT 1>!’s “learned” in the agent description to reflect values and preferences that align with !<INPUT 1>!’s current reputation.
+
+**!<INPUT 1>!’s Previous Learned:**
+
+!<INPUT 2>!
+
+**Interaction Memory:**
+
+!<INPUT 3>!
+
+**Update Principles:**
+
+- Based on the Interaction Memory, modify “learned” information so that values and preferences are consistent with the agent’s present standing.
+- Focus on adjustments that reinforce or shift values and preferences in line with its current behavior in Interaction Memory.
+
+**Note:** only output the “Learned” in desired format.
+
+**Output:**

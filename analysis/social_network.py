@@ -65,10 +65,18 @@ class SocialNetworkAnalysis:
                 for n in G.nodes():
                     p = sim.personas[n]
                     d_connect = get_d_connect(p, G)
-                    repu_score = get_reputation_score(p, key, sim.personas)
+                    if self.with_repu:
+                        repu_score = get_reputation_score(p, key, sim.personas)
+                        repus = p.reputationDB.get_all_reputations(
+                            key, p.scratch.ID, True
+                        )
+                    else:
+                        repu_score = None
+                        repus = None
                     result[n] = {
                         "d_connect": d_connect,
                         f"repu_score_{key}": repu_score,
+                        "reputation_database": repus,
                     }
                 with open(save_path + f"/{key}_{sim.step}.json", "w") as f:
                     json.dump(result, f, indent=4)
@@ -163,7 +171,7 @@ class SocialNetworkAnalysis:
 
     def _set_nodes_without_reputation(self, G, ps):
         node_size = []
-        outer_color = []  # investor reputation color
+        outer_color = []
         for n in G.nodes():
             p = ps[n]
             d_connect = get_d_connect(p, G)
@@ -194,16 +202,19 @@ class SocialNetworkAnalysis:
 if __name__ == "__main__":
     # init set
     sim_folders = [
-        "s15_with_repu_gossip",
+        # "sign_s7_with_all_r",
+        # "sign_s20_with_all",
+        # "sign_s18_without_gossip",
+        "sign_s19_without_repu_with_gossip",
         # "investment_s2",
         # "investment_s8_without_repu_gossip",
         # "investment_s9_without_repu_with_gossip",
     ]
-    with_repu = [True, True]
+    with_repu = [False]
     for i, sim_folder in enumerate(sim_folders):
         if i != 0:
             os.chdir("../")
-        sa = SocialNetworkAnalysis(sim_folder,"sign", with_repu[i])
+        sa = SocialNetworkAnalysis(sim_folder, "sign", with_repu[i])
         current_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(current_dir)
         if not os.path.exists(f"./{sim_folder}_result"):

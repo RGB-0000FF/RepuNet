@@ -1,7 +1,7 @@
 from .prompt_template.run_gpt_prompt import (
     # run_gpt_prompt_gossip_v1,
     run_gpt_prompt_gossip_v2,
-    run_gpt_prompt_gossip_listener_select_v1,
+    run_gpt_prompt_gossip_listener_select_v2,
     run_gpt_prompt_identify_and_summary_gossip_info_v1,
     run_gpt_prompt_first_order_evaluation_v1,
     run_gpt_prompt_second_order_evaluation_v1,
@@ -114,6 +114,7 @@ def first_order_gossip(
             personas[complain_info["complained name"]],
             complain_persona_role,
             init_persona.name,
+            gossip[0]["gossip info"],
         )
 
         if gossip[0]["whether to spread gossip second-hand"] == "Yes":
@@ -152,7 +153,7 @@ def second_order_gossip(
 ):
     print("SECOND ORDER GOSSIP")
     complain_persona = personas[complain_info["complained name"]]
-    gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
+    gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
         init_persona, init_persona_role, complain_persona
     )[0]
 
@@ -232,6 +233,7 @@ def second_order_gossip(
             complain_persona,
             complain_persona_role,
             init_persona.name,
+            gossip[0]["gossip info"],
         )
 
 
