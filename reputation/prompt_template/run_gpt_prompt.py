@@ -929,7 +929,7 @@ def run_gpt_prompt_gossip_listener_select_v2(
         return [gpt_response]
 
     def get_fail_safe():
-        fs = "error"
+        fs = []
         return fs
 
     gpt_param = {
