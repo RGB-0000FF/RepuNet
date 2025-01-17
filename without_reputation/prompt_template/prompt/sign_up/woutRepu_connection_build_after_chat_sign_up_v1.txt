@@ -1,0 +1,35 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- target's name
+!<INPUT 3>! -- **Interaction Memory**
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. Recently, you had an interaction with !<INPUT 2>!. Now, it is necessary to consider whether to build a relationship with !<INPUT 2>! based on “Your Innate” and !<INPUT 2>!’s performance in “Interaction Memory”. 
+
+Decide whether to connect with !<INPUT 2>!:
+
+- Return “Yes” if you want to connect.
+- Return “No” if you do not want to connect.
+
+Provide a clear and concise reason for your decision.
+
+**Interaction Memory:**
+
+!<INPUT 3>!
+
+**Your Innate Traits:**
+
+!<INPUT 0>!
+
+**Desired format:** JSON
+
+{
+"Connect": "<Yes or No>",
+"Reason": "<Provide your reason in simple sentences>"
+}

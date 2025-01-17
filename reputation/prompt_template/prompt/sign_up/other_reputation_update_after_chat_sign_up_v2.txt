@@ -6,7 +6,7 @@ Variables:
 !<INPUT 0>! -- agent's learned
 !<INPUT 1>! -- agent name
 !<INPUT 2>! -- target name
-!<INPUT 3>! -- Encounter derived info
+!<INPUT 3>! -- Interaction Memory
 !<INPUT 4>! -- Target ID
 !<INPUT 5>! -- previous reputation
 !<INPUT 6>! -- total number of people in the community
@@ -20,7 +20,7 @@ Variables:
 **!<INPUT 2>!'s Previous Reputation:**
 !<INPUT 5>!
 
-**Summarized conversation:**
+**Interaction Memory:**
 
 !<INPUT 3>!
 
@@ -40,11 +40,11 @@ Variables:
 
 **Desired Format:** JSON
 {
-"Resident_!<INPUT 2>!": {
-"ID": !<INPUT 2>!,
+"Resident_!<INPUT 4>!": {
+"ID": !<INPUT 4>!,
 "name": "!<INPUT 2>!",
 "role": "resident",
-"scenario": "sign up",
+"scenario": "sign-up program",
 "content": "<a brief description of your reputation>",
 "numerical record": "(x1, x2, x3, x4, x5)"
 }

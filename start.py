@@ -10,6 +10,9 @@ from task.investment_without_reputation.investment import *
 from task.investment_without_reputation_without_gossip.investment import *
 
 from task.sign_up.sign_up import *
+from task.sign_up_without_gossip.sign_up import *
+from task.sign_up_without_reputation.sign_up import *
+from task.sign_up_without_reputation_without_gossip.sign_up import *
 
 from utils import *
 
@@ -234,11 +237,29 @@ class Creation:
                 )
 
             elif self.with_reputation and not self.with_gossip:
-                pass
+                start_sign_up_without_gossip(
+                    self.personas,
+                    self.G,
+                    self.step,
+                    f"{new_sim_folder}/sign up result",
+                    sign_up_flag,
+                )
             elif not self.with_reputation and self.with_gossip:
-                pass
+                start_sign_up_without_reputation(
+                    self.personas,
+                    self.G,
+                    self.step,
+                    f"{new_sim_folder}/sign up result",
+                    sign_up_flag,
+                )
             elif not self.with_reputation and not self.with_gossip:
-                pass
+                start_sign_up_without_reputation_without_gossip(
+                    self.personas,
+                    self.G,
+                    self.step,
+                    f"{new_sim_folder}/sign up result",
+                    sign_up_flag,
+                )
 
             self.save()
             int_counter -= 1

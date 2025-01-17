@@ -3,14 +3,20 @@ import sys
 from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_connection_build_investor_v1,
     run_gpt_prompt_connection_build_trustee_v1,
+    run_gpt_prompt_connection_build_after_chat_sign_up_v1,
     run_gpt_prompt_disconnection_investor_v1,
     run_gpt_prompt_disconnection_trustee_v1,
+    run_gpt_prompt_disconnection_after_chat_sign_up_v1,
     run_gpt_prompt_disconnection_after_gossip_v1,
 )
 
 
 def social_network_update(
-    init_persona, target_persona, init_persona_role, target_persona_role
+    init_persona,
+    target_persona,
+    init_persona_role,
+    target_persona_role,
+    interaction_memory=None,
 ):
     try:
         _ = init_persona.scratch.relationship["bind_list"].index(
@@ -26,8 +32,9 @@ def social_network_update(
                 init_persona, target_persona, target_persona_role
             )[0]
         elif init_persona_role == "resident":
-            # TODO: disconnection after chat sign up
-            pass
+            disconnection_res = run_gpt_prompt_disconnection_after_chat_sign_up_v1(
+                init_persona, target_persona, target_persona_role, interaction_memory
+            )[0]
         else:
             disconnection_res = "error"
 
@@ -55,8 +62,9 @@ def social_network_update(
                 init_persona, target_persona, target_persona_role
             )[0]
         elif init_persona_role == "resident":
-            # TODO: connection after chat sign up
-            pass
+            bind_res = run_gpt_prompt_connection_build_after_chat_sign_up_v1(
+                init_persona, target_persona, target_persona_role, interaction_memory
+            )[0]
         else:
             bind_res = "error"
 

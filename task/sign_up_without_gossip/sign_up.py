@@ -1,16 +1,20 @@
 import random
 import os
+import sys
 
 from reputation.reputation_update import (
     reputation_update_sign_up,
 )
 from reputation.gossip import first_order_gossip
 from reputation.prompt_template.run_gpt_prompt import (
-    run_gpt_prompt_gossip_listener_select_v1,
+    run_gpt_prompt_gossip_listener_select_v2,
+    run_gpt_prompt_disconnection_after_chat_sign_up_v2,
 )
+from reputation.social_network import social_network_update_after_new_sign_up
 
 from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_sign_up_v1,
+    run_gpt_prompt_sign_up_v2,
     run_gpt_prompt_decide_to_talk_v1,
     run_gpt_prompt_create_chat_v1,
     run_gpt_prompt_summarize_chat_v1,
@@ -56,14 +60,15 @@ def chat_pair(personas):
     return pairs
 
 
-def sign_up(personas, step, save_folder):
+def sign_up(personas, step, save_folder, G):
     save_m = ""
     res = f"--------------------Sign up info {step}--------------------\n"
     count = 0
     for persona_name, persona in personas.items():
         count += 1
         if step != 1:
-            output = run_gpt_prompt_sign_up_v1(persona)[0]
+            # output = run_gpt_prompt_sign_up_v1(persona)[0]
+            output = run_gpt_prompt_sign_up_v2(persona)[0]
         else:
             output = run_gpt_prompt_init_sign_up_v1(persona)[0]
         if "error" in output.lower():
@@ -81,6 +86,7 @@ def sign_up(personas, step, save_folder):
         f.write(res)
 
     for _, persona in personas.items():
+        # update sign up info to memory
         persona.associativeMemory.add_event(
             subject=persona.name,
             predicate="sign up",
@@ -88,6 +94,23 @@ def sign_up(personas, step, save_folder):
             description=save_m,
             created_at=step,
         )
+        # update reputation after sign up
+        repus = persona.reputationDB.get_all_reputations("resident", persona.scratch.ID)
+        known_personas = [repu["name"] for _, repu in repus.items()]
+        for target_persona_name in known_personas:
+            target_persona = personas[target_persona_name]
+            update_info = {
+                "reason": "reputation update after sign up",
+                "total_number_of_people": len(personas),
+                "number_of_bidirectional_connections": len(
+                    get_d_connect(target_persona, G["resident"])
+                ),
+                "ava_num_bibd_connections": get_ava_num_bibd_connections(
+                    personas, G["resident"]
+                ),
+            }
+            reputation_update_sign_up(persona, target_persona, update_info)
+            social_network_update_after_new_sign_up(persona, target_persona)
 
 
 def start_chat(pair, G, ps):
@@ -202,10 +225,10 @@ def start_chat(pair, G, ps):
         pair[1].scratch.total_chat_num += 1
 
 
-def start_sign_up(personas, G, step, save_floder, sign_up_f=False):
+def start_sign_up_without_gossip(personas, G, step, save_floder, sign_up_f=False):
     if sign_up_f:
         # sign up ever 5th step
-        sign_up(personas, step, save_floder)
+        sign_up(personas, step, save_floder, G)
 
     # interaction
     pairs = chat_pair(personas)

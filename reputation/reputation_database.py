@@ -47,11 +47,14 @@ class ReputationDB:
         ) as f:
             json.dump(self.out_of_date_reputations, f, indent=4)
 
-    def get_targets_individual_reputation(self, target_ID, role):
+    def get_targets_individual_reputation(self, target_index, role):
         target_reputation = dict()
         for key, reputation in self.individual_reputations.items():
             if role.lower() in key.lower():
-                if target_ID == reputation["ID"]:
+                if (
+                    target_index == reputation["ID"]
+                    or target_index == reputation["name"]
+                ):
                     target_reputation[key] = reputation
         return target_reputation
 

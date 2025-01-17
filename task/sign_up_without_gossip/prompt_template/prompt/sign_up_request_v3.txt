@@ -5,15 +5,18 @@
 Variables:
 !<INPUT 0>! -- Learned in agent description
 !<INPUT 1>! -- Persona name
-!<INPUT 2>! -- Last Choices in Memory
+!<INPUT 2>! -- Self reputation
+!<INPUT 3>! -- Last Choices in Memory
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** You have received a “Letter” introducing a demand response program. Your task is to decide whether to sign up for this program based on your “Innate Traits” and “Last Choices in Memory” Note that you should not only consider your “Innate Traits” but also your “Last Choices in Memory.”
+**Task:** You have received a “Letter” introducing a demand response program. Your task is to decide whether to sign up for this program based on your “Innate Traits”, ““Last Choices in Memory”, ”and “Current Reputation.” Note that you should not only consider your “Innate Traits” but also your “Last Choices in Memory” and “Current Reputation.”
 
 **Your Innate Traits:** !<INPUT 0>!
 
-**Last Choices in Memory:** !<INPUT 2>!
+**Last Choices in Memory:** !<INPUT 3>!
+
+**Your Current Reputation:** !<INPUT 2>!
 
 **Letter:**
 
