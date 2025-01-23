@@ -23,7 +23,7 @@ def reputation_init_sign_up(init_persona):
     )
 
 
-def reputation_update_invest(init_persona, target_persona, update_info):
+def reputation_update_invest(init_persona, target_persona, update_info,full_investment=True):
     if "stage 1" in update_info["reason"]:
         reputation_update_after_stage1_invest(init_persona, target_persona, update_info)
     elif "stage 4" in update_info["reason"]:
@@ -34,9 +34,9 @@ def reputation_update_invest(init_persona, target_persona, update_info):
         return
 
     if update_info["init_persona_role"] == "investor":
-        social_network_update(init_persona, target_persona, "investor", "trustee")
+        social_network_update(init_persona, target_persona, "investor", "trustee",update_info=update_info,full_investment=full_investment)
     elif update_info["init_persona_role"] == "trustee":
-        social_network_update(init_persona, target_persona, "trustee", "investor")
+        social_network_update(init_persona, target_persona, "trustee", "investor",update_info=update_info,full_investment=full_investment)
 
 
 def reputation_update_sign_up(init_persona, target_persona, update_info):
@@ -134,8 +134,7 @@ def reputation_update_after_gossip_invest(init_persona, target_persona, update_i
         target_persona,
         update_info["gossip"][0],
         update_info["target_persona_role"],
-        update_info["total_number_of_people"],
-        update_info["number_of_bidirectional_connections"],
+        update_info["gossip"][0]["credibility level"],    
     )[0]
     if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
@@ -150,23 +149,13 @@ def reputation_update_after_stage4_invest(init_persona, target_persona, update_i
         res = run_gpt_prompt_reputation_update_after_stage4_investor_v1(
             init_persona,
             target_persona,
-            "investor",
-            "trustee",
-            update_info["init_behavior_summary"],
-            update_info["target_behavior_summary"],
-            update_info["total_number_of_people"],
-            update_info["number_of_bidirectional_connections"],
+            update_info,
         )[0]
     elif update_info["init_persona_role"] == "trustee":
         res = run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
             init_persona,
             target_persona,
-            "trustee",
-            "investor",
-            update_info["init_behavior_summary"],
-            update_info["target_behavior_summary"],
-            update_info["total_number_of_people"],
-            update_info["number_of_bidirectional_connections"],
+            update_info,
         )[0]
     if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")

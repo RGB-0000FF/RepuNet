@@ -5,7 +5,7 @@ from reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_gossip_listener_select_v2,
 )
 from reputation.reputation_update import reputation_update_invest
-
+from reputation.social_network import *
 from .prompt_template.run_gpt_prompt import *
 
 
@@ -41,7 +41,7 @@ def pair_each(personas, G):
             learned=personas[investor_k].scratch.learned
             repu_list=""
             for persona in d_connect_list_clean:
-                repu=personas[investor_k].reputationDB.get_targets_individual_reputation(personas[persona].scratch.ID, "trustee")
+                repu=investor.reputationDB.get_targets_individual_reputation(personas[persona].scratch.ID, "trustee")
                 repu_list+=personas[persona].scratch.name+":"+list(repu.values())[0]["content"]+"\n"
             # for name,reputation in list(repu.items()):
             #     repu_list+=name+":"+ reputation + "\n"    
@@ -173,7 +173,7 @@ def start_investment(pair, personas, G, save_folder):
         # total investment num +1
         investor.scratch.total_num_investor += 1
         trustee.scratch.total_num_trustee += 1
-        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}"
+        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\nInvestor's decision and explanation:{investor_decided}"
         investor.associativeMemory.add_event(
             subject=investor.name,
             predicate="investment",
@@ -208,11 +208,18 @@ def start_investment(pair, personas, G, save_folder):
         # }
         # reputation_update(investor, trustee, update_info_investor)
         # reputation_update(trustee, investor, update_info_trustee)
-
+        full_investment=False
+        update_info_investor={"target_behavior_summary":description}
+        update_info_trustee={"target_behavior_summary":description}
+        social_network_update(investor,trustee,"investor","trustee",update_info=update_info_investor,full_investment=full_investment)
+        social_network_update(trustee,investor,"trustee","investor",update_info=update_info_trustee,full_investment=full_investment)
+        investor.update_interaction_memory(role="investor",memory=description)
+        trustee.update_interaction_memory(role="trustee",memory=description)
         trustee_gossip_willing = run_gpt_prompt_stage1_trustee_gossip_willing_v1(
             trustee,
             trustee_plan,
             investor_decided.split("Refuse.")[-1].strip(),
+            investor,
             verbose=True,
         )[0]
         investor_gossip_willing = run_gpt_prompt_stage1_investor_gossip_willing_v1(
@@ -234,7 +241,7 @@ def start_investment(pair, personas, G, save_folder):
                     "complaint_target_ID": investor.scratch.ID,
                     "complaint_target": investor.name,
                     "complaint_target_role": "investor",
-                    "complaint_reason": trustee_gossip_willing.split(",")[-1],
+                    "complaint_reason": ",".join(trustee_gossip_willing.split(",")[1:]),
                 }
             )
         if "yes" in investor_gossip_willing.split(",")[0].lower():
@@ -243,7 +250,7 @@ def start_investment(pair, personas, G, save_folder):
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
                     "complaint_target_role": "trustee",
-                    "complaint_reason": investor_gossip_willing.split(",")[-1],
+                    "complaint_reason": ",".join(investor_gossip_willing.split(",")[1:]),
                 }
             )
 
@@ -252,7 +259,6 @@ def start_investment(pair, personas, G, save_folder):
             "trustee_gossip_willing": trustee_gossip_willing,
             "investor_gossip_willing": investor_gossip_willing,
         }
-
     elif "Accept" in investor_decided:
         # success investment num +1
         investor.scratch.total_num_investor += 1
@@ -271,7 +277,7 @@ def start_investment(pair, personas, G, save_folder):
 
         # stage 3
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
-            investor, trustee, trustee_plan, a_unit, k, unallocated_unit, verbose=True
+            trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
         trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
         investor_allocation_part = round(float(trustee_allocation["investor"]), 3)
@@ -334,9 +340,10 @@ def start_investment(pair, personas, G, save_folder):
             reported_investment_outcome,
             trustee_allocation_part,
             investor_allocation_part,
+            reflection=investor_evaluation["trustee_reputation"],
             verbose=True,
         )[0]
-
+        full_investment=True
         if type(investor_evaluation) is str and "error" in investor_evaluation.lower():
             raise Exception("GPT ERROR")
         if type(trustee_evaluation) is str and "error" in trustee_evaluation.lower():
@@ -363,9 +370,12 @@ def start_investment(pair, personas, G, save_folder):
                 get_d_connect(investor, G["investor"])
             ),
         }
-        reputation_update_invest(investor, trustee, update_info_investor)
-        reputation_update_invest(trustee, investor, update_info_trustee)
-
+        reputation_update_invest(investor, trustee, update_info_investor,full_investment=full_investment)
+        reputation_update_invest(trustee, investor, update_info_trustee,full_investment=full_investment)
+        
+        investor.update_interaction_memory(role="investor",memory=update_info_investor["target_behavior_summary"])
+        trustee.update_interaction_memory(role="trustee",memory=update_info_trustee["target_behavior_summary"])
+        
         trustee_gossip_willing = run_gpt_prompt_stage4_trustee_gossip_v1(
             trustee,
             investor,
@@ -378,6 +388,7 @@ def start_investment(pair, personas, G, save_folder):
             reported_investment_outcome,
             trustee_allocation_part,
             investor_allocation_part,
+            trustee_evaluation["investor_reputation"],
             verbose=True,
         )[0]
         investor_gossip_willing = run_gpt_prompt_stage4_investor_gossip_v1(
@@ -392,6 +403,7 @@ def start_investment(pair, personas, G, save_folder):
             reported_investment_outcome,
             trustee_allocation_part,
             investor_allocation_part,
+            investor_evaluation["trustee_reputation"],
             verbose=True,
         )[0]
 
@@ -407,7 +419,7 @@ def start_investment(pair, personas, G, save_folder):
                     "complaint_target_ID": investor.scratch.ID,
                     "complaint_target": investor.name,
                     "complaint_target_role": "investor",
-                    "complaint_reason": trustee_gossip_willing.split(",")[-1],
+                    "complaint_reason": ",".join(trustee_gossip_willing.split(",")[1:]),
                 }
             )
         if "yes" in investor_gossip_willing.split(",")[0].lower():
@@ -416,48 +428,67 @@ def start_investment(pair, personas, G, save_folder):
                     "complaint_target_ID": trustee.scratch.ID,
                     "complaint_target": trustee.name,
                     "complaint_target_role": "trustee",
-                    "complaint_reason": investor_gossip_willing.split(",")[-1],
+                    "complaint_reason": ",".join(investor_gossip_willing.split(",")[1:]),
                 }
             )
         print_stage4 = {
             "trustee_gossip_willing": trustee_gossip_willing,
             "investor_gossip_willing": investor_gossip_willing,
         }
-
+    oppent={"investor":"trustee","trustee":"investor"}
     # gossip stage
     if investor.scratch.complain_buffer:
+        for person in investor.scratch.complain_buffer:
+            if person["complaint_target_role"]=="trustee":
         # gossip target choose
-        gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
-            investor, "investor", trustee
-        )[0]
-        for gossip_target in gossip_target_investor:
-            # gossip chat
-            gossip_target_persona = personas[gossip_target]
-            first_order_gossip(
-                investor,
-                gossip_target_persona,
-                "investor",
-                "trustee",
-                personas,
-                G,
-            )
+                gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
+                    investor, "investor", personas[person["complaint_target"]]
+                )[0]
+            else:
+                gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
+                    investor, "trustee", personas[person["complaint_target"]]
+                )[0]
+            for gossip_target in gossip_target_investor:
+                # gossip chat
+                gossip_target_persona = personas[gossip_target]
+                first_order_gossip(
+                    investor,
+                    gossip_target_persona,
+                    oppent[person["complaint_target_role"]],
+                    person["complaint_target_role"],
+                    personas,
+                    G,
+                    val=person
+                )
+            
+        
 
     if trustee.scratch.complain_buffer:
+        for person in trustee.scratch.complain_buffer:
         # gossip target choose
-        gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v2(
-            trustee, "trustee", investor
-        )[0]
-        for gossip_target in gossip_target_trustee:
-            # gossip chat
-            gossip_target_persona = personas[gossip_target]
-            first_order_gossip(
-                trustee,
-                gossip_target_persona,
-                "trustee",
-                "investor",
-                personas,
-                G,
-            )
+            if person["complaint_target_role"]=="trustee":
+                gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v2(
+                    trustee, "investor", personas[person["complaint_target"]]
+                )[0]
+            else:
+                gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v2(
+                    trustee, "trustee", personas[person["complaint_target"]]
+                )[0]
+            for gossip_target in gossip_target_trustee:
+                    # gossip chat
+                gossip_target_persona = personas[gossip_target]
+                first_order_gossip(
+                    trustee,
+                    gossip_target_persona,
+                    oppent[person["complaint_target_role"]],
+                    person["complaint_target_role"],
+                    personas,
+                    G,
+                    val=person
+                )
+            
+        
+        
 
     print_investment_result(
         investor, trustee, print_stage1, print_stage3, print_stage4, save_folder

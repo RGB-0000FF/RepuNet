@@ -1,0 +1,45 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- target's name
+!<INPUT 3>! -- target's reputation
+
+
+!<INPUT 4>! -- interaction memory
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. Recently, you had an interaction with !<INPUT 2>!, and you have already updated its reputation in your perception. 
+
+Now, it is necessary to reconsider whether to build a relationship with !<INPUT 2>! based on “Your Innate”, “Interaction Memory” and “!<INPUT 2>!’s Reputation”. Humans typically prefer forming relationships with individuals of good reputation, as it fosters trust and collaboration. Similarly, your decision should be based on !<INPUT 2>!’s current reputation and your own innate traits, balancing trustworthiness with your personal standards.
+
+Decide whether to disconnect with !<INPUT 2>!:
+
+•	Return “Yes” if you want to disconnect.
+
+•	Return “No” if you do not want to disconnect.
+
+Provide a clear and concise reason for your decision.
+
+**!<INPUT 2>!’s Reputation:**
+
+!<INPUT 3>!
+
+**Interaction Memory:**
+
+- Your evaluation of !<INPUT 2>!’s performance: !<INPUT 4>!
+
+**Your Innate Traits:**
+
+!<INPUT 0>!
+
+**Desired format:** JSON
+
+{
+"Disconnect": "<Yes or No>",
+"Reason": "<Provide your reason in simple sentences>"
+}

@@ -205,7 +205,7 @@ if __name__ == "__main__":
         # "sign_s7_with_all_r",
         # "sign_s20_with_all",
         # "sign_s18_without_gossip",
-        "sign_s19_without_repu_with_gossip",
+        "s20_without_repu_gossip",
         # "investment_s2",
         # "investment_s8_without_repu_gossip",
         # "investment_s9_without_repu_with_gossip",
@@ -214,10 +214,11 @@ if __name__ == "__main__":
     for i, sim_folder in enumerate(sim_folders):
         if i != 0:
             os.chdir("../")
-        sa = SocialNetworkAnalysis(sim_folder, "sign", with_repu[i])
+        sa = SocialNetworkAnalysis(sim_folder, "invest", with_repu[i])
         current_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(current_dir)
         if not os.path.exists(f"./{sim_folder}_result"):
             os.makedirs(f"./{sim_folder}_result")
         sa.draw_social_network(f"./{sim_folder}_result")
         sa.save_social_network_detail(f"./{sim_folder}_result")
+    

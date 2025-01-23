@@ -1,0 +1,35 @@
+**system prompt: You are an expert on updating learned in an agent description based on its current reputation.**
+
+**user prompt:**
+
+**Variables:**
+!<INPUT 0>! -- agent name
+!<INPUT 1>! -- Previous “learned” information
+!<INPUT 2>! -- Current reputation
+
+!<INPUT 3>! — Self evaluation in Stage 4 **in Interaction Memory**
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** Based on “!<INPUT 0>!’s Previous Learned”, “!<INPUT 0>!’s Current Reputation”, “Interaction Memory"and “Update Principles”, update !<INPUT 0>!’s “learned” in the agent description to reflect values and preferences that align with !<INPUT 0>!’s current reputation.
+
+**!<INPUT 0>!’s Previous Learned:**
+
+!<INPUT 1>!
+
+**Interaction Memory:**
+
+- Your evaluation of your performance: !<INPUT 3>!
+
+**!<INPUT 0>!’s Current Reputation:**
+
+!<INPUT 2>!
+
+**Update Principles:**
+
+- Based on the current reputation, modify “learned” information so that values and preferences are consistent with the agent’s present standing.
+- Focus on adjustments that reinforce or shift values and preferences in line with reputation traits.
+
+**Note:** only output the “Learned” in desired format.
+
+**Output:**

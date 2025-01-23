@@ -222,7 +222,7 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
 
         # stage 3
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
-            investor, trustee, trustee_plan, a_unit, k, unallocated_unit, verbose=True
+            trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
         trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
         investor_allocation_part = round(float(trustee_allocation["investor"]), 3)

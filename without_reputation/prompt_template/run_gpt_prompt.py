@@ -539,22 +539,24 @@ def run_gpt_prompt_second_order_evaluation_v1(
 
 
 def run_gpt_prompt_connection_build_investor_v1(
-    init_persona, target_persona, target_persona_role
+    init_persona, target_persona, interaction_memory
 ):
     def create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        target_persona_recent_behavior = (
-            init_persona.associativeMemory.get_latest_event()
-        ).toJSON()
+        prompt_input.append(interaction_memory)
+        # target_persona_recent_behavior = (
+        #     init_persona.associativeMemory.get_latest_event()
+        # ).toJSON()
 
-        prompt_input += [target_persona_recent_behavior["description"]]
-        prompt_input += [init_persona.scratch.learned]
+        # prompt_input += [target_persona_recent_behavior["description"]]
+        
 
         return prompt_input
 
@@ -586,13 +588,13 @@ def run_gpt_prompt_connection_build_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/connection_build_investor_v1.txt"
+    prompt_template = "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -607,21 +609,22 @@ def run_gpt_prompt_connection_build_investor_v1(
 
 
 def run_gpt_prompt_disconnection_investor_v1(
-    init_persona, target_persona, target_persona_role
+    init_persona, target_persona, interaction_memory
 ):
     def create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        target_persona_recent_behavior = (
-            init_persona.associativeMemory.get_latest_event()
-        ).toJSON()
-        prompt_input += [target_persona_recent_behavior["description"]]
-        prompt_input += [init_persona.scratch.learned]
+        # target_persona_recent_behavior = (
+        #     init_persona.associativeMemory.get_latest_event()
+        # ).toJSON()
+        # prompt_input += [target_persona_recent_behavior["description"]]
+        prompt_input.append(interaction_memory)
 
         return prompt_input
 
@@ -653,13 +656,13 @@ def run_gpt_prompt_disconnection_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/disconnection_investor_v1.txt"
+    prompt_template = "prompt/investment/Baseline-disconnection_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     )
-    prompt = generate_prompt(prompt_input, prompt_template)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -674,21 +677,23 @@ def run_gpt_prompt_disconnection_investor_v1(
 
 
 def run_gpt_prompt_connection_build_trustee_v1(
-    init_persona, target_persona, target_persona_role
+    init_persona, target_persona, interaction_memory
 ):
     def create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        target_persona_recent_behavior = (
-            init_persona.associativeMemory.get_latest_event()
-        ).toJSON()
-        prompt_input += [target_persona_recent_behavior["description"]]
-        prompt_input += [init_persona.scratch.learned]
+        # target_persona_recent_behavior = (
+        #     init_persona.associativeMemory.get_latest_event()
+        # ).toJSON()
+        # prompt_input += [target_persona_recent_behavior["description"]]
+        prompt_input.append(interaction_memory)
+        
 
         return prompt_input
 
@@ -720,11 +725,11 @@ def run_gpt_prompt_connection_build_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/connection_build_trustee_v1.txt"
+    prompt_template = "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     )
     prompt = generate_prompt(prompt_input, prompt_template)
 
@@ -741,21 +746,23 @@ def run_gpt_prompt_connection_build_trustee_v1(
 
 
 def run_gpt_prompt_disconnection_trustee_v1(
-    init_persona, target_persona, target_persona_role
+    init_persona, target_persona, interaction_memory
 ):
     def create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     ):
         prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        target_persona_recent_behavior = (
-            init_persona.associativeMemory.get_latest_event()
-        ).toJSON()
-        prompt_input += [target_persona_recent_behavior["description"]]
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input.append(interaction_memory)
+        # target_persona_recent_behavior = (
+        #     init_persona.associativeMemory.get_latest_event()
+        # ).toJSON()
+        # prompt_input += [target_persona_recent_behavior["description"]]
+        
 
         return prompt_input
 
@@ -787,11 +794,11 @@ def run_gpt_prompt_disconnection_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/disconnection_trustee_v1.txt"
+    prompt_template = "prompt/investment/Baseline-disconnection_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
-        target_persona_role,
+        interaction_memory,
     )
     prompt = generate_prompt(prompt_input, prompt_template)
 

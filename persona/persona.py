@@ -29,6 +29,7 @@ class Persona:
         self.associativeMemory = AssociativeMemory(
             associative_memory_saved, do_load=True
         )
+        self.interaction_memory={"investor":[],"trustee":[]}
 
     def save(self, save_folder):
         scratch_folder = f"{save_folder}/memory/scratch.json"
@@ -67,4 +68,11 @@ class Persona:
         if len(memory_list_trustee)>=5:
             memory_list_trustee=memory_list_trustee[-5:]
         return memory_list_investor,memory_list_trustee
+    def update_interaction_memory(self,role,memory):
+        if len(self.interaction_memory[role])>=1:
+            self.interaction_memory[role].pop(0)
+        self.interaction_memory[role].append(memory)
+        
+    def get_interaction_memory(self,role):
+        return self.interaction_memory[role]
         

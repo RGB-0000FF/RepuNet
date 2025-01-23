@@ -68,7 +68,7 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         # total investment num +1
         investor.scratch.total_num_investor += 1
         trustee.scratch.total_num_trustee += 1
-        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\n{investor_decided}"
+        description = f"Failed investment. Investor is {investor.name} and Trustee is {trustee.name}.\nInvestor's decision and explanation:{investor_decided}"
         investor.associativeMemory.add_event(
             subject=investor.name,
             predicate="investment",
@@ -86,7 +86,10 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
 
         print_stage3 = None
         print_stage4 = None
-
+        memory_for_investor=description
+        memory_for_trustee=description
+        full_investment=False
+        
     elif "Accept" in investor_decided:
         # success investment num +1
         investor.scratch.total_num_investor += 1
@@ -105,7 +108,7 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
 
         # stage 3
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
-            investor, trustee, trustee_plan, a_unit, k, unallocated_unit, verbose=True
+            trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
         trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
         investor_allocation_part = round(float(trustee_allocation["investor"]), 3)
@@ -151,11 +154,42 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         # )[0]
         # trustee.scratch.learned = t_new_learned
         print_stage4 = None
-
+        investor_evaluation=run_gpt_prompt_investor_evaluation_v1(
+            init_persona=investor,
+            target_persona=trustee,
+            trustee_plan=trustee_plan,
+            investor_resource=a_unit,
+            k=2,
+            actual_distributable=2*a_unit,
+            trustee_share=trustee_part,
+            investor_share=investor_part,
+            reported_resource=reported_investment_outcome,
+            trustee_allocated=trustee_allocation_part,
+            investor_allocated=investor_allocation_part,
+            verbose=True
+        )[0]
+        trustee_evaluation=run_gpt_prompt_trustee_evaluation_v1(
+        init_persona=trustee,
+        target_persona=investor,
+        trustee_plan=trustee_plan,
+        investor_resource=a_unit,
+        k=2,
+        actual_distributable=2*a_unit,
+        trustee_share=trustee_part,
+        investor_share=investor_part,
+        reported_resource=reported_investment_outcome,
+        trustee_allocated=trustee_allocation_part,
+        investor_allocated=investor_allocation_part,
+        verbose=True,
+        )[0]
+        memory_for_investor=investor_evaluation["trustee_reflection"]
+        memory_for_trustee=trustee_evaluation["investor_reflection"]
+        full_investment=True
     # social network update after investment
-    social_network_update(investor, trustee, "investor", "trustee")
-    social_network_update(trustee, investor, "trustee", "investor")
-
+    social_network_update(investor, trustee, "investor", "trustee",interaction_memory=memory_for_investor,full_investment=full_investment)
+    social_network_update(trustee, investor, "trustee", "investor",interaction_memory=memory_for_trustee,full_investment=full_investment)
+    investor.update_interaction_memory(role="investor",memory=memory_for_investor)
+    trustee.update_interaction_memory(role="trustee",memory=memory_for_trustee)
     print_investment_result(
         investor, trustee, print_stage1, print_stage3, print_stage4, save_folder
     )

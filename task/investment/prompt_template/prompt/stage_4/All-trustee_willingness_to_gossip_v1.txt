@@ -1,0 +1,54 @@
+**system prompt: <!<INPUT 2>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent learned
+!<INPUT 1>! -- agent name
+
+!<INPUT 2>! -- Proposed Allocation Plan
+
+!<INPUT 3>! --<Investor Resource Quantity>
+
+!<INPUT 4>! -- <k>
+
+!<INPUT 5>! -- <Actual Distributable Resource Quantity>
+
+!<INPUT 6>! -- <Investor's Share>
+
+!<INPUT 7>! -- <Trustee's Share>
+
+!<INPUT 8>! -- <Reported Resource Quantity>
+
+!<INPUT 9>! -- <Trustee's Allocated Resource Quantity>
+!<INPUT 10>! -- <Investor's Allocated Resource Quantity>
+
+!<INPUT 11>! -- output of “Investor **Reputation Reflection” in “**stage_4_trustee**” prompt**
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** "You are !<INPUT 1>!. You recently interacted with an investor. Based on the “Interaction Memory” and your “Innate”, would you like to gossip with someone else about its behavior described in the “Interaction Memory”? Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior in the “Interaction Memory"
+
+**Guiding Principles for Gossip:**
+
+1. Gossiping is a tool for sharing experiences that help the community identify trustworthy and untrustworthy trustees.
+2. Avoiding gossip solely to preserve the trustee’s reputation is discouraged if their behavior risks harming other investors.
+3. Focus on your personal judgments regarding interaction history.
+
+**Interaction Memory:**
+1. **Agreement Stage:**
+
+- Proposed Allocation Plan: !<INPUT 2>!
+1. **Investment Stage:**
+- Actual Investment Outcome: The investor provided !<INPUT 3>! **units, which multiplied by !<INPUT 4>!, resulting in !<INPUT 5>! units. According to the allocation plan from  Agreement Stage, the investor are entitled to !<INPUT 6>!, while you (as trustee) is entitled to !<INPUT 7>!.
+1. **Profit Distribution Stage:**
+- Reported Investment Outcome: The current resource after investment reported by you is !<INPUT 8>!  units.
+- Actual Allocation Result: The trustee (You) receives !<INPUT 9>! units, and the investor  receives !<INPUT 10>! units.
+1. **Mutual Evaluation Stage:**
+- Your evaluation of the investor’s performance: !<INPUT 11>!
+
+**Innate:**
+!<INPUT 0>!
+
+**Desired format:**
+<Yes or No>, <Reason in one sentence>.

@@ -1,0 +1,37 @@
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Trustee's Allocation Plan>
+!<INPUT 2>! -- <Reasons for rejecting the trustee>
+
+!<INPUT 3>! -- agent name
+
+!<INPUT 4>! -- target name
+
+<commentblockmarker>###</commentblockmarker>
+
+
+
+**Background:** You are !<INPUT 3>!, a trustee in an investment exchange. The investment consists of four stages: (i) **Agreement Stage:** Both parties decide whether to agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits based on the investment outcome and informs the investor of any returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+
+**Task:** You are !<INPUT 3>!. You are a trustee and !<INPUT 4>! is an investor. You recently interacted with !<INPUT 4>! in “Agreement Stage”. In “Agreement Stage”, the investor !<INPUT 3>! rejected your allocation plan, which terminated the process of investment. Based on the “**Interaction History”, your “Innate”,** and **“Guiding Principles for Gossip”**, would you like to gossip with someone else about !<INPUT 4>!’s behavior described in the “Interaction History”? Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior in the “**Interaction History**”. 
+
+**Guiding Principles for Gossip:**
+
+1. Gossiping is a tool for sharing experiences that help the community identify trustworthy and untrustworthy trustees.
+2. Avoiding gossip solely to preserve the trustee’s reputation is discouraged if their behavior risks harming other investors.
+3. Focus on your personal judgments regarding interaction history.
+
+**Interaction History:**
+
+1. **Your Allocation Plan:**
+!<INPUT 1>!
+2. **Investor’s Reason for Rejecting Your Allocation Plan:**
+!<INPUT 2>!
+
+**Your Innate:**
+
+!<INPUT 0>!
+
+**Desired Format:**
+
+ <Yes or No>, <reason in one sentence>.
