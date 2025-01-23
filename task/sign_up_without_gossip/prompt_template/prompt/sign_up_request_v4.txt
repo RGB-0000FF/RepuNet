@@ -1,0 +1,57 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- Learned in agent description
+!<INPUT 1>! -- Persona name
+!<INPUT 2>! -- Only Numerical Record in Self reputation 
+!<INPUT 3>! -- Last Choices in Memory
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You have received a “Letter” introducing a demand response program. Your task is to decide whether to sign up for this program based on your “Innate Traits”, ““Last Choices in Memory”, ”and “Current Reputation.” Note that you should not only consider your “Innate Traits” but also your “Last Choices in Memory” and “Current Reputation.”
+
+**Your Innate Traits:** !<INPUT 0>!
+
+**Last Choices in Memory:** !<INPUT 3>!
+
+**Your Current Reputation:** !<INPUT 2>!
+
+- **Principles for Numerical Record:**
+
+Numerical scores based on the five levels {very bad, bad, neutral, good, very good} and the “content” of their reputation.
+
+The format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1.
+
+*Examples:* 1. If your reputation is neutral, the score can be (0.2, 0.2, 0.2, 0.2, 0.2).
+
+1. If your reputation is positive, one possible score might be (0, 0, 0.1, 0.3, 0.6).
+2. If your reputation is negative, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+
+**Letter:**
+
+Dear **!<INPUT 1>!**,
+
+To help reduce energy consumption during peak times, we invite you to participate in our demand response program. Below are the details of the program:
+
+•	**Background:**
+
+During hot weather, the simultaneous use of air conditioners can strain the town’s energy supply, potentially causing power outages. Participating in the program helps manage energy demand during peak times.
+
+•	**How It Works:**
+
+If you enroll, a radio-controlled switch will be installed on your air conditioning unit to reduce electricity consumption during high-demand periods.
+
+•	**Benefits:**
+
+Participation alleviates strain on energy resources and contributes to the community’s stability.
+
+•	**Drawbacks:**
+
+Enrolling requires sacrificing some personal comfort and control over electricity usage during peak periods.
+
+**Note:** Your decision to participate will be visible to others in the community.
+
+**Output:**  <Yes or No>. <One simple reason>

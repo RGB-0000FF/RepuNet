@@ -43,6 +43,7 @@ class Node:
         self.object = object
         self.description = description
         self.created_at = created_at
+
     def __str__(self) -> str:
         return f"{self.subject} {self.predicate} {self.object}"
 
@@ -145,7 +146,6 @@ class AssociativeMemory:
                     node["created_at"],
                 )
             else:
-                
                 if "conversation" in node:
                     convo = node["conversation"]
                 else:
@@ -159,7 +159,7 @@ class AssociativeMemory:
                     convo,
                     node["created_at"],
                 )
-            
+
             if n_type == NodeType.EVENT.name:
                 self.event_id_to_node[node["id"]] = node
 
@@ -249,4 +249,6 @@ class AssociativeMemory:
         )
 
     def get_latest_event(self):
+        if len(self.event_id_to_node) == 0:
+            return []
         return self.event_id_to_node[max(self.event_id_to_node.keys())]

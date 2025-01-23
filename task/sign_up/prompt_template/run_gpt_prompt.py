@@ -52,6 +52,73 @@ def run_gpt_prompt_init_sign_up_v1(init_persona):
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
+def run_gpt_prompt_sign_up_v3(init_persona):
+    def create_prompt_input(init_persona):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.name]
+        self_repu = init_persona.reputationDB.get_targets_individual_reputation(
+            init_persona.scratch.ID, "resident"
+        )
+        for v in self_repu.values():
+            prompt_input += [v["numerical record"]]
+
+        last_choice = init_persona.associativeMemory.get_latest_event()
+        if type(last_choice) is dict:
+            last_choice = last_choice["description"]
+        else:
+            last_choice = last_choice.toJSON()["description"]
+        last_choice = last_choice.splitlines()
+        for line in last_choice:
+            if init_persona.name in line:
+                # last choice of the persona in memory
+                prompt_input += [line]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=""):
+        try:
+            response = gpt_response.replace("**", "")
+
+            if response.split(".")[0].lower() in ["yes", "no"]:
+                return True
+            return False
+        except:
+            return False
+
+    def __func_clean_up(gpt_response, prompt=""):
+        return gpt_response.replace("**", "")
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/sign_up_request_v2.txt"
+    prompt_input = create_prompt_input(init_persona)
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
 def run_gpt_prompt_sign_up_v2(init_persona):
     def create_prompt_input(init_persona):
         prompt_input = []

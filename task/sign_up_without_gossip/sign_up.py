@@ -14,7 +14,7 @@ from reputation.social_network import social_network_update_after_new_sign_up
 
 from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_sign_up_v1,
-    run_gpt_prompt_sign_up_v2,
+    run_gpt_prompt_sign_up_v3,
     run_gpt_prompt_decide_to_talk_v1,
     run_gpt_prompt_create_chat_v1,
     run_gpt_prompt_summarize_chat_v1,
@@ -68,7 +68,7 @@ def sign_up(personas, step, save_folder, G):
         count += 1
         if step != 1:
             # output = run_gpt_prompt_sign_up_v1(persona)[0]
-            output = run_gpt_prompt_sign_up_v2(persona)[0]
+            output = run_gpt_prompt_sign_up_v3(persona)[0]
         else:
             output = run_gpt_prompt_init_sign_up_v1(persona)[0]
         if "error" in output.lower():

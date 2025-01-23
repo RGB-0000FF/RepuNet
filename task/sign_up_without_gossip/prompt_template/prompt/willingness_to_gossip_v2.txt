@@ -10,13 +10,12 @@ Variables:
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** "You are !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Interaction History”, “Guiding Principles for Gossip”, and your “Innate”, would you like to gossip with someone else about !<INPUT 1>!’s behavior described in the “Interaction History”? Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior in the “Interaction History”."
+**Task:** "You are  !<INPUT 3>!. You recently interacted with !<INPUT 1>!. Based on the “Interaction History”, “Guiding Principles”, and your “Innate”, would you like to share it with someone else about !<INPUT 1>!’s behavior described in the “Interaction History”?
 
-**Guiding Principles for Gossip:**
-1. Gossiping is a tool for sharing experiences that help the community identify trustworthy and untrustworthy trustees.
-2. Avoiding gossip solely to preserve the trustee’s reputation is discouraged if their behavior risks harming other investors.
+- If output “Yes”, explain which aspect of its behavior you want to share based on the “Interaction History”.
+- If output “No”, explain why you do not want to share about its behavior in the “Interaction History”.
 
-1. Focus on your personal judgments regarding interaction history.
+**Guiding Principles:** If you notice that your perspective differs from someone else’s, sharing it with a friend in your network can be an effective and constructive way to highlight. This can foster deeper connections and collective understanding.
 
 **Interaction History:**
 !<INPUT 2>!

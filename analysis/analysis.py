@@ -11,11 +11,67 @@ from utils import *
 from persona.persona import Persona
 
 
+def get_d_connect(init_persona, G):
+    d_connect_list = []
+    for edge in G.edges():
+        if edge[0] == init_persona.name:
+            if G.has_edge(edge[1], init_persona.name):
+                d_connect_list.append(edge[1])
+    return d_connect_list
+
+
+def get_gossip_count(ps, persona):
+    count = 0
+    for _, p in ps.items():
+        gossips = p.gossipDB.gossips
+        for gossip in gossips:
+            full_name = gossip["complained name"]
+            if full_name == persona:
+                count += 1
+    return count
+
+
+def get_reputation_score(target_persona, target_persona_role, personas):
+    count = 0
+    num = 0
+    for _, persona in personas.items():
+        reputation = persona.reputationDB.get_targets_individual_reputation(
+            target_persona.scratch.ID, target_persona_role
+        )
+        if target_persona_role == "investor":
+            input = "Investor"
+        elif target_persona_role == "trustee":
+            input = "Trustee"
+        elif target_persona_role == "resident":
+            input = "Resident"
+        if reputation:
+            count += 1
+            repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
+                "numerical record"
+            ]
+            scores = repu_score.replace("(", "").replace(")", "").split(",")
+            score = (
+                float(scores[4])
+                + float(scores[3])
+                - float(scores[1])
+                - float(scores[0])
+            )
+            if score > 1:
+                score = 1
+            elif score < -1:
+                score = -1
+            num += score
+    if count == 0:
+        return 0
+    return round((num / count), 3)
+
+
 class Analysis:
-    def __init__(self, sim_code, sim, with_reputation=True):
+    def __init__(self, sim_code, sim, with_reputation=True, with_gossip=True):
         self.sim_code = f"{sim_code}"
         sim_folder = f"{fs_storage}/{self.sim_code}"
         self.with_reputation = with_reputation
+        self.with_gossip = with_gossip
 
         with open(f"{sim_folder}/reverie/meta.json") as json_file:
             reverie_meta = json.load(json_file)
@@ -29,11 +85,6 @@ class Analysis:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
             curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
-        if "invest" in sim:
-            self._set_analysis_dict_invest()
-        elif "sign" in sim:
-            self._set_analysis_dict_sign_up()
-
         if self.with_reputation and sim and "invest" in sim:
             self.set_graph_invest()
         elif self.with_reputation and sim and "sign" in sim:
@@ -41,6 +92,11 @@ class Analysis:
 
         if not self.with_reputation:
             self._set_graph_without()
+
+        if "invest" in sim:
+            self._set_analysis_dict_invest()
+        elif "sign" in sim:
+            self._set_analysis_dict_sign_up()
 
     def set_graph_sign_up(self):
         self._set_graph_r()
@@ -177,7 +233,57 @@ class Analysis:
                     return trustee_w, investor_w
 
     def _set_analysis_dict_sign_up(self):
-        pass
+        for persona_name, persona in self.personas.items():
+            self.analysis_dict[persona_name] = dict()
+            choices = persona.associativeMemory.event_id_to_node
+            count = 0
+            for _, last_choice in choices.items():
+                sign_up = ""
+                if type(last_choice) is dict:
+                    last_choice = last_choice["description"]
+                else:
+                    last_choice = last_choice.toJSON()["description"]
+                last_choice = last_choice.splitlines()
+                for line in last_choice:
+                    if persona.name in line:
+                        # last choice of the persona in memory
+                        sign_up = line.split(":")[-1].strip()
+                        if sign_up.lower() == "yes":
+                            count += 1
+
+            sign_up = ""
+            if choices:
+                last_choice = persona.associativeMemory.get_latest_event()
+                if type(last_choice) is dict:
+                    last_choice = last_choice["description"]
+                else:
+                    last_choice = last_choice.toJSON()["description"]
+                last_choice = last_choice.splitlines()
+                for line in last_choice:
+                    if persona.name in line:
+                        # last choice of the persona in memory
+                        sign_up = line.split(":")[-1].strip()
+                self.analysis_dict[persona_name]["sign up"] = sign_up
+                self.analysis_dict[persona_name]["sign up rate"] = round(
+                    (count / len(choices)), 3
+                )
+
+            # if self.with_gossip:
+            #     self.analysis_dict[persona_name]["gossip_count"] = get_gossip_count(
+            #         self.personas, persona.name
+            #     )
+
+            if self.with_reputation:
+                d_connect = get_d_connect(persona, self.G["resident"])
+                self.analysis_dict[persona_name]["d_connect"] = d_connect
+                self.analysis_dict[persona_name]["reputation score"] = (
+                    get_reputation_score(persona, "resident", self.personas)
+                )
+                self.analysis_dict[persona_name]["reputation"] = (
+                    persona.reputationDB.get_all_reputations(
+                        "Resident", persona.scratch.ID, True
+                    )
+                )
 
     def _set_analysis_dict_invest(self):
         for persona_name, persona in self.personas.items():
@@ -267,11 +373,12 @@ class Analysis:
                 }
 
 
-def get_all_sim_info(sim_folder, sim, with_reputation=True):
+def get_all_sim_info(sim_folder, sim, with_reputation=True, limit=False):
     sim_steps = []
     sims = []
     for sim_code in os.listdir(f"{fs_storage}/{sim_folder}"):
-        if sim_code == "step_0":
+        step = int(sim_code.split("_")[-1])
+        if step > limit[1] or step < limit[0]:
             continue
         sim_steps.append(sim_code)
         sim_steps.sort(key=lambda x: int(x.split("_")[1]))

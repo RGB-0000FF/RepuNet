@@ -808,7 +808,81 @@ def run_gpt_prompt_update_learned_in_description_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#v1版本 不需要使用
+
+def run_gpt_prompt_update_learned_in_description_v2(
+    init_persona,
+    init_persona_role,
+    init_persona_view,
+):
+    def create_prompt_input(
+        init_persona,
+        init_persona_role,
+        init_persona_view,
+    ):
+        prompt_input = []
+        prompt_input += [
+            "You are an expert on updating learned in an agent description based on its current reputation."
+        ]
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [
+            json.dumps(
+                init_persona.reputationDB.get_targets_individual_reputation(
+                    init_persona.scratch.ID, init_persona_role
+                )
+            )
+        ]
+        prompt_input += [init_persona_view]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if "Final Learned" in gpt_response:
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.replace("*", "")
+        return response
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/update_learned_in_description_v3.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        init_persona_role,
+        init_persona_view,
+    )
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
 def run_gpt_prompt_gossip_listener_select_v1(
     init_persona,
     target_persona_role,
