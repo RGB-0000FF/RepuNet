@@ -427,6 +427,7 @@ def run_gpt_prompt_reputation_update_after_observed_v1(
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
         prompt_input += [interaction_memory]
         prompt_input += [target_persona.scratch.ID]
         pre_target_persona_reputation = (
@@ -485,7 +486,7 @@ def run_gpt_prompt_reputation_update_after_observed_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/reputation_update_after_stage1_investor_v1.txt"
+    prompt_template = "prompt/investment/All_observe_update_others_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,

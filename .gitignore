@@ -2,13 +2,20 @@ venv/
 .venv/
 pyproject.toml
 
+**/__pycache__
+__pycache__
+*.pyc
+
 .DS_Store
 .idea/
 
 
 output/
+*.txt
 
 sim_storage/*
+!sim_storage/invest_seed
+!sim_storage/sign_seed
 !sim_storage/change_sim_folder.py
 
 

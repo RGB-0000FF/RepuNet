@@ -31,7 +31,6 @@ class Persona:
             associative_memory_saved, do_load=True
         )
         self.interaction_memory = {"investor": [], "trustee": []}
-        self.observation_memory = {}
 
     def save(self, save_folder):
         scratch_folder = f"{save_folder}/memory/scratch.json"
@@ -84,14 +83,19 @@ class Persona:
 
     def get_interaction_memory(self, role):
         return self.interaction_memory[role]
+    
+    def get_observation_memory(self, name, role):
+        if f"{name}:{role}" in self.scratch.observed.keys():
+            return self.scratch.observed[f"{name}:{role}"]
+        else:
+            return None
 
     def update_observation_memory(self, name, role, memory):
-        if f"{name}:{role}" in self.observation_memory:
-            self.observation_memory[f"{name}:{role}"].append(memory)
+        if f"{name}:{role}" in self.scratch.observed.keys():
+            self.scratch.observed[f"{name}:{role}"].append(memory)
         else:
-            observation_list = deque(maxlen=5)
-            self.observation_memory[f"{name}:{role}"] = observation_list
-            self.observation_memory[f"{name}:{role}"].append(memory)
+            self.scratch.observed[f"{name}:{role}"] = []
+            self.scratch.observed[f"{name}:{role}"].append(memory)
 
     def clear_observation_memory(self):
-        self.observation_memory = {}
+        self.scratch.observed = {}

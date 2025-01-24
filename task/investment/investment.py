@@ -159,43 +159,46 @@ def known_personas_list(persona, role):
     for repu in known_investor_repus.values():
         if repu["name"] not in known_list:
             known_list.append(repu["name"])
+    return known_list
 
 
 def update_knowns_reputation_observation(personas):
-    for persona_name, persona in personas:
+    for persona_name, persona in personas.items():
         known_investor = known_personas_list(persona, "investor")
         known_trustee = known_personas_list(persona, "trustee")
         for known in known_investor:
-            observe_mem = persona.observation_memory[f"{known}:investor"]
-            update_info = {
-                "reason": "observed",
-                "interaction_memory": observe_mem,
-                "target_persona_role": "investor",
-            }
-            reputation_update_invest(
-                persona,
-                personas[known],
-                update_info,
-            )
-            social_network_update_after_observed_invest(
-                persona, personas[known], update_info
-            )
+            observe_mem = persona.get_observation_memory(known, "investor")
+            if observe_mem:
+                update_info = {
+                    "reason": "observed",
+                    "interaction_memory": observe_mem,
+                    "target_persona_role": "investor",
+                }
+                reputation_update_invest(
+                    persona,
+                    personas[known],
+                    update_info,
+                )
+                social_network_update_after_observed_invest(
+                    persona, personas[known], update_info
+                )
 
         for known in known_trustee:
-            observe_mem = persona.observation_memory[f"{known}:trustee"]
-            update_info = {
-                "reason": "observed",
-                "interaction_memory": observe_mem,
-                "target_persona_role": "trustee",
-            }
-            reputation_update_invest(
-                persona,
-                personas[known],
-                update_info,
-            )
-            social_network_update_after_observed_invest(
-                persona, personas[known], update_info
-            )
+            observe_mem = persona.get_observation_memory(known, "trustee")
+            if observe_mem:
+                update_info = {
+                    "reason": "observed",
+                    "interaction_memory": observe_mem,
+                    "target_persona_role": "trustee",
+                }
+                reputation_update_invest(
+                    persona,
+                    personas[known],
+                    update_info,
+                )
+                social_network_update_after_observed_invest(
+                    persona, personas[known], update_info
+                )
 
         persona.clear_observation_memory()
 
