@@ -3,14 +3,16 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_reputation_update_after_stage4_trustee_v1,
     run_gpt_prompt_reputation_update_after_gossip_invest_v1,
     run_gpt_prompt_reputation_update_after_gossip_sign_up_v1,
-    run_gpt_prompt_update_learned_in_description_v1,
+    run_gpt_prompt_update_learned_in_description_sign_v1,
     run_gpt_prompt_update_learned_in_description_v2,
+    run_gpt_prompt_update_learned_in_description_invest_v1,
     run_gpt_prompt_reputation_update_after_stage1_trustee_v1,
     run_gpt_prompt_reputation_update_after_stage1_investor_v1,
     run_gpt_prompt_self_reputation_init_sign_up_v1,
     run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1,
     run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1,
     run_gpt_prompt_other_reputation_update_after_new_sign_up_v1,
+    run_gpt_prompt_reputation_update_after_observed_v1,
 )
 from .social_network import *
 
@@ -24,20 +26,42 @@ def reputation_init_sign_up(init_persona):
     )
 
 
-def reputation_update_invest(init_persona, target_persona, update_info,full_investment=True):
+def reputation_update_invest(
+    init_persona, target_persona, update_info, full_investment=True
+):
     if "stage 1" in update_info["reason"]:
         reputation_update_after_stage1_invest(init_persona, target_persona, update_info)
     elif "stage 4" in update_info["reason"]:
         reputation_update_after_stage4_invest(init_persona, target_persona, update_info)
+    elif "observed" in update_info["reason"]:
+        reputation_update_after_observed_invest(
+            init_persona, target_persona, update_info
+        )
+        # NETWORK AFTER OBSERVED IS IN THE OBSERVED PART
+        return
     elif "gossip" in update_info["reason"]:
         reputation_update_after_gossip_invest(init_persona, target_persona, update_info)
         # NETWORK AFTER GOSSIP IS IN THE GOSSIP PART
         return
 
     if update_info["init_persona_role"] == "investor":
-        social_network_update(init_persona, target_persona, "investor", "trustee",update_info=update_info,full_investment=full_investment)
+        social_network_update(
+            init_persona,
+            target_persona,
+            "investor",
+            "trustee",
+            update_info=update_info,
+            full_investment=full_investment,
+        )
     elif update_info["init_persona_role"] == "trustee":
-        social_network_update(init_persona, target_persona, "trustee", "investor",update_info=update_info,full_investment=full_investment)
+        social_network_update(
+            init_persona,
+            target_persona,
+            "trustee",
+            "investor",
+            update_info=update_info,
+            full_investment=full_investment,
+        )
 
 
 def reputation_update_sign_up(init_persona, target_persona, update_info):
@@ -111,7 +135,7 @@ def reputation_update_after_interaction_sign_up(
         if f"{init_persona.name}'s Viewpoint" in s:
             self_view = s.split(":")[-1].strip()
 
-    learned_update(init_persona, "resident", self_view)
+    learned_update_sign(init_persona, "resident", self_view)
 
 
 def reputation_after_new_sign_up(init_persona, target_persona, update_info):
@@ -135,7 +159,7 @@ def reputation_update_after_gossip_invest(init_persona, target_persona, update_i
         target_persona,
         update_info["gossip"][0],
         update_info["target_persona_role"],
-        update_info["gossip"][0]["credibility level"],    
+        update_info["gossip"][0]["credibility level"],
     )[0]
     if type(res) is str and "error" in res.lower():
         raise Exception("GPT ERROR")
@@ -143,6 +167,20 @@ def reputation_update_after_gossip_invest(init_persona, target_persona, update_i
         res, init_persona.scratch.curr_step, update_info["reason"]
     )
     # print(res)
+
+
+def reputation_update_after_observed_invest(init_persona, target_persona, update_info):
+    res = run_gpt_prompt_reputation_update_after_observed_v1(
+        init_persona,
+        target_persona,
+        update_info["target_persona_role"],
+        update_info["interaction_memory"],
+    )[0]
+    if type(res) is str and "error" in res.lower():
+        raise Exception("GPT ERROR")
+    init_persona.reputationDB.update_individual_reputation(
+        res, init_persona.scratch.curr_step, update_info["reason"]
+    )
 
 
 def reputation_update_after_stage4_invest(init_persona, target_persona, update_info):
@@ -163,12 +201,19 @@ def reputation_update_after_stage4_invest(init_persona, target_persona, update_i
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
     )
-    # learned_update(init_persona, update_info["init_persona_role"])
+    learned_update_invest(
+        init_persona,
+        update_info["init_persona_role"],
+        update_info["init_behavior_summary"],
+    )
 
     # print(res)
 
 
 def reputation_update_after_stage1_invest(init_persona, target_persona, update_info):
+    """
+    NOT USED NOW
+    """
     if update_info["init_persona_role"] == "investor":
         res = run_gpt_prompt_reputation_update_after_stage1_investor_v1(
             init_persona,
@@ -196,11 +241,24 @@ def reputation_update_after_stage1_invest(init_persona, target_persona, update_i
     init_persona.reputationDB.update_individual_reputation(
         res, init_persona.scratch.curr_step, update_info["reason"]
     )
-    # learned_update(init_persona, update_info["init_persona_role"])
+    learned_update_invest(
+        init_persona,
+        update_info["init_persona_role"],
+        update_info["init_behavior_summary"],
+    )
 
 
-def learned_update(init_persona, init_persona_role, init_persona_view):
-    res = run_gpt_prompt_update_learned_in_description_v1(
+def learned_update_sign(init_persona, init_persona_role, init_persona_view):
+    res = run_gpt_prompt_update_learned_in_description_sign_v1(
+        init_persona, init_persona_role, init_persona_view
+    )[0]
+    if "error" in res.lower():
+        raise Exception("GPT ERROR")
+    init_persona.scratch.learned = res
+
+
+def learned_update_invest(init_persona, init_persona_role, init_persona_view):
+    res = run_gpt_prompt_update_learned_in_description_invest_v1(
         init_persona, init_persona_role, init_persona_view
     )[0]
     if "error" in res.lower():

@@ -30,28 +30,25 @@ def replace_full_name(name):
             return persona
     return None
 
-#fin
+
+# fin
 def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
-    #由单输出变为双输出
+    # 由单输出变为双输出
     init_persona,
     target_persona,
     Interaction_memory,
-    
 ):
     def create_self_update_prompt_input(
         init_persona,
         Interaction_memory,
-        
     ):
         prompt_input = []
         prompt_input.append(init_persona.scratch.learned)
         prompt_input.append(init_persona.scratch.name)
         prompt_input.append(init_persona.scratch.ID)
         prompt_input.append(Interaction_memory["init_behavior_summary"])
-        init_persona_repu = (
-            init_persona.reputationDB.get_targets_individual_reputation(
-                init_persona.scratch.ID, "Investor"
-            )
+        init_persona_repu = init_persona.reputationDB.get_targets_individual_reputation(
+            init_persona.scratch.ID, "Investor"
         )
         # target_persona_reputation = (
         #     init_persona.reputationDB.get_targets_individual_reputation(
@@ -61,11 +58,11 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
         prompt_input += [json.dumps(init_persona_repu)]
 
         return prompt_input
+
     def create_target_update_prompt_input(
         init_persona,
         target_persona,
         Interaction_memory,
-        
     ):
         prompt_input = []
         prompt_input.append(init_persona.scratch.learned)
@@ -80,7 +77,7 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
         prompt_input += [json.dumps(target_persona_repu)]
         prompt_input.append(target_persona.scratch.name)
         return prompt_input
-    
+
     def __func_validate(gpt_response, prompt=""):
         try:
             if __func_clean_up(gpt_response, prompt):
@@ -133,16 +130,14 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
     prompt_input_1 = create_self_update_prompt_input(
         init_persona,
         Interaction_memory,
-        
     )
-    prompt_input_2=create_target_update_prompt_input(
+    prompt_input_2 = create_target_update_prompt_input(
         init_persona,
         target_persona,
         Interaction_memory,
-        
     )
     prompt_1 = generate_prompt_role_play(prompt_input_1, prompt_template_1)
-    prompt_2 = generate_prompt_role_play(prompt_input_2,prompt_template_2)
+    prompt_2 = generate_prompt_role_play(prompt_input_2, prompt_template_2)
     fail_safe = get_fail_safe()
     output_1 = safe_generate_response(
         prompt_1, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
@@ -156,11 +151,20 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
     print_run_prompts(
         prompt_template_2, init_persona, gpt_param, prompt_input_2, prompt_2, output_2
     )
-    
-    output={**output_1,**output_2}
-    return output, [output, prompt_1,prompt_2, gpt_param, prompt_input_1,prompt_input_2, fail_safe]
 
-#被删除的功能，不需要改
+    output = {**output_1, **output_2}
+    return output, [
+        output,
+        prompt_1,
+        prompt_2,
+        gpt_param,
+        prompt_input_1,
+        prompt_input_2,
+        fail_safe,
+    ]
+
+
+# 被删除的功能，不需要改
 def run_gpt_prompt_reputation_update_after_stage1_investor_v1(
     init_persona,
     target_persona,
@@ -275,27 +279,24 @@ def run_gpt_prompt_reputation_update_after_stage1_investor_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
+
+# fin
 def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
     init_persona,
     target_persona,
     Interaction_memory,
-    
 ):
     def create_self_update_prompt_input(
         init_persona,
         Interaction_memory,
-        
     ):
         prompt_input = []
         prompt_input.append(init_persona.scratch.learned)
         prompt_input.append(init_persona.scratch.name)
         prompt_input.append(init_persona.scratch.ID)
         prompt_input.append(Interaction_memory["init_behavior_summary"])
-        init_persona_repu = (
-            init_persona.reputationDB.get_targets_individual_reputation(
-                init_persona.scratch.ID, "Trustee"
-            )
+        init_persona_repu = init_persona.reputationDB.get_targets_individual_reputation(
+            init_persona.scratch.ID, "Trustee"
         )
         # target_persona_reputation = (
         #     init_persona.reputationDB.get_targets_individual_reputation(
@@ -305,18 +306,18 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
         prompt_input += [json.dumps(init_persona_repu)]
 
         return prompt_input
+
     def create_target_update_prompt_input(
         init_persona,
         target_persona,
         Interaction_memory,
-        
     ):
         prompt_input = []
         prompt_input.append(init_persona.scratch.learned)
         prompt_input.append(init_persona.scratch.name)
         prompt_input.append(target_persona.scratch.ID)
         prompt_input.append(Interaction_memory["target_behavior_summary"])
-        
+
         target_persona_repu = (
             init_persona.reputationDB.get_targets_individual_reputation(
                 target_persona.scratch.ID, "Investor"
@@ -377,16 +378,14 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
     prompt_input_1 = create_self_update_prompt_input(
         init_persona,
         Interaction_memory,
-        
     )
-    prompt_input_2=create_target_update_prompt_input(
+    prompt_input_2 = create_target_update_prompt_input(
         init_persona,
         target_persona,
         Interaction_memory,
-        
     )
     prompt_1 = generate_prompt_role_play(prompt_input_1, prompt_template_1)
-    prompt_2 = generate_prompt_role_play(prompt_input_2,prompt_template_2)
+    prompt_2 = generate_prompt_role_play(prompt_input_2, prompt_template_2)
     fail_safe = get_fail_safe()
     output_1 = safe_generate_response(
         prompt_1, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
@@ -400,10 +399,114 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
     print_run_prompts(
         prompt_template_2, init_persona, gpt_param, prompt_input_2, prompt_2, output_2
     )
-    
-    output={**output_1,**output_2}
-    return output, [output, prompt_1,prompt_2, gpt_param, prompt_input_1,prompt_input_2, fail_safe]
-#被删除的功能，不需要改
+
+    output = {**output_1, **output_2}
+    return output, [
+        output,
+        prompt_1,
+        prompt_2,
+        gpt_param,
+        prompt_input_1,
+        prompt_input_2,
+        fail_safe,
+    ]
+
+
+def run_gpt_prompt_reputation_update_after_observed_v1(
+    init_persona,
+    target_persona,
+    target_persona_role,
+    interaction_memory,
+):
+    def create_prompt_input(
+        init_persona,
+        target_persona,
+        target_persona_role,
+        interaction_memory,
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [interaction_memory]
+        prompt_input += [target_persona.scratch.ID]
+        pre_target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(pre_target_persona_reputation)]
+        prompt_input += [target_persona_role]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=""):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=""):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        # print(response)
+        final_res = dict()
+        res = json.loads(response)
+
+        for _, val in res.items():
+            full_name = replace_full_name(val["name"])
+            if full_name:
+                val["name"] = full_name
+            else:
+                print(f"Full name not found for {val['name']}")
+                return False
+        for _, val in res.items():
+            id = val["ID"]
+            if val["role"].lower() == "investor":
+                final_res[f"Investor_{id}"] = val
+            elif val["role"].lower() == "trustee":
+                final_res[f"Trustee_{id}"] = val
+        if len(final_res) == 1:
+            return final_res
+        return False
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/investment/reputation_update_after_stage1_investor_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        target_persona,
+        target_persona_role,
+        interaction_memory,
+    )
+    prompt = generate_prompt(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+# 被删除的功能，不需要改
 def run_gpt_prompt_reputation_update_after_stage1_trustee_v1(
     init_persona,
     target_persona,
@@ -522,20 +625,13 @@ def run_gpt_prompt_reputation_update_after_stage1_trustee_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
+
+# fin
 def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
-    init_persona,
-    target_persona,
-    gossip,
-    target_persona_role,
-    cred_level
+    init_persona, target_persona, gossip, target_persona_role, cred_level
 ):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        gossip,
-        target_persona_role,
-        cred_level
+        init_persona, target_persona, gossip, target_persona_role, cred_level
     ):
         prompt_input = []
         prompt_input.append(init_persona.scratch.learned)
@@ -554,7 +650,7 @@ def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
             prompt_input += ["Investor"]
         elif target_persona_role.lower() == "trustee":
             prompt_input += ["Trustee"]
-        
+
         prompt_input += [cred_level]
 
         return prompt_input
@@ -605,13 +701,11 @@ def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/All-update_others_reputation_after_gossip_v1.txt"
+    prompt_template = (
+        "prompt/investment/All-update_others_reputation_after_gossip_v1.txt"
+    )
     prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        gossip,
-        target_persona_role,
-        cred_level
+        init_persona, target_persona, gossip, target_persona_role, cred_level
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -625,6 +719,7 @@ def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
     )
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
 
 # 场景1
 def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
@@ -726,8 +821,9 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#共通部分 无需改 但是要加参数(fin)
-def run_gpt_prompt_update_learned_in_description_v1(
+
+# 共通部分 无需改 但是要加参数(fin)
+def run_gpt_prompt_update_learned_in_description_sign_v1(
     init_persona,
     init_persona_role,
     init_persona_view,
@@ -789,7 +885,89 @@ def run_gpt_prompt_update_learned_in_description_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/update_learned_in_description_v2.txt"
+    prompt_template = "prompt/sign_up/update_learned_in_description_v2.txt"
+    prompt_input = create_prompt_input(
+        init_persona,
+        init_persona_role,
+        init_persona_view,
+    )
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+def run_gpt_prompt_update_learned_in_description_invest_v1(
+    init_persona,
+    init_persona_role,
+    init_persona_view,
+):
+    def create_prompt_input(
+        init_persona,
+        init_persona_role,
+        init_persona_view,
+    ):
+        prompt_input = []
+        prompt_input += [
+            "You are an expert on updating learned in an agent description based on its current reputation."
+        ]
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [
+            json.dumps(
+                init_persona.reputationDB.get_targets_individual_reputation(
+                    init_persona.scratch.ID, init_persona_role
+                )
+            )
+        ]
+        prompt_input += [init_persona_view]
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            persona_name = (
+                prompt["user"]
+                .split("**Task:** Based on “")[-1]
+                .split("’s Previous Learned")[0]
+                .strip()
+            )
+            print(persona_name)
+            print(gpt_response)
+            if persona_name in gpt_response:
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("Updated “learned” information:")[-1].strip()
+        return response
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/investment/update_learned_in_description_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         init_persona_role,
@@ -953,7 +1131,8 @@ def run_gpt_prompt_gossip_listener_select_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#共同部分 不需要改
+
+# 共同部分 不需要改
 def run_gpt_prompt_gossip_listener_select_v2(
     init_persona,
     target_persona_role,
@@ -984,7 +1163,10 @@ def run_gpt_prompt_gossip_listener_select_v2(
 
     def __func_validate(gpt_response, prompt=None):
         try:
-            if __func_clean_up(gpt_response, prompt) or __func_clean_up(gpt_response,prompt)==[]:
+            if (
+                __func_clean_up(gpt_response, prompt)
+                or __func_clean_up(gpt_response, prompt) == []
+            ):
                 return True
             return False
         except Exception as e:
@@ -1035,7 +1217,8 @@ def run_gpt_prompt_gossip_listener_select_v2(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#v1版本 不需要使用
+
+# v1版本 不需要使用
 def run_gpt_prompt_gossip_v1(init_persona, target_persona, reason):
     def create_prompt_input(
         init_persona,
@@ -1096,7 +1279,8 @@ def run_gpt_prompt_gossip_v1(init_persona, target_persona, reason):
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#共通 无需改
+
+# 共通 无需改
 def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_target):
     def create_prompt_input(init_persona, target_persona, reason, complain_target):
         prompt_input = []
@@ -1153,7 +1337,8 @@ def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_targ
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#共通 无需该
+
+# 共通 无需该
 def run_gpt_prompt_identify_and_summary_gossip_info_v1(
     init_persona, target_persona, complain_info
 ):
@@ -1218,7 +1403,8 @@ def run_gpt_prompt_identify_and_summary_gossip_info_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#共通 无需改
+
+# 共通 无需改
 def run_gpt_prompt_first_order_evaluation_v1(
     init_persona, target_persona, complain_info
 ):
@@ -1296,7 +1482,8 @@ def run_gpt_prompt_first_order_evaluation_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#共通 无需改
+
+# 共通 无需改
 def run_gpt_prompt_second_order_evaluation_v1(
     init_persona, target_persona, complain_info
 ):
@@ -1383,15 +1570,13 @@ def run_gpt_prompt_second_order_evaluation_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
+
+# fin
 def run_gpt_prompt_connection_build_investor_v1(
-    init_persona, target_persona, target_persona_role,interaction_memory
+    init_persona, target_persona, target_persona_role, interaction_memory
 ):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     ):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
@@ -1404,7 +1589,6 @@ def run_gpt_prompt_connection_build_investor_v1(
         )
         prompt_input += [json.dumps(target_persona_reputation)]
         prompt_input.append(interaction_memory)
-        
 
         return prompt_input
 
@@ -1438,10 +1622,7 @@ def run_gpt_prompt_connection_build_investor_v1(
     }
     prompt_template = "prompt/investment/All-connection_build_after_investment_v1.txt"
     prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -1456,15 +1637,13 @@ def run_gpt_prompt_connection_build_investor_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
+
+# fin
 def run_gpt_prompt_disconnection_investor_v1(
-    init_persona, target_persona, target_persona_role,interaction_memory
+    init_persona, target_persona, target_persona_role, interaction_memory
 ):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     ):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
@@ -1510,10 +1689,7 @@ def run_gpt_prompt_disconnection_investor_v1(
     }
     prompt_template = "prompt/investment/All-disconnection_after_investment_v1.txt"
     prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -1528,15 +1704,80 @@ def run_gpt_prompt_disconnection_investor_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
-def run_gpt_prompt_connection_build_trustee_v1(
-    init_persona, target_persona, target_persona_role,interaction_memory
+
+def run_gpt_prompt_disconnection_after_observed_v1(
+    init_persona, target_persona, target_persona_role, interaction_memory
 ):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
+    ):
+        prompt_input = []
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.name]
+        prompt_input += [target_persona.scratch.name]
+        target_persona_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                target_persona.scratch.ID, target_persona_role
+            )
+        )
+        prompt_input += [json.dumps(target_persona_reputation)]
+        prompt_input += [init_persona.scratch.learned]
+        prompt_input.append(interaction_memory)
+
+        return prompt_input
+
+    def __func_validate(gpt_response, prompt=None):
+        try:
+            if __func_clean_up(gpt_response, prompt):
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            return False
+
+    def __func_clean_up(gpt_response, prompt=None):
+        response = gpt_response.split("```json")[-1].split("```")[0].strip()
+        res = json.loads(response)
+        return res
+
+    def get_fail_safe():
+        fs = "error"
+        return fs
+
+    gpt_param = {
+        "engine": "gpt-4o-mini",
+        "max_tokens": 4096,
+        "temperature": 0,
+        "top_p": 1,
+        "stream": False,
+        "frequency_penalty": 0,
+        "presence_penalty": 0,
+        "stop": None,
+    }
+    prompt_template = "prompt/investment/All-disconnection_after_investment_v1.txt"
+    prompt_input = create_prompt_input(
+        init_persona, target_persona, target_persona_role, interaction_memory
+    )
+    prompt = generate_prompt_role_play(prompt_input, prompt_template)
+
+    fail_safe = get_fail_safe()
+    output = safe_generate_response(
+        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
+    )
+
+    print_run_prompts(
+        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
+    )
+
+    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
+
+
+# fin
+def run_gpt_prompt_connection_build_trustee_v1(
+    init_persona, target_persona, target_persona_role, interaction_memory
+):
+    def create_prompt_input(
+        init_persona, target_persona, target_persona_role, interaction_memory
     ):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
@@ -1582,10 +1823,7 @@ def run_gpt_prompt_connection_build_trustee_v1(
     }
     prompt_template = "prompt/investment/All-connection_build_after_investment_v1.txt"
     prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -1600,15 +1838,13 @@ def run_gpt_prompt_connection_build_trustee_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
+
+# fin
 def run_gpt_prompt_disconnection_trustee_v1(
-    init_persona, target_persona, target_persona_role,interaction_memory
+    init_persona, target_persona, target_persona_role, interaction_memory
 ):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     ):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned]
@@ -1623,7 +1859,7 @@ def run_gpt_prompt_disconnection_trustee_v1(
         prompt_input.append(interaction_memory)
 
         return prompt_input
- 
+
     def __func_validate(gpt_response, prompt=None):
         try:
             if __func_clean_up(gpt_response, prompt):
@@ -1654,10 +1890,7 @@ def run_gpt_prompt_disconnection_trustee_v1(
     }
     prompt_template = "prompt/investment/All-disconnection_after_investment_v1.txt"
     prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        target_persona_role,
-        interaction_memory
+        init_persona, target_persona, target_persona_role, interaction_memory
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -1672,7 +1905,8 @@ def run_gpt_prompt_disconnection_trustee_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#v1版本不需要使用
+
+# v1版本不需要使用
 def run_gpt_prompt_connection_build_after_chat_sign_up_v1(
     init_persona, target_persona, target_persona_role
 ):
@@ -1741,7 +1975,8 @@ def run_gpt_prompt_connection_build_after_chat_sign_up_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_connection_build_after_chat_sign_up_v2(
     init_persona, target_persona, target_persona_role, interaction_memory
 ):
@@ -1813,7 +2048,8 @@ def run_gpt_prompt_connection_build_after_chat_sign_up_v2(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#v1版本不需要使用
+
+# v1版本不需要使用
 def run_gpt_prompt_disconnection_after_chat_sign_up_v1(
     init_persona, target_persona, target_persona_role
 ):
@@ -1882,7 +2118,8 @@ def run_gpt_prompt_disconnection_after_chat_sign_up_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_disconnection_after_chat_sign_up_v2(
     init_persona, target_persona, target_persona_role, interaction_memory
 ):
@@ -1954,7 +2191,8 @@ def run_gpt_prompt_disconnection_after_chat_sign_up_v2(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_disconnection_after_new_sign_up_v1(
     init_persona, target_persona, target_persona_role
 ):
@@ -2037,7 +2275,8 @@ def run_gpt_prompt_disconnection_after_new_sign_up_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#v1版本不需要使用
+
+# v1版本不需要使用
 def run_gpt_prompt_disconnection_after_gossip_v1(
     init_persona, target_persona, target_persona_role, gossiper_name
 ):
@@ -2103,7 +2342,8 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin
+
+# fin
 def run_gpt_prompt_disconnection_after_gossip_v2(
     init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
 ):
@@ -2170,7 +2410,8 @@ def run_gpt_prompt_disconnection_after_gossip_v2(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona):
     def create_prompt_input(init_persona):
         prompt_input = []
@@ -2235,7 +2476,8 @@ def run_gpt_prompt_self_reputation_init_sign_up_v1(init_persona):
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
     init_persona, sum_convo, ava_satisfy
 ):
@@ -2317,7 +2559,8 @@ def run_gpt_prompt_self_reputation_update_after_chat_sign_up_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
     init_persona,
     target_persona,
@@ -2412,7 +2655,8 @@ def run_gpt_prompt_other_reputation_update_after_chat_sign_up_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#场景1
+
+# 场景1
 def run_gpt_prompt_other_reputation_update_after_new_sign_up_v1(
     init_persona,
     target_persona,
@@ -2519,5 +2763,3 @@ def run_gpt_prompt_other_reputation_update_after_new_sign_up_v1(
     )
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-

@@ -239,34 +239,40 @@ def start_sign_up(personas, G, step, save_floder, sign_up_f=False):
         if pair[0].scratch.complain_buffer:
             # gossip
             # gossip target choose
-            gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
-                pair[0], "resident", pair[1]
-            )[0]
-            for gossip_target in gossip_target_investor:
-                # gossip chat
-                gossip_target_persona = personas[gossip_target]
-                first_order_gossip(
-                    pair[0],
-                    gossip_target_persona,
-                    "resident",
-                    "resident",
-                    personas,
-                    G,
-                )
+            for person in pair[0].scratch.complain_buffer:
+                # gossip target choose
+                gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v2(
+                    pair[0], "resident", personas[person["complaint_target"]]
+                )[0]
+                for gossip_target in gossip_target_trustee:
+                    # gossip chat
+                    gossip_target_persona = personas[gossip_target]
+                    first_order_gossip(
+                        pair[0],
+                        gossip_target_persona,
+                        "resident",
+                        "resident",
+                        personas,
+                        G,
+                        val=person,
+                    )
         if pair[1].scratch.complain_buffer:
             # gossip
             # gossip target choose
-            gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
-                pair[1], "resident", pair[0]
-            )[0]
-            for gossip_target in gossip_target_investor:
-                # gossip chat
-                gossip_target_persona = personas[gossip_target]
-                first_order_gossip(
-                    pair[1],
-                    gossip_target_persona,
-                    "resident",
-                    "resident",
-                    personas,
-                    G,
-                )
+            for person in pair[1].scratch.complain_buffer:
+                # gossip target choose
+                gossip_target_trustee = run_gpt_prompt_gossip_listener_select_v2(
+                    pair[1], "resident", personas[person["complaint_target"]]
+                )[0]
+                for gossip_target in gossip_target_trustee:
+                    # gossip chat
+                    gossip_target_persona = personas[gossip_target]
+                    first_order_gossip(
+                        pair[1],
+                        gossip_target_persona,
+                        "resident",
+                        "resident",
+                        personas,
+                        G,
+                        val=person,
+                    )

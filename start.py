@@ -147,6 +147,9 @@ class Creation:
                 f"sim_code: {self.sim_code}-----------------------------------------------"
             )
             if self.with_reputation and self.with_gossip:
+                if self.step != 1 and (self.step - 1) % 5 == 0:
+                    update_knowns_reputation_observation(self.personas)
+
                 pairs = pair_each(self.personas, self.G)
 
                 for pair in pairs:

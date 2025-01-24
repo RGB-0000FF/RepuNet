@@ -1,0 +1,57 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- target name
+!<INPUT 3>! -- **Interaction Memory** 
+!<INPUT 4>! -- Target ID
+!<INPUT 5>! -- previous reputation
+!<INPUT 6>! -- target role
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. Update !<INPUT 2>!'s reputation based on “!<INPUT 2>!'s Previous Reputation”, !<INPUT 2>!'s performance in “Interaction Memory”, and the “Reputation Principles”.
+
+**!<INPUT 2>!'s Previous Reputation:**
+!<INPUT 5>!
+
+**Interaction Memory:**
+
+- Others’ evaluation of !<INPUT 2>!’s performance:
+    
+    !<INPUT 3>! 
+    
+
+**Reputation Principles:**
+
+- Evaluate !<INPUT 2>!’s reputation based on these traits:
+    - Trustworthiness: Your reliability and honesty.
+    - Prosociality: Your inclination to help and cooperate with others.
+    - Competence: Your ability to perform tasks effectively.
+    - Dominance: Your influence and authority over others.
+    - Norm compliance: How well you follow social norms.
+
+**Desired Format:** JSON
+{
+"!<INPUT 6>!_!<INPUT 4>!": {
+"ID": !<INPUT 4>!,
+"name": "!<INPUT 2>!",
+"role": "!<INPUT 6>!",
+"scenario": "investment",
+"content": "<a brief description of its reputation>",
+"numerical record": "(x1, x2, x3, x4, x5)"
+}
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very
+bad, bad, neutral, good, very good} and the “content” of their reputation. The
+format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+
+Note: only output the reputation in desired format.
