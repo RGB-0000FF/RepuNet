@@ -10,7 +10,8 @@ Variables:
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** You are !<INPUT 1>!.  You have decided to spread gossip about  !<INPUT 2>!. Now you want to choose a listener that you want to share your (dis)satisfaction on  !<INPUT 2>!’s behavior from your “Social Network”. Output the name of the listener you select.
+**Task:** You are !<INPUT 1>!.  You have decided to spread gossip about  !<INPUT 2>!. Now you want to choose a listener that you want to share your (dis)satisfaction on  !<INPUT 2>!’s behavior from your “Social Network”. Output the name of the listener you select. If the social network is empty, output **None**.
+
 
 **Social Network:**
 !<INPUT 3>!

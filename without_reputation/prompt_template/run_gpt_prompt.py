@@ -95,6 +95,8 @@ def run_gpt_prompt_gossip_listener_select_v1(
 
     def __func_validate(gpt_response, prompt=None):
         try:
+            if "None" in gpt_response:
+                return  True
             if __func_clean_up(gpt_response, prompt):
                 return True
             return False
@@ -103,6 +105,8 @@ def run_gpt_prompt_gossip_listener_select_v1(
             return False
 
     def __func_clean_up(gpt_response, prompt=None):
+        if "None" in gpt_response:
+            return []
         full_name = replace_full_name(gpt_response)
         if full_name:
             gpt_response = full_name
@@ -112,7 +116,7 @@ def run_gpt_prompt_gossip_listener_select_v1(
         return [gpt_response]
 
     def get_fail_safe():
-        fs = "error"
+        fs = []
         return fs
 
     gpt_param = {
