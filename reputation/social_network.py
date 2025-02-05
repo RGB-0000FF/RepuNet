@@ -59,9 +59,9 @@ def social_network_update(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, target_persona_role]
             )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, target_persona_role]
-            )
+            # init_persona.scratch.relationship["black_list"].append(
+            #     [target_persona.scratch.name, target_persona_role]
+            # )
 
     except Exception as e:
         if not full_investment:
@@ -124,9 +124,9 @@ def social_network_update_after_new_sign_up(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, "resident"]
             )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, "resident"]
-            )
+            # init_persona.scratch.relationship["black_list"].append(
+            #     [target_persona.scratch.name, "resident"]
+            # )
     except Exception as e:
         if isinstance(e, Exception) and str(e) == "GPT ERROR":
             sys.exit(str(e))
@@ -144,6 +144,7 @@ def social_network_update_after_observed_invest(
         disconnection_res = run_gpt_prompt_disconnection_after_observed_v1(
             init_persona,
             target_persona,
+            update_info["init_persona_role"],
             update_info["target_persona_role"],
             update_info["interaction_memory"],
         )[0]
@@ -155,9 +156,9 @@ def social_network_update_after_observed_invest(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, "resident"]
             )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, "resident"]
-            )
+            # init_persona.scratch.relationship["black_list"].append(
+            #     [target_persona.scratch.name, "resident"]
+            # )
     except Exception as e:
         if isinstance(e, Exception) and str(e) == "GPT ERROR":
             sys.exit(str(e))
@@ -166,22 +167,24 @@ def social_network_update_after_observed_invest(
 def social_network_update_after_gossip(
     init_persona,
     target_persona,
+    init_persona_role,
     target_persona_role,
     gossiper_name,
     gossip_info,
 ):
     gossip_res = run_gpt_prompt_disconnection_after_gossip_v2(
-        init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
+        init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
     )[0]
     if gossip_res["Disconnect"].lower() == "yes":
         try:
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, target_persona_role]
             )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, target_persona_role]
-            )
+            # init_persona.scratch.relationship["black_list"].append(
+            #     [target_persona.scratch.name, target_persona_role]
+            # )
         except ValueError:
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, target_persona_role]
-            )
+            # init_persona.scratch.relationship["black_list"].append(
+            #     [target_persona.scratch.name, target_persona_role]
+            # )
+            pass

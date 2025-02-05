@@ -34,7 +34,7 @@ def first_order_gossip(
     reason = val["complaint_reason"]
     # gossip chat
     convo = generate_convo(
-        init_persona, target_persona, reason, val["complaint_target"]
+        init_persona, target_persona, reason, val["complaint_target"],role=init_persona_role
     )
     init_persona.associativeMemory.add_chat(
         subject=init_persona.name,
@@ -60,12 +60,12 @@ def first_order_gossip(
         "complained role": complain_persona_role,
     }
     gossip_info = run_gpt_prompt_identify_and_summary_gossip_info_v1(
-        target_persona, init_persona, complain_info
+        target_persona, init_persona, complain_info,init_persona_role=init_persona_role
     )[0]
     complain_info["gossip info"] = gossip_info
     complain_info["gossiper role"] = init_persona_role
     gossip = run_gpt_prompt_first_order_evaluation_v1(
-        target_persona, init_persona, complain_info
+        target_persona, init_persona, complain_info,init_persona_role
     )[0]
     target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
     # reputation update
@@ -112,6 +112,7 @@ def first_order_gossip(
     social_network_update_after_gossip(
         target_persona,
         personas[complain_info["complained name"]],
+        init_persona_role,
         complain_persona_role,
         init_persona.name,
         gossip[0]["gossip info"],
@@ -165,6 +166,7 @@ def second_order_gossip(
             gossip_target_persona,
             complain_info["complain reason"],
             complain_info["complained name"],
+            role=init_persona_role,
         )
         gossip_target_persona.associativeMemory.add_chat(
             subject=init_persona.name,
@@ -184,12 +186,12 @@ def second_order_gossip(
         )
         complain_info["gossip chat"] = convo
         gossip_info = run_gpt_prompt_identify_and_summary_gossip_info_v1(
-            gossip_target_persona, init_persona, complain_info
+            gossip_target_persona, init_persona, complain_info,init_persona_role=init_persona_role
         )[0]
         complain_info["gossip info"] = gossip_info
         complain_info["gossiper role"] = init_persona_role
         gossip = run_gpt_prompt_second_order_evaluation_v1(
-            gossip_target_persona, init_persona, complain_info
+            gossip_target_persona, init_persona, complain_info,init_persona_role=init_persona_role
         )[0]
         gossip[0]["gossiper name"] = init_persona.name
         gossip_target_persona.gossipDB.add_gossip(
@@ -231,15 +233,16 @@ def second_order_gossip(
         social_network_update_after_gossip(
             gossip_target_persona,
             complain_persona,
+            init_persona_role,
             complain_persona_role,
             init_persona.name,
             gossip[0]["gossip info"],
         )
 
 
-def generate_convo(init_persona, target_persona, reason, complain_target):
+def generate_convo(init_persona, target_persona, reason, complain_target,role):
     convo = run_gpt_prompt_gossip_v2(
-        init_persona, target_persona, reason, complain_target
+        init_persona, target_persona, reason, complain_target,role
     )[0]
     print(convo)
     return convo

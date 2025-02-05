@@ -144,15 +144,7 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
             "reported_investment_outcome": reported_investment_outcome,
         }
 
-        # i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-        #     investor, "investor"
-        # )[0]
-        # investor.scratch.learned = i_new_learned
-
-        # t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-        #     trustee, "trustee"
-        # )[0]
-        # trustee.scratch.learned = t_new_learned
+        
         print_stage4 = None
         investor_evaluation=run_gpt_prompt_investor_evaluation_v1(
             init_persona=investor,
@@ -182,6 +174,15 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         investor_allocated=investor_allocation_part,
         verbose=True,
         )[0]
+        i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
+            investor, "investor",investor_evaluation["self_reflection"]
+        )[0]
+        investor.scratch.learned["investor"] = i_new_learned
+
+        t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
+            trustee, "trustee",trustee_evaluation["self_reflection"]
+        )[0]
+        trustee.scratch.learned["trustee"] = t_new_learned
         memory_for_investor=investor_evaluation["trustee_reflection"]
         memory_for_trustee=trustee_evaluation["investor_reflection"]
         full_investment=True

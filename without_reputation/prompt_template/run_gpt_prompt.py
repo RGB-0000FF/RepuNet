@@ -16,7 +16,7 @@ def run_gpt_prompt_update_learned_in_description_v1(
             "You are an expert on updating learned in an agent description based on its Interaction Memory."
         ]
         prompt_input += [init_persona.scratch.name]
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned[init_persona_role]]
         prompt_input += [interaction_memory_self_veiw]
 
         return prompt_input
@@ -25,8 +25,8 @@ def run_gpt_prompt_update_learned_in_description_v1(
         try:
             persona_name = (
                 prompt["user"]
-                .split("**Task:** Based on “")[-1]
-                .split("’s Previous Learned")[0]
+                .split("**Task:**")[-1]
+                .split("is a")[0]
                 .strip()
             )
             if persona_name in gpt_response:
@@ -54,7 +54,12 @@ def run_gpt_prompt_update_learned_in_description_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/update_learned_in_description_v2.txt"
+    if init_persona_role == "resident":
+        prompt_template = "prompt/update_learned_in_description_v2.txt"
+    elif init_persona_role == "investor":
+        prompt_template = "prompt/investment/baseline_update_investor_learned_description_v1.txt"
+    elif init_persona_role == "trustee":
+        prompt_template = "prompt/investment/baseline_update_trustee_learned_description_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
         init_persona_role,
@@ -85,7 +90,7 @@ def run_gpt_prompt_gossip_listener_select_v1(
         init_persona_role,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned[init_persona_role]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         bind_list = list(init_persona.scratch.relationship["bind_list"])
@@ -209,15 +214,15 @@ def run_gpt_prompt_gossip_v1(init_persona, target_persona, reason):
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-
-def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_target):
-    def create_prompt_input(init_persona, target_persona, reason, complain_target):
+#
+def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_target,init_persona_role=None):
+    def create_prompt_input(init_persona, target_persona, reason, complain_target,init_persona_role=None):
         prompt_input = []
         prompt_input += ["You are now a dialogue generation expert."]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        prompt_input += [init_persona.scratch.learned]
-        prompt_input += [target_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
+        prompt_input += [target_persona.scratch.learned[init_persona_role]] if type(target_persona.scratch.learned) is dict else [target_persona.scratch.learned]
         prompt_input += [reason]
         prompt_input += [complain_target]
 
@@ -251,7 +256,7 @@ def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_targ
     }
     prompt_template = "prompt/create_gossip_chat_v2.txt"
     prompt_input = create_prompt_input(
-        init_persona, target_persona, reason, complain_target
+        init_persona, target_persona, reason, complain_target,init_persona_role
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -401,9 +406,9 @@ def run_gpt_prompt_first_order_evaluation_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-
+#
 def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(
-    init_persona, target_persona, complain_info
+    init_persona, target_persona, complain_info,init_persona_role=None
 ):
     def create_prompt_input(
         init_persona,
@@ -411,7 +416,7 @@ def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes
         complain_info,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [complain_info["complained name"]]
@@ -455,6 +460,7 @@ def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes
         init_persona,
         target_persona,
         complain_info,
+        init_persona_role
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -551,7 +557,7 @@ def run_gpt_prompt_connection_build_investor_v1(
         interaction_memory
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input.append(interaction_memory)
@@ -621,7 +627,7 @@ def run_gpt_prompt_disconnection_investor_v1(
         interaction_memory,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         # target_persona_recent_behavior = (
@@ -689,7 +695,7 @@ def run_gpt_prompt_connection_build_trustee_v1(
         interaction_memory,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         # target_persona_recent_behavior = (
@@ -758,7 +764,7 @@ def run_gpt_prompt_disconnection_trustee_v1(
         interaction_memory,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input.append(interaction_memory)
@@ -817,15 +823,15 @@ def run_gpt_prompt_disconnection_trustee_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-
+#
 def run_gpt_prompt_disconnection_after_gossip_v1(
-    init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
+    init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
 ):
     def create_prompt_input(
-        init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
+        init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [gossip_info]
@@ -863,7 +869,7 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
     }
     prompt_template = "prompt/disconnection_after_gossip_v2.txt"
     prompt_input = create_prompt_input(
-        init_persona, target_persona, target_persona_role, gossiper_name, gossip_info
+        init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 

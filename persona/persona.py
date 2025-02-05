@@ -12,11 +12,11 @@ class Persona:
     gossipDB: GossipDB
     associativeMemory: AssociativeMemory
 
-    def __init__(self, name, folder_mem_saved=False, with_reputation=False):
+    def __init__(self, name, folder_mem_saved=False, with_reputation=False,investment=None):
         self.name = name
 
         scratch_saved = f"{folder_mem_saved}/memory/scratch.json"
-        self.scratch = Scratch(scratch_saved)
+        self.scratch = Scratch(scratch_saved,investment)
 
         gossip_saved = f"{folder_mem_saved}/reputation"
         self.gossipDB = GossipDB(gossip_saved)

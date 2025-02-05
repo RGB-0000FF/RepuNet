@@ -54,12 +54,12 @@ class Scratch:
 
     observed: dict
 
-    def __init__(self, f_saved):
+    def __init__(self, f_saved,investment=None):
         self.name = None
 
         self.innate = None
         # L1 stable traits.
-        self.learned = None
+        self.learned = {}
         # L2 external implementation.
         self.currently = None
 
@@ -90,7 +90,11 @@ class Scratch:
 
             self.name = scratch_load["name"]
             self.innate = scratch_load["innate"]
-            self.learned = scratch_load["learned"]
+            if investment:
+              self.learned["investor"] = scratch_load["learned"]["investor"]
+              self.learned["trustee"] = scratch_load["learned"]["trustee"]
+            else:
+              self.learned = scratch_load["learned"]
             self.currently = scratch_load["currently"]
 
             self.ID = scratch_load["ID"]

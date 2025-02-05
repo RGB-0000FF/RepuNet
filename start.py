@@ -21,7 +21,7 @@ from reputation.reputation_update import reputation_init_sign_up
 
 
 class Creation:
-    def __init__(self, sim_code, with_reputation, with_gossip, sim=None):
+    def __init__(self, sim_code, with_reputation, with_gossip, sim=None,):
         self.sim_code = f"{sim_code}"
         sim_folder = sim_folder = f"{fs_storage}/{self.sim_code}"
 
@@ -38,7 +38,10 @@ class Creation:
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
+            if sim=="investment":
+                curr_persona = Persona(persona_name, persona_folder, self.with_reputation,investment=True)
+            else:
+                curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
 
         if sim and "invest" in sim:
@@ -338,5 +341,10 @@ if __name__ == "__main__":
     origin = input("Enter the name of the forked simulation: ").strip()
     with_reputation = input("Whether to use reputation (y/n): ").strip()
     with_gossip = input("Whether to use gossip (y/n): ").strip()
-    server = Creation(origin, with_reputation, with_gossip)
+    game_type= input("Investment or Sign up (i/s): ").strip()
+    if "i" in game_type:
+        sim="investment"
+    else:
+        sim="sign_up"
+    server = Creation(origin, with_reputation, with_gossip,sim=sim)
     server.open_server()

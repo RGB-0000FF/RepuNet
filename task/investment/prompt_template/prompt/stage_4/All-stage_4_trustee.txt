@@ -14,7 +14,7 @@ Variables:
 
 !<INPUT 12>! -- the agent name
 
-!<INPUT 13>! -- output of “**Trustee Reputation Reflection” in “**stage_4_investor**” prompt**
+
 
 <commentblockmarker>###</commentblockmarker>
 
@@ -45,10 +45,11 @@ Step 2: A short reflection to update **the investor's reputation** from your per
 1. **Profit Distribution Stage:**
 - Reported Investment Outcome: The current resource after investment reported by the trustee is *!<INPUT 9>!* units.
 - Actual Allocation Result: Trustee receives *!<INPUT 10>!* units, and the investor receives *!<INPUT 11>!* units.
-1. **Mutual Evaluation Stage:**
-- Investor's evaluation of your performance: !<INPUT 13>!
+
 
 **Output:**
 
 1. **Self (Trustee) Reputation Reflection:** *<Short reflection for self reputation update.>*
 2. **Investor Reputation Reflection:** *<Short reflection for investor reputation update.>*
+
+**Note:**You must strictly adhere to the required format and cannot output any additional information.

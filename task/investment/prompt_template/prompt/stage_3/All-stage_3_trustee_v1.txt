@@ -45,7 +45,7 @@ Variables:
 
 **Desired Format:** :
 
-1. **Final Allocation:** Trustee receives *<Trustee's Allocated Resource Quantity>* units, and the investor receives *<Investor's Allocated Resource Quantity>* units.
+1. **Final Allocation:** Trustee receives X% of the total units after investment, and the investor receives Y% units. 
 2. **Reported Investment Outcome:** *The current resource after investment is <Reported Resource Quantity> units.*
 
 

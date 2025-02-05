@@ -1,5 +1,5 @@
 import random
-
+from decimal import Decimal
 from reputation.gossip import first_order_gossip
 from reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_gossip_listener_select_v2,
@@ -173,6 +173,7 @@ def update_knowns_reputation_observation(personas):
                     "reason": "observed",
                     "interaction_memory": observe_mem,
                     "target_persona_role": "investor",
+                    "init_persona_role": "trustee",
                 }
                 reputation_update_invest(
                     persona,
@@ -190,6 +191,7 @@ def update_knowns_reputation_observation(personas):
                     "reason": "observed",
                     "interaction_memory": observe_mem,
                     "target_persona_role": "trustee",
+                    "init_persona_role": "investor",
                 }
                 reputation_update_invest(
                     persona,
@@ -227,10 +229,10 @@ def start_investment(pair, personas, G, save_folder):
             raise Exception("GPT ERROR")
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
-        trustee_part = trustee_plan.split("trustee retains")[-1].split(".")[0].strip()
+        trustee_part = trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
 
         investor_part = (
-            trustee_plan.split("investor receives")[-1].split("of")[0].strip()
+            trustee_plan.lower().split("investor receives")[-1].split("of")[0].strip()
         )
 
         investor_decided = run_gpt_prompt_investor_decided_v1(
@@ -370,8 +372,8 @@ def start_investment(pair, personas, G, save_folder):
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
             trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
-        trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
-        investor_allocation_part = round(float(trustee_allocation["investor"]), 3)
+        trustee_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip())*a_unit/100
+        investor_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip())*a_unit/100
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part
@@ -412,11 +414,9 @@ def start_investment(pair, personas, G, save_folder):
             a_unit,
             k,
             a_unit * k,
-            trustee_part,
-            investor_part,
+            trustee_plan,
+            trustee_allocation,
             reported_investment_outcome,
-            trustee_allocation_part,
-            investor_allocation_part,
             verbose=True,
         )[0]
         trustee_evaluation = run_gpt_prompt_stage4_trustee_evaluation_v1(

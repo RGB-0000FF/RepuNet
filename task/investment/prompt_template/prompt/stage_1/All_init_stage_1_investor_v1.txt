@@ -32,4 +32,6 @@ The memory list provides your recent transaction records in order. These memorie
 - **If you accept:** *Accept. Allocate <fill in> units from available !<INPUT 2>! units to the trustee.*
 - **If you reject:** *Refuse. <Reason in one sentence>.*
 
+**Note:**You must strictly adhere to the required format and cannot output any additional information.
+
 **Output:**

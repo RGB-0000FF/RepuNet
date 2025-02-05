@@ -10,7 +10,7 @@ def run_gpt_prompt_investor_decided_v1(
     def create_prompt_input(init_persona, target_persona, allocation_plan):
         global text1
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [allocation_plan]
         prompt_input += [init_persona.scratch.resources_unit]
         init_reputation = init_persona.reputationDB.get_targets_individual_reputation(
@@ -99,7 +99,7 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
         global text2
 
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         init_reputation = init_persona.reputationDB.get_targets_individual_reputation(
             init_persona.scratch.ID, "trustee"
         )
@@ -196,7 +196,7 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
     ):
         global text2
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         trustee_reputation = (
             init_persona.reputationDB.get_targets_individual_reputation(
                 init_persona.scratch.ID, "trustee"
@@ -232,18 +232,19 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
     def __func_clean_up(gpt_response, prompt=""):
         gpt_response = gpt_response.replace("*", "")
         res = dict()
-        res["trustee"] = (
-            gpt_response.split("Trustee receives")[-1]
-            .split("units")[0]
-            .replace(",", "")
-            .strip()
-        )
-        res["investor"] = (
-            gpt_response.split("investor receives")[-1]
-            .split("units")[0]
-            .replace(",", "")
-            .strip()
-        )
+        # res["trustee"] = (
+        #     gpt_response.split("Trustee receives")[-1]
+        #     .split("units")[0]
+        #     .replace(",", "")
+        #     .strip()
+        # )
+        # res["investor"] = (
+        #     gpt_response.split("investor receives")[-1]
+        #     .split("units")[0]
+        #     .replace(",", "")
+        #     .strip()
+        # )
+        res["Final Allocation"] = gpt_response.split("Final Allocation:")[-1].split("Reported Investment Outcome:")[0].strip()
         res["reported_investment_outcome"] = gpt_response.split(
             "Reported Investment Outcome:"
         )[-1].strip()
@@ -254,7 +255,7 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
         return fs
 
     gpt_param = {
-        "engine": "gpt-4o-mini",
+        "engine": "gpt-4o",
         "max_tokens": 4096,
         "temperature": 0,
         "top_p": 1,
@@ -302,11 +303,9 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
     investor_resource,
     k,
     actual_distributable,
-    trustee_share,
-    investor_share,
+    proposed_plan,
+    actual_result,
     reported_resource,
-    trustee_allocated,
-    investor_allocated,
     verbose=False,
 ):
     def create_prompt_input(
@@ -316,14 +315,12 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
         investor_resource,
         k,
         actual_distributable,
-        trustee_share,
-        investor_share,
+        proposed_plan,
+        actual_result,
         reported_resource,
-        trustee_allocated,
-        investor_allocated,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         investor_reputation = (
             init_persona.reputationDB.get_targets_individual_reputation(
                 init_persona.scratch.ID, "investor"
@@ -342,11 +339,9 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
         prompt_input += [investor_resource]
         prompt_input += [k]
         prompt_input += [actual_distributable]
-        prompt_input += [Decimal(float(trustee_share.strip("%").strip())/100)*Decimal(float(reported_resource.split("investment is")[-1].split("units.")[0]))]
-        prompt_input += [Decimal(float(investor_share.strip("%").strip())/100)*Decimal(float(reported_resource.split("investment is")[-1].split("units.")[0]))]
+        prompt_input.append(proposed_plan)
+        prompt_input.append(actual_result)
         prompt_input += [reported_resource]
-        prompt_input += [trustee_allocated]
-        prompt_input += [investor_allocated]
         prompt_input.append(init_persona.scratch.name)
         return prompt_input
 
@@ -380,7 +375,7 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
         return fs
 
     gpt_param = {
-        "engine": "gpt-4o-mini",
+        "engine": "gpt-4o",
         "max_tokens": 4096,
         "temperature": 0,
         "top_p": 1,
@@ -397,11 +392,9 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
         investor_resource,
         k,
         actual_distributable,
-        trustee_share,
-        investor_share,
+        proposed_plan,
+        actual_result,
         reported_resource,
-        trustee_allocated,
-        investor_allocated,
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -448,7 +441,7 @@ def run_gpt_prompt_stage4_trustee_evaluation_v1(
         reflection
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         trustee_reputation = (
             init_persona.reputationDB.get_targets_individual_reputation(
                 init_persona.scratch.ID, "trustee"
@@ -473,7 +466,7 @@ def run_gpt_prompt_stage4_trustee_evaluation_v1(
         prompt_input += [str(trustee_allocated)]
         prompt_input += [str(investor_allocated)]
         prompt_input.append(str(init_persona.scratch.name))
-        prompt_input.append(str(reflection))
+        # prompt_input.append(str(reflection))
         return prompt_input
 
     def __func_validate(gpt_response, prompt=""):
@@ -566,7 +559,7 @@ def run_gpt_prompt_stage1_trustee_gossip_willing_v1(
         target_persona
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         prompt_input += [trustee_plan]
         prompt_input += [reject_reason]
         prompt_input.append(init_persona.scratch.name)
@@ -641,7 +634,7 @@ def run_gpt_prompt_stage1_investor_gossip_willing_v1(
         reject_reason,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [trustee_plan]
         prompt_input += [reject_reason]
         prompt_input.append(init_persona.scratch.name)
@@ -731,7 +724,7 @@ def run_gpt_prompt_stage4_investor_gossip_v1(
         reflection
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [trustee_plan]
         prompt_input += [investor_resource]
@@ -834,7 +827,7 @@ def run_gpt_prompt_stage4_trustee_gossip_v1(
         reflection
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [trustee_plan]
         prompt_input += [str(investor_resource)]
@@ -923,7 +916,7 @@ def run_gpt_prompt_select_trustee(
         repu_list
     ):
         prompt_input = []
-        prompt_input.append(learned)
+        prompt_input.append(learned["investor"])
         prompt_input.append(init_persona_name)
         prompt_input.append(repu_list)
 

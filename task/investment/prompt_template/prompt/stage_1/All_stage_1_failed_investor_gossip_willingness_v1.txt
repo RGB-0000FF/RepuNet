@@ -33,3 +33,5 @@ Variables:
 **Desired Format:**
 
  <Yes or No>, <reason in one sentence>.
+
+**Note:**You must strictly adhere to the required format and cannot output any additional information.

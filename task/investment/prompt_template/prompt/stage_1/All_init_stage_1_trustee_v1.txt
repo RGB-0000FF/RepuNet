@@ -21,4 +21,7 @@ Variables:
     - **Previous investment memories: You are !<INPUT 2>!.**
     !<INPUT 1>!
 
+
+**Note:**You must strictly adhere to the required format and cannot output any additional information.
+
 **Output in desired format (ONLY ONE SENTENCE):** Trustee proposes a resource allocation plan where investor receives X% of the disposable units after investment while trustee retains Y%.

@@ -2,7 +2,7 @@ import json
 import networkx as nx
 import os
 import sys
-
+import matplotlib.pyplot as plt
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
@@ -391,7 +391,7 @@ if __name__ == "__main__":
     # sims1 = get_all_sim_info("investment_s7_with_repu_without_gossip")
     # sims2 = get_all_sim_info("investment_s8_without_repu_gossip")
     # sims3 = get_all_sim_info("investment_s9_without_repu_with_gossip")
-    sims4 = get_all_sim_info("investment_s11_with_repu_gossip", "invest")
+    sims4 = get_all_sim_info("sign_s22_with_all", "sign",limit=(191,201))
     # count = 0
     # for sim in sims1:
     #     count += 1
@@ -407,8 +407,9 @@ if __name__ == "__main__":
     #     count += 1
     #     with open(f"./without_repu_with_gossip/analysis_{count}.json", "w") as f:
     #         json.dump(sim.analysis_dict, f, indent=4)
-    # count = 0
-    # for sim in sims4:
-    #     count += 1
-    #     with open(f"./with_repu_gossip/analysis_{count}.json", "w") as f:
-    #         json.dump(sim.analysis_dict, f, indent=4)
+    count = 190
+    for sim in sims4:
+        count += 1
+        with open(f"./analysis_return/sign_all/analysis_{count}.json", "w") as f:
+            json.dump(sim.analysis_dict, f, indent=4)   
+    

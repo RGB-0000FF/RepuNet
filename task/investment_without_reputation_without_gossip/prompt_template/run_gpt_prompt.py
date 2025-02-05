@@ -6,7 +6,7 @@ def run_gpt_prompt_investor_decided_v1(
 ):
     def create_prompt_input(init_persona, target_persona, allocation_plan):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [allocation_plan]
         prompt_input += [init_persona.scratch.resources_unit]
         memory_list=init_persona.get_interaction_memory(role="investor")
@@ -71,7 +71,7 @@ def run_gpt_prompt_investor_decided_v1(
 def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
     def create_prompt_input(init_persona, target_persona):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         memory_list=init_persona.get_interaction_memory(role="trustee")
         memory=""
         for m in memory_list:
@@ -146,7 +146,7 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
         actual_distributable,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [trustee_plan]
         prompt_input += [investor_resource]
         prompt_input += [k]
@@ -187,7 +187,7 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
         return fs
 
     gpt_param = {
-        "engine": "gpt-4o-mini",
+        "engine": "gpt-4o",
         "max_tokens": 4096,
         "temperature": 0,
         "top_p": 1,
@@ -248,13 +248,13 @@ def run_gpt_prompt_investor_evaluation_v1(
         investor_allocated,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["investor"]]
         #prompt_input += [trustee_plan]
         prompt_input += [investor_resource]
         prompt_input += [k]
         prompt_input += [actual_distributable]
-        prompt_input += [(float(trustee_share.strip("%").strip())/100)*float(reported_resource.split("investment is")[-1].split("units.")[0])]
-        prompt_input += [(float(investor_share.strip("%").strip())/100)*float(reported_resource.split("investment is")[-1].split("units.")[0])]
+        prompt_input += [(float(trustee_share.strip("%").strip())/100)*float(reported_resource.split("investment is")[-1].split("units.")[0].replace(",", ""))]
+        prompt_input += [(float(investor_share.strip("%").strip())/100)*float(reported_resource.split("investment is")[-1].split("units.")[0].replace(",", ""))]
         prompt_input += [reported_resource]
         prompt_input += [trustee_allocated]
         prompt_input += [investor_allocated]
@@ -286,7 +286,7 @@ def run_gpt_prompt_investor_evaluation_v1(
         return fs
 
     gpt_param = {
-        "engine": "gpt-4o-mini",
+        "engine": "gpt-4o",
         "max_tokens": 4096,
         "temperature": 0,
         "top_p": 1,
@@ -352,7 +352,7 @@ def run_gpt_prompt_trustee_evaluation_v1(
         investor_allocated,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
+        prompt_input += [init_persona.scratch.learned["trustee"]]
         prompt_input += [trustee_plan]
         prompt_input += [str(investor_resource)]
         prompt_input += [str(k)]

@@ -27,7 +27,7 @@ def reputation_init_sign_up(init_persona):
 
 
 def reputation_update_invest(
-    init_persona, target_persona, update_info, full_investment=True
+    init_persona, target_persona, update_info,full_investment=True, 
 ):
     if "stage 1" in update_info["reason"]:
         reputation_update_after_stage1_invest(init_persona, target_persona, update_info)
@@ -158,6 +158,7 @@ def reputation_update_after_gossip_invest(init_persona, target_persona, update_i
         init_persona,
         target_persona,
         update_info["gossip"][0],
+        update_info["init_persona_role"],
         update_info["target_persona_role"],
         update_info["gossip"][0]["credibility level"],
     )[0]
@@ -173,6 +174,7 @@ def reputation_update_after_observed_invest(init_persona, target_persona, update
     res = run_gpt_prompt_reputation_update_after_observed_v1(
         init_persona,
         target_persona,
+        update_info["init_persona_role"],
         update_info["target_persona_role"],
         update_info["interaction_memory"],
     )[0]
@@ -261,9 +263,9 @@ def learned_update_invest(init_persona, init_persona_role, init_persona_view):
     res = run_gpt_prompt_update_learned_in_description_invest_v1(
         init_persona, init_persona_role, init_persona_view
     )[0]
-    if "error" in res.lower():
+    if "error" in res.lower() and len(res) < 10:
         raise Exception("GPT ERROR")
-    init_persona.scratch.learned = res
+    init_persona.scratch.learned[init_persona_role] = res
 
 
 def replace_full_name(personas, name):

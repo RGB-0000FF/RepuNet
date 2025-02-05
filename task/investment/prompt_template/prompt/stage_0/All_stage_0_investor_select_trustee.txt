@@ -24,4 +24,6 @@ Variables:
 
 <trustee's name you choosed>
 
+**Note:**You must strictly adhere to the required format and cannot output any additional information.
+
 **Output:**

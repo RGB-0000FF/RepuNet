@@ -373,10 +373,10 @@ class SocialNetworkAnalysis:
 if __name__ == "__main__":
     # init set
     sim_folders = [
-        "sign_s14_without_all",
-        "sign_s22_with_all",
-        "sign_s18_without_gossip",
-        "sign_s19_without_repu_with_gossip",
+        "invest_s27_with_all",
+        # "sign_s22_with_all",
+        # "sign_s18_without_gossip",
+        # "sign_s19_without_repu_with_gossip",
         # "sign_s14_without_all",
         # "sign_s22_with_all",
         # "sign_s18_without_gossip",
@@ -390,7 +390,7 @@ if __name__ == "__main__":
         # "investment_s9_without_repu_with_gossip",
     ]
     with_repu = [
-        False,
+        True,
         True,
         True,
         False,
@@ -404,10 +404,10 @@ if __name__ == "__main__":
         False,
     ]
     limit = [
-        (100, 151),
-        (100, 151),
-        (100, 151),
-        (100, 151),
+        (1, 21),
+        (1, 201),
+        (1, 201),
+        (1, 201),
         # (50, 51),
         # (50, 51),
         # (50, 51),
@@ -420,7 +420,7 @@ if __name__ == "__main__":
     for i, sim_folder in enumerate(sim_folders):
         if i != 0:
             os.chdir("../")
-        sa = SocialNetworkAnalysis(sim_folder, "sign", with_repu[i], limit[i])
+        sa = SocialNetworkAnalysis(sim_folder, "invest", with_repu[i], limit[i])
         current_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(current_dir)
         if not os.path.exists(f"./{sim_folder}_result"):
