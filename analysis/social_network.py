@@ -210,6 +210,7 @@ class SocialNetworkAnalysis:
                         "d_connect": d_connect,
                         f"repu_score_{key}": repu_score,
                         "reputation_database": repus,
+                        "out_degree": G.out_degree(n),
                     }
                     # if "sign" in self.sim:
 
@@ -234,9 +235,7 @@ class SocialNetworkAnalysis:
                 elif self.with_repu and sim.step == 0:
                     data = get_data(G, sim.personas, key)
                     pos = nx.spring_layout(G, k=1.5, iterations=150)
-                    node_sizes, _ = self._set_nodes_reputation(
-                        G, sim.personas, key
-                    )
+                    node_sizes, _ = self._set_nodes_reputation(G, sim.personas, key)
                     color_map = {
                         node: get_color_for_score(score, -1, 1)
                         for node, score in data.items()
@@ -373,11 +372,11 @@ class SocialNetworkAnalysis:
 if __name__ == "__main__":
     # init set
     sim_folders = [
-        "invest_s27_with_all",
-        # "sign_s22_with_all",
-        # "sign_s18_without_gossip",
-        # "sign_s19_without_repu_with_gossip",
-        # "sign_s14_without_all",
+        "sign_s18_without_gossip",
+        "sign_s2_without_gossip",
+        "sign_s25_without_gossip",
+        "sign_s6_without_gossip",
+        "sign_s10_without_gossip",
         # "sign_s22_with_all",
         # "sign_s18_without_gossip",
         # "sign_s19_without_repu_with_gossip",
@@ -390,25 +389,25 @@ if __name__ == "__main__":
         # "investment_s9_without_repu_with_gossip",
     ]
     with_repu = [
+        # False,
         True,
         True,
+        # False,
+        # False,
         True,
-        False,
-        False,
         True,
-        True,
-        False,
-        False,
+        # False,
+        # False,
         True,
         True,
         False,
     ]
     limit = [
-        (1, 21),
-        (1, 201),
-        (1, 201),
-        (1, 201),
-        # (50, 51),
+        (191, 201),
+        (191, 201),
+        (191, 201),
+        (191, 201),
+        (191, 201),
         # (50, 51),
         # (50, 51),
         # (50, 51),
@@ -427,4 +426,3 @@ if __name__ == "__main__":
             os.makedirs(f"./{sim_folder}_result")
         sa.draw_social_network(f"./{sim_folder}_result")
         sa.save_social_network_detail(f"./{sim_folder}_result")
-    

@@ -23,6 +23,10 @@ analysis/*
 !analysis/analysis.py
 !analysis/social_network.py
 !analysis/statis_methods.py
+!analysis/statis_methods_sign.py
+
+
+figure
 
 utils.py
 metrics.md

@@ -6,7 +6,103 @@ import pandas as pd
 import json
 from scipy.stats import sem, t
 import numpy as np
-import networkx as nx
+
+
+# class Linear_Regression:
+#     def __init__(self, x, y, xlabel, ylabel, title) -> None:
+#         data = {xlabel: x, ylabel: y}
+#         self.data = pd.DataFrame(data)
+#         self.model = None
+#         self.result = None
+#         self.xlabel = xlabel
+#         self.ylabel = ylabel
+#         self.title = title
+
+#     def OLS(self):
+#         X = self.data[self.xlabel]
+#         Y = self.data[self.ylabel]
+#         X = sm.add_constant(X)
+#         self.model = sm.OLS(Y.astype(float), X.astype(float)).fit()
+#         self.result = self.model.summary()
+
+#     def return_result(self):
+#         return self.result
+
+#     def Logistic(self):
+#         X = self.data[self.xlabel]
+#         Y = self.data[self.ylabel]
+#         X = sm.add_constant(X)
+#         self.model = sm.Logit(Y, X).fit()
+#         self.result = self.model.summary()
+
+#     def visualization(self, color_list=[], color=None, label=None):
+#         plt.rcParams["font.family"] = "Times New Roman"
+#         if color_list:
+#             data = dict(self.data)
+#             data1 = {}
+#             data2 = {}
+#             x1 = []
+#             x2 = []
+#             y1 = []
+#             y2 = []
+#             for i in range(len(color_list)):
+#                 if color_list[i] == "red":
+#                     x1.append(data[self.xlabel][i])
+#                     y1.append(data[self.ylabel][i])
+#                 elif color_list[i] == "blue":
+#                     x2.append(data[self.xlabel][i])
+#                     y2.append(data[self.ylabel][i])
+#             data1[self.xlabel] = x1
+#             data1[self.ylabel] = y1
+#             data2[self.xlabel] = x2
+#             data2[self.ylabel] = y2
+
+#         # plt.figure(figsize=(10, 6))
+#         if color_list:
+#             sns.scatterplot(
+#                 x=self.xlabel,
+#                 y=self.ylabel,
+#                 data=data1,
+#                 color="red",
+#                 label="Sign-up",
+#             )
+#             sns.scatterplot(
+#                 x=self.xlabel,
+#                 y=self.ylabel,
+#                 data=data2,
+#                 color="blue",
+#                 label="Not Sign-up",
+#             )
+#         else:
+#             sns.scatterplot(
+#                 x=self.xlabel,
+#                 y=self.ylabel,
+#                 label=self.xlabel,
+#                 data=self.data,
+#                 color=color,
+#             )
+#         x1_vals = self.data[self.xlabel]
+#         predicted_y = self.model.predict(sm.add_constant(x1_vals))
+#         plt.plot(
+#             x1_vals,
+#             predicted_y,
+#             color=color,
+#             label=label,
+#             linewidth=2,
+#         )
+#         # plt.title('Trial 1: Linear regression of the Number of Double Positive Connect and reputation')
+#         # plt.title(self.title)
+#         # plt.xlabel(self.xlabel)
+#         # plt.ylabel(self.ylabel)
+#         # plt.legend()
+#         # plt.show()
+
+import pandas as pd
+import statsmodels.api as sm
+import seaborn as sns
+import matplotlib.pyplot as plt
+from matplotlib.colors import to_rgb, to_hex
+
 
 class Linear_Regression:
     def __init__(self, x, y, xlabel, ylabel, title) -> None:
@@ -35,54 +131,123 @@ class Linear_Regression:
         self.model = sm.Logit(Y, X).fit()
         self.result = self.model.summary()
 
-    def visualization(self, color_list=[], color=None, label=None):
-        if color_list:
-            data = dict(self.data)
-            data1 = {}
-            data2 = {}
-            x1 = []
-            x2 = []
-            y1 = []
-            y2 = []
-            for i in range(len(color_list)):
-                if color_list[i] == "red":
-                    x1.append(data[self.xlabel][i])
-                    y1.append(data[self.ylabel][i])
-                elif color_list[i] == "blue":
-                    x2.append(data[self.xlabel][i])
-                    y2.append(data[self.ylabel][i])
-            data1[self.xlabel] = x1
-            data1[self.ylabel] = y1
-            data2[self.xlabel] = x2
-            data2[self.ylabel] = y2
+    # def visualization(self, color_list=None, colors=None):
+    #     """
+    #     Visualize data points with different colors for multiple experiments.
+    #     Only show legend for "原始数据点" and "回归线".
+    #     :param color_list: List of experiment identifiers for each data point.
+    #     :param colors: Dictionary mapping experiment identifiers to colors.
+    #     """
+    #     plt.rcParams["font.family"] = "Times New Roman"
 
-        # plt.figure(figsize=(10, 6))
+    #     # Plot data points with color distinction
+    #     if color_list:
+    #         sns.scatterplot(
+    #             x=self.xlabel,
+    #             y=self.ylabel,
+    #             data=self.data,
+    #             hue=color_list,
+    #             palette=colors,
+    #             label="Number of Gossip ",
+    #             # legend=False,  # Disable experiment legend
+    #         )
+    #     else:
+    #         sns.scatterplot(
+    #             x=self.xlabel,
+    #             y=self.ylabel,
+    #             data=self.data,
+    #             color=colors[0] if colors else None,
+    #             label="Number of Gossip ",  # Label for original data points
+    #         )
+
+    #     # Plot the single regression line
+    #     X = sm.add_constant(self.data[self.xlabel])
+    #     predicted_y = self.model.predict(X)
+    #     plt.plot(
+    #         self.data[self.xlabel],
+    #         predicted_y,
+    #         color="black",  # Use a neutral color for the regression line
+    #         label="Linear_Regression",  # Label for regression line
+    #         linewidth=2,
+    #     )
+
+    #     # Add legend for "原始数据点" and "回归线"
+    #     plt.legend(prop={"size": 12, "family": "Times New Roman"})
+
+    def visualization(self, color_list=None, alphas=None):
+        """
+        Visualize data points with different transparency (alpha) for multiple experiments.
+        Show legend for "A Singal Agent" and "Linear_Regression".
+        :param color_list: List of experiment identifiers for each data point.
+        :param alphas: Dictionary mapping experiment identifiers to alpha values.
+        """
+        plt.rcParams["font.family"] = "Times New Roman"
+
+        # Plot data points with transparency distinction
         if color_list:
-            sns.scatterplot(
-                x=self.xlabel,
-                y=self.ylabel,
-                data=data1,
-                color="red",
-                label="Sign-up",
-            )
-            sns.scatterplot(
-                x=self.xlabel,
-                y=self.ylabel,
-                data=data2,
-                color="blue",
-                label="Not Sign-up",
-            )
+            for exp_name in set(color_list):  # Unique experiment names
+                mask = [
+                    exp == exp_name for exp in color_list
+                ]  # Mask for current experiment
+                plt.scatter(
+                    self.data[self.xlabel][mask],
+                    self.data[self.ylabel][mask],
+                    edgecolor="none",
+                    color="blue",  # Use blue for all points
+                    alpha=alphas[exp_name],  # Set transparency based on experiment
+                    label="A Single Agent"
+                    if exp_name == "sim1"
+                    else None,  # Only label one experiment
+                )
         else:
-            sns.scatterplot(x=self.xlabel, y=self.ylabel, data=self.data, color=color)
-        x1_vals = self.data[self.xlabel]
-        predicted_y = self.model.predict(sm.add_constant(x1_vals))
-        plt.plot(x1_vals, predicted_y, color=color, label=label, linewidth=2)
-        # plt.title('Trial 1: Linear regression of the Number of Double Positive Connect and reputation')
-        # plt.title(self.title)
-        # plt.xlabel(self.xlabel)
-        # plt.ylabel(self.ylabel)
-        # plt.legend()
-        # plt.show()
+            plt.scatter(
+                self.data[self.xlabel],
+                self.data[self.ylabel],
+                edgecolor="none",
+                color="blue",  # Use blue for all points
+                label="A Single Agent",  # Label for scatter points
+            )
+
+        # Plot the single regression line
+        X = sm.add_constant(self.data[self.xlabel])
+        predicted_y = self.model.predict(X)
+        plt.plot(
+            self.data[self.xlabel],
+            predicted_y,
+            color="black",  # Use a neutral color for the regression line
+            label="Linear Regression",  # Label for regression line
+            linewidth=2,
+        )
+
+        # Add legend for "A Singal Agent" and "Linear_Regression"
+        plt.legend(prop={"size": 12, "family": "Times New Roman"})
+
+    @staticmethod
+    def adjust_color_intensity(base_color, intensity):
+        """
+        Adjust the intensity of the color.
+        :param base_color: Original color (hex or name).
+        :param intensity: Intensity factor (0.0 to 1.0).
+        :return: Adjusted color in hex format.
+        """
+        rgb = to_rgb(base_color)
+        adjusted_rgb = tuple([c * intensity for c in rgb])
+        return to_hex(adjusted_rgb)
+
+    @staticmethod
+    def generate_colors(base_color, num_experiments):
+        """
+        Generate a list of colors with varying intensity for multiple experiments.
+        :param base_color: Base color (e.g., "blue").
+        :param num_experiments: Number of experiments.
+        :return: Dictionary mapping experiment identifiers to colors.
+        """
+        return {
+            f"sim{i+1}": Linear_Regression.adjust_color_intensity(
+                base_color, (i + 1) / num_experiments
+            )
+            for i in range(num_experiments)
+        }
 
 
 def Gini_coef(analysis_dict):
@@ -294,45 +459,45 @@ if __name__ == "__main__":
     # sims3 = get_all_sim_info("investment_s13_without_repu_with_gossip", "invest", False)
     # sims4 = get_all_sim_info("invest_s26_without_all", "invest", False,limit=(1,101))
 
-    data1 = [cheat_coef(i.analysis_dict) for i in sims1]
-    # data2 = [success_rate(i.analysis_dict) for i in sims2]
-    # data3 = [success_rate(i.analysis_dict) for i in sims3]
-    # data4 = [Satisfaction_rate_v1(i.analysis_dict) for i in sims4]
-    # plt.figure(figsize=(14, 7))
-    # plt.plot(
-    #     range(1, len(data1) + 1),
-    #     data1,
-    #     label="with reputation and gossip",
-    #     color="blue",
-    # )
-    # plt.scatter(range(1, len(data1) + 1), data1, color="blue")
-    # plt.plot(
-    #     range(1, len(data2) + 1),
-    #     data2,
-    #     label="without reputation but with gossip",
-    #     color="red",
-    # )
-    # plt.scatter(range(1, len(data2) + 1), data2, color="red")
-    # plt.plot(
-    #     range(1, len(data3) + 1),
-    #     data3,
-    #     label="with repuation but without gossip",
-    #     color="orange",
-    # )
-    # plt.scatter(range(1, len(data3) + 1), data3, color="orange")
-    # plt.plot(
-    #     range(1, len(data4) + 1),
-    #     data4,
-    #     label="without reputation and gossip",
-    #     color="cyan",
-    # )
-    # plt.scatter(range(1, len(data4) + 1), data4, color="cyan")
-    # plt.title("success rate()".title())
-    # plt.xlabel("Round")
-    # plt.ylabel("Success rate".capitalize())
-    # plt.axis([0,len(data1),0,1])
-    # plt.legend()
-    # plt.show()
+    data1 = [success_rate(i.analysis_dict) for i in sims1]
+    data2 = [success_rate(i.analysis_dict) for i in sims2]
+    data3 = [success_rate(i.analysis_dict) for i in sims3]
+    data4 = [success_rate(i.analysis_dict) for i in sims4]
+    plt.figure(figsize=(14, 7))
+    plt.plot(
+        range(1, len(data1) + 1),
+        data1,
+        label="with reputation and gossip",
+        color="blue",
+    )
+    plt.scatter(range(1, len(data1) + 1), data1, color="blue")
+    plt.plot(
+        range(1, len(data2) + 1),
+        data3,
+        label="without reputation but with gossip",
+        color="red",
+    )
+    plt.scatter(range(1, len(data2) + 1), data3, color="red")
+    plt.plot(
+        range(1, len(data2) + 1),
+        data2,
+        label="with reputation but without gossip",
+        color="orange",
+    )
+    plt.scatter(range(1, len(data2) + 1), data2, color="orange")
+    plt.plot(
+        range(1, len(data2) + 1),
+        data4,
+        label="without reputation and gossip",
+        color="cyan",
+    )
+    plt.scatter(range(1, len(data2) + 1), data4, color="cyan")
+    plt.title("Investment success rate")
+    plt.xlabel("Round")
+    plt.ylabel("Success Rate")
+    plt.axis([0, 30, 0, 1])
+    plt.legend()
+    plt.show()
 
     # l1=Linear_Regression(range(1,len(data1)+1),data1,"Round","Invest willingness","")
     # # # l2=Linear_Regression(range(1,len(data2)+1),data2,"Round","Invest willingness","")

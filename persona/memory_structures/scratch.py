@@ -52,7 +52,7 @@ class Scratch:
     relationship: dict
     resources_unit: int
 
-    observed: dict
+    # observed: dict
 
     def __init__(self, f_saved,investment=None):
         self.name = None
@@ -82,11 +82,11 @@ class Scratch:
         self.relationship = dict()
         self.resources_unit = 0
 
-        self.observed = dict()
+        # self.observed = dict()
 
         if check_if_file_exists(f_saved):
             # If we have a bootstrap file, load that here.
-            scratch_load = json.load(open(f_saved))
+            scratch_load = json.load(open(f_saved,encoding='utf-8', errors='ignore'))
 
             self.name = scratch_load["name"]
             self.innate = scratch_load["innate"]
@@ -119,7 +119,7 @@ class Scratch:
             }
             self.resources_unit = scratch_load["resources_unit"]
 
-            self.observed = scratch_load["observed"]
+            # self.observed = scratch_load["observed"]
 
     def save(self, out_json):
         """
@@ -158,7 +158,7 @@ class Scratch:
 
         scratch["resources_unit"] = self.resources_unit
 
-        scratch["observed"] = self.observed
+        # scratch["observed"] = self.observed
 
         with open(out_json, "w") as outfile:
             json.dump(scratch, outfile, indent=2, ensure_ascii=False)

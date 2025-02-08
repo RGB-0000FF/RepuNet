@@ -24,6 +24,7 @@ def get_gossip_count(ps, persona):
     count = 0
     for _, p in ps.items():
         gossips = p.gossipDB.gossips
+        # print(gossips)
         for gossip in gossips:
             full_name = gossip["complained name"]
             if full_name == persona:
@@ -50,12 +51,23 @@ def get_reputation_score(target_persona, target_persona_role, personas):
                 "numerical record"
             ]
             scores = repu_score.replace("(", "").replace(")", "").split(",")
-            score = (
-                float(scores[4])
-                + float(scores[3])
-                - float(scores[1])
-                - float(scores[0])
-            )
+            try:
+                s1 = float(scores[4])
+            except:
+                s1 = 0
+            try:
+                s2 = float(scores[3])
+            except:
+                s2 = 0
+            try:
+                s3 = float(scores[1])
+            except:
+                s3 = 0
+            try:
+                s4 = float(scores[0])
+            except:
+                s4 = 0
+            score = s1 + s2 - s3 - s4
             if score > 1:
                 score = 1
             elif score < -1:
@@ -114,7 +126,7 @@ class Analysis:
             black_list = list(persona.scratch.relationship["black_list"])
             bind_list = list(persona.scratch.relationship["bind_list"])
             for bind in bind_list:
-                if bind not in black_list and bind != "investor":
+                if bind not in black_list:
                     if not G.has_node(bind):
                         G.add_nodes_from([bind])
                     G.add_edges_from([(persona.name, bind)])
@@ -268,12 +280,14 @@ class Analysis:
                     (count / len(choices)), 3
                 )
 
-            # if self.with_gossip:
-            #     self.analysis_dict[persona_name]["gossip_count"] = get_gossip_count(
-            #         self.personas, persona.name
-            #     )
+            if self.with_gossip:
+                # print(self.step, persona.name)
+                self.analysis_dict[persona_name]["gossip_count"] = get_gossip_count(
+                    self.personas, persona.name
+                )
 
             if self.with_reputation:
+                self.analysis_dict[persona_name]["with_reputation"] = True
                 d_connect = get_d_connect(persona, self.G["resident"])
                 self.analysis_dict[persona_name]["d_connect"] = d_connect
                 self.analysis_dict[persona_name]["reputation score"] = (
@@ -284,6 +298,11 @@ class Analysis:
                         "Resident", persona.scratch.ID, True
                     )
                 )
+            else:
+                self.analysis_dict[persona_name]["with_reputation"] = False
+                d_connect = get_d_connect(persona, self.G["without_repu"])
+                self.analysis_dict[persona_name]["d_connect"] = d_connect
+            
 
     def _set_analysis_dict_invest(self):
         for persona_name, persona in self.personas.items():
@@ -373,18 +392,95 @@ class Analysis:
                 }
 
 
+# def get_all_sim_info(sim_folder, sim, with_reputation=True, limit=False):
+#     sim_steps = []
+#     sims = []
+#     for sim_code in os.listdir(f"{fs_storage}/{sim_folder}"):
+#         step = int(sim_code.split("_")[-1])
+#         if step > limit[1] or step < limit[0]:
+#             continue
+#         sim_steps.append(sim_code)
+#         sim_steps.sort(key=lambda x: int(x.split("_")[1]))
+#     for sim_step in sim_steps:
+#         print(sim_step)
+#         sims.append(Analysis(f"{sim_folder}/{sim_step}", sim, with_reputation))
+#     return sims
+
+
+import os
+from concurrent.futures import ProcessPoolExecutor
+
+
+# ✅ 全局函数，ProcessPoolExecutor 可以 pickle 这个函数
+def create_analysis(args):
+    sim_folder, sim_step, sim, with_reputation = args
+    return Analysis(f"{sim_folder}/{sim_step}", sim, with_reputation)
+
+
 def get_all_sim_info(sim_folder, sim, with_reputation=True, limit=False):
     sim_steps = []
-    sims = []
-    for sim_code in os.listdir(f"{fs_storage}/{sim_folder}"):
-        step = int(sim_code.split("_")[-1])
-        if step > limit[1] or step < limit[0]:
-            continue
-        sim_steps.append(sim_code)
-        sim_steps.sort(key=lambda x: int(x.split("_")[1]))
-    for sim_step in sim_steps:
-        sims.append(Analysis(f"{sim_folder}/{sim_step}", sim, with_reputation))
+
+    with os.scandir(f"{fs_storage}/{sim_folder}") as entries:
+        for entry in entries:
+            if entry.is_dir():
+                parts = entry.name.split("_")
+                try:
+                    step = int(parts[-1])
+                    if limit and (step < limit[0] or step > limit[1]):
+                        continue
+                    sim_steps.append((entry.name, step))
+                except ValueError:
+                    print(f"跳过无法解析的文件夹: {entry.name}")
+
+    sim_steps.sort(key=lambda x: x[1])
+    sim_steps = [step[0] for step in sim_steps]
+
+    # max_workers = os.cpu_count() * 2  # 🚀 让 CPU 充分利用
+    # print(f"使用 {max_workers} 个进程并行加载数据...")
+
+    # ✅ 使用全局函数 create_analysis 进行多进程计算
+    with ProcessPoolExecutor(max_workers=24) as executor:
+        sims = list(
+            executor.map(
+                create_analysis,
+                [(sim_folder, step, sim, with_reputation) for step in sim_steps],
+            )
+        )
+
     return sims
+
+
+# def get_all_sim_info(sim_folder, sim, with_reputation=True, limit=False):
+#     sim_steps = []
+
+#     # 使用 os.scandir() 提高文件遍历性能
+#     with os.scandir(f"{fs_storage}/{sim_folder}") as entries:
+#         for entry in entries:
+#             if entry.is_dir():  # 只处理文件夹
+#                 parts = entry.name.split("_")
+#                 try:
+#                     step = int(parts[-1])  # 确保 step 是数字
+#                     if limit and (step < limit[0] or step > limit[1]):
+#                         continue
+#                     sim_steps.append((entry.name, step))
+#                 except ValueError:
+#                     print(f"跳过无法解析的文件夹: {entry.name}")
+
+#     # 直接排序，避免重复 split
+#     sim_steps.sort(key=lambda x: x[1])
+#     sim_steps = [step[0] for step in sim_steps]  # 只保留文件名
+
+#     # 并行创建 Analysis 实例，加大线程池 worker 数量
+#     def create_analysis(sim_step):
+#         return Analysis(f"{sim_folder}/{sim_step}", sim, with_reputation)
+
+#     max_threads = min(16, os.cpu_count() * 2)  # 选择合理的线程数
+#     # print(f"使用 {max_threads} 个线程加载数据...")
+
+#     with ProcessPoolExecutor(max_workers=max_threads) as executor:
+#         sims = list(executor.map(create_analysis, sim_steps))
+
+#     return sims
 
 
 if __name__ == "__main__":
