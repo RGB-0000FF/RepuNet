@@ -17,6 +17,7 @@ def first_order_gossip(
     complain_persona_role,
     personas,
     G,
+    val
 ):
     """
     init_persona: gossiper
@@ -26,78 +27,77 @@ def first_order_gossip(
     """
     print("FIRST ORDER GOSSIP")
     finished = []
-    for val in init_persona.scratch.complain_buffer:
-        if val["complaint_target_role"] != complain_persona_role:
-            continue
-        reason = val["complaint_reason"]
-        # gossip chat
-        convo = generate_convo(
-            init_persona, target_persona, reason, val["complaint_target"],init_persona_role
-        )
-        init_persona.associativeMemory.add_chat(
-            subject=init_persona.name,
-            predicate="gossip",
-            obj=target_persona.name,
-            description=reason,
-            created_at=init_persona.scratch.curr_step,
-            conversation=convo,
-        )
-        target_persona.associativeMemory.add_chat(
-            subject=init_persona.name,
-            predicate="gossip",
-            obj=target_persona.name,
-            description=reason,
-            created_at=init_persona.scratch.curr_step,
-            conversation=convo,
-        )
-        # gossip evaluation
+    # for val in init_persona.scratch.complain_buffer:
+    if val["complaint_target_role"] != complain_persona_role:
+        pass
+    reason = val["complaint_reason"]
+    # gossip chat
+    convo = generate_convo(
+        init_persona, target_persona, reason, val["complaint_target"],init_persona_role
+    )
+    init_persona.associativeMemory.add_chat(
+        subject=init_persona.name,
+        predicate="gossip",
+        obj=target_persona.name,
+        description=reason,
+        created_at=init_persona.scratch.curr_step,
+        conversation=convo,
+    )
+    target_persona.associativeMemory.add_chat(
+        subject=init_persona.name,
+        predicate="gossip",
+        obj=target_persona.name,
+        description=reason,
+        created_at=init_persona.scratch.curr_step,
+        conversation=convo,
+    )
+    # gossip evaluation
+    complain_info = {
+        "gossip chat": convo,
+        "complained name": val["complaint_target"],
+        "complained ID": val["complaint_target_ID"],
+        "complained role": complain_persona_role,
+    }
+    gossip = run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(
+        target_persona, init_persona, complain_info,init_persona_role
+    )[0]
+    gossip[0]["type"] = "first order"
+    gossip[0]["credibility level"] = "None"
+    target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
+
+    social_network_update_after_gossip(
+        target_persona,
+        personas[complain_info["complained name"]],
+        init_persona_role,
+        complain_persona_role,
+        init_persona.name,
+        gossip[0],
+    )
+
+    if gossip[0]["Spread gossip further"] == "Yes":
         complain_info = {
-            "gossip chat": convo,
+            # "original gossiper name": init_persona.name,
+            # "original gossiper ID": init_persona.scratch.ID,
+            # "original gossiper role": init_persona_role,
+            # "first-order listener name": target_persona.name,
+            # "first-order listener ID": target_persona.scratch.ID,
+            # "first-order listener role": complain_persona_role,
             "complained name": val["complaint_target"],
             "complained ID": val["complaint_target_ID"],
             "complained role": complain_persona_role,
+            "complain reason": gossip[0]["Gossip info"],
         }
-        gossip = run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(
-            target_persona, init_persona, complain_info,init_persona_role
-        )[0]
-        gossip[0]["type"] = "first order"
-        gossip[0]["credibility level"] = "None"
-        target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
-
-        social_network_update_after_gossip(
+        second_order_gossip(
             target_persona,
-            personas[complain_info["complained name"]],
             init_persona_role,
             complain_persona_role,
-            init_persona.name,
-            gossip[0],
+            complain_info,
+            personas,
+            G,
         )
-
-        if gossip[0]["Spread gossip further"] == "Yes":
-            complain_info = {
-                # "original gossiper name": init_persona.name,
-                # "original gossiper ID": init_persona.scratch.ID,
-                # "original gossiper role": init_persona_role,
-                # "first-order listener name": target_persona.name,
-                # "first-order listener ID": target_persona.scratch.ID,
-                # "first-order listener role": complain_persona_role,
-                "complained name": val["complaint_target"],
-                "complained ID": val["complaint_target_ID"],
-                "complained role": complain_persona_role,
-                "complain reason": gossip[0]["Gossip info"],
-            }
-            second_order_gossip(
-                target_persona,
-                init_persona_role,
-                complain_persona_role,
-                complain_info,
-                personas,
-                G,
-            )
-        finished.append(val)
+    finished.append(val)
     for f in finished:
         init_persona.scratch.complain_buffer.remove(f)
-
 
 def second_order_gossip(
     init_persona,
@@ -173,3 +173,11 @@ def generate_convo(init_persona, target_persona, reason, comlain_target_name,ini
     )[0]
     print(convo)
     return convo
+
+def get_d_connect(init_persona, G):
+    d_connect_list = []
+    for edge in G.edges():
+        if edge[0] == init_persona.name:
+            if G.has_edge(edge[1], init_persona.name):
+                d_connect_list.append(edge[1])
+    return d_connect_list

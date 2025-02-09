@@ -6,8 +6,8 @@ import pandas as pd
 import json
 from scipy.stats import sem, t
 import numpy as np
-
-
+import networkx as nx
+from scipy.interpolate import make_interp_spline
 # class Linear_Regression:
 #     def __init__(self, x, y, xlabel, ylabel, title) -> None:
 #         data = {xlabel: x, ylabel: y}
@@ -379,7 +379,20 @@ def plot_distribution(data_list, label, color):
     # plt.legend()
     # plt.show()
 
-
+def success_rate_v0(analysis_dict):#计划和实际匹配
+    total=0
+    satisfy=0
+    for i,j in list(analysis_dict.items()):
+        if i==j["trustee"]:
+            total+=1
+            if j["investment_status"]=="success":
+                
+                p=float(j["trustee_plan"].split("receives")[-1].split("%")[0].strip())/100
+                rate=float(j["trustee_allocation"]["investor"].replace(",",""))/(float(j["trustee_allocation"]["investor"].replace(",",""))+float(j["trustee_allocation"]["trustee"].replace(",","")))
+                satisfy+=(rate>=p)
+            elif j["investment_status"]=="failed":
+                pass
+    return satisfy/total if total else 0
 def success_rate_v1(analysis_dict):#计划和实际匹配
     total=0
     satisfy=0
@@ -420,7 +433,20 @@ def success_rate_v2(analysis_dict):
             if j["investment_status"] == "success":
                 success += 1
     return success / total if total else 0
-
+def success_rate_v3(analysis_dict):#计划和实际匹配
+    total=0
+    satisfy=0
+    for i,j in list(analysis_dict.items()):
+        if i==j["trustee"]:
+            if j["investment_status"]=="success":
+                total+=1
+                p=float(j["trustee_plan"].split("receives")[-1].split("%")[0].strip())/100
+                rate=float(j["trustee_allocation"]["Final Allocation"].split("receives")[-1].split("%")[0].strip())/(float(j['trustee_allocation']["Final Allocation"].split("receives")[-1].split("%")[0].strip())
+                                                                                                                     +float(j['trustee_allocation']["Final Allocation"].split("receives")[1].split("%")[0].strip()))
+                satisfy+=(rate>=p)
+            elif j["investment_status"]=="failed":
+                pass
+    return satisfy/total if total else 0
 
 def get_disconnected_subgraphs(graph):
     # 获取连通分量（无向图）或强连通分量（有向图）
@@ -452,52 +478,133 @@ def count_bidirectional_edges(graph):
         if graph.has_edge(node2, node1):  # 检查反向边是否存在
             bidirectional_count += 1
     return bidirectional_count
+def dishonesty_count(analysis_dict):
+    count=0
+    for i,j in list(analysis_dict.items()):
+        if i==j["trustee"]:
+            if j["investment_status"]=="success":
+                p=float(j["trustee_plan"].split("receives")[-1].split("%")[0].strip())/100
+                rate=float(j["trustee_allocation"]["Final Allocation"].split("receives")[-1].split("%")[0].strip())/(float(j['trustee_allocation']["Final Allocation"].split("receives")[-1].split("%")[0].strip())
+                                                                                                                     +float(j['trustee_allocation']["Final Allocation"].split("receives")[1].split("%")[0].strip()))
+                count+=(rate<p)
+    return count
+
+def draw_line_smooth(data_dict, x_original, ablation=True):
+    plt.rcParams["font.family"] = "Times New Roman"
+    # 设置颜色
+    if ablation:
+        colors = ["blue", "orange", "green", "red"]
+    else:
+        colors = ["blue", "red"]
+    plt.figure(figsize=(10, 6))
+
+    for (label, stats), color in zip(data_dict.items(), colors):
+        y_mean = stats["mean"]
+        y_std = stats["std"]
+
+        # 使用 Cubic Spline 进行插值
+        x_smooth = np.linspace(x_original.min(), x_original.max(), 300)
+        spline = make_interp_spline(x_original, y_mean)
+        y_smooth = spline(x_smooth)
+
+        # 平滑后的误差带
+        y_std_smooth = make_interp_spline(x_original, y_std)(x_smooth)
+        y_upper = y_smooth + y_std_smooth
+        y_lower = y_smooth - y_std_smooth
+
+        # 绘制平滑曲线
+        plt.plot(x_smooth, y_smooth, label=label, color=color)
+
+        # 绘制误差带
+        plt.fill_between(x_smooth, y_lower, y_upper, alpha=0.2, color=color)
+
+        # 标注原始点
+        plt.scatter(x_original, y_mean, alpha=0.7, color=color)
+
+    # 图表设置
+    plt.xlabel("Rounds", fontsize=28, fontname="Times New Roman")
+    plt.ylabel("investment success rate".title(), fontsize=28, fontname="Times New Roman")
+    plt.ylim([0, 1])
+    plt.xlim([0, 101])
+    plt.xticks(fontname="Times New Roman", fontsize=25)
+    plt.yticks(fontname="Times New Roman", fontsize=25)
+    plt.legend(
+        prop={"size": 25, "family": "Times New Roman"},
+        loc="upper left",  # 选择大致方向，如 upper left、upper right、lower left 等
+        bbox_to_anchor=(0.3, 0.72),  # (x, y) 坐标，调整数值找到合适的位置
+    )
+    # if ablation:
+    #     plt.legend(
+    #         loc="upper center",  # 让图例位于图形的上方中心位置
+    #         bbox_to_anchor=(0.5, -0.2),  # 让图例向下移动到图表外
+    #         ncol=2,  # 设置图例为两列
+    #         # ncol=len(data_dict),
+    #         prop={"size": 25, "family": "Times New Roman"},
+    #         frameon=False,
+    #     )
+    # else:
+    #     plt.legend(
+    #         loc="upper center",  # 让图例位于图形的上方中心位置
+    #         bbox_to_anchor=(0.5, -0.2),  # 让图例向下移动到图表外
+    #         ncol=1,  # 设置图例为两列
+    #         # ncol=len(data_dict),
+    #         prop={"size": 25, "family": "Times New Roman"},
+    #         frameon=False,
+    #     )
+    # plt.tight_layout()
+    plt.grid(True)
+    plt.show()
+    # plt.savefig(
+    #     f"sign-up_with_error_bands_smooth_{datetime.datetime.now().second}.png",
+    #     bbox_inches="tight",
+    #     dpi=600,
+    # )
 
 if __name__ == "__main__":
-    sims1 = get_all_sim_info("invest_s27_with_all", "invest",limit=(1,21))
+    # sims1 = get_all_sim_info("invest_s27_with_all", "invest",limit=(1,21))
     # sims2 = get_all_sim_info("investment_s12_with_repu_without_gossip", "invest")
     # sims3 = get_all_sim_info("investment_s13_without_repu_with_gossip", "invest", False)
     # sims4 = get_all_sim_info("invest_s26_without_all", "invest", False,limit=(1,101))
 
-    data1 = [success_rate(i.analysis_dict) for i in sims1]
-    data2 = [success_rate(i.analysis_dict) for i in sims2]
-    data3 = [success_rate(i.analysis_dict) for i in sims3]
-    data4 = [success_rate(i.analysis_dict) for i in sims4]
-    plt.figure(figsize=(14, 7))
-    plt.plot(
-        range(1, len(data1) + 1),
-        data1,
-        label="with reputation and gossip",
-        color="blue",
-    )
-    plt.scatter(range(1, len(data1) + 1), data1, color="blue")
-    plt.plot(
-        range(1, len(data2) + 1),
-        data3,
-        label="without reputation but with gossip",
-        color="red",
-    )
-    plt.scatter(range(1, len(data2) + 1), data3, color="red")
-    plt.plot(
-        range(1, len(data2) + 1),
-        data2,
-        label="with reputation but without gossip",
-        color="orange",
-    )
-    plt.scatter(range(1, len(data2) + 1), data2, color="orange")
-    plt.plot(
-        range(1, len(data2) + 1),
-        data4,
-        label="without reputation and gossip",
-        color="cyan",
-    )
-    plt.scatter(range(1, len(data2) + 1), data4, color="cyan")
-    plt.title("Investment success rate")
-    plt.xlabel("Round")
-    plt.ylabel("Success Rate")
-    plt.axis([0, 30, 0, 1])
-    plt.legend()
-    plt.show()
+    # data1 = [success_rate(i.analysis_dict) for i in sims1]
+    # data2 = [success_rate(i.analysis_dict) for i in sims2]
+    # data3 = [success_rate(i.analysis_dict) for i in sims3]
+    # data4 = [success_rate(i.analysis_dict) for i in sims4]
+    # plt.figure(figsize=(14, 7))
+    # plt.plot(
+    #     range(1, len(data1) + 1),
+    #     data1,
+    #     label="with reputation and gossip",
+    #     color="blue",
+    # )
+    # plt.scatter(range(1, len(data1) + 1), data1, color="blue")
+    # plt.plot(
+    #     range(1, len(data2) + 1),
+    #     data3,
+    #     label="without reputation but with gossip",
+    #     color="red",
+    # )
+    # plt.scatter(range(1, len(data2) + 1), data3, color="red")
+    # plt.plot(
+    #     range(1, len(data2) + 1),
+    #     data2,
+    #     label="with reputation but without gossip",
+    #     color="orange",
+    # )
+    # plt.scatter(range(1, len(data2) + 1), data2, color="orange")
+    # plt.plot(
+    #     range(1, len(data2) + 1),
+    #     data4,
+    #     label="without reputation and gossip",
+    #     color="cyan",
+    # )
+    # plt.scatter(range(1, len(data2) + 1), data4, color="cyan")
+    # plt.title("Investment success rate")
+    # plt.xlabel("Round")
+    # plt.ylabel("Success Rate")
+    # plt.axis([0, 30, 0, 1])
+    # plt.legend()
+    # plt.show()
 
     # l1=Linear_Regression(range(1,len(data1)+1),data1,"Round","Invest willingness","")
     # # # l2=Linear_Regression(range(1,len(data2)+1),data2,"Round","Invest willingness","")
@@ -519,16 +626,16 @@ if __name__ == "__main__":
     # plt.show()
     # ————————————————————————————————————————
     # ————————————————————————————————————————
-    plt.figure(figsize=(14, 7))
-    plot_distribution(data1,"with reputation and gossip","blue")
-    # plot_distribution(data2,"without reputation but with gossip","red")
-    # plot_distribution(data3,"with reputation but without gossip","orange")
-    # plot_distribution(data4,"without reputation and gossip","cyan")
-    plt.title("cheat coefficient".title())
-    plt.xlabel("Round")
-    plt.ylabel("cheat coefficient".capitalize())
-    plt.legend()
-    plt.show()
+    # plt.figure(figsize=(14, 7))
+    # plot_distribution(data1,"with reputation and gossip","blue")
+    # # plot_distribution(data2,"without reputation but with gossip","red")
+    # # plot_distribution(data3,"with reputation but without gossip","orange")
+    # # plot_distribution(data4,"without reputation and gossip","cyan")
+    # plt.title("cheat coefficient".title())
+    # plt.xlabel("Round")
+    # plt.ylabel("cheat coefficient".capitalize())
+    # plt.legend()
+    # plt.show()
 # #---------------------------------------------------
     # sims1=get_all_sim_info("sign_s22_with_all","sign",limit=(192,201))
     # G_component=[]
@@ -615,7 +722,109 @@ if __name__ == "__main__":
     # print("mean cluster coef:",np.mean(mean_cluster_coef),np.std(mean_cluster_coef))
     # print("bidirectional edges:",np.mean(bid_con)/20,np.std(bid_con)/20)
     # print("sign up rate:",np.mean(sign_up_rate),np.std(sign_up_rate))
-        
+    
+    #smooth plot
+    def get_data_dict():
+        # 获取数据
+        sim1_group = [
+            # sim1_1,
+            # sim1_2,
+            get_all_sim_info("invest_s27_with_all", "invest", True, (1, 101)),
+            # get_all_sim_info("sign_s22_with_all", "sign", True, (1, 201)),
+            # get_all_sim_info("sign_s5_with_all", "sign", True, (1, 201)),
+            # get_all_sim_info("sign_s9_with_all", "sign", True, (1, 201)),
+            # get_all_sim_info("sign_s24_with_all", "sign", True, (1, 201)),
+        ]
+        # sim2_group = [
+        #     # sim2_1,
+        #     # sim2_2,
+        #     # sim2_3,
+        #     get_all_sim_info("sign_s18_without_gossip", "sign", True, (1, 201)),
+        #     get_all_sim_info("sign_s2_without_gossip", "sign", True, (1, 201)),
+        #     get_all_sim_info("sign_s25_without_gossip", "sign", True, (1, 201)),
+        #     get_all_sim_info("sign_s6_without_gossip", "sign", True, (1, 201)),
+        #     get_all_sim_info("sign_s10_without_gossip", "sign", True, (1, 201)),
+        # ]
+        # sim3_group = [
+        #     # sim3_1,
+        #     # sim3_2,
+        #     get_all_sim_info("sign_s19_without_repu_with_gossip", "sign", False, (1, 201)),
+        #     get_all_sim_info("sign_s4_without_repu_with_gossip", "sign", False, (1, 201)),
+        #     get_all_sim_info("sign_s7_without_repu_with_gossip", "sign", False, (1, 201)),
+        #     get_all_sim_info("sign_s11_without_repu_with_gossip", "sign", False, (1, 201)),
+        #     get_all_sim_info("sign_s26_without_repu_with_gossip", "sign", False, (1, 201)),
+        # ]
+        # sim4_group = [
+        #     # sim4_1,
+        #     # sim4_2,
+        #     get_all_sim_info("invest_s26_without_all", "invest", False, (1, 101)),
+        #     # get_all_sim_info("sign_s3_without_repu_gossip", "sign", False, (1, 201)),
+        #     # get_all_sim_info("sign_s8_without_all", "sign", False, (1, 201)),
+        #     # get_all_sim_info("sign_s14_without_all", "sign", False, (1, 201)),
+        #     # get_all_sim_info("sign_s27_without_all", "sign", False, (1, 201)),
+        # ]
+
+        # 采样数据
+        x_original = np.arange(1, 102, 5)
+
+        def calculate_y(sim_data):
+            y = []
+            for sim in sim_data:
+                if (sim.step - 1) % 5 == 0:
+                    count=success_rate_v1(sim.analysis_dict)
+                    y.append(count)
+            return y
+
+        def calculate_group_y(sim_group):
+            group_y = []
+            for sim in sim_group:
+                y = calculate_y(sim)
+                group_y.append(y)
+            return np.array(group_y)
+
+        y1_group = calculate_group_y(sim1_group)
+        # y2_group = calculate_group_y(sim2_group)
+        # y3_group = calculate_group_y(sim3_group)
+        # y4_group = calculate_group_y(sim4_group)
+
+        # 计算每个类别的均值和标准差
+        y1_mean, y1_std = np.mean(y1_group, axis=0), np.std(y1_group, axis=0)
+        # y2_mean, y2_std = np.mean(y2_group, axis=0), np.std(y2_group, axis=0)
+        # y3_mean, y3_std = np.mean(y3_group, axis=0), np.std(y3_group, axis=0)
+        # y4_mean, y4_std = np.mean(y4_group, axis=0), np.std(y4_group, axis=0)
+
+        # 将数据存储为 DataFrame
+
+        data_dict_ablation = {
+            "With Reputation System": {"mean": y1_mean, "std": y1_std},
+            # "Ablation Without Gossip": {"mean": y2_mean, "std": y2_std},
+            # "Ablation Without Reputation": {"mean": y3_mean, "std": y3_std},
+            # "Without Reputation System": {"mean": y4_mean, "std": y4_std},
+        }
+        data_dict = {
+            "With Reputation System": {"mean": y1_mean, "std": y1_std},
+            # "Without Reputation System": {"mean": y4_mean, "std": y4_std},
+        }
+        # Save data to a file
+        # with open("data_dict_full.json", "w") as f:
+        #     json.dump(
+        #         {
+        #             "ablation": {
+        #                 key: {"mean": value["mean"].tolist(), "std": value["std"].tolist()}
+        #                 for key, value in data_dict_ablation.items()
+        #             },
+        #             "data": {
+        #                 key: {"mean": value["mean"].tolist(), "std": value["std"].tolist()}
+        #                 for key, value in data_dict.items()
+        #             },
+        #             "x_original": x_original.tolist(),
+        #         },
+        #         f,
+        #     )
+
+        return data_dict_ablation, data_dict, x_original
+    data_dict_ablation,data_dict,x_original=get_data_dict()
+    draw_line_smooth(data_dict,x_original,False)
         
     
     

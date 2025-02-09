@@ -414,6 +414,7 @@ def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes
         init_persona,
         target_persona,
         complain_info,
+        init_persona_role
     ):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]

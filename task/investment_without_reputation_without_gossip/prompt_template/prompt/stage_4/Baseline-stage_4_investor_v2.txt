@@ -5,19 +5,16 @@ Variables:
 !<INPUT 1>! -- <Investor Resource Quantity>
 !<INPUT 2>! -- <k>
 !<INPUT 3>! -- <Actual Distributable Resource Quantity>
-!<INPUT 4>! -- <Trustee's Share>
-!<INPUT 5>! -- <Investor's Share>
+!<INPUT 4>! -- <**Proposed Allocation Plan**>
+!<INPUT 5>! -- <**Actual Allocation Result**>
 !<INPUT 6>! -- <Reported Resource Quantity>
-!<INPUT 7>! -- <Trustee's Allocated Resource Quantity>
-!<INPUT 8>! -- <Investor's Allocated Resource Quantity>
-
-!<INPUT 9>! -- the agent’s name
+!<INPUT 7>! -- the agent’s name
 
 <commentblockmarker>###</commentblockmarker>
 
-**Background:** You are !<INPUT 9>!, an investor in an investment exchange. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+**Background:** You are !<INPUT 7>!, an investor in an investment exchange. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
 
-**Task:** As **!<INPUT 9>!**, you are in the **Mutual Evaluation Stage**. Using the provided **Principles**, follow the steps below to evaluate the trustee’s behavior:
+**Task:** As **!<INPUT 7>!**, you are in the **Mutual Evaluation Stage**. Using the provided **Principles**, follow the steps below to evaluate the trustee’s behavior:
 
 **Step 1: Honesty Check**
 
@@ -30,8 +27,8 @@ Compare the “Reported Resource Quantity” provided by the trustee with the �
 
 Compare the “Proposed Allocation Plan” from the **Agreement Stage** with the “Actual Allocation Result” from the **Distribution Stage** to assess the trustee’s fairness.
 
-- **Proposed Allocation Plan:** Trustee: !<INPUT 4>! units; Investor: !<INPUT 5>! units.
-- **Actual Allocation Result:** Trustee: *!<INPUT 7>!* units; Investor: *!<INPUT 8>!* units.
+- **Proposed Allocation Plan:**  !<INPUT 4>!
+- **Actual Allocation Result:** !<INPUT 5>!
 
 **Step 3: Behavioral Evaluation**
 

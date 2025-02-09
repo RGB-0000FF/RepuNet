@@ -110,8 +110,8 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
             trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
-        trustee_allocation_part = round(float(trustee_allocation["trustee"]), 3)
-        investor_allocation_part = round(float(trustee_allocation["investor"]), 3)
+        trustee_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip())*a_unit/100
+        investor_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip())*a_unit/100
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part
@@ -153,12 +153,9 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
             investor_resource=a_unit,
             k=2,
             actual_distributable=2*a_unit,
-            trustee_share=trustee_part,
-            investor_share=investor_part,
+            trustee_allocation=trustee_allocation,
             reported_resource=reported_investment_outcome,
-            trustee_allocated=trustee_allocation_part,
-            investor_allocated=investor_allocation_part,
-            verbose=True
+            verbose=True,
         )[0]
         trustee_evaluation=run_gpt_prompt_trustee_evaluation_v1(
         init_persona=trustee,

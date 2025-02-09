@@ -165,18 +165,19 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
     def __func_clean_up(gpt_response, prompt=""):
         gpt_response = gpt_response.replace("*", "")
         res = dict()
-        res["trustee"] = (
-            gpt_response.split("Trustee receives")[-1]
-            .split("units")[0]
-            .replace(",", "")
-            .strip()
-        )
-        res["investor"] = (
-            gpt_response.split("investor receives")[-1]
-            .split("units")[0]
-            .replace(",", "")
-            .strip()
-        )
+        # res["trustee"] = (
+        #     gpt_response.split("Trustee receives")[-1]
+        #     .split("units")[0]
+        #     .replace(",", "")
+        #     .strip()
+        # )
+        # res["investor"] = (
+        #     gpt_response.split("investor receives")[-1]
+        #     .split("units")[0]
+        #     .replace(",", "")
+        #     .strip()
+        # )
+        res["Final Allocation"] = gpt_response.split("Final Allocation:")[-1].split("Reported Investment Outcome:")[0].strip()
         res["reported_investment_outcome"] = gpt_response.split(
             "Reported Investment Outcome:"
         )[-1].strip()
@@ -227,11 +228,8 @@ def run_gpt_prompt_investor_evaluation_v1(
     investor_resource,
     k,
     actual_distributable,
-    trustee_share,
-    investor_share,
+    trustee_allocation,
     reported_resource,
-    trustee_allocated,
-    investor_allocated,
     verbose=False,
 )->dict:
     def create_prompt_input(
@@ -241,11 +239,8 @@ def run_gpt_prompt_investor_evaluation_v1(
         investor_resource,
         k,
         actual_distributable,
-        trustee_share,
-        investor_share,
+        trustee_allocation,
         reported_resource,
-        trustee_allocated,
-        investor_allocated,
     ):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned["investor"]]
@@ -253,11 +248,9 @@ def run_gpt_prompt_investor_evaluation_v1(
         prompt_input += [investor_resource]
         prompt_input += [k]
         prompt_input += [actual_distributable]
-        prompt_input += [(float(trustee_share.strip("%").strip())/100)*float(reported_resource.split("investment is")[-1].split("units.")[0].replace(",", ""))]
-        prompt_input += [(float(investor_share.strip("%").strip())/100)*float(reported_resource.split("investment is")[-1].split("units.")[0].replace(",", ""))]
+        prompt_input.append(trustee_plan)
+        prompt_input.append(trustee_allocation)
         prompt_input += [reported_resource]
-        prompt_input += [trustee_allocated]
-        prompt_input += [investor_allocated]
         prompt_input.append(init_persona.scratch.name)
         return prompt_input
 
@@ -303,11 +296,8 @@ def run_gpt_prompt_investor_evaluation_v1(
         investor_resource,
         k,
         actual_distributable,
-        trustee_share,
-        investor_share,
+        trustee_allocation,
         reported_resource,
-        trustee_allocated,
-        investor_allocated,
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
