@@ -11,7 +11,7 @@ __pycache__
 
 
 output/
-*.txt
+
 
 sim_storage/*
 !sim_storage/invest_seed

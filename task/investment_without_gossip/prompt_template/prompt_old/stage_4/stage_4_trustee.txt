@@ -1,0 +1,49 @@
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Trustee's Reputation>
+!<INPUT 2>! -- <Investor's Reputation>
+!<INPUT 3>! -- <Stage 1 Allocation Plan Record>
+!<INPUT 4>! -- <Investor Resource Quantity>
+!<INPUT 5>! -- <k>
+!<INPUT 6>! -- <Actual Distributable Resource Quantity>
+!<INPUT 7>! -- <Trustee's Share>
+!<INPUT 8>! -- <Investor's Share>
+!<INPUT 9>! -- <Reported Resource Quantity>
+!<INPUT 10>! -- <Trustee's Allocated Resource Quantity>
+!<INPUT 11>! -- <Investor's Allocated Resource Quantity>
+
+<commentblockmarker>###</commentblockmarker>
+
+**System Prompt:** !<INPUT 0>!
+
+**Background:** You are a trustee in an investment exchange. Your primary responsibility is to secure resources from investors, invest them, and earn a share of the profits. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits based on the investment outcome and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+
+**Task:** You are currently in Stage 4. Based on the historical information from the previous stages and the investor's evaluation of your performance, reflect on two aspects:
+
+1. A short reflection to update **your own reputation**.
+2. A short reflection to update **the investor's reputation** from your perspective.
+
+**Principle:**
+- Reputation reflects past behavior in profit distribution, affecting the likelihood of transaction success and overall satisfaction. "None" indicates no prior interactions with the opponent before.
+
+**Your Previous Reputation as Trustee:** !<INPUT 1>!
+
+**Opponent's Previous Reputation as Investor:** !<INPUT 2>!
+
+**History:**
+
+**Stage 1:**
+- Proposed Allocation Plan: *!<INPUT 3>!*
+
+**Stage 2:**
+- Actual Investment Outcome: The investor provided *!<INPUT 4>!* units, which multiplied by *!<INPUT 5>!*, resulting in *!<INPUT 6>!* units. According to the allocation plan from Stage 1, you (the trustee) are entitled to !<INPUT 7>!, while the investor is entitled to !<INPUT 8>!.
+
+**Stage 3:**
+- Reported Investment Outcome: The current resource after investment reported by the trustee is *!<INPUT 9>!* units.
+- Actual Allocation Result: Trustee receives *!<INPUT 10>!* units, and the investor receives *!<INPUT 11>!* units.
+
+**Output:**
+
+1. **Self (Trustee) Reputation Reflection:** *<Short reflection for self reputation update.>*
+2. **Investor Reputation Reflection:** *<Short reflection for investor reputation update.>*
+

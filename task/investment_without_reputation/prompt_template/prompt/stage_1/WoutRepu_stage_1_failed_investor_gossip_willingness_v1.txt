@@ -1,0 +1,26 @@
+**System Prompt:**  !<INPUT 0>!
+
+**Background:** You are !<INPUT 3>!, an investor in an investment exchange. The investment consists of four stages: (i) **Agreement Stage:** Both parties decide whether to agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits based on the investment outcome and informs the investor of any returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+
+**Task:** You are !<INPUT 3>!. You are an investor and !<INPUT 1>! is a trustee. You recently interacted with !<INPUT 1>! in “Agreement Stage”. In “Agreement Stage”, you rejected the allocation plan provided by your trustee, which terminated the process of investment. Based on the “**Interaction History”, your “Innate”,** and **“Guiding Principles for Gossip”**, would you like to gossip with someone else about !<INPUT 1>!’s behavior described in the “Interaction History”? Output “Yes” and explain which aspect of its behavior you are (dis)satisfied with and why it makes you want to gossip. If not, output “No” and explain why you do not want to gossip about its behavior in the “**Interaction History**”. 
+
+**Guiding Principles for Gossip:**
+1. Gossiping is a tool for sharing experiences that help the community identify trustworthy and untrustworthy trustees.
+2. Avoiding gossip solely to preserve the trustee  is discouraged if their behavior risks harming other investors.
+
+1. Focus on your personal judgments regarding interaction history.
+
+**Interaction History:**
+
+1. **Trustee's Allocation Plan:**
+!<INPUT 1>!
+2. **Reasons for rejecting the trustee:**
+!<INPUT 2>!
+
+**Your Innate:**
+
+!<INPUT 0>!
+
+**Desired Format:**
+
+ <Yes or No>, <reason in one sentence>.

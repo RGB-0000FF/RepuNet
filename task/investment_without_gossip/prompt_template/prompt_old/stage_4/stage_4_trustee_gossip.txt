@@ -1,0 +1,38 @@
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Stage 1 Allocation Plan Record>
+!<INPUT 2>! -- <Investor Resource Quantity>
+!<INPUT 3>! -- <k>
+!<INPUT 4>! -- <Actual Distributable Resource Quantity>
+!<INPUT 5>! -- <Trustee's Share>
+!<INPUT 6>! -- <Investor's Share>
+!<INPUT 7>! -- <Reported Resource Quantity>
+!<INPUT 8>! -- <Trustee's Allocated Resource Quantity>
+!<INPUT 9>! -- <Investor's Allocated Resource Quantity>
+
+<commentblockmarker>###</commentblockmarker>
+
+**System Prompt:** !<INPUT 0>!
+
+**Background:** You are a trustee in an investment exchange. Your primary responsibility is to secure resources from investors, invest them, and earn a share of the profits. The transaction consists of four stages: (i) **Agreement Stage:** Both parties agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits based on the investment outcome and informs the investor of the returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+
+**Task:** You are currently in Stage 4. Based on the historical information from the previous stages:
+
+**Decide whether to gossip** about the investor's performance with your friends based on their behavior in this transaction.
+
+
+**History:**
+
+**Stage 1:**
+- Proposed Allocation Plan: *!<INPUT 1>!*
+
+**Stage 2:**
+- Actual Investment Outcome: The investor provided *!<INPUT 2>!* units, which multiplied by *!<INPUT 3>!*, resulting in *!<INPUT 4>!* units. According to the allocation plan from Stage 1, you (the trustee) are entitled to !<INPUT 5>!, while the investor is entitled to !<INPUT 6>!.
+
+**Stage 3:**
+- Reported Investment Outcome: The current resource after investment reported by you is *!<INPUT 7>!* units.
+- Actual Allocation Result: You receives *!<INPUT 8>!* units, and the investor receives *!<INPUT 9>!* units.
+
+**Output:**
+
+**Whether to Gossip:** *<Yes or No>, <reason in one sentence>.*

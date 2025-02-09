@@ -1,0 +1,24 @@
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Trustee's Allocation Plan>
+!<INPUT 2>! -- <Reasons for rejecting the trustee>
+
+<commentblockmarker>###</commentblockmarker>
+
+**System Prompt:**  !<INPUT 0>!
+
+**Background:** You are an investor in an investment exchange. Your primary goal is to entrust your resources to a reliable trustee to achieve wealth accumulation. The transaction consists of four stages: (i) **Agreement Stage:** Both parties decide whether to agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits based on the investment outcome and informs the investor of any returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+
+**Task:** You are currently in Stage 1. Just now, you rejected the allocation plan provided by your trustee, which resulted in the failure and early termination of the investment.Based on the **Trustee's Allocation Plan** and your **Reasons for rejecting the trustee**, you can decide whether to spread the trustee's gossip.
+
+**Trustee's Allocation Plan:**
+!<INPUT 1>!
+
+**Reasons for rejecting the trustee:**
+!<INPUT 2>!
+
+**Desired Format:**
+
+**Whether to Gossip:** *<Yes or No>, <reason in one sentence>.*
+
+**Output:**

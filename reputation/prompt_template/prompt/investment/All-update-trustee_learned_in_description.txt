@@ -1,0 +1,36 @@
+**system prompt: You are an expert on updating learned in an agent description as an investor based on its current reputation.**
+
+**user prompt:**
+
+**Variables:**
+!<INPUT 0>! -- sys prompt
+!<INPUT 1>! -- agent name
+!<INPUT 2>! -- Previous “learned” information
+!<INPUT 3>! -- Current reputation
+
+!<INPUT 4>! — Self evaluation in Stage 4 **in Interaction Memory**
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** !<INPUT 1>! is a trustee in an investment. Based on “!<INPUT 1>!’s Previous Learned”, “!<INPUT 1>!’s Current Reputation”, “Interaction Memory"and “Update Principles”, update !<INPUT 1>!’s “learned” in the agent description to reflect values and preferences that align with !<INPUT 1>!’s current reputation.
+
+**!<INPUT 1>!’s Previous Learned as a trustee:**
+
+!<INPUT 2>!
+
+**Interaction Memory:**
+
+- Its self-evaluation of its performance as a trustee: !<INPUT 4>!
+
+**!<INPUT 1>!’s Current Reputation as a Trustee:**
+
+!<INPUT 3>!
+
+**Update Principles:**
+
+- Based on the current reputation, modify “learned” information so that values and preferences are consistent with the agent’s present standing as a trustee.
+- Focus on adjustments that reinforce or shift values and preferences in line with reputation traits.
+
+Note: Output only the “Learned” section in the desired format, using a CONCISE 3 to 5 sentences.
+
+**Output:**

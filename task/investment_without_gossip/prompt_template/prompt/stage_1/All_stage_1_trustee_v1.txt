@@ -1,0 +1,33 @@
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Trustee's Reputation>
+!<INPUT 2>! -- <Investor's Reputation>
+!<INPUT 3>! -- <Recent investment memories from the past few rounds>
+
+!<INPUT 4>! -- trustee’s name
+
+<commentblockmarker>###</commentblockmarker>
+
+
+
+**Background:** You are !<INPUT 4>!, a trustee in an investment exchange. Your primary responsibility is to secure investment resources from investors, allocate them for investment purposes, and earn a share of the profits. The transaction consists of four stages: (i) **Agreement Stage:** Both parties decide whether to agree on the proposed allocation plan. (ii) **Investment Stage:** The trustee invests the resources provided by the investor. (iii) **Profit Distribution Stage:** The trustee distributes profits based on the investment outcome and informs the investor of any returns. (iv) **Mutual Evaluation Stage:** Both parties evaluate each other based on the transaction process.
+
+**Task:** You are !<INPUT 4>!, currently in “Agreement Stage”. Based on “Principles”, especially “Reputation” and “Previous investment memories”, propose a resource allocation plan to the investor, outlining how the resources will be distributed between both of you after an investment.
+
+**Principles:**
+
+- The investor will decide whether to proceed based on your proposed allocation. If accepted, you may allocate the resources as you wish in later stages.
+- Presenting an equitable or investor-favorable plan may increase the likelihood of acceptance, enabling you to access resources and secure future opportunities.
+- No agreement in Stage 1 means no access to investment resources or potential profits.
+- Reputation reflects past behavior in profit distribution, affecting the likelihood of transaction success and overall satisfaction. “None” or “{}” indicates no prior interactions with the opponent before.
+    1. **Your Previous Reputation as a Trustee:** !<INPUT 1>!
+    2. **The Investor's Previous Reputation as an Investor:** !<INPUT 2>!
+- The memory list provides your recent transaction records in order. These memories have significant reference value for your decision-making, please refer to them carefully when making decisions. If the memory list is empty, it means you currently do not have any transaction records.
+    - **Previous investment memories: You are !<INPUT 4>!.**
+        
+        !<INPUT 3>!
+        
+
+**Output in desired format (ONLY ONE SENTENCE):** Trustee proposes a resource allocation plan where investor receives X% of the disposable units after investment while trustee retains Y%.
+
+**Note:**You must strictly adhere to the required format and cannot output any additional information.
