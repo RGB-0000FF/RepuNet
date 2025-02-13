@@ -47,9 +47,23 @@ def get_reputation_score(target_persona, target_persona_role, personas):
             input = "Resident"
         if reputation:
             count += 1
-            repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
-                "numerical record"
-            ]
+            try:
+                if "numerical record" in reputation[f"{input}_{target_persona.scratch.ID}"].keys():
+                    repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
+                        "numerical record"
+                    ]
+                elif "numerical_record" in reputation[f"{input}_{target_persona.scratch.ID}"].keys():
+                    repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
+                        "numerical_record"
+                    ]
+                else:
+                    repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
+                        " numerical record"
+                    ]
+            except:
+                print(reputation[f"{input}_{target_persona.scratch.ID}"])
+                raise KeyError
+            
             scores = repu_score.replace("(", "").replace(")", "").split(",")
             try:
                 s1 = float(scores[4])
@@ -307,7 +321,19 @@ class Analysis:
     def _set_analysis_dict_invest(self):
         for persona_name, persona in self.personas.items():
             self.analysis_dict[persona_name] = dict()
+            if self.with_gossip:
+                    # print(self.step, persona.name)
+                    self.analysis_dict[persona_name]["gossip_count"] = get_gossip_count(
+                        self.personas, persona.name
+                    )
             if self.with_reputation:
+                self.analysis_dict[persona_name]["reputation score"]=dict()
+                self.analysis_dict[persona_name]["reputation score"]["trustee"] = (
+                    get_reputation_score(persona, "trustee", self.personas)
+                )
+                self.analysis_dict[persona_name]["reputation score"]["investor"] = (
+                    get_reputation_score(persona, "investor", self.personas)
+                )
                 self.analysis_dict[persona_name]["reputation"] = {
                     "Investor": self.personas[
                         persona_name
@@ -390,6 +416,7 @@ class Analysis:
                     "investor": i_gossip_willing,
                     "trustee": t_gossip_willing,
                 }
+                
 
 
 # def get_all_sim_info(sim_folder, sim, with_reputation=True, limit=False):
