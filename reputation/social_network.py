@@ -5,11 +5,8 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_connection_build_trustee_v1,
     run_gpt_prompt_disconnection_investor_v1,
     run_gpt_prompt_disconnection_trustee_v1,
-    run_gpt_prompt_disconnection_after_gossip_v1,
     run_gpt_prompt_disconnection_after_gossip_v2,
-    run_gpt_prompt_connection_build_after_chat_sign_up_v1,
     run_gpt_prompt_connection_build_after_chat_sign_up_v2,
-    run_gpt_prompt_disconnection_after_chat_sign_up_v1,
     run_gpt_prompt_disconnection_after_chat_sign_up_v2,
     run_gpt_prompt_disconnection_after_new_sign_up_v1,
     run_gpt_prompt_disconnection_after_observed_v1,
@@ -59,9 +56,9 @@ def social_network_update(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, target_persona_role]
             )
-            # init_persona.scratch.relationship["black_list"].append(
-            #     [target_persona.scratch.name, target_persona_role]
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                [target_persona.scratch.name, target_persona_role]
+            )
 
     except Exception as e:
         if not full_investment:
@@ -124,9 +121,9 @@ def social_network_update_after_new_sign_up(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, "resident"]
             )
-            # init_persona.scratch.relationship["black_list"].append(
-            #     [target_persona.scratch.name, "resident"]
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                [target_persona.scratch.name, "resident"]
+            )
     except Exception as e:
         if isinstance(e, Exception) and str(e) == "GPT ERROR":
             sys.exit(str(e))
@@ -156,9 +153,9 @@ def social_network_update_after_observed_invest(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, "resident"]
             )
-            # init_persona.scratch.relationship["black_list"].append(
-            #     [target_persona.scratch.name, "resident"]
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                [target_persona.scratch.name, "resident"]
+            )
     except Exception as e:
         if isinstance(e, Exception) and str(e) == "GPT ERROR":
             sys.exit(str(e))
@@ -180,11 +177,11 @@ def social_network_update_after_gossip(
             init_persona.scratch.relationship["bind_list"].remove(
                 [target_persona.scratch.name, target_persona_role]
             )
-            # init_persona.scratch.relationship["black_list"].append(
-            #     [target_persona.scratch.name, target_persona_role]
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                [target_persona.scratch.name, target_persona_role]
+            )
         except ValueError:
-            # init_persona.scratch.relationship["black_list"].append(
-            #     [target_persona.scratch.name, target_persona_role]
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                [target_persona.scratch.name, target_persona_role]
+            )
             pass

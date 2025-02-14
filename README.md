@@ -24,7 +24,9 @@ Install everything listed in the `requirements.txt` file (I strongly recommend f
 
 ### Step 3. create a simulation seed
 
-Create a folder for your simulation inside `sim_storage`. The simulation folder should follow the format `sim_storage/<your_simulation>` (e.g., `sim_storage/investment_s1`).
+Create a folder for your simulation inside `sim_storage`. The simulation folder should follow the format `sim_storage/<your_simulation>` (e.g., `sim_storage/investment_s1`). 
+
+You can use **`<sim>`_seed** (e.g., **invest_seed** or **sign_seed**) as your simulation seed.
 
 Within your simulation folder, create a subfolder named `step_0` (e.g., `sim_storage/investment_s1/step_0`). The `step_0` folder serves as the **seed** for the simulation, containing the initial configuration, input data, or state required to begin the simulation process.
 
@@ -51,7 +53,6 @@ It is important to note that your `step_0` folder needs to contain two subfolder
    }
    ```
 
-
 # Running a Simulation
 
 Run `start.py` in your terminal.
@@ -60,4 +61,8 @@ When prompted with `Enter the name of the forked simulation:`, input the path to
 
  `investment_s1/step_0`
 
-Then, run the simulation you want. If you wish to run an investment simulation, enter `run invest <step>`. Additionally, you can choose to run the simulation either with reputation or with gossip.
+Then, you can choose your mode option: select `reputation` or `gossip`. (Specifically, if the task is **investment**, you need to input an additional `i`).
+
+Finaly,run the simulation you want. If you wish to run an investment simulation, enter `run <task> <step>`. Additionally, you can choose to run the simulation either with reputation or with gossip.For example,
+
+`run sign 1`

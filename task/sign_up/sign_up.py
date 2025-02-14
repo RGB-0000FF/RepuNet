@@ -8,13 +8,10 @@ from reputation.reputation_update import (
 from reputation.gossip import first_order_gossip
 from reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_gossip_listener_select_v2,
-    run_gpt_prompt_disconnection_after_new_sign_up_v1,
-    run_gpt_prompt_disconnection_after_chat_sign_up_v2,
 )
 from reputation.social_network import social_network_update_after_new_sign_up
 
 from .prompt_template.run_gpt_prompt import (
-    run_gpt_prompt_sign_up_v1,
     run_gpt_prompt_sign_up_v3,
     run_gpt_prompt_decide_to_talk_v1,
     run_gpt_prompt_create_chat_v1,

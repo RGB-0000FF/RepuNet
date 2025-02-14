@@ -3,21 +3,20 @@
 **user prompt:**
 
 Variables:
-!<INPUT 0>! -- agent's ;learned
+!<INPUT 0>! -- agent's learned
 !<INPUT 1>! -- agent name
-!<INPUT 1>! -- target's name
-!<INPUT 2>! -- target's reputation
-!<INPUT 3>! -- gossiper's name
-!<INPUT 5>! -- agent's learned
-!<INPUT 6>! -- Evaluated Gossip INFO
+!<INPUT 2>! -- target's name
+!<INPUT 3>! -- target's reputation
+!<INPUT 4>! -- gossiper's name
+!<INPUT 5>! -- Evaluated Gossip INFO
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** You are **!<INPUT 1>!**. Recently, you received gossip about **!<INPUT 1>!**, and you have already evaluated and summarized this information in “Evaluated Gossip INFO.” This evaluation has influenced your perception of **!<INPUT 1>!**’s reputation.
+**Task:** You are **!<INPUT 1>!**. Recently, you received gossip about **!<INPUT 2>!**, and you have already evaluated and summarized this information in “Evaluated Gossip INFO.” This evaluation has influenced your perception of **!<INPUT 2>!**’s reputation.
 
-Now, it is necessary to reconsider whether maintaining a relationship with **!<INPUT 1>!** aligns with your values based on the “Evaluated Gossip INFO”, “!<INPUT 1>!’s Reputation”, and “Your Innate Traits”. Humans typically prefer forming relationships with individuals of good reputation, as it fosters trust and collaboration. Similarly, your decision should be based on **!<INPUT 1>!**’s current reputation and your own innate traits, balancing trustworthiness with your personal standards.
+Now, it is necessary to reconsider whether maintaining a relationship with **!<INPUT 2>!** aligns with your values based on the “Evaluated Gossip INFO”, “!<INPUT 2>!’s Reputation”, and “Your Innate Traits”. Humans typically prefer forming relationships with individuals of good reputation, as it fosters trust and collaboration. Similarly, your decision should be based on **!<INPUT 2>!**’s current reputation and your own innate traits, balancing trustworthiness with your personal standards.
 
-Decide whether to disconnect from **!<INPUT 1>!**:
+Decide whether to disconnect from **!<INPUT 2>!**:
 
 •	Return “Yes” if you want to disconnect.
 
@@ -25,17 +24,17 @@ Decide whether to disconnect from **!<INPUT 1>!**:
 
 Provide a clear and concise reason for your decision.
 
-**!<INPUT 1>!’s Reputation:**
+**!<INPUT 2>!’s Reputation:**
 
-!<INPUT 2>!
+!<INPUT 3>!
 
 **Evaluated Gossip INFO:**
 
-!<INPUT 6>!
+!<INPUT 5>!
 
 **Your Innate Traits:**
 
-!<INPUT 5>!
+!<INPUT 0>!
 
 **Desired format:** JSON
 

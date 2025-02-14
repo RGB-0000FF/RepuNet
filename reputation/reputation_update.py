@@ -4,7 +4,6 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_reputation_update_after_gossip_invest_v1,
     run_gpt_prompt_reputation_update_after_gossip_sign_up_v1,
     run_gpt_prompt_update_learned_in_description_sign_v1,
-    run_gpt_prompt_update_learned_in_description_v2,
     run_gpt_prompt_update_learned_in_description_invest_v1,
     run_gpt_prompt_reputation_update_after_stage1_trustee_v1,
     run_gpt_prompt_reputation_update_after_stage1_investor_v1,
