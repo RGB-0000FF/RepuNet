@@ -70,7 +70,6 @@ def sign_up(personas, step, save_folder):
         output_res = output.split(".")[0].strip()
         save_m += f"{persona_name}: {output_res}\n"
         res += f"{count}. {persona_name}: {output}\n"
-        # TODO: Implement sign up
         # sign up info as EVENT save to memory
     res += "--------------------End of Sign up info--------------------\n\n"
 

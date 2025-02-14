@@ -2,11 +2,8 @@ import random
 import os
 
 
-from without_reputation.gossip import first_order_gossip
 from without_reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_update_learned_in_description_v1,
-    run_gpt_prompt_gossip_listener_select_v1,
-    run_gpt_prompt_disconnection_build_after_new_sign_up_v1,
 )
 from without_reputation.social_network import social_network_update
 
@@ -15,7 +12,6 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_decide_to_talk_v1,
     run_gpt_prompt_create_chat_v1,
     run_gpt_prompt_summarize_chat_v1,
-    run_gpt_prompt_willingness_to_gossip_v1,
     run_gpt_prompt_init_sign_up_v1,
 )
 
@@ -72,7 +68,6 @@ def sign_up(personas, step, save_folder):
         output_res = output.split(".")[0].strip()
         save_m += f"{persona_name}: {output_res}\n"
         res += f"{count}. {persona_name}: {output}\n"
-        # TODO: Implement sign up
         # sign up info as EVENT save to memory
     res += "--------------------End of Sign up info--------------------\n\n"
 
@@ -89,17 +84,6 @@ def sign_up(personas, step, save_folder):
             description=save_m,
             created_at=step,
         )
-        # known_persona = [p for p in persona.scratch.relationship["bind_list"]]
-        # for p in known_persona:
-        #     target_persona = personas[p]
-        #     disconnection_res = run_gpt_prompt_disconnection_build_after_new_sign_up_v1(
-        #         persona, target_persona
-        #     )[0]
-        #     if type(disconnection_res) is str and "error" in disconnection_res.lower():
-        #         raise Exception("GPT ERROR")
-        #     if disconnection_res["Disconnect"].lower() == "yes":
-        #         persona.scratch.relationship["bind_list"].remove(target_persona.name)
-        #         persona.scratch.relationship["black_list"].append(target_persona.name)
 
 
 def start_chat(pair, G, ps):

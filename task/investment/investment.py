@@ -229,7 +229,9 @@ def start_investment(pair, personas, G, save_folder):
             raise Exception("GPT ERROR")
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
-        trustee_part = trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
+        trustee_part = (
+            trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
+        )
 
         investor_part = (
             trustee_plan.lower().split("investor receives")[-1].split("of")[0].strip()
@@ -266,25 +268,6 @@ def start_investment(pair, personas, G, save_folder):
             created_at=investor.scratch.curr_step,
         )
 
-        # eputation update agter stage 1
-        # update_info_investor = {
-        #     "reason": "reputation update agter stage 1",
-        #     "init_persona_role": "investor",
-        #     "allocation_plan": trustee_plan,
-        #     "reason_refusal": investor_decided,
-        #     "total_number_of_people": len(personas),
-        #     "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
-        # }
-        # update_info_trustee = {
-        #     "reason": "reputation update agter stage 1",
-        #     "init_persona_role": "trustee",
-        #     "allocation_plan": trustee_plan,
-        #     "reason_refusal": investor_decided,
-        #     "total_number_of_people": len(personas),
-        #     "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
-        # }
-        # reputation_update(investor, trustee, update_info_investor)
-        # reputation_update(trustee, investor, update_info_trustee)
         full_investment = False
         update_info_investor = {"target_behavior_summary": description}
         update_info_trustee = {"target_behavior_summary": description}
@@ -372,8 +355,28 @@ def start_investment(pair, personas, G, save_folder):
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
             trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
-        trustee_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip())*a_unit/100
-        investor_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip())*a_unit/100
+        trustee_allocation_part = (
+            k
+            * float(
+                trustee_allocation["Final Allocation"]
+                .split("receives")[1]
+                .split("%")[0]
+                .strip()
+            )
+            * a_unit
+            / 100
+        )
+        investor_allocation_part = (
+            k
+            * float(
+                trustee_allocation["Final Allocation"]
+                .split("receives")[-1]
+                .split("%")[0]
+                .strip()
+            )
+            * a_unit
+            / 100
+        )
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part

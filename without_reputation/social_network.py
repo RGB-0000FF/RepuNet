@@ -46,9 +46,9 @@ def social_network_update(
             init_persona.scratch.relationship["bind_list"].remove(
                 target_persona.scratch.name
             )
-            # init_persona.scratch.relationship["black_list"].append(
-            #     target_persona.scratch.name
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                target_persona.scratch.name
+            )
 
     except Exception as e:
         if not full_investment:
@@ -92,11 +92,11 @@ def social_network_update_after_gossip(
             init_persona.scratch.relationship["bind_list"].remove(
                 target_persona.scratch.name
             )
-            # init_persona.scratch.relationship["black_list"].append(
-            #     target_persona.scratch.name
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                target_persona.scratch.name
+            )
         except ValueError:
-            # init_persona.scratch.relationship["black_list"].append(
-            #     target_persona.scratch.name
-            # )
+            init_persona.scratch.relationship["black_list"].append(
+                target_persona.scratch.name
+            )
             pass

@@ -31,7 +31,6 @@ def replace_full_name(name):
     return None
 
 
-# fin
 def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
     # 由单输出变为双输出
     init_persona,
@@ -164,7 +163,6 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
     ]
 
 
-# 被删除的功能，不需要改
 def run_gpt_prompt_reputation_update_after_stage1_investor_v1(
     init_persona,
     target_persona,
@@ -280,7 +278,6 @@ def run_gpt_prompt_reputation_update_after_stage1_investor_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-# fin
 def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
     init_persona,
     target_persona,
@@ -412,7 +409,6 @@ def run_gpt_prompt_reputation_update_after_stage4_trustee_v1(
     ]
 
 
-# 需要多传参数
 def run_gpt_prompt_reputation_update_after_observed_v1(
     init_persona,
     target_persona,
@@ -511,7 +507,6 @@ def run_gpt_prompt_reputation_update_after_observed_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-# 被删除的功能，不需要改
 def run_gpt_prompt_reputation_update_after_stage1_trustee_v1(
     init_persona,
     target_persona,
@@ -631,7 +626,6 @@ def run_gpt_prompt_reputation_update_after_stage1_trustee_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-# 传入参数需要改
 def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
     init_persona,
     target_persona,
@@ -741,7 +735,6 @@ def run_gpt_prompt_reputation_update_after_gossip_invest_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-# 场景1
 def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
     init_persona,
     target_persona,
@@ -842,7 +835,6 @@ def run_gpt_prompt_reputation_update_after_gossip_sign_up_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-# 场景1
 def run_gpt_prompt_update_learned_in_description_sign_v1(
     init_persona,
     init_persona_role,

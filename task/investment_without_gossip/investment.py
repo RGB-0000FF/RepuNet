@@ -1,7 +1,6 @@
 import random
 
 
-
 from reputation.reputation_update import reputation_update_invest
 from reputation.social_network import *
 from .prompt_template.run_gpt_prompt import *
@@ -227,7 +226,9 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             raise Exception("GPT ERROR")
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
-        trustee_part = trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
+        trustee_part = (
+            trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
+        )
 
         investor_part = (
             trustee_plan.lower().split("investor receives")[-1].split("of")[0].strip()
@@ -264,25 +265,6 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             created_at=investor.scratch.curr_step,
         )
 
-        # eputation update agter stage 1
-        # update_info_investor = {
-        #     "reason": "reputation update agter stage 1",
-        #     "init_persona_role": "investor",
-        #     "allocation_plan": trustee_plan,
-        #     "reason_refusal": investor_decided,
-        #     "total_number_of_people": len(personas),
-        #     "number_of_bidirectional_connections": len(get_d_connect(trustee, G)),
-        # }
-        # update_info_trustee = {
-        #     "reason": "reputation update agter stage 1",
-        #     "init_persona_role": "trustee",
-        #     "allocation_plan": trustee_plan,
-        #     "reason_refusal": investor_decided,
-        #     "total_number_of_people": len(personas),
-        #     "number_of_bidirectional_connections": len(get_d_connect(investor, G)),
-        # }
-        # reputation_update(investor, trustee, update_info_investor)
-        # reputation_update(trustee, investor, update_info_trustee)
         full_investment = False
         update_info_investor = {"target_behavior_summary": description}
         update_info_trustee = {"target_behavior_summary": description}
@@ -304,13 +286,10 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         )
         investor.update_interaction_memory(role="investor", memory=description)
         trustee.update_interaction_memory(role="trustee", memory=description)
-        
-
-       
 
         print_stage3 = None
         print_stage4 = None
-        
+
     elif "Accept" in investor_decided:
         # success investment num +1
         investor.scratch.total_num_investor += 1
@@ -331,8 +310,28 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
             trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
         )[0]
-        trustee_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip())*a_unit/100
-        investor_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip())*a_unit/100
+        trustee_allocation_part = (
+            k
+            * float(
+                trustee_allocation["Final Allocation"]
+                .split("receives")[1]
+                .split("%")[0]
+                .strip()
+            )
+            * a_unit
+            / 100
+        )
+        investor_allocation_part = (
+            k
+            * float(
+                trustee_allocation["Final Allocation"]
+                .split("receives")[-1]
+                .split("%")[0]
+                .strip()
+            )
+            * a_unit
+            / 100
+        )
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part
@@ -449,8 +448,8 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         trustee.update_interaction_memory(
             role="trustee", memory=update_info_trustee["target_behavior_summary"]
         )
-    print_stage4=None
-    
+    print_stage4 = None
+
     print_investment_result(
         investor, trustee, print_stage1, print_stage3, print_stage4, save_folder
     )
@@ -545,8 +544,6 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
         investor_line = f"| Investor: {investor.name}: actual allocation {stage3['investor_actual_allocation_part']}"
         f.write(investor_line + " " * (width - len(investor_line) - 1) + "|\n")
         f.write("+" + "-" * (width - 2) + "+\n")
-
-        
 
         f.write("+" + "-" * (width - 2) + "+\n")
         f.write("|" + " " * 40 + "End of Investment " + " " * 40 + "|\n")

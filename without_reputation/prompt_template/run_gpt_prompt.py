@@ -24,10 +24,7 @@ def run_gpt_prompt_update_learned_in_description_v1(
     def __func_validate(gpt_response, prompt=None):
         try:
             persona_name = (
-                prompt["user"]
-                .split("**Task:**")[-1]
-                .split("is a")[0]
-                .strip()
+                prompt["user"].split("**Task:**")[-1].split("is a")[0].strip()
             )
             if persona_name in gpt_response:
                 return True
@@ -57,9 +54,13 @@ def run_gpt_prompt_update_learned_in_description_v1(
     if init_persona_role == "resident":
         prompt_template = "prompt/update_learned_in_description_v2.txt"
     elif init_persona_role == "investor":
-        prompt_template = "prompt/investment/baseline_update_investor_learned_description_v1.txt"
+        prompt_template = (
+            "prompt/investment/baseline_update_investor_learned_description_v1.txt"
+        )
     elif init_persona_role == "trustee":
-        prompt_template = "prompt/investment/baseline_update_trustee_learned_description_v1.txt"
+        prompt_template = (
+            "prompt/investment/baseline_update_trustee_learned_description_v1.txt"
+        )
     prompt_input = create_prompt_input(
         init_persona,
         init_persona_role,
@@ -101,7 +102,7 @@ def run_gpt_prompt_gossip_listener_select_v1(
     def __func_validate(gpt_response, prompt=None):
         try:
             if "None" in gpt_response:
-                return  True
+                return True
             if __func_clean_up(gpt_response, prompt):
                 return True
             return False
@@ -154,75 +155,26 @@ def run_gpt_prompt_gossip_listener_select_v1(
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_gossip_v1(init_persona, target_persona, reason):
+def run_gpt_prompt_gossip_v2(
+    init_persona, target_persona, reason, complain_target, init_persona_role=None
+):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        reason,
+        init_persona, target_persona, reason, complain_target, init_persona_role=None
     ):
-        prompt_input = []
-        prompt_input += [init_persona.scratch.name]
-        prompt_input += [target_persona.scratch.name]
-        prompt_input += [init_persona.scratch.learned]
-        prompt_input += [target_persona.scratch.learned]
-        prompt_input += [reason]
-
-        return prompt_input
-
-    def __func_validate(gpt_response, prompt=None):
-        try:
-            if ":" in gpt_response:
-                return True
-            return False
-        except Exception as e:
-            print(e)
-            return False
-
-    def __func_clean_up(gpt_response, prompt=None):
-        return gpt_response
-
-    def get_fail_safe():
-        fs = "error"
-        return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
-    prompt_template = "prompt/create_gossip_chat_v1.txt"
-    prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        reason,
-    )
-    prompt = generate_prompt(prompt_input, prompt_template)
-
-    fail_safe = get_fail_safe()
-    output = safe_generate_response(
-        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
-    )
-
-    print_run_prompts(
-        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
-    )
-
-    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-#
-def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_target,init_persona_role=None):
-    def create_prompt_input(init_persona, target_persona, reason, complain_target,init_persona_role=None):
         prompt_input = []
         prompt_input += ["You are now a dialogue generation expert."]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
-        prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
-        prompt_input += [target_persona.scratch.learned[init_persona_role]] if type(target_persona.scratch.learned) is dict else [target_persona.scratch.learned]
+        prompt_input += (
+            [init_persona.scratch.learned[init_persona_role]]
+            if type(init_persona.scratch.learned) is dict
+            else [init_persona.scratch.learned]
+        )
+        prompt_input += (
+            [target_persona.scratch.learned[init_persona_role]]
+            if type(target_persona.scratch.learned) is dict
+            else [target_persona.scratch.learned]
+        )
         prompt_input += [reason]
         prompt_input += [complain_target]
 
@@ -256,7 +208,7 @@ def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_targ
     }
     prompt_template = "prompt/create_gossip_chat_v2.txt"
     prompt_input = create_prompt_input(
-        init_persona, target_persona, reason, complain_target,init_persona_role
+        init_persona, target_persona, reason, complain_target, init_persona_role
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -272,152 +224,18 @@ def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_targ
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-def run_gpt_prompt_identify_and_summary_gossip_info_v1(
-    init_persona, target_persona, complain_info
-):
-    def create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-    ):
-        prompt_input = []
-        prompt_input += [init_persona.scratch.name]
-        prompt_input += [target_persona.scratch.name]
-        prompt_input += [complain_info["complained name"]]
-        prompt_input += [complain_info["complained ID"]]
-        prompt_input += [complain_info["gossip chat"]]
-
-        return prompt_input
-
-    def __func_validate(gpt_response, prompt=None):
-        try:
-            if __func_clean_up(gpt_response, prompt):
-                return True
-            return False
-        except Exception as e:
-            print(e)
-            return False
-
-    def __func_clean_up(gpt_response, prompt=None):
-        response = gpt_response.split("Gossip info:")[-1].strip()
-        return response
-
-    def get_fail_safe():
-        fs = "error"
-        return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
-    prompt_template = "prompt/identify_and_summary_gossip_info_v1.txt"
-    prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-    )
-    prompt = generate_prompt(prompt_input, prompt_template)
-
-    fail_safe = get_fail_safe()
-    output = safe_generate_response(
-        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
-    )
-
-    print_run_prompts(
-        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
-    )
-
-    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-
-def run_gpt_prompt_first_order_evaluation_v1(
-    init_persona, target_persona, complain_info
-):
-    def create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-    ):
-        prompt_input = []
-        prompt_input += [init_persona.scratch.name]
-        prompt_input += [target_persona.scratch.name]
-        prompt_input += [complain_info["complained name"]]
-        prompt_input += [complain_info["complained ID"]]
-        prompt_input += [complain_info["gossip info"]]
-        prompt_input += [init_persona.gossipDB.gossips_count]
-        prompt_input += [init_persona.gossipDB.gossips_incredible_count]
-        prompt_input += [complain_info["complained role"]]
-
-        return prompt_input
-
-    def __func_validate(gpt_response, prompt=None):
-        try:
-            if __func_clean_up(gpt_response, prompt):
-                return True
-            return False
-        except Exception as e:
-            print(e)
-            return False
-
-    def __func_clean_up(gpt_response, prompt=None):
-        response = gpt_response.split("```json")[-1].split("```")[0].strip()
-        res = json.loads(response)
-        res_fin = []
-        for _, val in res.items():
-            res_fin.append(val)
-        return res_fin
-
-    def get_fail_safe():
-        fs = "error"
-        return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
-    prompt_template = "prompt/first_order_evaluation_v1.txt"
-    prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-    )
-    prompt = generate_prompt(prompt_input, prompt_template)
-
-    fail_safe = get_fail_safe()
-    output = safe_generate_response(
-        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
-    )
-
-    print_run_prompts(
-        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
-    )
-
-    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-#
 def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(
-    init_persona, target_persona, complain_info,init_persona_role=None
+    init_persona, target_persona, complain_info, init_persona_role=None
 ):
     def create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-        init_persona_role
+        init_persona, target_persona, complain_info, init_persona_role
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
+        prompt_input += (
+            [init_persona.scratch.learned[init_persona_role]]
+            if type(init_persona.scratch.learned) is dict
+            else [init_persona.scratch.learned]
+        )
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [complain_info["complained name"]]
@@ -458,84 +276,9 @@ def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes
     }
     prompt_template = "prompt/woutRepu_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1.txt"
     prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-        init_persona_role
+        init_persona, target_persona, complain_info, init_persona_role
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
-
-    fail_safe = get_fail_safe()
-    output = safe_generate_response(
-        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
-    )
-
-    print_run_prompts(
-        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
-    )
-
-    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-
-def run_gpt_prompt_second_order_evaluation_v1(
-    init_persona, target_persona, complain_info
-):
-    def create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-    ):
-        prompt_input = []
-        prompt_input += [init_persona.scratch.name]
-        prompt_input += [complain_info["original gossiper name"]]
-        prompt_input += [complain_info["complained name"]]
-        prompt_input += [complain_info["complained ID"]]
-        prompt_input += [complain_info["gossip info"]]
-        prompt_input += [init_persona.gossipDB.gossips_count]
-        prompt_input += [init_persona.gossipDB.gossips_incredible_count]
-        prompt_input += [complain_info["first-order listener name"]]
-        prompt_input += [complain_info["complained role"]]
-
-        return prompt_input
-
-    def __func_validate(gpt_response, prompt=None):
-        try:
-            if __func_clean_up(gpt_response, prompt):
-                return True
-            return False
-        except Exception as e:
-            print(e)
-            return False
-
-    def __func_clean_up(gpt_response, prompt=None):
-        response = gpt_response.split("```json")[-1].split("```")[0].strip()
-        res = json.loads(response)
-        res_fin = []
-        for _, val in res.items():
-            res_fin.append(val)
-        return res_fin
-
-    def get_fail_safe():
-        fs = "error"
-        return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
-    prompt_template = "prompt/second_order_evaluation_v1.txt"
-    prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
-        complain_info,
-    )
-    prompt = generate_prompt(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
     output = safe_generate_response(
@@ -552,11 +295,7 @@ def run_gpt_prompt_second_order_evaluation_v1(
 def run_gpt_prompt_connection_build_investor_v1(
     init_persona, target_persona, interaction_memory
 ):
-    def create_prompt_input(
-        init_persona,
-        target_persona,
-        interaction_memory
-    ):
+    def create_prompt_input(init_persona, target_persona, interaction_memory):
         prompt_input = []
         prompt_input += [init_persona.scratch.learned["investor"]]
         prompt_input += [init_persona.scratch.name]
@@ -567,7 +306,6 @@ def run_gpt_prompt_connection_build_investor_v1(
         # ).toJSON()
 
         # prompt_input += [target_persona_recent_behavior["description"]]
-        
 
         return prompt_input
 
@@ -599,7 +337,9 @@ def run_gpt_prompt_connection_build_investor_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
+    prompt_template = (
+        "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
+    )
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -704,7 +444,6 @@ def run_gpt_prompt_connection_build_trustee_v1(
         # ).toJSON()
         # prompt_input += [target_persona_recent_behavior["description"]]
         prompt_input.append(interaction_memory)
-        
 
         return prompt_input
 
@@ -736,7 +475,9 @@ def run_gpt_prompt_connection_build_trustee_v1(
         "presence_penalty": 0,
         "stop": None,
     }
-    prompt_template = "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
+    prompt_template = (
+        "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
+    )
     prompt_input = create_prompt_input(
         init_persona,
         target_persona,
@@ -773,7 +514,6 @@ def run_gpt_prompt_disconnection_trustee_v1(
         #     init_persona.associativeMemory.get_latest_event()
         # ).toJSON()
         # prompt_input += [target_persona_recent_behavior["description"]]
-        
 
         return prompt_input
 
@@ -824,15 +564,29 @@ def run_gpt_prompt_disconnection_trustee_v1(
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#
+
 def run_gpt_prompt_disconnection_after_gossip_v1(
-    init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
+    init_persona,
+    target_persona,
+    init_persona_role,
+    target_persona_role,
+    gossiper_name,
+    gossip_info,
 ):
     def create_prompt_input(
-        init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
+        init_persona,
+        target_persona,
+        init_persona_role,
+        target_persona_role,
+        gossiper_name,
+        gossip_info,
     ):
         prompt_input = []
-        prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
+        prompt_input += (
+            [init_persona.scratch.learned[init_persona_role]]
+            if type(init_persona.scratch.learned) is dict
+            else [init_persona.scratch.learned]
+        )
         prompt_input += [init_persona.scratch.name]
         prompt_input += [target_persona.scratch.name]
         prompt_input += [gossip_info]
@@ -870,7 +624,12 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
     }
     prompt_template = "prompt/disconnection_after_gossip_v2.txt"
     prompt_input = create_prompt_input(
-        init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
+        init_persona,
+        target_persona,
+        init_persona_role,
+        target_persona_role,
+        gossiper_name,
+        gossip_info,
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
@@ -1005,83 +764,6 @@ def run_gpt_prompt_connection_build_after_chat_sign_up_v1(
         target_persona,
         target_persona_role,
         interaction_memory,
-    )
-    prompt = generate_prompt_role_play(prompt_input, prompt_template)
-
-    fail_safe = get_fail_safe()
-    output = safe_generate_response(
-        prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
-    )
-
-    print_run_prompts(
-        prompt_template, init_persona, gpt_param, prompt_input, prompt, output
-    )
-
-    return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-
-def run_gpt_prompt_disconnection_build_after_new_sign_up_v1(
-    init_persona, target_persona
-):
-    def create_prompt_input(
-        init_persona,
-        target_persona,
-    ):
-        prompt_input = []
-        prompt_input += [init_persona.scratch.learned]
-        prompt_input += [init_persona.scratch.name]
-        prompt_input += [target_persona.scratch.name]
-
-        last_choice = init_persona.associativeMemory.get_latest_event()
-        if type(last_choice) is dict:
-            last_choice = last_choice["description"]
-        else:
-            last_choice = last_choice.toJSON()["description"]
-        last_choice = last_choice.splitlines()
-        for line in last_choice:
-            if target_persona.name in line:
-                # last choice of the persona in memory
-                prompt_input += [line.split(":")[-1].strip()]
-            elif init_persona.name in line:
-                # last choice of the persona in memory
-                prompt_input += [line.split(":")[-1].strip()]
-
-        return prompt_input
-
-    def __func_validate(gpt_response, prompt=None):
-        try:
-            if __func_clean_up(gpt_response, prompt):
-                return True
-            return False
-        except Exception as e:
-            print(e)
-            return False
-
-    def __func_clean_up(gpt_response, prompt=None):
-        response = gpt_response.split("```json")[-1].split("```")[0].strip()
-        res = json.loads(response)
-        return res
-
-    def get_fail_safe():
-        fs = "error"
-        return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
-    prompt_template = (
-        "prompt/sign_up/woutRepu_disconnection_only_after_new_sign_up_v1.txt"
-    )
-    prompt_input = create_prompt_input(
-        init_persona,
-        target_persona,
     )
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 

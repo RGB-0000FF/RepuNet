@@ -5,20 +5,14 @@ import sys
 from reputation.reputation_update import (
     reputation_update_sign_up,
 )
-from reputation.gossip import first_order_gossip
-from reputation.prompt_template.run_gpt_prompt import (
-    run_gpt_prompt_gossip_listener_select_v2,
-    run_gpt_prompt_disconnection_after_chat_sign_up_v2,
-)
+
 from reputation.social_network import social_network_update_after_new_sign_up
 
 from .prompt_template.run_gpt_prompt import (
-    run_gpt_prompt_sign_up_v1,
     run_gpt_prompt_sign_up_v3,
     run_gpt_prompt_decide_to_talk_v1,
     run_gpt_prompt_create_chat_v1,
     run_gpt_prompt_summarize_chat_v1,
-    run_gpt_prompt_willingness_to_gossip_v1,
     run_gpt_prompt_init_sign_up_v1,
 )
 
@@ -76,7 +70,6 @@ def sign_up(personas, step, save_folder, G):
         output_res = output.split(".")[0].strip()
         save_m += f"{persona_name}: {output_res}\n"
         res += f"{count}. {persona_name}: {output}\n"
-        # TODO: Implement sign up
         # sign up info as EVENT save to memory
     res += "--------------------End of Sign up info--------------------\n\n"
 
@@ -170,34 +163,6 @@ def start_chat(pair, G, ps):
             created_at=pair[0].scratch.curr_step,
         )
 
-        # Chat satisfaction & Gossip willingness
-        # p0_gossip = run_gpt_prompt_willingness_to_gossip_v1(
-        #     pair[0], pair[1], sum_covno
-        # )[0]
-        # p1_gossip = run_gpt_prompt_willingness_to_gossip_v1(
-        #     pair[1], pair[0], sum_covno
-        # )[0]
-        # if "error" in p0_gossip.lower() or "error" in p1_gossip.lower():
-        #     raise Exception("GPT ERROR")
-        # if "yes" in p0_gossip.split(",")[0].lower():
-        #     pair[0].scratch.complain_buffer.append(
-        #         {
-        #             "complaint_target_ID": pair[1].scratch.ID,
-        #             "complaint_target": pair[1].name,
-        #             "complaint_target_role": "resident",
-        #             "complaint_reason": p0_gossip.split(",")[-1].strip(),
-        #         }
-        #     )
-        # if "yes" in p1_gossip.split(",")[0].lower():
-        #     pair[1].scratch.complain_buffer.append(
-        #         {
-        #             "complaint_target_ID": pair[0].scratch.ID,
-        #             "complaint_target": pair[0].name,
-        #             "complaint_target_role": "resident",
-        #             "complaint_reason": p1_gossip.split(",")[-1].strip(),
-        #         }
-        #     )
-
         update_info_0 = {
             "reason": "reputation update after interaction",
             "sum_convo": sum_covno,
@@ -234,38 +199,3 @@ def start_sign_up_without_gossip(personas, G, step, save_floder, sign_up_f=False
     pairs = chat_pair(personas)
     for pair in pairs:
         start_chat(pair, G, personas)
-
-        # if pair[0].scratch.complain_buffer:
-        #     # gossip
-        #     # gossip target choose
-        #     gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
-        #         pair[0], "resident", pair[1]
-        #     )[0]
-        #     for gossip_target in gossip_target_investor:
-        #         # gossip chat
-        #         gossip_target_persona = personas[gossip_target]
-        #         first_order_gossip(
-        #             pair[0],
-        #             gossip_target_persona,
-        #             "resident",
-        #             "resident",
-        #             personas,
-        #             G,
-        #         )
-        # if pair[1].scratch.complain_buffer:
-        #     # gossip
-        #     # gossip target choose
-        #     gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
-        #         pair[1], "resident", pair[0]
-        #     )[0]
-        #     for gossip_target in gossip_target_investor:
-        #         # gossip chat
-        #         gossip_target_persona = personas[gossip_target]
-        #         first_order_gossip(
-        #             pair[1],
-        #             gossip_target_persona,
-        #             "resident",
-        #             "resident",
-        #             personas,
-        #             G,
-        #         )
