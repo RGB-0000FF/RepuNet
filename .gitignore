@@ -1,5 +1,6 @@
 venv/
 .venv/
+.vscode
 pyproject.toml
 
 **/__pycache__
@@ -20,13 +21,10 @@ sim_storage/*
 
 
 analysis/*
-!analysis/analysis.py
-!analysis/social_network.py
-!analysis/statis_methods.py
-!analysis/statis_methods_sign.py
 
 
 figure
+gossip_data
 
 utils.py
 metrics.md

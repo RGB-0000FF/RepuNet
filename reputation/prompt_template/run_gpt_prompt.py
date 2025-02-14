@@ -1510,28 +1510,28 @@ def run_gpt_prompt_second_order_evaluation_v1(
         prompt_input = []
         prompt_input += [init_persona.scratch.learned[init_persona_role]] if type(init_persona.scratch.learned) is dict else [init_persona.scratch.learned]
         prompt_input += [init_persona.scratch.name]
-        prompt_input += [complain_info["original gossiper name"]]
+        prompt_input += [complain_info["first-order listener name"]]
         prompt_input += [complain_info["complained name"]]
         prompt_input += [complain_info["complained ID"]]
-        original_gossiper_reputation = (
-            init_persona.reputationDB.get_targets_individual_reputation(
-                complain_info["original gossiper ID"],
-                complain_info["original gossiper role"],
-            )
-        )
-        prompt_input += [json.dumps(original_gossiper_reputation)]
-        prompt_input += [complain_info["gossip info"]]
-        prompt_input += [init_persona.gossipDB.gossips_count]
-        prompt_input += [init_persona.gossipDB.gossips_incredible_count]
-        prompt_input += [complain_info["first-order listener name"]]
-        first_order_listener_reputation = (
+        second_gossiper_reputation = (
             init_persona.reputationDB.get_targets_individual_reputation(
                 complain_info["first-order listener ID"],
                 complain_info["first-order listener role"],
             )
         )
-        prompt_input += [json.dumps(first_order_listener_reputation)]
+        prompt_input += [json.dumps(second_gossiper_reputation)]
+        prompt_input += [complain_info["gossip info"]]
+        prompt_input += [init_persona.gossipDB.gossips_count]
+        prompt_input += [init_persona.gossipDB.gossips_incredible_count]
         prompt_input += [complain_info["complained role"]]
+        prompt_input += [complain_info["original gossiper name"]]
+        first_order_gossiper_reputation = (
+            init_persona.reputationDB.get_targets_individual_reputation(
+                complain_info["original gossiper ID"],
+                complain_info["original gossiper role"],
+            )
+        )
+        prompt_input += [json.dumps(first_order_gossiper_reputation)]
 
         return prompt_input
 

@@ -3,7 +3,7 @@
 **user prompt:**
 
 Variables:
-!<INPUT 1>! -- agent's learned
+!<INPUT 0>! -- agent's learned
 !<INPUT 1>! -- agent name
 !<INPUT 2>! -- second-order gossiper name
 !<INPUT 3>! -- complained agent name
@@ -14,9 +14,9 @@ Variables:
 !<INPUT 8>! -- numbers of unimportant gossip info
 !<INPUT 9>! — complained agent role
 
-!<INPUT 9>! — first-order gossiper name
+!<INPUT 10>! — first-order gossiper name
 
-!<INPUT 10>! — first-order gossiper reputation
+!<INPUT 11>! — first-order gossiper reputation
 
 <commentblockmarker>###</commentblockmarker>
 
@@ -26,7 +26,7 @@ Variables:
 
 You are !<INPUT 1>!. In this context, gossip occurs in two phases:
 
-1.	First-order gossip: !<INPUT 9>! shared its perspective on !<INPUT 3>!’s behavior with !<INPUT 2>!.
+1.	First-order gossip: !<INPUT 10>! shared its perspective on !<INPUT 3>!’s behavior with !<INPUT 2>!.
 
 2.	Second-order gossip: !<INPUT 2>! then conveyed this gossip information to you, and you have already summarized the “Gossip info” shared by !<INPUT 2>!.
 
@@ -38,9 +38,9 @@ You are !<INPUT 1>!. In this context, gossip occurs in two phases:
 
 1.	Source credibility: The reputation of the gossip sources affects the credibility of the gossip. Higher reputations of the first-order and second-order gossipers imply higher credibility. If either gossiper has a low reputation in your perception, it will diminish the credibility of the gossip information.
 
-•	First-order gossiper’s reputation: **!<INPUT 5>!**
+•	First-order gossiper’s reputation: **!<INPUT 11>!**
 
-•	Second-order gossiper’s reputation: **!<INPUT 10>!**
+•	Second-order gossiper’s reputation: **!<INPUT 5>!**
 
 2.	Societal credibility of gossip: the more “very uncredible” or “uncredible” gossip information there is, the lower the credibility of gossip information in this society.
 
@@ -54,7 +54,7 @@ You are !<INPUT 1>!. In this context, gossip occurs in two phases:
 "complained ID": "!<INPUT 4>!",
 "complained name": "!<INPUT 3>!",
 "complained role": "!<INPUT 9>!",
-"first-order gossiper name": "!<INPUT 9>!",
+"first-order gossiper name": "!<INPUT 10>!",
 "second-order gossiper name": "!<INPUT 2>!",
 "gossip info": "!<INPUT 6>!",
 "credibility level": "{level}"
