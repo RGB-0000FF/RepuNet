@@ -78,6 +78,8 @@ class ReputationDB:
             input = "Trustee"
         elif role.lower() == "resident":
             input = "Resident"
+        elif role.lower() == "player":
+            input = "Player"
         for key, reputation in self.individual_reputations.items():
             if with_self and input in key:
                 all_reputations[key] = reputation

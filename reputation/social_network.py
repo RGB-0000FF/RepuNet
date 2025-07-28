@@ -1,6 +1,7 @@
 import sys
 
 from .prompt_template.run_gpt_prompt import (
+    run_gpt_prompt_connection_build_player_v1,
     run_gpt_prompt_connection_build_investor_v1,
     run_gpt_prompt_connection_build_trustee_v1,
     run_gpt_prompt_disconnection_investor_v1,
@@ -10,6 +11,7 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_disconnection_after_chat_sign_up_v2,
     run_gpt_prompt_disconnection_after_new_sign_up_v1,
     run_gpt_prompt_disconnection_after_observed_v1,
+    run_gpt_prompt_disconnection_player_v1,
 )
 
 
@@ -22,9 +24,7 @@ def social_network_update(
     full_investment=True,
 ):
     try:
-        _ = init_persona.scratch.relationship["bind_list"].index(
-            [target_persona.scratch.name, target_persona_role]
-        )
+        _ = init_persona.scratch.relationship["bind_list"].index([target_persona.scratch.name, target_persona_role])
         if init_persona_role == "investor":
             disconnection_res = run_gpt_prompt_disconnection_investor_v1(
                 init_persona,
@@ -46,6 +46,13 @@ def social_network_update(
                 target_persona_role,
                 update_info["sum_convo"],
             )[0]
+        elif init_persona_role == "player":
+            disconnection_res = run_gpt_prompt_disconnection_player_v1(
+                init_persona,
+                target_persona,
+                target_persona_role,
+                update_info["target_behavior_summary"],
+            )[0]
         else:
             disconnection_res = "error"
 
@@ -53,12 +60,8 @@ def social_network_update(
             raise Exception("GPT ERROR")
 
         if disconnection_res["Disconnect"].lower() == "yes":
-            init_persona.scratch.relationship["bind_list"].remove(
-                [target_persona.scratch.name, target_persona_role]
-            )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, target_persona_role]
-            )
+            init_persona.scratch.relationship["bind_list"].remove([target_persona.scratch.name, target_persona_role])
+            init_persona.scratch.relationship["black_list"].append([target_persona.scratch.name, target_persona_role])
 
     except Exception as e:
         if not full_investment:
@@ -88,6 +91,12 @@ def social_network_update(
                     target_persona_role,
                     update_info["sum_convo"],
                 )[0]
+            elif init_persona_role == "player":
+                bind_res = run_gpt_prompt_connection_build_player_v1(
+                    init_persona,
+                    target_persona,
+                    update_info["target_behavior_summary"],
+                )[0]
             else:
                 bind_res = "error"
 
@@ -95,9 +104,7 @@ def social_network_update(
                 sys.exit("GPT ERROR")
 
             if bind_res["Connect"].lower() == "yes":
-                init_persona.scratch.relationship["bind_list"].append(
-                    [target_persona.scratch.name, target_persona_role]
-                )
+                init_persona.scratch.relationship["bind_list"].append([target_persona.scratch.name, target_persona_role])
 
 
 def social_network_update_after_new_sign_up(
@@ -105,9 +112,7 @@ def social_network_update_after_new_sign_up(
     target_persona,
 ):
     try:
-        _ = init_persona.scratch.relationship["bind_list"].index(
-            [target_persona.scratch.name, "resident"]
-        )
+        _ = init_persona.scratch.relationship["bind_list"].index([target_persona.scratch.name, "resident"])
         disconnection_res = run_gpt_prompt_disconnection_after_new_sign_up_v1(
             init_persona,
             target_persona,
@@ -118,12 +123,8 @@ def social_network_update_after_new_sign_up(
             raise Exception("GPT ERROR")
 
         if disconnection_res["Disconnect"].lower() == "yes":
-            init_persona.scratch.relationship["bind_list"].remove(
-                [target_persona.scratch.name, "resident"]
-            )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, "resident"]
-            )
+            init_persona.scratch.relationship["bind_list"].remove([target_persona.scratch.name, "resident"])
+            init_persona.scratch.relationship["black_list"].append([target_persona.scratch.name, "resident"])
     except Exception as e:
         if isinstance(e, Exception) and str(e) == "GPT ERROR":
             sys.exit(str(e))
@@ -135,9 +136,7 @@ def social_network_update_after_observed_invest(
     update_info,
 ):
     try:
-        _ = init_persona.scratch.relationship["bind_list"].index(
-            [target_persona.scratch.name, "resident"]
-        )
+        _ = init_persona.scratch.relationship["bind_list"].index([target_persona.scratch.name, "resident"])
         disconnection_res = run_gpt_prompt_disconnection_after_observed_v1(
             init_persona,
             target_persona,
@@ -150,12 +149,8 @@ def social_network_update_after_observed_invest(
             raise Exception("GPT ERROR")
 
         if disconnection_res["Disconnect"].lower() == "yes":
-            init_persona.scratch.relationship["bind_list"].remove(
-                [target_persona.scratch.name, "resident"]
-            )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, "resident"]
-            )
+            init_persona.scratch.relationship["bind_list"].remove([target_persona.scratch.name, "resident"])
+            init_persona.scratch.relationship["black_list"].append([target_persona.scratch.name, "resident"])
     except Exception as e:
         if isinstance(e, Exception) and str(e) == "GPT ERROR":
             sys.exit(str(e))
@@ -169,19 +164,11 @@ def social_network_update_after_gossip(
     gossiper_name,
     gossip_info,
 ):
-    gossip_res = run_gpt_prompt_disconnection_after_gossip_v2(
-        init_persona, target_persona, init_persona_role,target_persona_role, gossiper_name, gossip_info
-    )[0]
+    gossip_res = run_gpt_prompt_disconnection_after_gossip_v2(init_persona, target_persona, init_persona_role, target_persona_role, gossiper_name, gossip_info)[0]
     if gossip_res["Disconnect"].lower() == "yes":
         try:
-            init_persona.scratch.relationship["bind_list"].remove(
-                [target_persona.scratch.name, target_persona_role]
-            )
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, target_persona_role]
-            )
+            init_persona.scratch.relationship["bind_list"].remove([target_persona.scratch.name, target_persona_role])
+            init_persona.scratch.relationship["black_list"].append([target_persona.scratch.name, target_persona_role])
         except ValueError:
-            init_persona.scratch.relationship["black_list"].append(
-                [target_persona.scratch.name, target_persona_role]
-            )
+            init_persona.scratch.relationship["black_list"].append([target_persona.scratch.name, target_persona_role])
             pass

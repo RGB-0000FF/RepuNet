@@ -1,0 +1,26 @@
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Reputation list of available players>
+
+<commentblockmarker>###</commentblockmarker>
+
+**Background:** You are a participant in a repeated Prisoner's Dilemma game. In each round, you are paired with another player to decide whether to cooperate or defect. Players build a reputation over time, which reflects their previous decisions in similar games.
+
+**Task:** You are currently in the selection phase. You need to choose one opponent from the available list based on their reputation. This decision may affect both your potential gain and your future standing in the game network.
+
+**Principles:**
+
+- A higher reputation suggests that the player has a history of cooperative behavior and may be more trustworthy in the upcoming game.
+- A lower reputation may indicate a tendency to defect, which could result in higher risk or lower payoff for you.
+- You can only choose one player to pair with in this round.
+
+**Available Players and Their Reputations:**
+!<INPUT 1>!
+
+**Desired Format:**
+
+<name of the selected player>
+
+**Note:** You must strictly adhere to the required format and cannot output any additional information.
+
+**Output:**

@@ -1,9 +1,12 @@
+import os
 import json
 import shutil
 import traceback
 import errno
-import networkx as nx
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
+import networkx as nx
 from task.investment.investment import *
 from task.investment_without_gossip.investment import *
 from task.investment_without_reputation.investment import *
@@ -14,6 +17,8 @@ from task.sign_up_without_gossip.sign_up import *
 from task.sign_up_without_reputation.sign_up import *
 from task.sign_up_without_reputation_without_gossip.sign_up import *
 
+from task.pd_game.pd_game import *
+
 from utils import *
 
 from persona.persona import Persona
@@ -21,7 +26,13 @@ from reputation.reputation_update import reputation_init_sign_up
 
 
 class Creation:
-    def __init__(self, sim_code, with_reputation, with_gossip, sim=None,):
+    def __init__(
+        self,
+        sim_code,
+        with_reputation,
+        with_gossip,
+        sim=None,
+    ):
         self.sim_code = f"{sim_code}"
         sim_folder = sim_folder = f"{fs_storage}/{self.sim_code}"
 
@@ -31,15 +42,13 @@ class Creation:
         self.step = reverie_meta["step"]
         self.personas = dict()
         self.G = dict()
-        self.with_reputation = (
-            "y" in with_reputation.lower() and "n" not in with_reputation.lower()
-        )
+        self.with_reputation = "y" in with_reputation.lower() and "n" not in with_reputation.lower()
         self.with_gossip = "y" in with_gossip.lower() and "n" not in with_gossip.lower()
 
         for persona_name in reverie_meta["persona_names"]:
             persona_folder = f"{sim_folder}/personas/{persona_name}"
-            if sim=="investment":
-                curr_persona = Persona(persona_name, persona_folder, self.with_reputation,investment=True)
+            if sim == "investment":
+                curr_persona = Persona(persona_name, persona_folder, self.with_reputation, investment=True)
             else:
                 curr_persona = Persona(persona_name, persona_folder, self.with_reputation)
             self.personas[persona_name] = curr_persona
@@ -48,6 +57,8 @@ class Creation:
             self.set_graph_invest()
         elif sim and "sign" in sim:
             self.set_graph_sign_up()
+        elif sim and "pd" in sim:
+            self.set_graph_pd_game()
 
     def set_graph_sign_up(self):
         self._set_graph_r()
@@ -55,6 +66,9 @@ class Creation:
     def set_graph_invest(self):
         self._set_graph_i()
         self._set_graph_t()
+
+    def set_graph_pd_game(self):
+        self._set_graph_p()
 
     def _set_graph_r(self):
         # investor graph
@@ -101,6 +115,21 @@ class Creation:
                     G.add_edges_from([(persona.name, bind[0])])
         self.G["trustee"] = G
 
+    def _set_graph_p(self):
+        # player graph for PD game
+        G = nx.DiGraph()
+        for _, persona in self.personas.items():
+            if not G.has_node(persona.name):
+                G.add_nodes_from([persona.name])
+            black_list = list(persona.scratch.relationship["black_list"])
+            bind_list = list(persona.scratch.relationship["bind_list"])
+            for bind in bind_list:
+                if bind[0] not in black_list:
+                    if not G.has_node(bind[0]):
+                        G.add_nodes_from([bind[0]])
+                    G.add_edges_from([(persona.name, bind[0])])
+        self.G["player"] = G
+
     def save(self):
         sim_folder = f"{fs_storage}/{self.sim_code}"
         reverie_meta = dict()
@@ -113,9 +142,7 @@ class Creation:
         # Save the personas.
         for persona_name, persona in self.personas.items():
             save_folder = f"{sim_folder}/personas/{persona_name}"
-            persona.associativeMemory.base_path = (
-                f"{save_folder}/memory/associative_memory"
-            )
+            persona.associativeMemory.base_path = f"{save_folder}/memory/associative_memory"
             persona.save(save_folder)
             # save reputation and gossip
             reputation_folder = f"{sim_folder}/personas/{persona_name}/reputation"
@@ -146,9 +173,7 @@ class Creation:
             if os.path.exists(f"{new_sim_folder}/investment results"):
                 shutil.rmtree(f"{new_sim_folder}/investment results")
             self.set_graph_invest()
-            print(
-                f"sim_code: {self.sim_code}-----------------------------------------------"
-            )
+            print(f"sim_code: {self.sim_code}-----------------------------------------------")
             if self.with_reputation and self.with_gossip:
                 if self.step != 1 and (self.step - 1) % 5 == 0:
                     update_knowns_reputation_observation(self.personas)
@@ -183,9 +208,7 @@ class Creation:
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
             elif not self.with_reputation and not self.with_gossip:
-                pairs = pair_each_without_reputation_without_gossip(
-                    self.personas, self.G
-                )
+                pairs = pair_each_without_reputation_without_gossip(self.personas, self.G)
                 for pair in pairs:
                     start_investment_without_reputation_without_gossip(
                         pair,
@@ -225,9 +248,7 @@ class Creation:
             #         reputation_init_sign_up(persona)
 
             self.set_graph_sign_up()
-            print(
-                f"sim_code: {self.sim_code}-----------------------------------------------"
-            )
+            print(f"sim_code: {self.sim_code}-----------------------------------------------")
 
             sign_up_flag = False
             if (self.step - 1) % 5 == 0:
@@ -269,6 +290,85 @@ class Creation:
 
             self.save()
             int_counter -= 1
+
+    def start_server_pd_game(self, int_counter):
+        """启动PD游戏服务器"""
+        print("Starting PD Game Server...")
+
+        while True:
+            # Done with this iteration if <int_counter> reaches 0.
+            if int_counter == 0:
+                break
+
+            self.step += 1
+            for persona_name, persona in self.personas.items():
+                persona.scratch.curr_step += 1
+            origin_sim_folder = f"{fs_storage}/{self.sim_code}"
+            new_sim_code = self.sim_code.split("/")[0] + f"/step_{self.step}"
+            new_sim_folder = f"{fs_storage}/{new_sim_code}"
+            self.sim_code = new_sim_code
+            # copy the PD game data to the new simulation folder
+            shutil.copytree(
+                f"{origin_sim_folder}",
+                f"{new_sim_folder}",
+            )
+
+            if os.path.exists(f"{new_sim_folder}/pd_game results"):
+                shutil.rmtree(f"{new_sim_folder}/pd_game results")
+            self.set_graph_pd_game()
+            print(f"sim_code: {self.sim_code}-----------------------------------------------")
+
+            if self.with_reputation and self.with_gossip:
+                if self.step != 1 and (self.step - 1) % 5 == 0:
+                    update_knowns_reputation_observation(self.personas)
+
+                pairs = pair_each(self.personas, self.G)
+
+                # 设置gossip同步
+                from task.pd_game.pd_game import set_gossip_sync
+
+                set_gossip_sync(len(pairs))
+
+                # 多线程执行PD游戏
+                self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results")
+
+                # 顺序执行gossip（如果有的话）
+                from task.pd_game.pd_game import execute_gossip_sequential, gossip_queue
+
+                if gossip_queue:
+                    print("START EXECUTE Gossip!!!!!!!!!!!!!!!!!!!!!")
+                    execute_gossip_sequential(self.personas, self.G, max_retries=3)
+
+            self.save()
+            int_counter -= 1
+
+    def execute_pd_games_parallel(self, pairs, save_folder):
+        """并行执行PD游戏"""
+        with ThreadPoolExecutor(max_workers=len(pairs)) as executor:
+            # 提交所有任务
+            future_to_pair = {
+                executor.submit(
+                    start_pd_game,
+                    pair,
+                    self.personas,
+                    self.G,
+                    save_folder,
+                    max_retries=5,  # 设置最大重试次数
+                ): pair
+                for pair in pairs
+            }
+
+            # 等待所有任务完成
+            for future in as_completed(future_to_pair):
+                pair = future_to_pair[future]
+                try:
+                    result = future.result()
+                    if result and result[0] is not None:
+                        print(f"Completed PD game: {pair[0]} vs {pair[1]}")
+                    else:
+                        print(f"Failed PD game: {pair[0]} vs {pair[1]} (after all retries)")
+                except Exception as e:
+                    print(f"Error in PD game {pair[0]} vs {pair[1]}: {e}")
 
     def open_server(self):
         """
@@ -314,9 +414,7 @@ class Creation:
                     # Example: save
                     self.save()
 
-                elif (
-                    sim_command[:3].lower() == "run" and "invest" in sim_command.lower()
-                ):
+                elif sim_command[:3].lower() == "run" and "invest" in sim_command.lower():
                     # Runs the number of steps specified in the prompt.
                     # Example: run 1000
                     int_count = int(sim_command.split()[-1])
@@ -327,6 +425,12 @@ class Creation:
                     # Example: run 1000
                     int_count = int(sim_command.split()[-1])
                     server.start_server_sign_up(int_count)
+
+                elif sim_command[:3].lower() == "run" and "pd" in sim_command.lower():
+                    # Runs the number of steps specified in the prompt.
+                    # Example: run 1000
+                    int_count = int(sim_command.split()[-1])
+                    server.start_server_pd_game(int_count)
 
                 print(ret_str)
 
@@ -341,10 +445,14 @@ if __name__ == "__main__":
     origin = input("Enter the name of the forked simulation: ").strip()
     with_reputation = input("Whether to use reputation (y/n): ").strip()
     with_gossip = input("Whether to use gossip (y/n): ").strip()
-    game_type= input("Investment or Sign up (i/s): ").strip()
+    game_type = input("Investment, Sign up, or PD game (i/s/p): ").strip()
     if "i" in game_type:
-        sim="investment"
+        sim = "investment"
+    elif "s" in game_type:
+        sim = "sign_up"
+    elif "p" in game_type:
+        sim = "pd_game"
     else:
-        sim="sign_up"
-    server = Creation(origin, with_reputation, with_gossip,sim=sim)
+        sim = "investment"  # default
+    server = Creation(origin, with_reputation, with_gossip, sim=sim)
     server.open_server()

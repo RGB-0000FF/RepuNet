@@ -5,9 +5,7 @@ import os
 import openai
 from openai import OpenAI
 
-from utils import *
-
-api_base = "https://api.claudeshop.top/v1"
+from utils import openai_api_key, api_base
 
 client = openai.OpenAI(api_key=openai_api_key, base_url=api_base)
 
@@ -94,7 +92,7 @@ def generate_prompt_role_play(curr_input, prompt_lib_file):
     curr_input = [str(i) for i in curr_input]
     prompt_lib_file = os.path.join(os.path.dirname(__file__), prompt_lib_file)
 
-    f = open(prompt_lib_file, "r",encoding="utf-8")
+    f = open(prompt_lib_file, "r", encoding="utf-8")
     prompt = f.read()
     f.close()
     for count, i in enumerate(curr_input):
@@ -102,8 +100,6 @@ def generate_prompt_role_play(curr_input, prompt_lib_file):
     if "<commentblockmarker>###</commentblockmarker>" in prompt:
         prompt = prompt.split("<commentblockmarker>###</commentblockmarker>")[1]
     return {"system": curr_input[0], "user": prompt.strip()}
-
-
 
 
 def generate_prompt(curr_input, prompt_lib_file):

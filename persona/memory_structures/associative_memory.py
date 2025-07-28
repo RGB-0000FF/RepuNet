@@ -252,3 +252,17 @@ class AssociativeMemory:
         if len(self.event_id_to_node) == 0:
             return []
         return self.event_id_to_node[max(self.event_id_to_node.keys())]
+
+    def get_latest_event_with_target(self, target_name: str, by="object"):
+        latest = None
+        latest_time = -1
+        for node in self.event_id_to_node.values():
+            if by == "object" and node.object == target_name:
+                if node.created_at > latest_time:
+                    latest = node
+                    latest_time = node.created_at
+            elif by == "subject" and node.subject == target_name:
+                if node.created_at > latest_time:
+                    latest = node
+                    latest_time = node.created_at
+        return latest

@@ -1,0 +1,79 @@
+**System Prompt:** !<INPUT 0>!
+
+Variables:
+!<INPUT 0>! -- <'learned' in agent description>
+!<INPUT 1>! -- <Your previous Reputation>
+!<INPUT 2>! -- <Opponent’s previous Reputation>
+!<INPUT 3>! -- <Your decision (Cooperate/Defect)>
+!<INPUT 4>! -- <Opponent’s decision (Cooperate/Defect)>
+!<INPUT 5>! -- <Your name>
+!<INPUT 6>! -- <Opponent's name>
+
+<commentblockmarker>###</commentblockmarker>
+
+**Background:**  
+You are !<INPUT 5>!, a participant in a repeated Prisoner's Dilemma (PD) game. Each round consists of five stages: (i) **Matching Stage**, (ii) **Participation Decision Stage**, (iii) **PD Game Stage**, (iv) **Evaluation Stage**, and (v) **Gossip Stage**. Reputation affects future interactions and game outcomes.
+
+**Task:**  
+As **!<INPUT 5>!**, you are now in the **Evaluation Stage**. Follow the steps below to evaluate both your own and !<INPUT 6>!'s behavior based on the PD game outcome.
+
+---
+
+**Step 1: Reciprocity Check**  
+Evaluate reciprocity based on both players' choices in the PD game:
+
+- **Your Decision:** !<INPUT 3>!  
+- **Opponent’s Decision:** !<INPUT 4>!
+
+Assess if the opponent’s behavior aligns with reciprocal cooperation or defection.
+
+- Mutual cooperation indicates strong positive reciprocity.
+- Mutual defection indicates negative reciprocity.
+- One-sided defection signals exploitation.
+
+---
+
+**Step 2: Trustworthiness Check**  
+Compare the opponent’s previous reputation with their current choice to assess trustworthiness:
+
+- **Opponent’s Previous Reputation:** !<INPUT 2>!
+- **Opponent’s Current Decision:** !<INPUT 4>!
+
+- If the opponent’s behavior matches expectations from their previous reputation, consider them trustworthy.
+- A significant deviation suggests lower trustworthiness or strategic unpredictability.
+
+---
+
+**Step 3: Behavioral Evaluation**  
+Based on Steps 1 and 2, provide summaries to update reputations:
+
+1. **Self Reputation Reflection:**  
+   *<Brief summary reflecting your own behavior and how it may affect your reputation in future rounds.>*
+
+2. **Opponent Reputation Reflection:**  
+   *<Brief summary reflecting your opponent’s behavior and recommendations for updating their reputation accordingly.>*
+
+---
+
+**Principles:**
+
+- Reputation reflects consistency between previous reputation and actual behavior.
+- Positive reciprocity strengthens reputation; exploitation or inconsistency weakens reputation.
+- Your evaluations influence future game dynamics and interactions.
+
+---
+
+**Desired Output Format:**
+Step 1: xxx
+
+Step 2: xxx
+
+Step 3:
+
+    1. Self Reputation Reflection: <Short reflection for updating your own reputation.>
+
+    2. Opponent Reputation Reflection: <Short reflection for updating opponent’s reputation.>
+
+
+**Note:** Strictly adhere to the desired output format.
+

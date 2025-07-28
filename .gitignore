@@ -1,7 +1,8 @@
 venv/
 .venv/
 .vscode
-pyproject.toml
+.python-version
+uv.lock
 
 **/__pycache__
 __pycache__
@@ -18,6 +19,7 @@ sim_storage/*
 !sim_storage/invest_seed
 !sim_storage/sign_seed
 !sim_storage/change_sim_folder.py
+!sim_storage/pd_game_seed
 
 
 analysis/*

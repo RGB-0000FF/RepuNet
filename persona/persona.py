@@ -12,11 +12,11 @@ class Persona:
     gossipDB: GossipDB
     associativeMemory: AssociativeMemory
 
-    def __init__(self, name, folder_mem_saved=False, with_reputation=False,investment=None):
+    def __init__(self, name, folder_mem_saved=False, with_reputation=False, investment=None):
         self.name = name
 
         scratch_saved = f"{folder_mem_saved}/memory/scratch.json"
-        self.scratch = Scratch(scratch_saved,investment)
+        self.scratch = Scratch(scratch_saved, investment)
 
         gossip_saved = f"{folder_mem_saved}/reputation"
         self.gossipDB = GossipDB(gossip_saved)
@@ -27,9 +27,7 @@ class Persona:
             self.reputationDB = None
 
         associative_memory_saved = f"{folder_mem_saved}/memory/associative_memory"
-        self.associativeMemory = AssociativeMemory(
-            associative_memory_saved, do_load=True
-        )
+        self.associativeMemory = AssociativeMemory(associative_memory_saved, do_load=True)
         self.interaction_memory = {"investor": [], "trustee": []}
 
     def save(self, save_folder):
@@ -60,13 +58,7 @@ class Persona:
                 else:
                     memory_list_trustee.append(des_str)
             elif "Success" in des_str:
-                if (
-                    des_str.split("investor is")[1]
-                    .split("trustee is")[0]
-                    .strip()
-                    .strip(",")
-                    == self.name
-                ):
+                if des_str.split("investor is")[1].split("trustee is")[0].strip().strip(",") == self.name:
                     memory_list_investor.append(des_str)
                 else:
                     memory_list_trustee.append(des_str)
@@ -83,7 +75,7 @@ class Persona:
 
     def get_interaction_memory(self, role):
         return self.interaction_memory[role]
-    
+
     def get_observation_memory(self, name, role):
         if f"{name}:{role}" in self.scratch.observed.keys():
             return self.scratch.observed[f"{name}:{role}"]

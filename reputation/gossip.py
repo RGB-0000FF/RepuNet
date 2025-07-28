@@ -6,21 +6,11 @@ from .prompt_template.run_gpt_prompt import (
     run_gpt_prompt_first_order_evaluation_v1,
     run_gpt_prompt_second_order_evaluation_v1,
 )
-from .reputation_update import reputation_update_invest
-from .reputation_update import reputation_update_sign_up
-
+from .reputation_update import reputation_update_invest, reputation_update_sign_up, reputation_update_pd_game
 from .social_network import social_network_update_after_gossip
 
 
-def first_order_gossip(
-    init_persona,
-    target_persona,
-    init_persona_role,
-    complain_persona_role,
-    personas,
-    G,
-    val
-):
+def first_order_gossip(init_persona, target_persona, init_persona_role, complain_persona_role, personas, G, val):
     """
     init_persona: gossiper
     target_persona: listener
@@ -33,9 +23,7 @@ def first_order_gossip(
         return
     reason = val["complaint_reason"]
     # gossip chat
-    convo = generate_convo(
-        init_persona, target_persona, reason, val["complaint_target"],role=init_persona_role
-    )
+    convo = generate_convo(init_persona, target_persona, reason, val["complaint_target"], role=init_persona_role)
     init_persona.associativeMemory.add_chat(
         subject=init_persona.name,
         predicate="gossip",
@@ -59,17 +47,13 @@ def first_order_gossip(
         "complained ID": val["complaint_target_ID"],
         "complained role": complain_persona_role,
     }
-    gossip_info = run_gpt_prompt_identify_and_summary_gossip_info_v1(
-        target_persona, init_persona, complain_info,init_persona_role=init_persona_role
-    )[0]
+    gossip_info = run_gpt_prompt_identify_and_summary_gossip_info_v1(target_persona, init_persona, complain_info, init_persona_role=init_persona_role)[0]
     complain_info["gossip info"] = gossip_info
     complain_info["gossiper role"] = init_persona_role
-    gossip = run_gpt_prompt_first_order_evaluation_v1(
-        target_persona, init_persona, complain_info,init_persona_role
-    )[0]
+    gossip = run_gpt_prompt_first_order_evaluation_v1(target_persona, init_persona, complain_info, init_persona_role)[0]
     target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
     # reputation update
-    if complain_info["complained role"] != "resident":
+    if complain_info["complained role"] != "resident" and complain_info["complained role"] != "player":
         update_info = {
             "reason": "reputation update after first order gossip",
             "init_persona_role": init_persona_role,
@@ -88,7 +72,18 @@ def first_order_gossip(
             personas[complain_info["complained name"]],
             update_info,
         )
-
+    elif complain_info["complained role"] == "player":
+        update_info = {
+            "reason": "reputation update after first order gossip",
+            "init_persona_role": init_persona_role,
+            "target_persona_role": complain_persona_role,
+            "gossip": gossip,
+        }
+        reputation_update_pd_game(
+            target_persona,
+            personas[complain_info["complained name"]],
+            update_info,
+        )
     else:
         update_info = {
             "reason": "reputation update after first order gossip",
@@ -154,9 +149,7 @@ def second_order_gossip(
 ):
     print("SECOND ORDER GOSSIP")
     complain_persona = personas[complain_info["complained name"]]
-    gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(
-        init_persona, init_persona_role, complain_persona
-    )[0]
+    gossip_target_investor = run_gpt_prompt_gossip_listener_select_v2(init_persona, init_persona_role, complain_persona)[0]
 
     for gossip_target in gossip_target_investor:
         gossip_target_persona = personas[gossip_target]
@@ -185,31 +178,35 @@ def second_order_gossip(
             conversation=convo,
         )
         complain_info["gossip chat"] = convo
-        gossip_info = run_gpt_prompt_identify_and_summary_gossip_info_v1(
-            gossip_target_persona, init_persona, complain_info,init_persona_role=init_persona_role
-        )[0]
+        gossip_info = run_gpt_prompt_identify_and_summary_gossip_info_v1(gossip_target_persona, init_persona, complain_info, init_persona_role=init_persona_role)[0]
         complain_info["gossip info"] = gossip_info
         complain_info["gossiper role"] = init_persona_role
-        gossip = run_gpt_prompt_second_order_evaluation_v1(
-            gossip_target_persona, init_persona, complain_info,init_persona_role=init_persona_role
-        )[0]
+        gossip = run_gpt_prompt_second_order_evaluation_v1(gossip_target_persona, init_persona, complain_info, init_persona_role=init_persona_role)[0]
         gossip[0]["gossiper name"] = init_persona.name
-        gossip_target_persona.gossipDB.add_gossip(
-            gossip, gossip_target_persona.scratch.curr_step
-        )
+        gossip_target_persona.gossipDB.add_gossip(gossip, gossip_target_persona.scratch.curr_step)
         # reputation update
-        if complain_info["complained role"] != "resident":
+        if complain_info["complained role"] != "resident" and complain_info["complained role"] != "player":
             update_info = {
                 "reason": "reputation update after second order gossip",
                 "init_persona_role": init_persona_role,
                 "target_persona_role": complain_persona_role,
                 "gossip": gossip,
                 "total_number_of_people": len(personas),
-                "number_of_bidirectional_connections": len(
-                    get_d_connect(complain_persona, G[complain_info["complained role"]])
-                ),
+                "number_of_bidirectional_connections": len(get_d_connect(complain_persona, G[complain_info["complained role"]])),
             }
             reputation_update_invest(
+                gossip_target_persona,
+                complain_persona,
+                update_info,
+            )
+        elif complain_info["complained role"] == "player":
+            update_info = {
+                "reason": "reputation update after second order gossip",
+                "init_persona_role": init_persona_role,
+                "target_persona_role": complain_persona_role,
+                "gossip": gossip,
+            }
+            reputation_update_pd_game(
                 gossip_target_persona,
                 complain_persona,
                 update_info,
@@ -221,9 +218,7 @@ def second_order_gossip(
                 "target_persona_role": complain_persona_role,
                 "gossip": gossip,
                 "total_number_of_people": len(personas),
-                "number_of_bidirectional_connections": len(
-                    get_d_connect(complain_persona, G[complain_info["complained role"]])
-                ),
+                "number_of_bidirectional_connections": len(get_d_connect(complain_persona, G[complain_info["complained role"]])),
             }
             reputation_update_sign_up(
                 gossip_target_persona,
@@ -240,10 +235,8 @@ def second_order_gossip(
         )
 
 
-def generate_convo(init_persona, target_persona, reason, complain_target,role):
-    convo = run_gpt_prompt_gossip_v2(
-        init_persona, target_persona, reason, complain_target,role
-    )[0]
+def generate_convo(init_persona, target_persona, reason, complain_target, role):
+    convo = run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_target, role)[0]
     print(convo)
     return convo
 

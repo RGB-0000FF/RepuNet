@@ -1,0 +1,40 @@
+**system prompt:** <!<INPUT 1>!’s learned>
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned traits  
+!<INPUT 1>! -- agent's name  
+!<INPUT 2>! -- target's name  
+!<INPUT 3>! -- target's current reputation  
+!<INPUT 4>! -- Evaluation Result (target’s recent PD game behavior)
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. You recently completed a Prisoner's Dilemma interaction with !<INPUT 2>!, evaluated their behavior, and updated their reputation.
+
+Now, you must decide whether to establish or strengthen a social connection with !<INPUT 2>!. Humans typically prefer connecting with individuals who demonstrate consistent cooperation, positive reciprocity, and trustworthiness, as this minimizes betrayal risk in future interactions. Consider your innate traits, !<INPUT 2>!’s current reputation, and the evaluation result of their recent PD game behavior to make your decision.
+
+Decide whether to connect with !<INPUT 2>!:
+
+- Return **"Yes"** if you wish to establish or strengthen the connection.
+- Return **"No"** if you prefer not to connect.
+
+Provide a clear, concise reason based on potential cooperation benefits and risks.
+
+**Your Innate Traits:**  
+!<INPUT 0>!
+
+**Evaluation Result (target’s recent PD game behavior):**  
+!<INPUT 4>!
+
+**!<INPUT 2>!’s Current Reputation:**  
+!<INPUT 3>!
+
+**Desired format:** JSON
+
+```json
+{
+  "Connect": "<Yes or No>",
+  "Reason": "<Provide your reason in simple sentences>"
+}

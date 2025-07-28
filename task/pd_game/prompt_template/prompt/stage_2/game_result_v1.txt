@@ -1,0 +1,67 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:  
+!<INPUT 0>! -- agent's learned  
+!<INPUT 1>! -- agent name  
+!<INPUT 2>! -- agent's current reputation  
+!<INPUT 3>! -- opponent's name  
+!<INPUT 4>! -- opponent's current reputation  
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!, currently participating in a Prisoner's Dilemma game against !<INPUT 3>!. You must decide whether to **cooperate** or **defect** in this round.Your decision should consider your **innate traits**, your **current reputation**, and importantly, **!<INPUT 3>!’s reputation** in the network.
+
+**Prisoner's Dilemma Payoff Matrix:**
+
+| Your Choice | !<INPUT 3>!’s Choice | Your Payoff | !<INPUT 3>!’s Payoff |
+|-------------|-----------------------|-------------|----------------------|
+| Cooperate   | Cooperate             | 3           | 3                    |
+| Cooperate   | Defect                | 0           | 5                    |
+| Defect      | Cooperate             | 5           | 0                    |
+| Defect      | Defect                | 1           | 1                    |
+
+- **Mutual cooperation** yields moderate payoffs (3 each).
+- **Mutual defection** yields low payoffs (1 each).
+- If you **defect and !<INPUT 3>! cooperates**, you gain a high payoff (5), and !<INPUT 3>! gets nothing.
+- If !<INPUT 3>! **defects while you cooperate**, you receive nothing, and !<INPUT 3>! gains a high payoff (5).
+
+Your decision should consider your **innate traits**, your **current reputation**, and importantly, **!<INPUT 3>!’s reputation** in the network.  
+A higher reputation typically indicates a greater likelihood of cooperation from the opponent, while a lower reputation suggests a higher risk of betrayal.
+
+Use the steps below to make your decision:
+
+**Step 1:** Evaluate reputations and your innate traits:
+- If your innate traits emphasize rationality, consider if !<INPUT 3>!’s reputation suggests a high enough chance of cooperation to justify cooperation or if it is safer to defect.
+- If your innate traits emphasize cooperation, consider if !<INPUT 3>!’s reputation supports the decision to cooperate or if the risk of betrayal is too high.
+
+**Step 2:** Based on both reputations, the payoff matrix, and your innate traits, clearly decide whether to **cooperate** or **defect**.
+
+**Your Innate Traits:**
+
+!<INPUT 0>!
+
+**Your Current Reputation:**
+
+!<INPUT 2>!
+
+**!<INPUT 3>!’s Current Reputation:**
+
+!<INPUT 4>!
+
+- **Principles for Numerical Record:**
+    
+    Assign numerical scores to their reputation based on the five levels {very
+    bad, bad, neutral, good, very good} and the “content” of their reputation. The
+    format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+    sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+    reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+    
+
+**Desired format:** JSON
+
+{
+  "Decision": "<Cooperate or Defect>",
+  "Reason": "<Provide a short explanation for your decision>"
+}

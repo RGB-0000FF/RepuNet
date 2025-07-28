@@ -1,0 +1,30 @@
+[project]
+name = "repunet"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "infomap>=2.8.0",
+    "matplotlib>=3.10.3",
+    "networkx>=3.5",
+    "numpy>=2.3.2",
+    "openai>=1.97.1",
+    "pandas>=2.3.1",
+    "ruff>=0.12.5",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.14.5",
+    "tqdm>=4.67.1",
+]
+
+[tool.ruff]
+line-length = 200
+indent-width = 4
+exclude = [".venv", "venv", "env", "__pycache__", ".git", ".mypy_cache", ".pytest_cache"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+

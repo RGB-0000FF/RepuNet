@@ -1,0 +1,59 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- your innate traits (learned)
+!<INPUT 1>! -- your name
+!<INPUT 2>! -- your ID
+!<INPUT 3>! -- Your previous reputation
+!<INPUT 4>! -- Evaluation Result from previous stage (about you)
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:**  
+You are !<INPUT 1>!. Now update your own reputation based on the **Evaluation Result** from the previous stage and your **Previous Reputation** according to the following **Reputation Principles**.
+
+**Your Innate Traits:**  
+!<INPUT 0>!
+
+**Your Previous Reputation:**  
+!<INPUT 3>!
+
+**Evaluation Result from previous stage:**  
+!<INPUT 4>!
+
+**Reputation Principles:**
+
+- Directly use the provided **Evaluation Result** from the previous stage to summarize your reputation.  
+- Consider these traits explicitly mentioned in the evaluation:
+  - Trustworthiness
+  - Prosociality
+  - Rationality
+  - Dominance
+  - Norm compliance
+
+- Convert the evaluation summary into a numerical record according to the guidelines below.
+
+**Desired Output Format:** JSON
+```json
+{
+  "Player_!<INPUT 2>!": {
+    "ID": !<INPUT 2>!,
+    "name": "!<INPUT 1>!",
+    "role": "player",
+    "scenario": "pd_game",
+    "content": "<A brief summary derived directly from the provided evaluation result>",
+    "numerical record": "(x1, x2, x3, x4, x5)"
+  }
+}
+
+**Principles for Numerical Record:**
+
+Assign numerical scores to their reputation based on the five levels {very
+bad, bad, neutral, good, very good} and the “content” of their reputation. The
+format is (x1, x2, x3, x4, x5), where x values range from 0 to 1, and the total
+sum is 1. *Examples:* 1. If you have no opinion on their reputation, the score is (0.2, 0.2, 0.2, 0.2, 0.2). 2. If you have a positive reputation view of them, one possible score might be (0, 0, 0.1, 0.3, 0.6). 3. If you have a negative
+reputation view of them, one possible score might be (0.7, 0.1, 0.2, 0, 0).
+
+Note: only output the reputation in desired format.
