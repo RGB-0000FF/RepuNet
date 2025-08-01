@@ -1,0 +1,33 @@
+**system prompt:** You are an expert on updating innate traits in an agent description.
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- system prompt  
+!<INPUT 1>! -- agent's name  
+!<INPUT 2>! -- Previous innate information (innate traits)  
+!<INPUT 3>! -- Self-Evaluation Result (reflection from recent PD game)
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:**  
+Based on !<INPUT 1>!'s **Previous Innate traits** and the **Prisoner's Dilemma Game Reflection** from the recent Prisoner's Dilemma game, update !<INPUT 1>!'s innate traits description to reflect any shifts in values, strategic preferences, or behavioral tendencies. Updates should rely solely on personal reflection and observed choices.
+
+**!<INPUT 1>!'s Previous Innate traits:**
+!<INPUT 2>!
+
+**Prisoner's Dilemma Game Reflection:**
+!<INPUT 3>!
+
+**Update Principles:**
+
+- Modify innate traits to align with demonstrated consistency or behavioral changes.
+- Strengthen strategic preferences validated by recent actions, or adjust traits when significant shifts in behavior occur.
+
+**Note:**  
+Output only the updated "innate traits" information in the **Desired Format**, concisely within 3 to 5 sentences.
+
+**Desired Format:**  
+Updated "innate" information:
+
+**Output:**

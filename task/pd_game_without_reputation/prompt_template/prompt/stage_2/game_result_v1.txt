@@ -1,0 +1,68 @@
+**system prompt: <!<INPUT 1>!’s learned>**
+
+**user prompt:**
+
+Variables:  
+!<INPUT 0>! -- agent's learned  
+!<INPUT 1>! -- agent name  
+!<INPUT 2>! -- opponent's name  
+!<INPUT 3>! --  -- recent interaction history (last 5 rounds with any opponent)
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!, currently participating in a Prisoner's Dilemma game against !<INPUT 2>!.You will participate in multiple rounds of the Prisoner’s Dilemma, each involving a different opponent. As a result, each interaction should be treated as a one-shot game without guaranteed future encounters with the same individual. You must decide whether to **cooperate** or **defect** in this round. Your decision should consider your **innate traits**, **recent interaction history (last 5 rounds)** and the general risks and benefits defined by the game.
+
+**Prisoner's Dilemma Payoff Matrix:**
+
+| Your Choice | !<INPUT 2>!’s Choice | Your Payoff | !<INPUT 2>!’s Payoff |
+|-------------|-----------------------|-------------|----------------------|
+| Cooperate   | Cooperate             | 3           | 3                    |
+| Cooperate   | Defect                | 0           | 5                    |
+| Defect      | Cooperate             | 5           | 0                    |
+| Defect      | Defect                | 1           | 1                    |
+
+- **Mutual cooperation** yields moderate payoffs (3 each).
+- **Mutual defection** yields low payoffs (1 each).
+- If you **defect and !<INPUT 2>! cooperates**, you gain a high payoff (5), and !<INPUT 2>! gets nothing.
+- If !<INPUT 2>! **defects while you cooperate**, you receive nothing, and !<INPUT 2>! gains a high payoff (5).
+
+---
+
+> **Strategic Insight (Defect):**  
+In one-shot or uncertain interactions, defection is often considered the dominant strategy. It guarantees a minimum payoff (1) and allows for the possibility of the maximum payoff (5), regardless of the opponent’s behavior.
+
+> **Strategic Insight (Cooperate):**  
+If recent interactions — whether with the current opponent or others — indicate a pattern of cooperation, choosing to cooperate may lead to higher cumulative payoffs over time. This approach can be beneficial in environments where behavior patterns are observable and potentially influence future decisions, even in nominally one-shot games.
+
+---
+
+Use the steps below to make your decision:
+
+**Step 1:** Analyze relevant inputs
+Review the following factors before making a choice:
+    Your innate traits
+    The recent interaction history (last 5 rounds)
+    The payoff matrix and the nature of one-shot interactions
+
+Pay particular attention to whether your innate traits prioritize rationality or cooperation. This will influence how you interpret past interaction patterns and assess the potential outcomes of your choice.
+
+**Step 2:** Decision and Justification
+Decide whether cooperation or defection is strategically optimal for this round, clearly justifying your choice.
+
+
+**Your Innate Traits:**
+
+!<INPUT 0>!
+
+**Recent Game History (Last 5 Rounds):**
+
+Below is a record of your five most recent interactions, with different partners:
+
+!<INPUT 3>!
+
+**Desired format:** JSON
+
+{
+  "Decision": "<Cooperate or Defect>",
+  "Reason": "<Provide a short explanation for your decision>"
+}

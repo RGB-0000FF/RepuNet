@@ -240,6 +240,7 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
     player1 = personas[pair[0]]
     player2 = personas[pair[1]]
 
+    # Here is force to play
     print_stage1 = {
         "player1_decision": "Accept to play.",
         "player2_decision": "Accept to play.",
@@ -346,11 +347,7 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
         if hasattr(player2.scratch, "resources_unit"):
             player2.scratch.resources_unit += player2_payoff
 
-        event_description = (
-            f"Success PD game: player1 is {player1.name}, player2 is {player2.name}\n"
-            f"stage 1: player1_decision is {player1_decision}, player2_decision is {player2_decision}\n"
-            f"stage 2: game_result is {game_result}, player1_strategy is {player1_strategy}, player2_strategy is {player2_strategy}"
-        )
+        event_description = f"Game_result is {game_result}. {player1.name} chose {player1_strategy}, {player2.name} chose {player2_strategy}"
 
         player1.associativeMemory.add_event(
             subject=player1.name,

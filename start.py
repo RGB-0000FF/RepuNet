@@ -18,6 +18,9 @@ from task.sign_up_without_reputation.sign_up import *
 from task.sign_up_without_reputation_without_gossip.sign_up import *
 
 from task.pd_game.pd_game import *
+from task.pd_game_without_gossip.pd_game import *
+from task.pd_game_without_reputation.pd_game import *
+from task.pd_game_without_reputation_without_gossip.pd_game import *
 
 from utils import *
 
@@ -318,10 +321,10 @@ class Creation:
             self.set_graph_pd_game()
             print(f"sim_code: {self.sim_code}-----------------------------------------------")
 
+            # 根据reputation和gossip设置选择相应的PD游戏版本
             if self.with_reputation and self.with_gossip:
-                if self.step != 1 and (self.step - 1) % 5 == 0:
-                    update_knowns_reputation_observation(self.personas)
-
+                # 原始版本：有reputation和gossip
+                print("Using original PD game with reputation and gossip")
                 pairs = pair_each(self.personas, self.G)
 
                 # 设置gossip同步
@@ -330,7 +333,7 @@ class Creation:
                 set_gossip_sync(len(pairs))
 
                 # 多线程执行PD游戏
-                self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results")
+                self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "original")
 
                 # 顺序执行gossip（如果有的话）
                 from task.pd_game.pd_game import execute_gossip_sequential, gossip_queue
@@ -339,16 +342,66 @@ class Creation:
                     print("START EXECUTE Gossip!!!!!!!!!!!!!!!!!!!!!")
                     execute_gossip_sequential(self.personas, self.G, max_retries=3)
 
+            elif self.with_reputation and not self.with_gossip:
+                # without_gossip版本：有reputation，无gossip
+                print("Using PD game without gossip (with reputation)")
+                pairs = pair_each(self.personas, self.G)
+
+                # 多线程执行PD游戏（无gossip）
+                self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "without_gossip")
+
+            elif not self.with_reputation and self.with_gossip:
+                # without_reputation版本：无reputation，有gossip
+                print("Using PD game without reputation (with gossip)")
+
+                pairs = pair_each_without_reputation(self.personas, self.G)
+
+                # 设置gossip同步
+                from task.pd_game_without_reputation.pd_game import set_gossip_sync
+
+                set_gossip_sync(len(pairs))
+
+                # 多线程执行PD游戏
+                self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "without_reputation")
+
+                # 顺序执行gossip（如果有的话）
+                from task.pd_game_without_reputation.pd_game import execute_gossip_sequential_without_reputation, gossip_queue
+
+                if gossip_queue:
+                    print("START EXECUTE Gossip!!!!!!!!!!!!!!!!!!!!!")
+                    execute_gossip_sequential_without_reputation(self.personas, self.G, max_retries=3)
+
+            else:
+                # without_reputation_without_gossip版本：无reputation，无gossip
+                print("Using PD game without reputation and without gossip")
+
+                pairs = pair_each_without_reputation_without_gossip(self.personas, self.G)
+
+                # 多线程执行PD游戏（无reputation和gossip）
+                self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "without_reputation_without_gossip")
+
             self.save()
             int_counter -= 1
 
-    def execute_pd_games_parallel(self, pairs, save_folder):
+    def execute_pd_games_parallel(self, pairs, save_folder, version="original"):
         """并行执行PD游戏"""
         with ThreadPoolExecutor(max_workers=len(pairs)) as executor:
+            # 根据版本选择相应的函数
+            if version == "original":
+                start_func = start_pd_game
+            elif version == "without_gossip":
+                start_func = start_pd_game_without_gossip  # 使用without_gossip模块的start_pd_game_without_gossip
+            elif version == "without_reputation":
+                start_func = start_pd_game_without_reputation
+            elif version == "without_reputation_without_gossip":
+                start_func = start_pd_game_without_reputation_without_gossip
+            else:
+                start_func = start_pd_game
+
             # 提交所有任务
             future_to_pair = {
                 executor.submit(
-                    start_pd_game,
+                    start_func,
                     pair,
                     self.personas,
                     self.G,
@@ -364,11 +417,11 @@ class Creation:
                 try:
                     result = future.result()
                     if result and result[0] is not None:
-                        print(f"Completed PD game: {pair[0]} vs {pair[1]}")
+                        print(f"Completed PD game ({version}): {pair[0]} vs {pair[1]}")
                     else:
-                        print(f"Failed PD game: {pair[0]} vs {pair[1]} (after all retries)")
+                        print(f"Failed PD game ({version}): {pair[0]} vs {pair[1]} (after all retries)")
                 except Exception as e:
-                    print(f"Error in PD game {pair[0]} vs {pair[1]}: {e}")
+                    print(f"Error in PD game ({version}) {pair[0]} vs {pair[1]}: {e}")
 
     def open_server(self):
         """

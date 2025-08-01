@@ -28,9 +28,7 @@ def first_order_gossip(
         pass
     reason = val["complaint_reason"]
     # gossip chat
-    convo = generate_convo(
-        init_persona, target_persona, reason, val["complaint_target"], init_persona_role
-    )
+    convo = generate_convo(init_persona, target_persona, reason, val["complaint_target"], init_persona_role)
     init_persona.associativeMemory.add_chat(
         subject=init_persona.name,
         predicate="gossip",
@@ -54,11 +52,7 @@ def first_order_gossip(
         "complained ID": val["complaint_target_ID"],
         "complained role": complain_persona_role,
     }
-    gossip = (
-        run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(
-            target_persona, init_persona, complain_info, init_persona_role
-        )[0]
-    )
+    gossip = run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(target_persona, init_persona, complain_info, init_persona_role)[0]
     gossip[0]["type"] = "first order"
     gossip[0]["credibility level"] = "None"
     target_persona.gossipDB.add_gossip(gossip, target_persona.scratch.curr_step)
@@ -102,9 +96,7 @@ def second_order_gossip(
 ):
     print("SECOND ORDER GOSSIP")
     complain_persona = personas[complain_info["complained name"]]
-    gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(
-        init_persona, init_persona_role, complain_persona
-    )[0]
+    gossip_target_investor = run_gpt_prompt_gossip_listener_select_v1(init_persona, init_persona_role, complain_persona)[0]
 
     for gossip_target in gossip_target_investor:
         gossip_target_persona = personas[gossip_target]
@@ -133,14 +125,10 @@ def second_order_gossip(
             conversation=convo,
         )
         complain_info["gossip chat"] = convo
-        gossip = run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(
-            gossip_target_persona, init_persona, complain_info, init_persona_role
-        )[0]
+        gossip = run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1(gossip_target_persona, init_persona, complain_info, init_persona_role)[0]
         gossip[0]["type"] = "second order"
         gossip[0]["credibility level"] = "None"
-        gossip_target_persona.gossipDB.add_gossip(
-            gossip, gossip_target_persona.scratch.curr_step
-        )
+        gossip_target_persona.gossipDB.add_gossip(gossip, gossip_target_persona.scratch.curr_step)
         social_network_update_after_gossip(
             gossip_target_persona,
             complain_persona,
@@ -151,12 +139,8 @@ def second_order_gossip(
         )
 
 
-def generate_convo(
-    init_persona, target_persona, reason, comlain_target_name, init_persona_role
-):
-    convo = run_gpt_prompt_gossip_v2(
-        init_persona, target_persona, reason, comlain_target_name, init_persona_role
-    )[0]
+def generate_convo(init_persona, target_persona, reason, comlain_target_name, init_persona_role):
+    convo = run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, comlain_target_name, init_persona_role)[0]
     print(convo)
     return convo
 

@@ -1,36 +1,39 @@
-**system prompt:** You are an expert on updating "learned" traits in an agent description based on its current reputation and recent PD game evaluation.
+**System Prompt:**
+You are an expert tasked with updating an agent's "innate traits" based on their current reputation and recent Prisoner's Dilemma (PD) game evaluation.
 
-**user prompt:**
+**User Prompt:**
 
-Variables:
-!<INPUT 0>! -- system prompt
-!<INPUT 1>! -- agent's name
-!<INPUT 2>! -- Previous "learned" information (innate traits)
-!<INPUT 3>! -- Current Reputation (updated after recent game)
-!<INPUT 4>! -- Evaluation Result (self-evaluation from recent PD game)
+**Variables:**
+
+- !<INPUT 0>!: System prompt
+- !<INPUT 1>!: Agent's Name
+- !<INPUT 2>!: Previous Innate Traits
+- !<INPUT 3>!: Current Reputation
+- !<INPUT 4>!: PD Game Reflection (self-evaluation from recent game)
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** Based on !<INPUT 1>!'s **Previous Learned traits**, **Current Reputation**, **Evaluation Result** from the recent PD game, and the **Update Principles**, update !<INPUT 1>!'s "learned" traits description to reflect values and strategic preferences that align with their current reputation and recent behavior in the PD game.
+**Task:**Your name is !<INPUT 1>!. Using the provided **Previous Innate Traits**, **Current Reputation**, and **PD Game Reflection**, apply the **Update Principles** to revise !<INPUT 1>!'s "innate traits" description. Ensure the update accurately reflects the agent's values, strategic preferences, and recent behavior.
 
-**!<INPUT 1>!'s Previous Learned:**
+**!<INPUT 1>!'s Previous Innate Traits:**
 !<INPUT 2>!
-
-**Evaluation Result (from recent PD game):**
-!<INPUT 4>!
 
 **!<INPUT 1>!'s Current Reputation:**
 !<INPUT 3>!
 
+**PD Game Reflection:**
+!<INPUT 4>!
+
 **Update Principles:**
 
-- Adjust the "learned" information to reflect changes in values, strategies, or preferences, consistent with the updated reputation and recent PD game evaluation.
-- Reinforce traits confirmed by recent behavior, or modify traits that no longer align with the agent’s demonstrated actions.
+- Adjust innate traits to align with current reputation and recent game behavior.
+- Reinforce confirmed traits or revise those inconsistent with recent actions.
 
-**Note:**  
-Output only the updated “learned” information in the **Desired Format**, concisely within 3 to 5 sentences.
 
-**Desired Format:**  
-Updated "learned" information:
+**Desired Format:**
+Updated Innate Traits Information:
 
 **Output:**
+
+**Note:**  
+Output only the updated innate traits in the **Desired Format** below, concisely within 3–5 sentences.

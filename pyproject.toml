@@ -6,11 +6,13 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "infomap>=2.8.0",
-    "matplotlib>=3.10.3",
+    "ipykernel>=6.30.0",
+    "matplotlib==3.9.4",
     "networkx>=3.5",
     "numpy>=2.3.2",
     "openai>=1.97.1",
     "pandas>=2.3.1",
+    "pip>=25.1.1",
     "ruff>=0.12.5",
     "seaborn>=0.13.2",
     "statsmodels>=0.14.5",

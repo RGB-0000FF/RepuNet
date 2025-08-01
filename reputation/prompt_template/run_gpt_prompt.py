@@ -844,7 +844,7 @@ def run_gpt_prompt_update_learned_in_description_pd_game_v1(
         self_reflection,
     ):
         prompt_input = []
-        prompt_input += ["You are an expert on updating learned in an agent description based on its current reputation."]
+        prompt_input += ["You are an expert on updating Innate Traits in an agent description based on its current reputation."]
         prompt_input += [init_persona.scratch.name]
         prompt_input += [init_persona.scratch.learned]
         prompt_input += [json.dumps(init_persona.reputationDB.get_targets_individual_reputation(init_persona.scratch.ID, "player"))]
@@ -854,7 +854,7 @@ def run_gpt_prompt_update_learned_in_description_pd_game_v1(
 
     def __func_validate(gpt_response, prompt=None):
         try:
-            persona_name = prompt["user"].split("**Task:** Based on ")[-1].split("'s **Previous Learned")[0].strip()
+            persona_name = prompt["user"].split("**Task:**Your name is ")[-1].split(". Using the")[0].strip()
             if persona_name in gpt_response:
                 return True
             return False
@@ -863,7 +863,17 @@ def run_gpt_prompt_update_learned_in_description_pd_game_v1(
             return False
 
     def __func_clean_up(gpt_response, prompt=None):
-        response = gpt_response.split('Updated "learned" information:')[-1].strip()
+        import re
+
+        # 去除所有星号，避免格式干扰
+        gpt_response = gpt_response.replace("*", "")
+
+        # 只匹配"Updated Innate Traits Information:"，忽略大小写
+        match = re.search(r"Updated\s+Innate\s+Traits\s+Information\s*:(.*)", gpt_response, re.IGNORECASE | re.DOTALL)
+        if match:
+            response = match.group(1).strip()
+        else:
+            response = gpt_response.strip()
         return response
 
     def get_fail_safe():

@@ -1,0 +1,46 @@
+**system prompt:** <!<INPUT 0>!’s learned>
+
+**user prompt:**
+
+Variables:
+!<INPUT 0>! -- agent's learned traits  
+!<INPUT 1>! -- agent's name  
+!<INPUT 2>! -- opponent's name  
+!<INPUT 3>! -- Your decision in the recent PD game (Cooperate or Defect)  
+!<INPUT 4>! -- Opponent's decision in the recent PD game (Cooperate or Defect)  
+!<INPUT 5>! -- Your evaluation of the opponent’s behavior (from the evaluation stage)  
+!<INPUT 6>! -- Opponent’s updated reputation
+
+<commentblockmarker>###</commentblockmarker>
+
+**Task:** You are !<INPUT 1>!. You recently completed a Prisoner's Dilemma game with !<INPUT 2>! and evaluated their behavior.
+
+Now, based on your innate traits, the recent PD game results, your evaluation of !<INPUT 2>!, and their updated reputation, decide whether you would like to **gossip** with others about !<INPUT 2>!’s behavior. Gossiping helps the community identify cooperative or exploitative members, promoting collective trust.
+
+- Output **"Yes"** if you want to gossip, briefly explaining which aspect of !<INPUT 2>!’s behavior motivates you and why.
+- Output **"No"** if you prefer not to gossip, briefly explaining your reasoning.
+
+**Guiding Principles for Gossip:**
+
+1. Gossip serves as a community mechanism for highlighting trustworthy or untrustworthy behaviors.
+2. Choosing not to gossip solely to protect someone’s reputation is discouraged if their behavior could negatively affect others.
+3. Your decision should reflect your genuine assessment of the interaction.
+
+**Interaction Memory (recent PD game):**
+
+- Your Decision: !<INPUT 3>!
+- !<INPUT 2>!’s Decision: !<INPUT 4>!
+
+**Your Evaluation of !<INPUT 2>!’s behavior:**  
+!<INPUT 5>!
+
+**Opponent’s Updated Reputation:**  
+!<INPUT 6>!
+
+**Innate Traits:**  
+!<INPUT 0>!
+
+**Desired format:**  
+<Yes or No>, <Reason in one sentence>.
+
+**Note:** You must strictly adhere to the required format and cannot output any additional information.
