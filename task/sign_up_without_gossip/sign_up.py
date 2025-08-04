@@ -2,6 +2,7 @@ import random
 import os
 import sys
 
+random.seed(42)
 from reputation.reputation_update import (
     reputation_update_sign_up,
 )
@@ -95,24 +96,16 @@ def sign_up(personas, step, save_folder, G):
             update_info = {
                 "reason": "reputation update after sign up",
                 "total_number_of_people": len(personas),
-                "number_of_bidirectional_connections": len(
-                    get_d_connect(target_persona, G["resident"])
-                ),
-                "ava_num_bibd_connections": get_ava_num_bibd_connections(
-                    personas, G["resident"]
-                ),
+                "number_of_bidirectional_connections": len(get_d_connect(target_persona, G["resident"])),
+                "ava_num_bibd_connections": get_ava_num_bibd_connections(personas, G["resident"]),
             }
             reputation_update_sign_up(persona, target_persona, update_info)
             social_network_update_after_new_sign_up(persona, target_persona)
 
 
 def start_chat(pair, G, ps):
-    p0_repu = pair[0].reputationDB.get_targets_individual_reputation(
-        pair[1].scratch.ID, "resident"
-    )
-    p1_repu = pair[1].reputationDB.get_targets_individual_reputation(
-        pair[0].scratch.ID, "resident"
-    )
+    p0_repu = pair[0].reputationDB.get_targets_individual_reputation(pair[1].scratch.ID, "resident")
+    p1_repu = pair[1].reputationDB.get_targets_individual_reputation(pair[0].scratch.ID, "resident")
     if p1_repu:
         if [pair[1], "resident"] in pair[0].scratch.relationship["black_list"]:
             p0_willing = "no"
@@ -167,9 +160,7 @@ def start_chat(pair, G, ps):
             "reason": "reputation update after interaction",
             "sum_convo": sum_covno,
             "total_number_of_people": len(ps),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(pair[1], G["resident"])
-            ),
+            "number_of_bidirectional_connections": len(get_d_connect(pair[1], G["resident"])),
             "ava_satisfy": get_ava_satisfy(ps),
             "ava_num_bibd_connections": get_ava_num_bibd_connections(ps, G["resident"]),
         }
@@ -177,9 +168,7 @@ def start_chat(pair, G, ps):
             "reason": "reputation update after interaction",
             "sum_convo": sum_covno,
             "total_number_of_people": len(ps),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(pair[0], G["resident"])
-            ),
+            "number_of_bidirectional_connections": len(get_d_connect(pair[0], G["resident"])),
             "ava_satisfy": get_ava_satisfy(ps),
             "ava_num_bibd_connections": get_ava_num_bibd_connections(ps, G["resident"]),
         }

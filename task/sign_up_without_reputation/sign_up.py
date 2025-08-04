@@ -1,6 +1,7 @@
 import random
 import os
 
+random.seed(42)
 from without_reputation.gossip import first_order_gossip
 from without_reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_update_learned_in_description_v1,

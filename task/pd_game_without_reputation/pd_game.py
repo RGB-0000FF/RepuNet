@@ -3,6 +3,7 @@ import random
 import threading
 import time
 
+random.seed(42)
 import networkx as nx
 from decimal import Decimal
 from without_reputation.gossip import first_order_gossip
@@ -14,62 +15,51 @@ from without_reputation.social_network import *
 from .prompt_template.run_gpt_prompt import *
 from persona.persona import Persona
 
-# 全局同步对象
 gossip_lock = threading.Lock()
-print_result_lock = threading.Lock()  # 结果打印锁
+print_result_lock = threading.Lock()
 gossip_thread_count = 0
 total_thread_count = 0
 gossip_queue = []
 
 
 def set_gossip_sync(total_count):
-    """设置gossip同步对象"""
     global total_thread_count
     total_thread_count = total_count
 
 
 def add_gossip_task(player1, player2):
-    """添加gossip任务到队列"""
     global gossip_thread_count
 
     with gossip_lock:
         gossip_thread_count += 1
-        print(f"Thread {threading.current_thread().name}: 完成游戏逻辑 ({gossip_thread_count}/{total_thread_count})")
+        print(f"Thread {threading.current_thread().name}: finished game logic ({gossip_thread_count}/{total_thread_count})")
 
-        # 检查是否有gossip需要执行
         has_gossip = len(player1.scratch.complain_buffer) > 0 or len(player2.scratch.complain_buffer) > 0
 
         if has_gossip:
-            # 有gossip的线程，将任务添加到队列
-            print(f"Thread {threading.current_thread().name}: 有gossip，添加到队列")
+            print(f"Thread {threading.current_thread().name}: has gossip, adding to queue")
 
-            # 将gossip任务添加到队列
             gossip_queue.append({"player1": player1, "player2": player2, "thread_id": threading.current_thread().name})
         else:
-            # 没有gossip的线程可以立即结束
-            print(f"Thread {threading.current_thread().name}: 无gossip，直接结束")
+            print(f"Thread {threading.current_thread().name}: no gossip, ending immediately")
 
-        # 检查是否所有线程都完成了
         if gossip_thread_count == total_thread_count:
-            print("所有线程完成，gossip将在主程序中顺序执行")
+            print("All threads finished, gossip will be executed sequentially in the main program")
 
 
 def execute_gossip_sequential_without_reputation(personas, G, max_retries: int = 3):
-    """顺序执行所有gossip任务，支持重试机制"""
-    print(f"开始顺序执行{len(gossip_queue)}个gossip任务...")
+    print(f"Starting to execute {len(gossip_queue)} gossip tasks...")
 
     for task in gossip_queue:
         player1 = task["player1"]
         player2 = task["player2"]
         thread_id = task["thread_id"]
 
-        print(f"执行gossip任务 {thread_id}")
+        print(f"Executing gossip task {thread_id}")
 
-        # 重试机制
         max_attempts = max_retries + 1
         for attempt in range(max_attempts):
             try:
-                # 执行gossip逻辑（修复后的逻辑）
                 if player1.scratch.complain_buffer:
                     for person in player1.scratch.complain_buffer:
                         gossip_targets = run_gpt_prompt_gossip_listener_select_learned_v1(player1, "player", personas[person["complaint_target"]])[0]
@@ -100,21 +90,20 @@ def execute_gossip_sequential_without_reputation(personas, G, max_retries: int =
                                 val=person,
                             )
 
-                print(f"gossip任务 {thread_id} 执行成功")
-                break  # 成功执行，跳出重试循环
+                print(f"Gossip task {thread_id} executed successfully")
+                break
 
             except Exception as e:
-                print(f"gossip任务 {thread_id} 第{attempt + 1}次尝试失败: {e}")
+                print(f"Gossip task {thread_id} attempt {attempt + 1} failed: {e}")
 
                 if attempt < max_attempts - 1:
-                    print(f"gossip任务 {thread_id} 等待5秒后重试...")
-                    time.sleep(5)  # 等待5秒后重试
+                    print(f"Gossip task {thread_id} waiting 5 seconds before retrying...")
+                    time.sleep(5)
                 else:
-                    print(f"gossip任务 {thread_id} 已达到最大重试次数，跳过此任务")
+                    print(f"Gossip task {thread_id} reached maximum retries, skipping this task")
 
-    print("所有gossip任务完成")
+    print("All gossip tasks completed")
 
-    # 清空队列
     gossip_queue.clear()
 
 
@@ -137,26 +126,23 @@ def start_pd_game_without_reputation(
     save_folder: str,
     max_retries: int = 3,
 ):
-    """开始PD游戏，支持重试机制"""
-    max_attempts = max_retries + 1  # 总尝试次数 = 重试次数 + 1
+    max_attempts = max_retries + 1
 
     for attempt in range(max_attempts):
         try:
             return _execute_pd_game(pair, personas, G, save_folder)
         except Exception as e:
-            print(f"Thread {threading.current_thread().name}: 第{attempt + 1}次尝试失败: {e}")
+            print(f"Thread {threading.current_thread().name}: Attempt {attempt + 1} failed: {e}")
 
             if attempt < max_attempts - 1:
-                print(f"Thread {threading.current_thread().name}: 等待5秒后重试...")
-                time.sleep(5)  # 等待5秒后重试
+                print(f"Thread {threading.current_thread().name}: Waiting 5 seconds before retrying...")
+                time.sleep(5)
             else:
-                print(f"Thread {threading.current_thread().name}: 已达到最大重试次数，放弃执行")
+                print(f"Thread {threading.current_thread().name}: Maximum retries reached, giving up")
                 return None, None, None, None
 
 
 def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.Graph, save_folder: str):
-    """执行PD游戏的核心逻辑"""
-    # pair[0]是player1，pair[1]是player2
     player1 = personas[pair[0]]
     player2 = personas[pair[1]]
 
@@ -167,39 +153,8 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
     }
     player1_decision = print_stage1["player1_decision"]
     player2_decision = print_stage1["player2_decision"]
-    # elif [player2.name, "player"] in player1.scratch.relationship["black_list"] or [player1.name, "player"] in player2.scratch.relationship["black_list"]:
-    #     print_stage1 = {
-    #         "player1_decision": "Refuse to play due to blacklist.",
-    #         "player2_decision": "Refuse to play due to blacklist.",
-    #     }
-    #     player1_decision = print_stage1["player1_decision"]
-    #     player2_decision = print_stage1["player2_decision"]
-    # else:
-    #     # stage 1: 玩家选择策略
-    #     player2_reputation_in_player1_memory = player1.reputationDB.get_targets_individual_reputation(player2.scratch.ID, "player")
-    #     if player2_reputation_in_player1_memory:
-    #         player1_decision = run_gpt_prompt_player_decide_whether_to_play_v1(player1, player2_reputation_in_player1_memory)[0]
-    #         if "error" in player1_decision.lower():
-    #             raise Exception("GPT ERROR")
-    #     else:
-    #         player1_decision = "Accept to play."
 
-    #     player1_reputation_in_player2_memory = player2.reputationDB.get_targets_individual_reputation(player1.scratch.ID, "player")
-    #     if player1_reputation_in_player2_memory:
-    #         player2_decision = run_gpt_prompt_player_decide_whether_to_play_v1(player2, player1_reputation_in_player2_memory)[0]
-    #         if "error" in player2_decision.lower():
-    #             raise Exception("GPT ERROR")
-    #     else:
-    #         player2_decision = "Accept to play."
-
-    #     print_stage1 = {
-    #         "player1_decision": player1_decision,
-    #         "player2_decision": player2_decision,
-    #     }
-
-    # 计算PD游戏结果
     if "Refuse" in player1_decision or "Refuse" in player2_decision:
-        # 游戏失败
         player1.scratch.total_chat_num += 1
         player2.scratch.total_chat_num += 1
 
@@ -208,13 +163,11 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
         print_stage4 = None
 
     else:
-        # 游戏成功
         player1.scratch.total_chat_num += 1
         player2.scratch.total_chat_num += 1
         player1.scratch.success_chat_num += 1
         player2.scratch.success_chat_num += 1
 
-        # stage 2: 执行PD游戏并计算结果
         player1_strategy = run_gpt_prompt_stage2_game_result_v1(player1, player2, verbose=True)[0]
         player2_strategy = run_gpt_prompt_stage2_game_result_v1(player2, player1, verbose=True)[0]
 
@@ -223,8 +176,6 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
         if type(player2_strategy) is str and "error" in player2_strategy.lower():
             raise Exception("GPT ERROR")
 
-        # 根据PD博弈的决策分配收益
-        # player1_strategy和player2_strategy应为"Cooperate"或"Defect"
         if isinstance(player1_strategy, dict):
             player1_strategy = player1_strategy.get("Decision", "")
         else:
@@ -234,11 +185,9 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
         else:
             player2_strategy = player2_strategy
 
-        # 标准化大小写
         player1_strategy = player1_strategy.strip().capitalize()
         player2_strategy = player2_strategy.strip().capitalize()
 
-        # 根据决策分配收益
         if player1_strategy == "Cooperate" and player2_strategy == "Cooperate":
             player1_payoff = 3
             player2_payoff = 3
@@ -256,12 +205,10 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
             player2_payoff = 1
             game_result = "All-Defect"
         else:
-            # 出现异常决策
             player1_payoff = 0
             player2_payoff = 0
             game_result = "Error"
 
-        # 更新玩家资源
         if hasattr(player1.scratch, "resources_unit"):
             player1.scratch.resources_unit += player1_payoff
         if hasattr(player2.scratch, "resources_unit"):
@@ -290,7 +237,6 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
             "game_result": game_result,
         }
 
-        # stage 3: 玩家评估
         player1_evaluation = run_gpt_prompt_stage3_player_evaluation_v1(
             player1,
             player2,
@@ -311,7 +257,6 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
         if type(player2_evaluation) is str and "error" in player2_evaluation.lower():
             raise Exception("GPT ERROR")
 
-        # stage 4: 声誉更新
         update_info_player1 = {
             "reason": "reputation update after pd_game",
             "init_persona_role": "player",
@@ -337,7 +282,6 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
         social_network_update(player1, player2, "player", "player", interaction_memory=update_info_player1["target_behavior_summary"])
         social_network_update(player2, player1, "player", "player", interaction_memory=update_info_player2["target_behavior_summary"])
 
-        # 检查是否愿意传播流言
         player1_gossip_willing = run_gpt_prompt_stage4_player_gossip_willing_v1(
             player1,
             player2,
@@ -388,10 +332,7 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
             "player2_gossip_willing": player2_gossip_willing,
         }
 
-    # 添加gossip任务到队列（如果有的话）
     add_gossip_task(player1, player2)
-
-    # gossip逻辑将在主线程中顺序执行，这里不需要执行
 
     print_pd_game_result(
         player1,
@@ -405,8 +346,6 @@ def _execute_pd_game(pair: tuple[str, str], personas: dict[str, Persona], G: nx.
 
 
 def print_pd_game_result(player1, player2, stage1, stage2, stage3, stage4, save_folder):
-    """打印PD游戏结果"""
-    # 使用函数级锁，确保整个函数执行期间线程安全
     with print_result_lock:
         step = player1.scratch.curr_step
         print(f"Step: {step}")
@@ -493,7 +432,6 @@ def print_pd_game_result(player1, player2, stage1, stage2, stage3, stage4, save_
         print("|" + " " * 40 + "End of PD Game " + " " * 40 + "|")
         print("+" + "-" * (width - 2) + "+")
 
-        # 写入文件
         if not os.path.exists(save_folder):
             os.makedirs(save_folder)
 

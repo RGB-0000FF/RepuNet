@@ -2,6 +2,7 @@ import random
 import os
 import sys
 
+random.seed(42)
 from reputation.reputation_update import (
     reputation_update_sign_up,
 )

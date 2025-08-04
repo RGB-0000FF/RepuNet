@@ -1,5 +1,6 @@
 import random
 
+random.seed(42)
 from without_reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_update_learned_in_description_v1,
 )
@@ -25,10 +26,7 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
     investor = personas[pair[0]]
     trustee = personas[pair[1]]
 
-    if (
-        trustee.name in investor.scratch.relationship["black_list"]
-        or investor.name in trustee.scratch.relationship["black_list"]
-    ):
+    if trustee.name in investor.scratch.relationship["black_list"] or investor.name in trustee.scratch.relationship["black_list"]:
         print_stage1 = {
             "plan": "There is no plan for this investment because both parties might be on each other's blacklist.",
             "investor_decided": "Refuse. The investors refused because the parties might be on each other's blacklist.",
@@ -37,9 +35,7 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         investor_decided = print_stage1["investor_decided"]
     else:
         # stage 1
-        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
-            0
-        ]
+        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[0]
 
         if "error" in trustee_plan.lower():
             raise Exception("GPT ERROR")
@@ -48,13 +44,9 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
 
         trustee_part = trustee_plan.split("trustee retains")[-1].split(".")[0].strip()
 
-        investor_part = (
-            trustee_plan.split("investor receives")[-1].split("of")[0].strip()
-        )
+        investor_part = trustee_plan.split("investor receives")[-1].split("of")[0].strip()
 
-        investor_decided = run_gpt_prompt_investor_decided_v1(
-            investor, trustee, trustee_plan, verbose=True
-        )[0]
+        investor_decided = run_gpt_prompt_investor_decided_v1(investor, trustee, trustee_plan, verbose=True)[0]
 
         if "error" in investor_decided.lower():
             raise Exception("GPT ERROR")
@@ -86,10 +78,10 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
 
         print_stage3 = None
         print_stage4 = None
-        memory_for_investor=description
-        memory_for_trustee=description
-        full_investment=False
-        
+        memory_for_investor = description
+        memory_for_trustee = description
+        full_investment = False
+
     elif "Accept" in investor_decided:
         # success investment num +1
         investor.scratch.total_num_investor += 1
@@ -98,20 +90,16 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
         trustee.scratch.success_num_trustee += 1
 
         # stage 2
-        a_unit = round(
-            float(investor_decided.split("Allocation")[-1].split("unit")[0].strip()), 3
-        )
+        a_unit = round(float(investor_decided.split("Allocation")[-1].split("unit")[0].strip()), 3)
         investor.scratch.resources_unit -= a_unit
         # k is 2
         k = 2
         unallocated_unit = a_unit * k
 
         # stage 3
-        trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
-            trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
-        )[0]
-        trustee_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip())*a_unit/100
-        investor_allocation_part = k*float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip())*a_unit/100
+        trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True)[0]
+        trustee_allocation_part = k * float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip()) * a_unit / 100
+        investor_allocation_part = k * float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip()) * a_unit / 100
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part
@@ -144,53 +132,46 @@ def start_investment_without_reputation_without_gossip(pair, personas, G, save_f
             "reported_investment_outcome": reported_investment_outcome,
         }
 
-        
         print_stage4 = None
-        investor_evaluation=run_gpt_prompt_investor_evaluation_v1(
+        investor_evaluation = run_gpt_prompt_investor_evaluation_v1(
             init_persona=investor,
             target_persona=trustee,
             trustee_plan=trustee_plan,
             investor_resource=a_unit,
             k=2,
-            actual_distributable=2*a_unit,
+            actual_distributable=2 * a_unit,
             trustee_allocation=trustee_allocation,
             reported_resource=reported_investment_outcome,
             verbose=True,
         )[0]
-        trustee_evaluation=run_gpt_prompt_trustee_evaluation_v1(
-        init_persona=trustee,
-        target_persona=investor,
-        trustee_plan=trustee_plan,
-        investor_resource=a_unit,
-        k=2,
-        actual_distributable=2*a_unit,
-        trustee_share=trustee_part,
-        investor_share=investor_part,
-        reported_resource=reported_investment_outcome,
-        trustee_allocated=trustee_allocation_part,
-        investor_allocated=investor_allocation_part,
-        verbose=True,
+        trustee_evaluation = run_gpt_prompt_trustee_evaluation_v1(
+            init_persona=trustee,
+            target_persona=investor,
+            trustee_plan=trustee_plan,
+            investor_resource=a_unit,
+            k=2,
+            actual_distributable=2 * a_unit,
+            trustee_share=trustee_part,
+            investor_share=investor_part,
+            reported_resource=reported_investment_outcome,
+            trustee_allocated=trustee_allocation_part,
+            investor_allocated=investor_allocation_part,
+            verbose=True,
         )[0]
-        i_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-            investor, "investor",investor_evaluation["self_reflection"]
-        )[0]
+        i_new_learned = run_gpt_prompt_update_learned_in_description_v1(investor, "investor", investor_evaluation["self_reflection"])[0]
         investor.scratch.learned["investor"] = i_new_learned
 
-        t_new_learned = run_gpt_prompt_update_learned_in_description_v1(
-            trustee, "trustee",trustee_evaluation["self_reflection"]
-        )[0]
+        t_new_learned = run_gpt_prompt_update_learned_in_description_v1(trustee, "trustee", trustee_evaluation["self_reflection"])[0]
         trustee.scratch.learned["trustee"] = t_new_learned
-        memory_for_investor=investor_evaluation["trustee_reflection"]
-        memory_for_trustee=trustee_evaluation["investor_reflection"]
-        full_investment=True
+        memory_for_investor = investor_evaluation["trustee_reflection"]
+        memory_for_trustee = trustee_evaluation["investor_reflection"]
+        full_investment = True
     # social network update after investment
-    social_network_update(investor, trustee, "investor", "trustee",interaction_memory=memory_for_investor,full_investment=full_investment)
-    social_network_update(trustee, investor, "trustee", "investor",interaction_memory=memory_for_trustee,full_investment=full_investment)
-    investor.update_interaction_memory(role="investor",memory=memory_for_investor)
-    trustee.update_interaction_memory(role="trustee",memory=memory_for_trustee)
-    print_investment_result(
-        investor, trustee, print_stage1, print_stage3, print_stage4, save_folder
-    )
+    social_network_update(investor, trustee, "investor", "trustee", interaction_memory=memory_for_investor, full_investment=full_investment)
+    social_network_update(trustee, investor, "trustee", "investor", interaction_memory=memory_for_trustee, full_investment=full_investment)
+    investor.update_interaction_memory(role="investor", memory=memory_for_investor)
+    trustee.update_interaction_memory(role="trustee", memory=memory_for_trustee)
+    print_investment_result(investor, trustee, print_stage1, print_stage3, print_stage4, save_folder)
 
 
 def print_investment_result(investor, trustee, stage1, stage3, stage4, save_folder):
@@ -209,9 +190,7 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
     trustee_line = f"| Trustee: {trustee.name}: allocated plan {stage1['plan']}"
     print("+" + "-" * (width - 2) + "+")
     print(trustee_line + " " * (width - len(trustee_line) - 1) + "|")
-    investor_line = (
-        f"| Investor: {investor.name}: investor decided {stage1['investor_decided']}"
-    )
+    investor_line = f"| Investor: {investor.name}: investor decided {stage1['investor_decided']}"
     print(investor_line + " " * (width - len(investor_line) - 1) + "|")
     print("+" + "-" * (width - 2) + "+")
 
@@ -221,9 +200,7 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
         print("+" + "-" * (width - 2) + "+")
         if not os.path.exists(save_folder):
             os.makedirs(save_folder)
-        with open(
-            f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a"
-        ) as f:
+        with open(f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a") as f:
             f.write("+" + "-" * (width - 2) + "+\n")
             f.write("|" + "**Stage  1**" + " " * (width - 14) + "|\n")
             f.write("+" + "-" * (width - 2) + "+\n")
@@ -258,9 +235,7 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
     # Write investment results to file
     if not os.path.exists(save_folder):
         os.makedirs(save_folder)
-    with open(
-        f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a"
-    ) as f:
+    with open(f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a") as f:
         f.write("+" + "-" * (width - 2) + "+\n")
         f.write("|" + "**Stage  1**" + " " * (width - 14) + "|\n")
         f.write("+" + "-" * (width - 2) + "+\n")

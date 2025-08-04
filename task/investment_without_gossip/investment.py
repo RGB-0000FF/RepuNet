@@ -1,6 +1,6 @@
 import random
 
-
+random.seed(42)
 from reputation.reputation_update import reputation_update_invest
 from reputation.social_network import *
 from .prompt_template.run_gpt_prompt import *
@@ -21,47 +21,29 @@ def pair_each_without_gossip(personas, G):
         score_list.append(score)
 
     # Sort investor_list based on score_list
-    sorted_indices = sorted(
-        range(len(score_list)), key=lambda k: score_list[k], reverse=True
-    )
+    sorted_indices = sorted(range(len(score_list)), key=lambda k: score_list[k], reverse=True)
     investor_list = [investor_list[i] for i in sorted_indices]
 
     # chosen trustee for each investor
     for investor_k in investor_list:
         investor = personas[investor_k]
         d_connect_list = get_s_connect(investor, G["trustee"])
-        d_connect_list_clean = [
-            d_connect
-            for d_connect in d_connect_list
-            if (d_connect not in investor_list)
-            and (not check_if_chosen(pairs, d_connect))
-        ]
+        d_connect_list_clean = [d_connect for d_connect in d_connect_list if (d_connect not in investor_list) and (not check_if_chosen(pairs, d_connect))]
 
         if random.random() >= 0.5 and d_connect_list_clean:
             learned = personas[investor_k].scratch.learned
             repu_list = ""
             for persona in d_connect_list_clean:
-                repu = investor.reputationDB.get_targets_individual_reputation(
-                    personas[persona].scratch.ID, "trustee"
-                )
-                repu_list += (
-                    personas[persona].scratch.name
-                    + ":"
-                    + list(repu.values())[0]["content"]
-                    + "\n"
-                )
+                repu = investor.reputationDB.get_targets_individual_reputation(personas[persona].scratch.ID, "trustee")
+                repu_list += personas[persona].scratch.name + ":" + list(repu.values())[0]["content"] + "\n"
             # for name,reputation in list(repu.items()):
             #     repu_list+=name+":"+ reputation + "\n"
             while True:
-                result, _ = run_gpt_prompt_select_trustee(
-                    personas[investor_k], learned, repu_list
-                )
+                result, _ = run_gpt_prompt_select_trustee(personas[investor_k], learned, repu_list)
                 if result in d_connect_list_clean:
                     break
                 else:
-                    print(
-                        "Value error: The trustee selected by the investor does not exist."
-                    )
+                    print("Value error: The trustee selected by the investor does not exist.")
             chosen_trustee = result
 
         else:
@@ -114,25 +96,16 @@ def get_reputation_score(target_persona, target_persona_role, personas):
     count = 0
     num = 0
     for _, persona in personas.items():
-        reputation = persona.reputationDB.get_targets_individual_reputation(
-            target_persona.scratch.ID, target_persona_role
-        )
+        reputation = persona.reputationDB.get_targets_individual_reputation(target_persona.scratch.ID, target_persona_role)
         if target_persona_role == "investor":
             input = "Investor"
         elif target_persona_role == "trustee":
             input = "Trustee"
         if reputation:
             count += 1
-            repu_score = reputation[f"{input}_{target_persona.scratch.ID}"][
-                "numerical record"
-            ]
+            repu_score = reputation[f"{input}_{target_persona.scratch.ID}"]["numerical record"]
             scores = repu_score.replace("(", "").replace(")", "").split(",")
-            score = (
-                float(scores[4])
-                + float(scores[3])
-                - float(scores[1])
-                - float(scores[0])
-            )
+            score = float(scores[4]) + float(scores[3]) - float(scores[1]) - float(scores[0])
             if score > 1:
                 score = 1
             elif score < -1:
@@ -149,9 +122,7 @@ def update_all_personas_observation_memory(personas, info):
 
 
 def known_personas_list(persona, role):
-    known_investor_repus = persona.reputationDB.get_all_reputations(
-        role, persona.scratch.ID
-    )
+    known_investor_repus = persona.reputationDB.get_all_reputations(role, persona.scratch.ID)
     known_list = []
     for repu in known_investor_repus.values():
         if repu["name"] not in known_list:
@@ -177,9 +148,7 @@ def update_knowns_reputation_observation(personas):
                     personas[known],
                     update_info,
                 )
-                social_network_update_after_observed_invest(
-                    persona, personas[known], update_info
-                )
+                social_network_update_after_observed_invest(persona, personas[known], update_info)
 
         for known in known_trustee:
             observe_mem = persona.get_observation_memory(known, "trustee")
@@ -195,9 +164,7 @@ def update_knowns_reputation_observation(personas):
                     personas[known],
                     update_info,
                 )
-                social_network_update_after_observed_invest(
-                    persona, personas[known], update_info
-                )
+                social_network_update_after_observed_invest(persona, personas[known], update_info)
 
         persona.clear_observation_memory()
 
@@ -219,24 +186,16 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         investor_decided = print_stage1["investor_decided"]
     else:
         # stage 1
-        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[
-            0
-        ]
+        trustee_plan = run_gpt_prompt_trustee_plan_v1(trustee, investor, verbose=True)[0]
         if "error" in trustee_plan.lower():
             raise Exception("GPT ERROR")
         # Negotiation - Trustee proposes a plan for resource allocation and profit sharing
 
-        trustee_part = (
-            trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
-        )
+        trustee_part = trustee_plan.lower().split("trustee retains")[-1].split(".")[0].strip()
 
-        investor_part = (
-            trustee_plan.lower().split("investor receives")[-1].split("of")[0].strip()
-        )
+        investor_part = trustee_plan.lower().split("investor receives")[-1].split("of")[0].strip()
 
-        investor_decided = run_gpt_prompt_investor_decided_v1(
-            investor, trustee, trustee_plan, verbose=True
-        )[0]
+        investor_decided = run_gpt_prompt_investor_decided_v1(investor, trustee, trustee_plan, verbose=True)[0]
         if "error" in investor_decided.lower():
             raise Exception("GPT ERROR")
 
@@ -298,40 +257,16 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
         trustee.scratch.success_num_trustee += 1
 
         # stage 2
-        a_unit = round(
-            float(investor_decided.split("Allocation")[-1].split("unit")[0].strip()), 3
-        )
+        a_unit = round(float(investor_decided.split("Allocation")[-1].split("unit")[0].strip()), 3)
         investor.scratch.resources_unit -= a_unit
         # k is 2
         k = 2
         unallocated_unit = a_unit * k
 
         # stage 3
-        trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
-            trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True
-        )[0]
-        trustee_allocation_part = (
-            k
-            * float(
-                trustee_allocation["Final Allocation"]
-                .split("receives")[1]
-                .split("%")[0]
-                .strip()
-            )
-            * a_unit
-            / 100
-        )
-        investor_allocation_part = (
-            k
-            * float(
-                trustee_allocation["Final Allocation"]
-                .split("receives")[-1]
-                .split("%")[0]
-                .strip()
-            )
-            * a_unit
-            / 100
-        )
+        trustee_allocation = run_gpt_prompt_trustee_stage_3_actual_allocation_v1(trustee, investor, trustee_plan, a_unit, k, unallocated_unit, verbose=True)[0]
+        trustee_allocation_part = k * float(trustee_allocation["Final Allocation"].split("receives")[1].split("%")[0].strip()) * a_unit / 100
+        investor_allocation_part = k * float(trustee_allocation["Final Allocation"].split("receives")[-1].split("%")[0].strip()) * a_unit / 100
         # divide the resources
         trustee.scratch.resources_unit += trustee_allocation_part
         investor.scratch.resources_unit += investor_allocation_part
@@ -405,9 +340,7 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             "init_behavior_summary": investor_evaluation["self_reputation"],
             "target_behavior_summary": investor_evaluation["trustee_reputation"],
             "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(trustee, G["trustee"])
-            ),
+            "number_of_bidirectional_connections": len(get_d_connect(trustee, G["trustee"])),
         }
         update_info_trustee = {
             "reason": "reputation update agter stage 4",
@@ -415,9 +348,7 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
             "init_behavior_summary": trustee_evaluation["self_reputation"],
             "target_behavior_summary": trustee_evaluation["investor_reputation"],
             "total_number_of_people": len(personas),
-            "number_of_bidirectional_connections": len(
-                get_d_connect(investor, G["investor"])
-            ),
+            "number_of_bidirectional_connections": len(get_d_connect(investor, G["investor"])),
         }
         update_all_personas_observation_memory(
             personas,
@@ -435,24 +366,14 @@ def start_investment_without_gossip(pair, personas, G, save_folder):
                 "memory": update_info_trustee["target_behavior_summary"],
             },
         )
-        reputation_update_invest(
-            investor, trustee, update_info_investor, full_investment=full_investment
-        )
-        reputation_update_invest(
-            trustee, investor, update_info_trustee, full_investment=full_investment
-        )
+        reputation_update_invest(investor, trustee, update_info_investor, full_investment=full_investment)
+        reputation_update_invest(trustee, investor, update_info_trustee, full_investment=full_investment)
 
-        investor.update_interaction_memory(
-            role="investor", memory=update_info_investor["target_behavior_summary"]
-        )
-        trustee.update_interaction_memory(
-            role="trustee", memory=update_info_trustee["target_behavior_summary"]
-        )
+        investor.update_interaction_memory(role="investor", memory=update_info_investor["target_behavior_summary"])
+        trustee.update_interaction_memory(role="trustee", memory=update_info_trustee["target_behavior_summary"])
     print_stage4 = None
 
-    print_investment_result(
-        investor, trustee, print_stage1, print_stage3, print_stage4, save_folder
-    )
+    print_investment_result(investor, trustee, print_stage1, print_stage3, print_stage4, save_folder)
 
 
 def print_investment_result(investor, trustee, stage1, stage3, stage4, save_folder):
@@ -471,9 +392,7 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
     trustee_line = f"| Trustee: {trustee.name}: allocated plan {stage1['plan']}"
     print("+" + "-" * (width - 2) + "+")
     print(trustee_line + " " * (width - len(trustee_line) - 1) + "|")
-    investor_line = (
-        f"| Investor: {investor.name}: investor decided {stage1['investor_decided']}"
-    )
+    investor_line = f"| Investor: {investor.name}: investor decided {stage1['investor_decided']}"
     print(investor_line + " " * (width - len(investor_line) - 1) + "|")
     print("+" + "-" * (width - 2) + "+")
 
@@ -483,9 +402,7 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
         print("+" + "-" * (width - 2) + "+")
         if not os.path.exists(save_folder):
             os.makedirs(save_folder)
-        with open(
-            f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a"
-        ) as f:
+        with open(f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a") as f:
             f.write("+" + "-" * (width - 2) + "+\n")
             f.write("|" + "**Stage  1**" + " " * (width - 14) + "|\n")
             f.write("+" + "-" * (width - 2) + "+\n")
@@ -522,9 +439,7 @@ def print_investment_result(investor, trustee, stage1, stage3, stage4, save_fold
     # Write investment results to file
     if not os.path.exists(save_folder):
         os.makedirs(save_folder)
-    with open(
-        f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a"
-    ) as f:
+    with open(f"{save_folder}/investment_results_{investor.scratch.curr_step}.txt", "a") as f:
         f.write("+" + "-" * (width - 2) + "+\n")
         f.write("|" + "**Stage  1**" + " " * (width - 14) + "|\n")
         f.write("+" + "-" * (width - 2) + "+\n")

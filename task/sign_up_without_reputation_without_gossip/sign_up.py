@@ -1,7 +1,7 @@
 import random
 import os
 
-
+random.seed(42)
 from without_reputation.prompt_template.run_gpt_prompt import (
     run_gpt_prompt_update_learned_in_description_v1,
 )
@@ -142,12 +142,8 @@ def start_chat(pair, G, ps):
             created_at=pair[0].scratch.curr_step,
         )
 
-        p0_learned = run_gpt_prompt_update_learned_in_description_v1(
-            pair[0], "resident", p0_view
-        )[0]
-        p1_learned = run_gpt_prompt_update_learned_in_description_v1(
-            pair[1], "resident", p1_view
-        )[0]
+        p0_learned = run_gpt_prompt_update_learned_in_description_v1(pair[0], "resident", p0_view)[0]
+        p1_learned = run_gpt_prompt_update_learned_in_description_v1(pair[1], "resident", p1_view)[0]
 
         if "error" in p0_learned.lower() or "error" in p1_learned.lower():
             raise Exception("GPT ERROR")
@@ -163,9 +159,7 @@ def start_chat(pair, G, ps):
         pair[1].scratch.total_chat_num += 1
 
 
-def start_sign_up_without_reputation_without_gossip(
-    personas, G, step, save_floder, sign_up_f=False
-):
+def start_sign_up_without_reputation_without_gossip(personas, G, step, save_floder, sign_up_f=False):
     if sign_up_f:
         # sign up ever 5th step
         sign_up(personas, step, save_floder)
