@@ -48,11 +48,6 @@ def run_gpt_prompt_reputation_update_after_stage4_investor_v1(
         prompt_input.append(init_persona.scratch.ID)
         prompt_input.append(Interaction_memory["init_behavior_summary"])
         init_persona_repu = init_persona.reputationDB.get_targets_individual_reputation(init_persona.scratch.ID, "Investor")
-        # target_persona_reputation = (
-        #     init_persona.reputationDB.get_targets_individual_reputation(
-        #         target_persona.scratch.ID, "Trustee"
-        #     )
-        # )
         prompt_input += [json.dumps(init_persona_repu)]
 
         return prompt_input

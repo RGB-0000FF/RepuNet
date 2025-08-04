@@ -22,32 +22,6 @@ from .prompt_template.run_gpt_prompt import (
 )
 
 
-def get_d_connect(init_persona, G):
-    d_connect_list = []
-    for edge in G.edges():
-        if edge[0] == init_persona.name:
-            if G.has_edge(edge[1], init_persona.name):
-                d_connect_list.append(edge[1])
-    return d_connect_list
-
-
-def get_ava_satisfy(ps):
-    sum_s = 0
-    for persona_name, persona in ps.items():
-        if persona.scratch.total_chat_num == 0:
-            sum_s += 0
-        else:
-            sum_s += persona.scratch.success_chat_num / persona.scratch.total_chat_num
-    return round(sum_s / len(ps), 2)
-
-
-def get_ava_num_bibd_connections(ps, G):
-    sum_s = 0
-    for persona_name, persona in ps.items():
-        sum_s += len(get_d_connect(persona, G))
-    return round(sum_s / len(ps), 2)
-
-
 def chat_pair(personas):
     personas_keys = list(personas.keys())
     random.shuffle(personas_keys)
@@ -100,9 +74,6 @@ def sign_up(personas, step, save_folder, G):
             target_persona = personas[target_persona_name]
             update_info = {
                 "reason": "reputation update after sign up",
-                "total_number_of_people": len(personas),
-                "number_of_bidirectional_connections": len(get_d_connect(target_persona, G["resident"])),
-                "ava_num_bibd_connections": get_ava_num_bibd_connections(personas, G["resident"]),
             }
             reputation_update_sign_up(persona, target_persona, update_info)
             social_network_update_after_new_sign_up(persona, target_persona)
@@ -134,10 +105,6 @@ def start_chat(pair, G, ps):
         p1_willing = "yes"
 
     if "yes" in p0_willing.lower() and "yes" in p1_willing.lower():
-        pair[0].scratch.total_chat_num += 1
-        pair[1].scratch.total_chat_num += 1
-        pair[0].scratch.success_chat_num += 1
-        pair[1].scratch.success_chat_num += 1
         # chat
         convo = run_gpt_prompt_create_chat_v1(pair[0], pair[1])[0]
         sum_covno = run_gpt_prompt_summarize_chat_v1(pair[0], pair[1], convo)[0]
@@ -187,19 +154,9 @@ def start_chat(pair, G, ps):
 
         update_info_0 = {
             "reason": "reputation update after interaction",
-            "sum_convo": sum_covno,
-            "total_number_of_people": len(ps),
-            "number_of_bidirectional_connections": len(get_d_connect(pair[1], G["resident"])),
-            "ava_satisfy": get_ava_satisfy(ps),
-            "ava_num_bibd_connections": get_ava_num_bibd_connections(ps, G["resident"]),
         }
         update_info_1 = {
             "reason": "reputation update after interaction",
-            "sum_convo": sum_covno,
-            "total_number_of_people": len(ps),
-            "number_of_bidirectional_connections": len(get_d_connect(pair[0], G["resident"])),
-            "ava_satisfy": get_ava_satisfy(ps),
-            "ava_num_bibd_connections": get_ava_num_bibd_connections(ps, G["resident"]),
         }
         reputation_update_sign_up(pair[0], pair[1], update_info_0)
         reputation_update_sign_up(pair[1], pair[0], update_info_1)
