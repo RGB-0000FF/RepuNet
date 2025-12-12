@@ -1,7 +1,6 @@
 # 🤝 RepuNet Simulations
 
-Paper: https://arxiv.org/html/2505.05029v2  
-Anonymous repo mirror: https://anonymous.4open.science/r/RepuNet-B346
+Paper: https://arxiv.org/html/2505.05029v2
 
 RepuNet explores reputation as a remedy for cooperation collapse in LLM-based multi-agent systems. Agents update self/peer reputation from direct interactions and gossip, rewire their network connections, and run across investment, sign-up, and prisoner’s dilemma scenarios. The system sustains cooperation, avoids collapse, and surfaces emergent behaviors such as cooperative clusters, isolation of exploitative agents, and a bias toward sharing positive over negative gossip. Agents reason through an LLM backend, and every simulation step is persisted to disk for inspection or resume.
 
