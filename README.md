@@ -1,6 +1,9 @@
 # RepuNet Simulation Runner
 
-End-to-end runner for reputation-aware social simulations (Investment, Sign-up, Prisoner’s Dilemma) with optional reputation and gossip mechanisms. Agents reason through an LLM backend, and every simulation step is persisted to disk for inspection or resume.
+Paper: https://arxiv.org/html/2505.05029v2  
+Anonymous repo mirror: https://anonymous.4open.science/r/RepuNet-B346
+
+RepuNet studies reputation as a remedy for cooperation collapse in LLM-based multi-agent systems. The runner implements the dynamic dual-level reputation framework from the paper: agents update self/peer reputation from direct interactions and gossip, and rewire the network by forming or severing connections. Across investment, sign-up, and prisoner’s dilemma scenarios, RepuNet sustains cooperation, avoids collapse, and shows emergent behaviors such as cooperative clusters, isolation of exploitative agents, and a bias toward sharing positive over negative gossip. Agents reason through an LLM backend, and every simulation step is persisted to disk for inspection or resume.
 
 ## Requirements
 - Python 3.13+
