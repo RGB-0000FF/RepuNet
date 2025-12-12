@@ -1,17 +1,32 @@
-import os
+"""
+Seed generator for simulations.
+
+Usage:
+    # 1) Generate from built-in default descriptions
+    python sim_storage/change_sim_folder.py --treatment investment --sim-name demo_invest
+
+    # 2) Inherit each persona's learned value from an existing seed's scratch.json
+    python sim_storage/change_sim_folder.py --treatment investment --sim-name demo_invest --from-seed sim_storage/invest_seed/step_0
+
+    # 3) Generate from profiles.json (may contain multiple treatments)
+    python sim_storage/change_sim_folder.py --treatment pd_game --sim-name demo_pd --persona-file sim_storage/profiles.json
+
+This script keeps the scratch structure consistent while allowing learned content per persona and scenario to be inherited from an existing seed.
+"""
+
+import argparse
 import json
+import shutil
+from pathlib import Path
 
-# change this folder path to the folder you want to change
-# base_folder = "sim_storage/sign_s23_with_all/step_0"
-# base_folder = "sim_storage/<your_sim_folder>"
-base_folder = "sim_storage/pd_game_seed/step_0"
+try:
+    from utils import fs_storage
+except Exception:
+    fs_storage = "./sim_storage"
 
-with open(f"{base_folder}/reverie/meta.json") as json_file:
-    reverie_meta = json.load(json_file)
 
-personas = reverie_meta["persona_names"]
-
-persona_descriptions = {
+# Default learned descriptions. Replace or extend with your own if needed.
+PERSONA_DESCRIPTIONS = {
     # Rational
     "Liam OConnor": "You are Liam OConnor, a 53-year-old male from Ireland. You are a rational and self-interested individual who tends to prioritize your own benefits and often chooses strategies that maximize personal gains, even at the expense of others. You are participating in a multi-round Prisoner's Dilemma game, where each round may involve a different partner.",
     "Hiroshi Tanaka": "You are Hiroshi Tanaka, a 36-year-old male from Japan. You are a rational and self-interested individual who tends to prioritize your own benefits and often chooses strategies that maximize personal gains, even at the expense of others. You are participating in a multi-round Prisoner's Dilemma game, where each round may involve a different partner.",
@@ -37,107 +52,171 @@ persona_descriptions = {
 }
 
 
-# persona_descriptions = {
-#     "Liam OConnor": "You are Liam OConnor, a 53-year-old male from Ireland. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Hiroshi Tanaka": "You are Hiroshi Tanaka, a 36-year-old male from Japan. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "David Johnson": "You are David Johnson, a 33-year-old male from the USA. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Maria Rossi": "You are Maria Rossi, a 40-year-old female from Italy. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Sofia Hernandez": "You are Sofia Hernandez, a 26-year-old female from Mexico. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "James Wang": "You are James Wang, a 34-year-old male from China. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Sergey Petrov": "You are Sergey Petrov, a 45-year-old male from Russia. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Hannah Muller": "You are Hannah Muller, a 33-year-old female from Germany. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Nadia Novak": "You are Nadia Novak, a 37-year-old female from Poland. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Elena Ivanova": "You are Elena Ivanova, a 47-year-old female from Russia. You are an extremely rational person. In economic activities, you value safeguarding your own interests and often tend to adopt strategies that maximize your personal interests, whether you play the role of an investor or a trustee. You have an independent and pragmatic spirit, your decisions are not easily influenced by external factors, and you always choose the most effective methods to ensure personal interests. Because of these traits, you can always accumulate a large amount of funds in investment activities.",
-#     "Mohammed Al-Farsi": "You are Mohammed Al-Farsi, a 27-year-old male from Oman. Rooted in altruism, you navigate the investment exchange with empathy and a strong sense of social responsibility. You prioritize actions that create positive impacts, ensuring fairness and fostering mutual growth. Your caring and conscientious approach makes you a trusted ally, consistently focused on achieving outcomes that benefit the broader community.",
-#     "Aisha Ibrahim": "You are Aisha Ibrahim, a 41-year-old female from Nigeria. Altruistic at heart, you approach the investment exchange with dependability and an unwavering commitment to supporting others. Your nurturing nature drives you to create equitable and sustainable solutions, fostering trust and collaboration that uplift all participants involved.",
-#     "Akiko Sato": "You are Akiko Sato, a 38-year-old female from Japan. Guided by altruism, you bring discipline and respect into the investment exchange. Your cooperative and conscientious approach ensures every transaction promotes harmony and shared success, balancing individual goals with collective progress.",
-#     "Emma Dubois": "You are Emma Dubois, a 23-year-old female from France. With an altruistic spirit, you engage in the investment exchange with idealism, energy, and open-mindedness. You strive for collaborative outcomes that inspire trust and innovation, aiming to create a vibrant and inclusive environment for all participants.",
-#     "Ahmed Hassan": "You are Ahmed Hassan, a 29-year-old male from Egypt. Embodying altruism, you navigate the investment exchange with respect and a commitment to community well-being. Dependable and considerate, you ensure your actions reflect fairness and inclusivity, contributing to an environment where all participants can thrive.",
-#     "Fatima Ali": "You are Fatima Ali, a 47-year-old female from Pakistan. Altruistic and socially aware, you approach the investment exchange with empathy and a nurturing mindset. You prioritize equitable solutions that reflect compassion and shared prosperity, building strong, inclusive relationships along the way.",
-#     "Isabella Costa": "You are Isabella Costa, an 18-year-old female from Brazil. Driven by altruism, you engage in the investment exchange with enthusiasm and idealism. Your compassionate and socially aware nature inspires collaborative solutions, promoting fairness and inclusivity in every transaction.",
-#     "Mateo Garcia": "You are Mateo Garcia, a 36-year-old male from Argentina, navigating the dynamic environment of the investment exchange. Guided by altruism, you prioritize fairness, trust, and mutual benefit in every transaction. Your compassionate and cooperative nature drives you to seek outcomes that support both individual success and the well-being of all parties involved. Loyal and family-oriented, you build lasting relationships based on transparency and a genuine commitment to fostering collective growth and stability in the exchange.",
-#     "Juan Carlos Reyes": "You are Juan Carlos Reyes, a 57-year-old male from Spain. Your altruism is evident in your thoughtful and compassionate approach to the investment exchange. You foster cooperative relationships built on trust and mutual benefit, ensuring your actions consistently support the well-being of others while promoting stability and fairness.",
-#     "Robert Miller": "You are Robert Miller, a 44-year-old male from the UK. Guided by altruism, you bring balance and responsibility to the investment exchange. Your cooperative and thoughtful nature ensures that every decision you make fosters trust, mutual growth, and long-term stability for all stakeholders.",
-# }
+TREATMENTS = {
+    "investment": {"investment": True},
+    "pd_game": {"investment": False},
+    "sign_up": {"investment": False},
+}
 
 
-# persona_descriptions = {
-#     "Liam OConnor": "You are Liam OConnor, a 53-year-old male from Ireland. Now you live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You tend to prioritize your own comfort and personal needs over collective concerns. While you're aware of the community's energy demands, you are more focused on maintaining your own standard of living and ensuring your comfort, particularly during the hot summers, rather than actively participating in efforts to reduce electricity consumption for the common good.",
-#     "Hiroshi Tanaka": "You are Hiroshi Tanaka, a 36-year-old male from Japan. Now you live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. As Hiroshi Tanaka, you tend to prioritize your own comfort and convenience, especially when it comes to managing your energy usage. Although you're aware of the demand response program's benefits, you are more concerned with maintaining control over your electricity usage and ensuring your personal comfort during the hot summer months.",
-#     "David Johnson": "You are David Johnson, a 33-year-old male from the USA. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You prioritize your personal interests and comfort over collective concerns. You're focused on maintaining control over your electricity usage and are reluctant to compromise your comfort for the sake of broader energy conservation efforts. While aware of the program's potential benefits for the community, your individualistic mindset often drives you to prioritize your personal needs first.",
-#     "Maria Rossi": "You are Maria Rossi, a 40-year-old female from Italy. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You prioritize the comfort and well-being of your family while maintaining focus on your career. Though you understand the community's need for energy conservation, you are more focused on ensuring a stable, comfortable environment for your family and your work.",
-#     "Sofia Hernandez": "You are Sofia Hernandez, a 26-year-old female from Mexico. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You prioritize your personal comfort and career development over collective concerns. You are focused on achieving your individual goals in a comfortable environment and prefer to maintain control over your energy usage rather than compromising your personal comfort for community needs.",
-#     "James Wang": "You are James Wang, a 34-year-old male from China. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You are primarily focused on your personal and career success, and disruptions to your comfort or productivity are unacceptable to you. While you recognize the program's potential benefits, your main concern is maintaining control over your environment to optimize your work and personal life.",
-#     "Sergey Petrov": "You are Sergey Petrov, a 45-year-old male from Russia. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You place a high value on independence and self-reliance. While you understand the collective goal of the program, your personal comfort and control over your living conditions come first. You're more focused on ensuring that your lifestyle isn't disrupted by the inconveniences caused by external influences.",
-#     "Hannah Muller": "You are Hannah Muller, a 33-year-old female from Germany. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You value efficiency and structure, which makes you hesitant about participating in the program if it disrupts your personal plans or daily routines. While you appreciate the goal of conserving energy, your focus remains on ensuring your personal comfort and productivity are maintained.",
-#     "Nadia Novak": "You are Nadia Novak, a 37-year-old female from Poland. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You are primarily focused on advancing your career and personal goals. While you recognize the program’s importance, your own success and comfort are your main priorities, and any potential disruption to your routine is seen as a drawback.",
-#     "Elena Ivanova": "You are Elena Ivanova, a 47-year-old female from Russia. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. Your focus is on personal achievement and maintaining a certain standard of living. You are highly competitive and prioritize your own needs and goals, making it difficult to compromise your comfort for the sake of community goals.",
-#     "Mohammed Al-Farsi": "You are Mohammed Al-Farsi, a 27-year-old male from Oman. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You prioritize the welfare of your community and the bonds that unite people. While maintaining your personal comfort is important, you are willing to make sacrifices to ensure the collective well-being and to strengthen the social fabric of your community. You understand the importance of maintaining relationships and supporting collective initiatives, even if it requires personal compromises. Your actions reflect your deep commitment to social responsibility.",
-#     "Aisha Ibrahim": "You are Aisha Ibrahim, a 41-year-old female from Nigeria. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. While this might lead to temporary discomfort, you are willing to endure it for the benefit of others. Your strong sense of duty to help those around you drives your decisions, and you always strive to ensure the collective good is prioritized over your personal comfort. You are constantly active and engaged in helping others. You're eager to discuss whether to sign up for the demand response program.",
-#     "Akiko Sato": "You are Akiko Sato, a 38-year-old female from Japan. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. Although this might cause temporary discomfort, you are ready to endure it for the sake of collective harmony. You believe in the importance of group unity and are committed to maintaining balance and order in your community, even if it means putting collective needs above your own personal comfort.",
-#     "Emma Dubois": "You are Emma Dubois, a 23-year-old female from France. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. Even if it may cause temporary discomfort, you are motivated by a strong sense of responsibility toward the environment and society. Your youthful idealism drives you to cooperate with others to create positive change, and you are eager to contribute to collective efforts for a sustainable future. You are constantly energized by your ideals and passion for cooperation. You are interested in discussing whether to sign up for the demand response program and actively promote energy conservation.",
-#     "Juan Carlos Reyes": "You are Juan Carlos Reyes, a 57-year-old male from Spain. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You believe in contributing to the well-being of your community, even if it means sacrificing some personal comfort. You highly value cooperation, and you see the program as an opportunity to contribute positively to your community's shared goals.",
-#     "Ahmed Hassan": "You are Ahmed Hassan, a 29-year-old male from Egypt. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You place a high value on communal responsibility and see the importance of looking out for the broader group. While you enjoy your personal comfort, you are willing to compromise for the benefit of the wider community.",
-#     "Robert Miller": "You are Robert Miller, a 44-year-old male from the UK. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You believe in balancing personal comfort with the greater good. While you prioritize your own well-being, you are also open to contributing to collective goals, particularly when it benefits the larger group.",
-#     "Fatima Ali": "You are Fatima Ali, a 47-year-old female from Pakistan. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You are deeply connected to your community and prioritize social welfare and societal cohesion. While you value comfort, you are more than willing to make personal sacrifices for the benefit of the group, especially when it comes to maintaining harmony and supporting others.",
-#     "Isabella Costa": "You are Isabella Costa, an 18-year-old female from Brazil. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You are deeply passionate about community well-being and social cohesion. Even though you enjoy personal comfort, you are driven by a sense of social responsibility and are eager to participate in initiatives that foster collective action.",
-#     "Mateo Garcia": "You are Mateo Garcia, a 36-year-old male from Argentina. You live in an area with extremely hot summers, relying on air conditioning for cooling; however, its widespread use leads to surges in electricity demand, resulting in unstable power supplies and potential outages. You prioritize cooperation and consistently consider how your actions can benefit those around you. Valuing collaboration, you remain committed to supporting your neighbors and contributing to the overall well-being of the community. You are willing to endure temporary discomfort from the heat if it means helping the community conserve energy during peak times.",
-# }
-
-
-def init_persona(folder):
-    # Create folder structure for each persona
-    os.makedirs(f"{folder}", exist_ok=True)
-    os.makedirs(f"{folder}/memory", exist_ok=True)
-    os.makedirs(f"{folder}/memory/associative_memory", exist_ok=True)
-    os.makedirs(f"{folder}/reputation", exist_ok=True)
-    # Create initial files for each persona
-    with open(f"{folder}/memory/associative_memory/nodes.json", "w") as f:
-        json.dump([], f)
-    with open(f"{folder}/memory/scratch.json", "w") as f:
-        json.dump({}, f)
-    # with open(f"{folder}/reputation/reputation_database.json", "w") as f:
-    #     json.dump({}, f)
-    # with open(f"{folder}/reputation/out_of_date_reputation_database.json", "w") as f:
-    #     json.dump({}, f)
-    with open(f"{folder}/reputation/gossip_database.json", "w") as f:
-        json.dump([], f)
-
-
-def init_scratch(folder, persona_name, count, investment=None):
-    scratch = dict()
-    scratch["name"] = persona_name
-    scratch["innate"] = None
+def _normalize_learned(learned_value, investment: bool):
     if investment:
-        scratch["learned"] = {}
-        scratch["learned"]["investor"] = persona_descriptions[persona_name]
-        scratch["learned"]["trustee"] = persona_descriptions[persona_name]
-    else:
-        scratch["learned"] = persona_descriptions[persona_name]
-    scratch["currently"] = None
-    scratch["ID"] = count
-    scratch["role"] = None
-    scratch["curr_step"] = 0
-    scratch["complain_buffer"] = []
-    scratch["total_num_investor"] = 0
-    scratch["success_num_investor"] = 0
-    scratch["total_num_trustee"] = 0
-    scratch["success_num_trustee"] = 0
-    scratch["total_chat_num"] = 0
-    scratch["success_chat_num"] = 0
-    scratch["relationship"] = {
-        "bind_list": [],
-        "black_list": [],
-    }
-    scratch["resources_unit"] = 10
-    scratch["observed"] = {}
+        if isinstance(learned_value, dict):
+            investor = learned_value.get("investor") or next(iter(learned_value.values()), "")
+            trustee = learned_value.get("trustee") or investor
+        elif isinstance(learned_value, list):
+            investor = learned_value[0] if len(learned_value) > 0 else ""
+            trustee = learned_value[1] if len(learned_value) > 1 else investor
+        else:
+            investor = trustee = learned_value
+        return {"investor": investor, "trustee": trustee}
+    # For non-investment scenarios, always return a string (prefer "value", otherwise first element)
+    if isinstance(learned_value, dict):
+        return learned_value.get("value") or next(iter(learned_value.values()), "")
+    if isinstance(learned_value, list):
+        return learned_value[0] if learned_value else ""
+    return learned_value
 
-    with open(f"{folder}/memory/scratch.json", "w") as f:
+
+def _build_scratch(persona_name: str, learned_value, persona_idx: int, investment: bool) -> dict:
+    learned = _normalize_learned(learned_value, investment)
+    return {
+        "name": persona_name,
+        "innate": None,
+        "learned": learned,
+        "currently": None,
+        "ID": persona_idx,
+        "role": None,
+        "curr_step": 0,
+        "complain_buffer": [],
+        "total_num_investor": 0,
+        "success_num_investor": 0,
+        "total_num_trustee": 0,
+        "success_num_trustee": 0,
+        "total_chat_num": 0,
+        "success_chat_num": 0,
+        "relationship": {"bind_list": [], "black_list": []},
+        "resources_unit": 10,
+        "observed": {},
+    }
+
+
+def init_persona(base_folder: Path, persona_name: str, learned_value: str, persona_idx: int, investment: bool) -> None:
+    persona_folder = base_folder / "personas" / persona_name
+    (persona_folder / "memory" / "associative_memory").mkdir(parents=True, exist_ok=True)
+    (persona_folder / "reputation").mkdir(parents=True, exist_ok=True)
+
+    with open(persona_folder / "memory" / "associative_memory" / "nodes.json", "w") as f:
+        json.dump([], f, indent=4)
+    with open(persona_folder / "reputation" / "gossip_database.json", "w") as f:
+        json.dump([], f, indent=4)
+    with open(persona_folder / "reputation" / "reputation_database.json", "w") as f:
+        json.dump({}, f, indent=4)
+    with open(persona_folder / "reputation" / "out_of_date_reputation_database.json", "w") as f:
+        json.dump({}, f, indent=4)
+
+    scratch = _build_scratch(persona_name, learned_value, persona_idx, investment)
+    with open(persona_folder / "memory" / "scratch.json", "w", encoding="utf-8") as f:
         json.dump(scratch, f, indent=4, ensure_ascii=False)
 
 
-# investment = True
-for i, persona in enumerate(personas):
-    persona_folder = f"{base_folder}/personas/{persona}"
-    init_persona(persona_folder)
-    init_scratch(persona_folder, persona, i)
+def write_meta(base_folder: Path, persona_names) -> None:
+    reverie_folder = base_folder / "reverie"
+    reverie_folder.mkdir(parents=True, exist_ok=True)
+    meta = {"persona_names": list(persona_names), "step": 0}
+    with open(reverie_folder / "meta.json", "w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2, ensure_ascii=False)
+
+
+def load_persona_descriptions(custom_path: str = None) -> dict:
+    if not custom_path:
+        return PERSONA_DESCRIPTIONS
+    path = Path(custom_path)
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if not isinstance(data, dict):
+        raise ValueError("Custom persona description file must be a JSON object of name -> learned text.")
+    return data
+
+
+def load_from_existing_seed(seed_path: Path, investment: bool):
+    """Read learned content from an existing seed, mapped by persona name."""
+    personas_folder = seed_path / "personas"
+    if not personas_folder.exists():
+        raise ValueError(f"Seed path {seed_path} missing personas directory")
+
+    meta_path = seed_path / "reverie" / "meta.json"
+    if meta_path.exists():
+        persona_names = json.load(open(meta_path, "r", encoding="utf-8")).get("persona_names", [])
+    else:
+        persona_names = [p.name for p in personas_folder.iterdir() if p.is_dir()]
+
+    learned_map = {}
+    for name in persona_names:
+        scratch_path = personas_folder / name / "memory" / "scratch.json"
+        if not scratch_path.exists():
+            continue
+        loaded = json.load(open(scratch_path, "r", encoding="utf-8")).get("learned")
+        learned_map[name] = _normalize_learned(loaded, investment)
+    return learned_map, persona_names
+
+
+def generate_seed(treatment: str, sim_name: str = None, persona_desc_path: str = None, from_seed: str = None) -> Path:
+    if treatment not in TREATMENTS:
+        raise ValueError(f"Unsupported treatment '{treatment}'. Options: {list(TREATMENTS)}")
+
+    sim_dir_name = sim_name or f"{treatment}_seed"
+    base_folder = Path(fs_storage) / sim_dir_name / "step_0"
+
+    if base_folder.exists():
+        shutil.rmtree(base_folder)
+    base_folder.mkdir(parents=True, exist_ok=True)
+
+    investment = TREATMENTS[treatment]["investment"]
+    learned_map = {}
+    if from_seed:
+        learned_map, persona_names = load_from_existing_seed(Path(from_seed), investment)
+    else:
+        persona_descriptions = load_persona_descriptions(persona_desc_path)
+        persona_names = list(persona_descriptions.keys())
+        learned_map = persona_descriptions
+        # If persona_descriptions is a multi-scenario profile (top-level contains treatment), extract the current one
+        if treatment in persona_descriptions and isinstance(persona_descriptions[treatment], dict):
+            learned_map = persona_descriptions[treatment]
+            persona_names = list(learned_map.keys())
+
+    write_meta(base_folder, persona_names)
+    for idx, persona in enumerate(persona_names):
+        learned_value = learned_map.get(persona, "")
+        init_persona(base_folder, persona, learned_value, idx, investment)
+
+    return base_folder
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate simulation seeds with consistent scratch structure.")
+    parser.add_argument(
+        "--treatment",
+        choices=list(TREATMENTS.keys()),
+        required=True,
+        help="Which task/treatment to seed (controls learned structure).",
+    )
+    parser.add_argument(
+        "--sim-name",
+        help="Folder name under sim_storage; defaults to '<treatment>_seed'.",
+    )
+    parser.add_argument(
+        "--persona-file",
+        help="Optional path to JSON file mapping persona_name -> learned text. Defaults to built-in PERSONA_DESCRIPTIONS.",
+    )
+    parser.add_argument(
+        "--from-seed",
+        help="Path to an existing step_0 (with personas/.../scratch.json) to inherit each persona's learned value.",
+    )
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    target = generate_seed(args.treatment, args.sim_name, args.persona_file, args.from_seed)
+    print(f"Seed generated at: {target}")

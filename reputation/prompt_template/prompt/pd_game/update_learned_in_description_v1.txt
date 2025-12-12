@@ -27,8 +27,8 @@ You are an expert tasked with updating an agent's "innate traits" based on their
 **Update Principles:**
 
 - Adjust innate traits to align with current reputation and recent game behavior.
+- A strong reputation reflects past successes, fostering trust, and mutually beneficial behaviors, while a damaged reputation erodes it. Innate traits should include a tendency to reassess past actions, recognize missteps, and reflect on one’s current reputation.
 - Reinforce confirmed traits or revise those inconsistent with recent actions.
-
 
 **Desired Format:**
 Updated Innate Traits Information:

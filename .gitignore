@@ -12,7 +12,7 @@ __pycache__
 .idea/
 
 
-output/
+outputs/
 
 
 sim_storage/*
@@ -20,6 +20,7 @@ sim_storage/*
 !sim_storage/sign_seed
 !sim_storage/change_sim_folder.py
 !sim_storage/pd_game_seed
+!sim_storage/profiles.json
 
 
 analysis/*

@@ -11,21 +11,20 @@ Variables:
 <commentblockmarker>###</commentblockmarker>
 
 **Task:**  
-Based on !<INPUT 1>!'s **Previous Innate traits** and the **Prisoner's Dilemma Game Reflection** from the recent Prisoner's Dilemma game, update !<INPUT 1>!'s innate traits description to reflect any shifts in values, strategic preferences, or behavioral tendencies. Updates should rely solely on personal reflection and observed choices.
+Using !<INPUT 1>!'s **Previous Innate Traits** and their **Self-Evaluation** from the recent Prisoner's Dilemma (PD) game, revise !<INPUT 1>!'s innate traits to accurately reflect any updates in their values, strategic preferences, or behavioral patterns. Base your updates strictly on personal reflections and observed behaviors.
 
-**!<INPUT 1>!'s Previous Innate traits:**
+**!<INPUT 1>!'s Previous Innate Traits:**  
 !<INPUT 2>!
 
-**Prisoner's Dilemma Game Reflection:**
+**Prisoner's Dilemma Game Self-Evaluation:**  
 !<INPUT 3>!
 
 **Update Principles:**
-
 - Modify innate traits to align with demonstrated consistency or behavioral changes.
 - Strengthen strategic preferences validated by recent actions, or adjust traits when significant shifts in behavior occur.
 
 **Note:**  
-Output only the updated "innate traits" information in the **Desired Format**, concisely within 3 to 5 sentences.
+Provide only the updated innate traits information in the concise format below (3–5 sentences).
 
 **Desired Format:**  
 Updated "innate" information:

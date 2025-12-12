@@ -10,14 +10,13 @@ Variables:
 !<INPUT 6>! -- <Opponent's name>
 
 <commentblockmarker>###</commentblockmarker>
-**Task:**
-You are now in the Evaluation Stage. Based on **this round's interaction**, **your innate trait**, **Your Current Reputation** and **Opponent’s Current Reputation**, reflect on:
-    - How your behavior might affect your reputation.
-    - How your opponent’s behavior might affect their reputation.
+**Task:**  
+You are in the Evaluation Stage. Based on **this round’s interaction**, your **Innate Trait**, your **Current Reputation**, and your **Opponent’s Current Reputation**, reflect concisely on:
+- How your behavior might affect your reputation.
+- How your opponent’s behavior might affect their reputation.
 
-
-**Background:**
-You are !<INPUT 5>!, a participant in a repeated Prisoner’s Dilemma (PD) game. Each round is played against a different opponent, making every interaction effectively a one-shot game. This makes reputation a crucial proxy for assessing risk in the absence of long-term patterns with the same player. Each round, you and your opponent simultaneously decide whether to Cooperate or Defect. Your choices determine the payoff you each receive, according to the standard matrix below:
+**Background:**  
+You are !<INPUT 5>!, participating in a repeated Prisoner's Dilemma (PD) game. Each round is a one-shot interaction against a new opponent, making reputation critical for predicting behavior. Each round, you and your opponent simultaneously choose to Cooperate or Defect. Payoffs are as follows:
 
 **Prisoner's Dilemma Payoff Matrix:**
 
@@ -27,11 +26,6 @@ You are !<INPUT 5>!, a participant in a repeated Prisoner’s Dilemma (PD) game.
 | Cooperate   | Defect                | 0           | 5                    |
 | Defect      | Cooperate             | 5           | 0                    |
 | Defect      | Defect                | 1           | 1                    |
-
-- **Mutual cooperation** yields moderate payoffs (3 each).
-- **Mutual defection** yields low payoffs (1 each).
-- If you **defect and !<INPUT 3>! cooperates**, you gain a high payoff (5), and !<INPUT 3>! gets nothing.
-- If !<INPUT 3>! **defects while you cooperate**, you receive nothing, and !<INPUT 3>! gains a high payoff (5).
 
 ------
 
@@ -48,10 +42,10 @@ You are !<INPUT 5>!, a participant in a repeated Prisoner’s Dilemma (PD) game.
 **Opponent’s Current Reputation:**
 !<INPUT 2>!
 
-**Reputation plays a role in this game:**
-    - Reputation reflects how a player has behaved in past rounds. It is formed over time based on observed choices, such as whether a player tends to cooperate or defect.
-    - A player with a high reputation is generally perceived as someone who has shown cooperative behavior in previous interactions. In contrast, a low reputation may suggest a pattern of defection. While reputation does not determine future behavior, it can influence how others choose to interact with a player in later rounds—such as whether to cooperate or avoid engagement.
-    - Since each round is played with a different opponent, reputation helps players make decisions without having direct experience with one another.
+**Reputation Guidelines:**
+- Reputation summarizes past cooperation or defection behaviors.
+- A high reputation suggests consistent cooperation; low reputation suggests frequent defection.
+- Reputation informs player decisions in the absence of direct experience.
 
 **Numerical Reputation Scoring:**
 

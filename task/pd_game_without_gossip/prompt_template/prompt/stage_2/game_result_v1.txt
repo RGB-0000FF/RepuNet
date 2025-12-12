@@ -1,59 +1,51 @@
-**system prompt: <!<INPUT 1>!’s learned>**
+Variables:
 
-**user prompt:**
+!<INPUT 0>! -- agent's learned
 
-Variables:  
-!<INPUT 0>! -- agent's learned  
-!<INPUT 1>! -- agent name  
-!<INPUT 2>! -- agent's current reputation  
-!<INPUT 3>! -- opponent's name  
-!<INPUT 4>! -- opponent's current reputation  
+!<INPUT 1>! -- agent name
+
+!<INPUT 2>! -- agent's current reputation
+
+!<INPUT 3>! -- opponent's name
+
+!<INPUT 4>! -- opponent's current reputation
+
 !<INPUT 5>! -- recent interaction history (last 5 rounds with any opponent)
 
 <commentblockmarker>###</commentblockmarker>
 
-**Task:** You are !<INPUT 1>!, currently participating in a Prisoner's Dilemma game against !<INPUT 3>!. You will participate in multiple rounds of the Prisoner’s Dilemma, each involving a different opponent. As a result, each interaction should be treated as a one-shot game without guaranteed future encounters with the same individual. You must decide whether to **cooperate** or **defect** in this round. Your decision should consider your **innate traits**, **Your Current Reputation**, **!<INPUT 3>!’s Current Reputation** and **recent interaction history (last 5 rounds)**.
+**Task:**
 
-**Prisoner's Dilemma Payoff Matrix:**
+You are !<INPUT 1>!, currently participating in a Prisoner's Dilemma game against !<INPUT 3>!.
+
+You must decide whether to **cooperate** or **defect** **this round** based on:
+
+- Your **Innate Traits**
+- Your **Current Reputation**
+- !<INPUT 3>!'s **Current Reputation**
+- Recent Interaction History (last 5 rounds)
+
+Your objective is to:
+
+1. Maximize your **long-term cumulative payoff** over many rounds.
+2. **Protect and improve your reputation**, because it strongly affects how others will treat you in future rounds.
+
+---
+
+**Prisoner's Dilemma Payoff Matrix (single round):**
 
 | Your Choice | !<INPUT 3>!’s Choice | Your Payoff | !<INPUT 3>!’s Payoff |
-|-------------|-----------------------|-------------|----------------------|
-| Cooperate   | Cooperate             | 3           | 3                    |
-| Cooperate   | Defect                | 0           | 5                    |
-| Defect      | Cooperate             | 5           | 0                    |
-| Defect      | Defect                | 1           | 1                    |
+| --- | --- | --- | --- |
+| Cooperate | Cooperate | 3 | 3 |
+| Cooperate | Defect | 0 | 5 |
+| Defect | Cooperate | 5 | 0 |
+| Defect | Defect | 1 | 1 |
 
-- **Mutual cooperation** yields moderate payoffs (3 each).
-- **Mutual defection** yields low payoffs (1 each).
-- If you **defect and !<INPUT 3>! cooperates**, you gain a high payoff (5), and !<INPUT 3>! gets nothing.
-- If !<INPUT 3>! **defects while you cooperate**, you receive nothing, and !<INPUT 3>! gains a high payoff (5).
-
-Your decision should consider your **innate traits**, **Your Current Reputation**, **recent interaction history (last 5 rounds)**, and importantly, **!<INPUT 3>!’s Current Reputation** in the network.
-Reputation reflects an agent’s observed behavior over past interactions. A higher reputation indicates a greater frequency of cooperative actions, while a lower reputation reflects a greater frequency of defections.
-
----
-
-> **Strategic Insight (Defect):**  
-In one-shot or uncertain interactions, defection is often considered the dominant strategy. It guarantees a minimum payoff (1) and allows for the possibility of the maximum payoff (5), regardless of the opponent’s behavior.
-
-> **Strategic Insight (Cooperate):**  
-If recent interactions — whether with the current opponent or others — indicate a pattern of cooperation, choosing to cooperate may lead to higher cumulative payoffs over time. This approach can be beneficial in environments where behavior patterns are observable and potentially influence future decisions, even in nominally one-shot games.
-
----
-
-Use the steps below to make your decision:
-
-**Step 1: Assess inputs**
-Review the following information:
-    Your innate traits
-    Your current reputation
-    !<INPUT 3>!’s current reputation
-    Recent interaction history
-
-Pay particular attention to whether your innate traits prioritize rationality or cooperation. This will affect how you interpret reputational signals and historical patterns of behavior.
-
-**Step 2: Make your decision**
-Using the payoff matrix, reputational information, recent game history, and your innate traits, decide whether cooperation or defection offers the better strategic outcome in this round.
+> In a one-shot game, defection can secure a minimum payoff of 1 and occasionally yield 5.
+> 
+> 
+> **However, short-term defection usually leads to lower future payoffs**, because others will be less willing to cooperate with you.
+> 
 
 ---
 
@@ -65,30 +57,25 @@ Using the payoff matrix, reputational information, recent game history, and your
 
 !<INPUT 2>!
 
+**Recent Game History (Last 5 Rounds):**
+!<INPUT 5>!
+
 **!<INPUT 3>!’s Current Reputation:**
 
 !<INPUT 4>!
 
-  **Numerical Reputation Scoring:**
+**Numerical Reputation Scoring:**
 
-  - Assign numerical reputation scores using the categories {very bad, bad, neutral, good, very good}.
-  - Scores format: (x1, x2, x3, x4, x5), each between 0 and 1, summing to 1.
-  - Examples:
+- Assign numerical reputation scores using the categories {very bad, bad, neutral, good, very good}.
+- Scores format: (x1, x2, x3, x4, x5), each between 0 and 1, summing to 1.
+- Examples:
     - Neutral: (0.2, 0.2, 0.2, 0.2, 0.2)
     - Positive: (0, 0, 0.1, 0.3, 0.6)
     - Negative: (0.7, 0.1, 0.2, 0, 0)
 
-**Recent Game History (Last 5 Rounds):**
-
-Below is a record of your five most recent interactions, possibly with different partners:
-
-!<INPUT 5>!
-
-
-
 **Desired format:** JSON
 
 {
-  "Decision": "<Cooperate or Defect>",
-  "Reason": "<Provide a short explanation for your decision>"
+"Decision": "<Cooperate or Defect>",
+"Reason": "<Provide a short explanation for your decision>"
 }

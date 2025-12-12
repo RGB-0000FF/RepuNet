@@ -1,4 +1,5 @@
-from .gpt_structure import *
+from prompt_interface import *
+from utils import default_gpt_params
 
 
 def run_gpt_prompt_init_sign_up_v1(init_persona):
@@ -26,16 +27,7 @@ def run_gpt_prompt_init_sign_up_v1(init_persona):
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/init_sign_up_request_v2.txt"
     prompt_input = create_prompt_input(init_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
@@ -93,16 +85,7 @@ def run_gpt_prompt_sign_up_v3(init_persona):
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/sign_up_request_v2.txt"
     prompt_input = create_prompt_input(init_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
@@ -150,16 +133,7 @@ def run_gpt_prompt_decide_to_talk_v1(init_persona, target_persona):
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/decide_to_talk_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
@@ -218,16 +192,7 @@ def run_gpt_prompt_create_chat_v1(init_persona, target_persona):
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/create_chat_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona)
     prompt = generate_prompt_role_play(prompt_input, prompt_template, role_play=False)
@@ -270,16 +235,7 @@ def run_gpt_prompt_summarize_chat_v1(init_persona, target_persona, convo):
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/summarize_basic_chat_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona, convo)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)

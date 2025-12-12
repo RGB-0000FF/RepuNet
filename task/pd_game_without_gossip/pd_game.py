@@ -30,20 +30,51 @@ def get_d_connect(init_persona, G):
     return d_connect_list
 
 
+def _score_from_numerical_record(repu_score):
+    """Normalize numerical record that may be string like '(a,b,...)' or list of numbers."""
+    values = []
+    if isinstance(repu_score, str):
+        parts = [p.strip() for p in repu_score.replace("(", "").replace(")", "").split(",") if p.strip() != ""]
+        values = parts
+    elif isinstance(repu_score, (list, tuple)):
+        values = list(repu_score)
+    else:
+        return None
+
+    floats = []
+    for v in values:
+        try:
+            floats.append(float(v))
+        except Exception:
+            continue
+
+    while len(floats) < 5:
+        floats.append(0.0)
+
+    if not floats:
+        return None
+
+    score = floats[4] + floats[3] - floats[1] - floats[0]
+    if score > 1:
+        score = 1
+    elif score < -1:
+        score = -1
+    return score
+
+
 def get_reputation_score(target_persona, target_persona_role, personas):
     count = 0
     num = 0
     for _, persona in personas.items():
         reputation = persona.reputationDB.get_targets_individual_reputation(target_persona.scratch.ID, target_persona_role)
         if reputation:
+            repu = reputation.get(f"Player_{target_persona.scratch.ID}")
+            if not repu:
+                continue
+            score = _score_from_numerical_record(repu.get("numerical record"))
+            if score is None:
+                continue
             count += 1
-            repu_score = reputation[f"Player_{target_persona.scratch.ID}"]["numerical record"]
-            scores = repu_score.replace("(", "").replace(")", "").split(",")
-            score = float(scores[4]) + float(scores[3]) - float(scores[1]) - float(scores[0])
-            if score > 1:
-                score = 1
-            elif score < -1:
-                score = -1
             num += score
     if count == 0:
         return 0

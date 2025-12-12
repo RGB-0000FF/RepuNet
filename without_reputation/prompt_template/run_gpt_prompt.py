@@ -1,4 +1,5 @@
-from .gpt_structure import *
+from prompt_interface import *
+from utils import default_gpt_params
 import json
 
 
@@ -38,16 +39,7 @@ def run_gpt_prompt_update_learned_in_description_v1(
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     if init_persona_role == "resident":
         prompt_template = "prompt/update_learned_in_description_v2.txt"
     elif init_persona_role == "investor":
@@ -105,16 +97,7 @@ def run_gpt_prompt_update_learned_in_description_pd_game_v1(
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/pd_game/update_learned_in_description_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -176,16 +159,7 @@ def run_gpt_prompt_gossip_listener_select_learned_v1(
         fs = []
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/gossip_listener_select_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -247,16 +221,7 @@ def run_gpt_prompt_gossip_listener_select_v1(
         fs = []
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/gossip_listener_select_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -302,16 +267,7 @@ def run_gpt_prompt_gossip_v2(init_persona, target_persona, reason, complain_targ
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/create_gossip_chat_v2.txt"
     prompt_input = create_prompt_input(init_persona, target_persona, reason, complain_target, init_persona_role)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
@@ -356,16 +312,7 @@ def run_gpt_prompt_identify_and_summary_gossip_info_and_second_gossip_willingnes
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/woutRepu_identify_and_summary_gossip_info_and_second_gossip_willingnes_v1.txt"
     prompt_input = create_prompt_input(init_persona, target_persona, complain_info, init_persona_role)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
@@ -411,16 +358,7 @@ def run_gpt_prompt_connection_build_investor_v1(init_persona, target_persona, in
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -465,16 +403,7 @@ def run_gpt_prompt_connection_build_after_pd_game_v1(init_persona, target_person
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/pd_game/connection_after_pd_game_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -523,16 +452,7 @@ def run_gpt_prompt_disconnection_after_pd_game_v1(init_persona, target_persona, 
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/pd_game/disconnection_after_pd_game_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -585,16 +505,7 @@ def run_gpt_prompt_disconnection_investor_v1(init_persona, target_persona, inter
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/investment/Baseline-disconnection_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -647,16 +558,7 @@ def run_gpt_prompt_connection_build_trustee_v1(init_persona, target_persona, int
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/investment/Baseline-connection_build_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -709,16 +611,7 @@ def run_gpt_prompt_disconnection_trustee_v1(init_persona, target_persona, intera
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/investment/Baseline-disconnection_after_investment_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -778,16 +671,7 @@ def run_gpt_prompt_disconnection_after_gossip_v1(
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/disconnection_after_gossip_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -840,16 +724,7 @@ def run_gpt_prompt_disconnection_after_chat_sign_up_v1(init_persona, target_pers
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/sign_up/woutRepu_disconnection_after_chat_sign_up_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -900,16 +775,7 @@ def run_gpt_prompt_connection_build_after_chat_sign_up_v1(init_persona, target_p
         fs = "error"
         return fs
 
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
+    gpt_param = default_gpt_params()
     prompt_template = "prompt/sign_up/woutRepu_connection_build_after_chat_sign_up_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,

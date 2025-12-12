@@ -55,6 +55,7 @@ class Scratch:
     observed: dict
 
     def __init__(self, f_saved,investment=None):
+        self.is_investment = bool(investment)
         self.name = None
 
         self.innate = None
@@ -79,7 +80,7 @@ class Scratch:
         self.total_chat_num = 0
         self.success_chat_num = 0
 
-        self.relationship = dict()
+        self.relationship = {"bind_list": [], "black_list": deque([], maxlen=5)}
         self.resources_unit = 0
 
         self.observed = dict()
@@ -88,38 +89,62 @@ class Scratch:
             # If we have a bootstrap file, load that here.
             scratch_load = json.load(open(f_saved,encoding='utf-8', errors='ignore'))
 
-            self.name = scratch_load["name"]
-            self.innate = scratch_load["innate"]
-            if investment:
-              self.learned["investor"] = scratch_load["learned"]["investor"]
-              self.learned["trustee"] = scratch_load["learned"]["trustee"]
-            else:
-              self.learned = scratch_load["learned"]
-            self.currently = scratch_load["currently"]
+            self.name = scratch_load.get("name")
+            self.innate = scratch_load.get("innate")
+            self.learned = self._normalize_learned(scratch_load.get("learned"), self.is_investment)
+            self.currently = scratch_load.get("currently")
 
-            self.ID = scratch_load["ID"]
-            self.role = scratch_load["role"]
+            self.ID = scratch_load.get("ID")
+            self.role = scratch_load.get("role")
 
-            self.curr_step = scratch_load["curr_step"]
+            self.curr_step = scratch_load.get("curr_step", 0)
 
-            self.complain_buffer = scratch_load["complain_buffer"]
+            self.complain_buffer = scratch_load.get("complain_buffer", [])
 
-            self.total_num_investor = scratch_load["total_num_investor"]
-            self.success_num_investor = scratch_load["success_num_investor"]
-            self.total_num_trustee = scratch_load["total_num_trustee"]
-            self.success_num_trustee = scratch_load["success_num_trustee"]
-            self.total_chat_num = scratch_load["total_chat_num"]
-            self.success_chat_num = scratch_load["success_chat_num"]
+            self.total_num_investor = scratch_load.get("total_num_investor", 0)
+            self.success_num_investor = scratch_load.get("success_num_investor", 0)
+            self.total_num_trustee = scratch_load.get("total_num_trustee", 0)
+            self.success_num_trustee = scratch_load.get("success_num_trustee", 0)
+            self.total_chat_num = scratch_load.get("total_chat_num", 0)
+            self.success_chat_num = scratch_load.get("success_chat_num", 0)
 
+            relationship_load = scratch_load.get("relationship", {"bind_list": [], "black_list": []})
             self.relationship = {
-                "bind_list": scratch_load["relationship"]["bind_list"],
+                "bind_list": relationship_load.get("bind_list", []),
                 "black_list": deque(
-                    scratch_load["relationship"]["black_list"], maxlen=5
+                    relationship_load.get("black_list", []), maxlen=5
                 ),
             }
-            self.resources_unit = scratch_load["resources_unit"]
+            self.resources_unit = scratch_load.get("resources_unit", 0)
 
-            self.observed = scratch_load["observed"]
+            self.observed = scratch_load.get("observed", {})
+        else:
+            self.learned = self._normalize_learned(self.learned, self.is_investment)
+
+    def _normalize_learned(self, learned_value, investment):
+        """
+        Ensure learned takes a consistent shape:
+        - investment=True -> {"investor": str, "trustee": str}
+        - otherwise -> str/dict as provided or empty string.
+        """
+        if investment:
+            investor = ""
+            trustee = ""
+            if isinstance(learned_value, dict):
+                investor = learned_value.get("investor") or learned_value.get("0") or learned_value.get("investor_learned") or next(iter(learned_value.values()), "")
+                trustee = learned_value.get("trustee") or learned_value.get("1") or learned_value.get("trustee_learned") or investor
+            elif isinstance(learned_value, list):
+                investor = learned_value[0] if len(learned_value) > 0 else ""
+                trustee = learned_value[1] if len(learned_value) > 1 else investor
+            elif learned_value is not None:
+                investor = trustee = learned_value
+            return {"investor": investor, "trustee": trustee if trustee is not None else investor}
+
+        if isinstance(learned_value, dict):
+            if "value" in learned_value:
+                return learned_value.get("value")
+            return learned_value if learned_value else ""
+        return learned_value if learned_value is not None else ""
 
     def save(self, out_json):
         """
@@ -134,7 +159,7 @@ class Scratch:
 
         scratch["name"] = self.name
         scratch["innate"] = self.innate
-        scratch["learned"] = self.learned
+        scratch["learned"] = self._normalize_learned(self.learned, self.is_investment)
         scratch["currently"] = self.currently
 
         scratch["ID"] = self.ID

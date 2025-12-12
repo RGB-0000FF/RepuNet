@@ -17,10 +17,10 @@ from task.sign_up_without_gossip.sign_up import *
 from task.sign_up_without_reputation.sign_up import *
 from task.sign_up_without_reputation_without_gossip.sign_up import *
 
-from task.pd_game.pd_game import *
-from task.pd_game_without_gossip.pd_game import *
-from task.pd_game_without_reputation.pd_game import *
-from task.pd_game_without_reputation_without_gossip.pd_game import *
+import task.pd_game.pd_game as pd_game_with_gossip
+import task.pd_game_without_gossip.pd_game as pd_game_without_gossip
+import task.pd_game_without_reputation.pd_game as pd_game_without_reputation
+import task.pd_game_without_reputation_without_gossip.pd_game as pd_game_without_reputation_without_gossip
 
 from utils import *
 
@@ -178,10 +178,12 @@ class Creation:
             self.set_graph_invest()
             print(f"sim_code: {self.sim_code}-----------------------------------------------")
             if self.with_reputation and self.with_gossip:
+                print(f"[investment] branch=with_reputation_with_gossip step={self.step}")
                 if self.step != 1 and (self.step - 1) % 5 == 0:
                     update_knowns_reputation_observation(self.personas)
 
                 pairs = pair_each(self.personas, self.G)
+                print(f"[investment] with_reputation_with_gossip pairing count={len(pairs)}")
 
                 for pair in pairs:
                     start_investment(
@@ -191,7 +193,9 @@ class Creation:
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
             elif self.with_reputation and not self.with_gossip:
+                print(f"[investment] branch=with_reputation_without_gossip step={self.step}")
                 pairs = pair_each_without_gossip(self.personas, self.G)
+                print(f"[investment] with_reputation_without_gossip pairing count={len(pairs)}")
 
                 for pair in pairs:
                     start_investment_without_gossip(
@@ -201,7 +205,9 @@ class Creation:
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
             elif not self.with_reputation and self.with_gossip:
+                print(f"[investment] branch=without_reputation_with_gossip step={self.step}")
                 pairs = pair_each_without_reputation(self.personas, self.G)
+                print(f"[investment] without_reputation_with_gossip pairing count={len(pairs)}")
 
                 for pair in pairs:
                     start_investment_without_reputation(
@@ -211,7 +217,9 @@ class Creation:
                         f"{fs_storage}/{self.sim_code}/investment results",
                     )
             elif not self.with_reputation and not self.with_gossip:
+                print(f"[investment] branch=without_reputation_without_gossip step={self.step}")
                 pairs = pair_each_without_reputation_without_gossip(self.personas, self.G)
+                print(f"[investment] without_reputation_without_gossip pairing count={len(pairs)}")
                 for pair in pairs:
                     start_investment_without_reputation_without_gossip(
                         pair,
@@ -258,6 +266,8 @@ class Creation:
                 sign_up_flag = True
 
             if self.with_reputation and self.with_gossip:
+                print(f"[sign_up] branch=with_reputation_with_gossip step={self.step}")
+                print(f"[sign_up] pairing start (with_reputation_with_gossip)")
                 start_sign_up(
                     self.personas,
                     self.G,
@@ -267,6 +277,8 @@ class Creation:
                 )
 
             elif self.with_reputation and not self.with_gossip:
+                print(f"[sign_up] branch=with_reputation_without_gossip step={self.step}")
+                print(f"[sign_up] pairing start (with_reputation_without_gossip)")
                 start_sign_up_without_gossip(
                     self.personas,
                     self.G,
@@ -275,6 +287,8 @@ class Creation:
                     sign_up_flag,
                 )
             elif not self.with_reputation and self.with_gossip:
+                print(f"[sign_up] branch=without_reputation_with_gossip step={self.step}")
+                print(f"[sign_up] pairing start (without_reputation_with_gossip)")
                 start_sign_up_without_reputation(
                     self.personas,
                     self.G,
@@ -283,6 +297,8 @@ class Creation:
                     sign_up_flag,
                 )
             elif not self.with_reputation and not self.with_gossip:
+                print(f"[sign_up] branch=without_reputation_without_gossip step={self.step}")
+                print(f"[sign_up] pairing start (without_reputation_without_gossip)")
                 start_sign_up_without_reputation_without_gossip(
                     self.personas,
                     self.G,
@@ -295,7 +311,7 @@ class Creation:
             int_counter -= 1
 
     def start_server_pd_game(self, int_counter):
-        """启动PD游戏服务器"""
+        """Start the PD game server."""
         print("Starting PD Game Server...")
 
         while True:
@@ -321,84 +337,76 @@ class Creation:
             self.set_graph_pd_game()
             print(f"sim_code: {self.sim_code}-----------------------------------------------")
 
-            # 根据reputation和gossip设置选择相应的PD游戏版本
+            # Choose PD game version based on reputation and gossip settings
             if self.with_reputation and self.with_gossip:
-                # 原始版本：有reputation和gossip
-                print("Using original PD game with reputation and gossip")
-                pairs = pair_each(self.personas, self.G)
+                # Original version: reputation and gossip enabled
+                print(f"[pd_game] branch=with_reputation_with_gossip step={self.step}")
+                pairs = pd_game_with_gossip.pair_each(self.personas, self.G)
 
-                # 设置gossip同步
-                from task.pd_game.pd_game import set_gossip_sync
+                # Configure gossip synchronization
+                pd_game_with_gossip.set_gossip_sync(len(pairs))
 
-                set_gossip_sync(len(pairs))
-
-                # 多线程执行PD游戏
+                # Execute PD games concurrently
                 self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "original")
 
-                # 顺序执行gossip（如果有的话）
-                from task.pd_game.pd_game import execute_gossip_sequential, gossip_queue
-
-                if gossip_queue:
+                # Run gossip sequentially when available
+                if pd_game_with_gossip.gossip_queue:
                     print("START EXECUTE Gossip!!!!!!!!!!!!!!!!!!!!!")
-                    execute_gossip_sequential(self.personas, self.G, max_retries=3)
+                    pd_game_with_gossip.execute_gossip_sequential(self.personas, self.G, max_retries=3)
 
             elif self.with_reputation and not self.with_gossip:
-                # without_gossip版本：有reputation，无gossip
-                print("Using PD game without gossip (with reputation)")
-                pairs = pair_each(self.personas, self.G)
+                # without_gossip: reputation enabled, gossip disabled
+                print(f"[pd_game] branch=with_reputation_without_gossip step={self.step}")
+                pairs = pd_game_without_gossip.pair_each(self.personas, self.G)
 
-                # 多线程执行PD游戏（无gossip）
+                # Execute PD games concurrently (no gossip)
                 self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "without_gossip")
 
             elif not self.with_reputation and self.with_gossip:
-                # without_reputation版本：无reputation，有gossip
-                print("Using PD game without reputation (with gossip)")
+                # without_reputation: reputation disabled, gossip enabled
+                print(f"[pd_game] branch=without_reputation_with_gossip step={self.step}")
 
-                pairs = pair_each_without_reputation(self.personas, self.G)
+                pairs = pd_game_without_reputation.pair_each_without_reputation(self.personas, self.G)
 
-                # 设置gossip同步
-                from task.pd_game_without_reputation.pd_game import set_gossip_sync
+                # Configure gossip synchronization
+                pd_game_without_reputation.set_gossip_sync(len(pairs))
 
-                set_gossip_sync(len(pairs))
-
-                # 多线程执行PD游戏
+                # Execute PD games concurrently
                 self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "without_reputation")
 
-                # 顺序执行gossip（如果有的话）
-                from task.pd_game_without_reputation.pd_game import execute_gossip_sequential_without_reputation, gossip_queue
-
-                if gossip_queue:
+                # Run gossip sequentially when available
+                if pd_game_without_reputation.gossip_queue:
                     print("START EXECUTE Gossip!!!!!!!!!!!!!!!!!!!!!")
-                    execute_gossip_sequential_without_reputation(self.personas, self.G, max_retries=3)
+                    pd_game_without_reputation.execute_gossip_sequential_without_reputation(self.personas, self.G, max_retries=3)
 
             else:
-                # without_reputation_without_gossip版本：无reputation，无gossip
-                print("Using PD game without reputation and without gossip")
+                # without_reputation_without_gossip: reputation and gossip disabled
+                print(f"[pd_game] branch=without_reputation_without_gossip step={self.step}")
 
-                pairs = pair_each_without_reputation_without_gossip(self.personas, self.G)
+                pairs = pd_game_without_reputation_without_gossip.pair_each_without_reputation_without_gossip(self.personas, self.G)
 
-                # 多线程执行PD游戏（无reputation和gossip）
+                # Execute PD games concurrently (no reputation or gossip)
                 self.execute_pd_games_parallel(pairs, f"{fs_storage}/{self.sim_code}/pd_game results", "without_reputation_without_gossip")
 
             self.save()
             int_counter -= 1
 
     def execute_pd_games_parallel(self, pairs, save_folder, version="original"):
-        """并行执行PD游戏"""
+        """Run PD games in parallel."""
         with ThreadPoolExecutor(max_workers=len(pairs)) as executor:
-            # 根据版本选择相应的函数
+            # Pick the correct entrypoint for the selected version
             if version == "original":
-                start_func = start_pd_game
+                start_func = pd_game_with_gossip.start_pd_game
             elif version == "without_gossip":
-                start_func = start_pd_game_without_gossip  # 使用without_gossip模块的start_pd_game_without_gossip
+                start_func = pd_game_without_gossip.start_pd_game_without_gossip  # Use the without_gossip variant
             elif version == "without_reputation":
-                start_func = start_pd_game_without_reputation
+                start_func = pd_game_without_reputation.start_pd_game_without_reputation
             elif version == "without_reputation_without_gossip":
-                start_func = start_pd_game_without_reputation_without_gossip
+                start_func = pd_game_without_reputation_without_gossip.start_pd_game_without_reputation_without_gossip
             else:
-                start_func = start_pd_game
+                start_func = pd_game_with_gossip.start_pd_game
 
-            # 提交所有任务
+            # Submit all tasks
             future_to_pair = {
                 executor.submit(
                     start_func,
@@ -406,12 +414,12 @@ class Creation:
                     self.personas,
                     self.G,
                     save_folder,
-                    max_retries=5,  # 设置最大重试次数
+                    max_retries=5,  # Allow up to five retries
                 ): pair
                 for pair in pairs
             }
 
-            # 等待所有任务完成
+            # Wait for all tasks to complete
             for future in as_completed(future_to_pair):
                 pair = future_to_pair[future]
                 try:

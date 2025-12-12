@@ -1,6 +1,7 @@
 import os
 import json
-from .gpt_structure import *
+from prompt_interface import *
+from utils import default_gpt_params
 from persona.persona import Persona
 
 
@@ -65,22 +66,12 @@ def run_gpt_prompt_stage2_game_result_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_input = create_prompt_input(player1, player2)
     prompt_template = "prompt/stage_2/game_result_v1.txt"
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up)
 
     if verbose:
@@ -123,9 +114,9 @@ def run_gpt_prompt_stage3_player_evaluation_v1(
         res = dict()
         gpt_response = gpt_response.replace("*", "")
 
-        # 更健壮的解析逻辑
+        # More robust parsing logic
         try:
-            # 查找Self Reflection部分
+            # Find the Self Reflection section
             if "Self Reflection:" in gpt_response:
                 self_part = gpt_response.split("Self Reflection:")[-1]
                 if "Opponent Reflection:" in self_part:
@@ -135,36 +126,25 @@ def run_gpt_prompt_stage3_player_evaluation_v1(
             else:
                 return False
 
-            # 查找Opponent Reflection部分
+            # Find the Opponent Reflection section
             if "Opponent Reflection:" in gpt_response:
                 opponent_part = gpt_response.split("Opponent Reflection:")[-1].strip()
                 res["opponent_reflection"] = opponent_part
             else:
                 return False
 
-            # 验证结果
+            # Validate the parsed content
             for val in res.values():
-                if val == "" or len(val) < 5:  # 至少要有一些内容
+                if val == "" or len(val) < 5:  # Require non-empty, meaningful content
                     return False
             return res
         except Exception as e:
-            print(f"解析错误: {e}")
+            print(f"Parsing error: {e}")
             return False
 
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_3/player_evaluation_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -175,6 +155,7 @@ def run_gpt_prompt_stage3_player_evaluation_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up)
 
     if verbose:
@@ -229,22 +210,12 @@ def run_gpt_prompt_stage4_player_gossip_willing_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_4/player_gossip_willingness_v1.txt"
     prompt_input = create_prompt_input(init_persona, target_persona, self_decision, target_decision, target_reflection)
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up)
 
     if verbose:

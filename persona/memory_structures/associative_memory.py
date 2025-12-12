@@ -255,10 +255,10 @@ class AssociativeMemory:
 
     def get_latest_event_with_target(self, target_name: str, by="object"):
         """
-        获取最近5条与目标相关的事件描述，并拼接成字符串返回（按created_at降序排列）
-        :param target_name: 目标名称
-        :param by: "object" 或 "subject"
-        :return: 最近5条事件的description拼接字符串（最新的在前）
+        Get the latest five event descriptions related to the target and join them into a string (ordered by created_at descending).
+        :param target_name: target name
+        :param by: "object" or "subject"
+        :return: concatenated descriptions of the latest events (newest first)
         """
         matched_nodes = []
         for node in self.event_id_to_node.values():
@@ -266,9 +266,9 @@ class AssociativeMemory:
                 node = node.toJSON()
             if node[by] == target_name:
                 matched_nodes.append(node)
-        # 按created_at降序排列
+        # Sort by created_at descending
         matched_nodes.sort(key=lambda x: x["created_at"], reverse=True)
-        # 提取description并拼接
+        # Join descriptions
         descriptions = ""
         for i, node in enumerate(matched_nodes[:5]):
             patch = f"Latest Round {i + 1}: {node['description']}\n\n"

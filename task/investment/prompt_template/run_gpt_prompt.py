@@ -1,4 +1,5 @@
-from .gpt_structure import *
+from prompt_interface import *
+from utils import default_gpt_params
 from decimal import Decimal
 text1="You have never been an investor before, so you are not sure about your reputation."
 text2="You have never been an trustee before, so you were not sure about your reputation."
@@ -58,17 +59,6 @@ def run_gpt_prompt_investor_decided_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_input = create_prompt_input(init_persona, target_persona, allocation_plan)
     if not prompt_input[4]:
         prompt_input.pop(3)
@@ -80,6 +70,7 @@ def run_gpt_prompt_investor_decided_v1(
         prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     ).strip()
@@ -142,17 +133,6 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     
     prompt_input = create_prompt_input(init_persona, target_persona)
     
@@ -165,6 +145,7 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
         prompt_template="prompt/stage_1/All_stage_1_trustee_v1.txt"
         prompt = generate_prompt_role_play(prompt_input, prompt_template)
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     ).strip()
@@ -176,7 +157,7 @@ def run_gpt_prompt_trustee_plan_v1(init_persona, target_persona, verbose=False):
 
     return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
-#fin 有疑问（没有repu时是否换提示词）
+#fin TODO: Should the prompt change when reputation is disabled?
 def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
     init_persona,
     target_persona,
@@ -253,17 +234,6 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template_1 = "prompt/stage_3/All-stage_3_trustee_v1.txt"
     prompt_template_2="prompt/stage_3/All-INIT_stage_3_trustee_v1.txt"
     prompt_input = create_prompt_input(
@@ -284,6 +254,7 @@ def run_gpt_prompt_trustee_stage_3_actual_allocation_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -373,17 +344,6 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_4/All-stage_4_investor_v2.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -399,6 +359,7 @@ def run_gpt_prompt_stage4_investor_evaluation_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -504,17 +465,6 @@ def run_gpt_prompt_stage4_trustee_evaluation_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_4/All-stage_4_trustee.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -533,6 +483,7 @@ def run_gpt_prompt_stage4_trustee_evaluation_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -589,17 +540,6 @@ def run_gpt_prompt_stage1_trustee_gossip_willing_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_1/All_stage_1_failed_trustee_gossip_willingness_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -610,6 +550,7 @@ def run_gpt_prompt_stage1_trustee_gossip_willing_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -662,17 +603,6 @@ def run_gpt_prompt_stage1_investor_gossip_willing_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_1/All_stage_1_failed_investor_gossip_willingness_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -682,6 +612,7 @@ def run_gpt_prompt_stage1_investor_gossip_willing_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -756,17 +687,6 @@ def run_gpt_prompt_stage4_investor_gossip_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_4/All-investor_willingness_to_gossip_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -785,6 +705,7 @@ def run_gpt_prompt_stage4_investor_gossip_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -863,17 +784,6 @@ def run_gpt_prompt_stage4_trustee_gossip_v1(
     def get_fail_safe():
         fs = "Error"
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_4/All-trustee_willingness_to_gossip_v1.txt"
     prompt_input = create_prompt_input(
         init_persona,
@@ -892,6 +802,7 @@ def run_gpt_prompt_stage4_trustee_gossip_v1(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
@@ -931,17 +842,6 @@ def run_gpt_prompt_select_trustee(
     def get_fail_safe():
         fs = []
         return fs
-
-    gpt_param = {
-        "engine": "gpt-4o-mini",
-        "max_tokens": 4096,
-        "temperature": 0,
-        "top_p": 1,
-        "stream": False,
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-        "stop": None,
-    }
     prompt_template = "prompt/stage_0/All_stage_0_investor_select_trustee.txt"
     prompt_input = create_prompt_input(
         learned=learned,
@@ -951,6 +851,7 @@ def run_gpt_prompt_select_trustee(
     prompt = generate_prompt_role_play(prompt_input, prompt_template)
 
     fail_safe = get_fail_safe()
+    gpt_param = default_gpt_params()
     output = safe_generate_response(
         prompt, gpt_param, 5, fail_safe, __func_validate, __func_clean_up
     )
