@@ -1,16 +1,16 @@
-# 🧠 RepuNet Simulations
+# 🤝 RepuNet Simulations
 
 Paper: https://arxiv.org/html/2505.05029v2  
 Anonymous repo mirror: https://anonymous.4open.science/r/RepuNet-B346
 
 RepuNet explores reputation as a remedy for cooperation collapse in LLM-based multi-agent systems. Agents update self/peer reputation from direct interactions and gossip, rewire their network connections, and run across investment, sign-up, and prisoner’s dilemma scenarios. The system sustains cooperation, avoids collapse, and surfaces emergent behaviors such as cooperative clusters, isolation of exploitative agents, and a bias toward sharing positive over negative gossip. Agents reason through an LLM backend, and every simulation step is persisted to disk for inspection or resume.
 
-## Requirements
+## 📦 Requirements
 - Python 3.13+
 - A virtual environment tool (`uv`, `venv`, or `conda`)
 - Access to an OpenAI-compatible API endpoint
 
-## Install
+## ⚡ Install
 ```bash
 # create venv (choose one)
 uv venv && source .venv/bin/activate          # or .venv/Scripts/activate on Windows
@@ -20,7 +20,7 @@ python -m venv .venv && source .venv/bin/activate
 uv pip install -e .    # or: pip install -e .
 ```
 
-## Configure the LLM + storage
+## 🎛️ Configure the LLM + storage
 Edit `utils.py` before running:
 - `openai_api_key` / `key_owner`: your API key and an identifier (do not commit real keys).
 - `llm_model` / `llm_api_base`: model name and base URL for your provider.
@@ -56,7 +56,7 @@ def default_gpt_params():
 ```
 After saving, export your key in the shell (`export OPENAI_API_KEY=...`) and proceed to seed + run commands below.
 
-## Seed data
+## 🌱 Seed data
 Seeds live at `fs_storage/<sim_name>/step_0` with `reverie/meta.json` and per-persona memory/reputation files. Use the generator to build consistent seeds:
 - Built-in personas:  
   ```bash
@@ -77,8 +77,8 @@ Seeds live at `fs_storage/<sim_name>/step_0` with `reverie/meta.json` and per-pe
 
 If a default seed is missing, `scripts/run_simulation.py` will auto-create one using the built-ins or `sim_storage/profiles.json` when present.
 
-## Run simulations
-### Interactive loop (`start.py`)
+## ▶️ Run simulations
+### 🎮 Interactive loop (`start.py`)
 ```bash
 python start.py
 ```
@@ -94,7 +94,7 @@ Commands inside the loop:
 
 Each step copies the previous `step_x` to `step_{x+1}` and writes results into `investment results`, `sign up result`, or `pd_game results` under the new step folder.
 
-### Non-interactive against an existing seed
+### 🤖 Non-interactive against an existing seed
 ```bash
 python auto_run.py \
   --sim investment_seed/step_0 \
@@ -104,7 +104,7 @@ python auto_run.py \
   --gossip n
 ```
 
-### Auto seed + run + resume
+### 🔁 Auto seed + run + resume
 `scripts/run_simulation.py` finds or builds a seed, copies it to a timestamped run folder, and starts the scenario. It can also resume from any `step_x` inside `fs_storage`.
 ```bash
 python scripts/run_simulation.py \
@@ -117,14 +117,14 @@ python scripts/run_simulation.py \
 python scripts/run_simulation.py --scenario pd --steps 5 --sim run_pd/step_2
 ```
 
-### Batch runs
+### 🧵 Batch runs
 Edit `scripts/batch_run.sh` (array `JOBS`) and execute:
 ```bash
 bash scripts/batch_run.sh
 ```
 Logs go to `outputs/<run_id>.log`; runs land in `fs_storage/<run_id>/step_*`.
 
-## Useful paths
+## 🗂️ Useful paths
 - `start.py`: interactive runner
 - `auto_run.py`: non-interactive runner for an existing seed
 - `scripts/run_simulation.py`: auto-seed/resume runner
