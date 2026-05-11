@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.13%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![arXiv](https://img.shields.io/badge/arXiv-2505.05029-b31b1b.svg)](https://arxiv.org/abs/2505.05029)
 [![LLM Backend](https://img.shields.io/badge/LLM-OpenAI--compatible-0f766e)](#配置)
-[![License](https://img.shields.io/badge/License-TBD-lightgrey.svg)](#许可证)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 <a href="README.md"><kbd>English</kbd></a> <a href="README_ZH.md"><kbd>简体中文</kbd></a>
 
@@ -15,7 +15,7 @@
 [HTML](https://arxiv.org/html/2505.05029v2) |
 [架构图](#架构图) |
 [快速开始](#快速开始) |
-[引用](#引用)
+[引用与许可证](#引用与许可证)
 
 </div>
 
@@ -60,7 +60,7 @@
 - [运行仿真](#运行仿真)
 - [种子数据](#种子数据)
 - [输出与常用路径](#输出与常用路径)
-- [引用](#引用)
+- [引用与许可证](#引用与许可证)
 - [许可证](#许可证)
 
 ## 环境要求
@@ -253,10 +253,21 @@ python sim_storage/export_profiles.py \
 
 每个仿真 step 会将 `step_x` 复制到 `step_{x+1}`，并在新 step 目录下写入 `investment results`、`sign up result` 或 `pd_game results` 等场景输出。
 
-## 引用
+## 引用与许可证
 
-如果你在研究中使用 RepuNet，请引用上方链接中的论文。正式 BibTeX 会在最终引用元数据确认后补充。
+如果你在研究中使用 RepuNet，请引用我们的论文。下面是可直接复制的 BibTeX：
 
-## 许可证
+```bibtex
+@misc{ren2026reputation,
+  title         = {Reputation as a Solution to Cooperation Collapse in LLM-based MASs},
+  author        = {Ren, Siyue and Li, Dong and Zhao, Wenyi and Chen, Jintai and He, Xu and Hu, Shuyue and Wang, Pengfei and Deng, Lidong and Li, Xiu and Xiao, Yanghua},
+  year          = {2026},
+  eprint        = {2505.05029},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  doi           = {10.48550/arXiv.2505.05029},
+  url           = {https://arxiv.org/abs/2505.05029}
+}
+```
 
-本仓库尚未包含最终确定的开源许可证。在正式 license 添加之前，如需在正常学术审阅和评估之外重新分发或复用代码，请先联系作者获取许可。
+RepuNet 采用 [MIT License](LICENSE) 发布。MIT 是学术研究代码中常见的宽松许可证，允许他人在保留版权和许可证声明的前提下使用、修改和分发代码。

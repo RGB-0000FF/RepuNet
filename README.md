@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.13%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![arXiv](https://img.shields.io/badge/arXiv-2505.05029-b31b1b.svg)](https://arxiv.org/abs/2505.05029)
 [![LLM Backend](https://img.shields.io/badge/LLM-OpenAI--compatible-0f766e)](#configuration)
-[![License](https://img.shields.io/badge/License-TBD-lightgrey.svg)](#license)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 <a href="README.md"><kbd>English</kbd></a> <a href="README_ZH.md"><kbd>简体中文</kbd></a>
 
@@ -15,7 +15,7 @@
 [HTML](https://arxiv.org/html/2505.05029v2) |
 [Architecture](#architecture) |
 [Quick Start](#quick-start) |
-[Citation](#citation)
+[Citation & License](#citation--license)
 
 </div>
 
@@ -60,7 +60,7 @@
 - [Run Simulations](#run-simulations)
 - [Seed Data](#seed-data)
 - [Outputs and Useful Paths](#outputs-and-useful-paths)
-- [Citation](#citation)
+- [Citation & License](#citation--license)
 - [License](#license)
 
 ## Requirements
@@ -253,10 +253,21 @@ If a default seed is missing, `scripts/run_simulation.py` automatically creates 
 
 Each simulation step copies `step_x` to `step_{x+1}` and writes scenario outputs such as `investment results`, `sign up result`, or `pd_game results` under the new step folder.
 
-## Citation
+## Citation & License
 
-If you use RepuNet in your research, please cite the paper linked above. A formal BibTeX entry will be added once the final citation metadata is available.
+If you use RepuNet in your research, please cite our paper:
 
-## License
+```bibtex
+@misc{ren2026reputation,
+  title         = {Reputation as a Solution to Cooperation Collapse in LLM-based MASs},
+  author        = {Ren, Siyue and Li, Dong and Zhao, Wenyi and Chen, Jintai and He, Xu and Hu, Shuyue and Wang, Pengfei and Deng, Lidong and Li, Xiu and Xiao, Yanghua},
+  year          = {2026},
+  eprint        = {2505.05029},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  doi           = {10.48550/arXiv.2505.05029},
+  url           = {https://arxiv.org/abs/2505.05029}
+}
+```
 
-This repository does not yet include a finalized open-source license. Until a license is added, please contact the authors for permission before redistributing or reusing the code beyond normal academic review and evaluation.
+RepuNet is released under the [MIT License](LICENSE). MIT is a common permissive license for academic research code because it allows reuse, modification, and redistribution with attribution while keeping the license text lightweight.
